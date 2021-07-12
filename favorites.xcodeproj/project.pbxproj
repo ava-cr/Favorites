@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,6 +21,7 @@
 		464D1DCB269C8F2100C32AE2 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1DCA269C8F2100C32AE2 /* FeedViewController.m */; };
 		464D1DCE269C8F2900C32AE2 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1DCD269C8F2900C32AE2 /* ProfileViewController.m */; };
 		464D1DD1269C8FDF00C32AE2 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1DD0269C8FDF00C32AE2 /* LoginViewController.m */; };
+		464D1E14269CF49A00C32AE2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 464D1E13269CF49A00C32AE2 /* MapKit.framework */; };
 		A50209F1761945099FC0662A /* Pods_favorites.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1B88076CE8FC1A9BA6328B /* Pods_favorites.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		464D1DCD269C8F2900C32AE2 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		464D1DCF269C8FDF00C32AE2 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		464D1DD0269C8FDF00C32AE2 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		464D1E13269CF49A00C32AE2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5A1B88076CE8FC1A9BA6328B /* Pods_favorites.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_favorites.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62C4F1D93C24C2071D8AAC05 /* Pods-favoritesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favoritesTests.debug.xcconfig"; path = "Target Support Files/Pods-favoritesTests/Pods-favoritesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A347F2FD08F02FC1F06C3623 /* Pods-favorites-favoritesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favorites-favoritesUITests.debug.xcconfig"; path = "Target Support Files/Pods-favorites-favoritesUITests/Pods-favorites-favoritesUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				464D1E14269CF49A00C32AE2 /* MapKit.framework in Frameworks */,
 				A50209F1761945099FC0662A /* Pods_favorites.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,6 +111,7 @@
 		346E1B17556B58DC61290424 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				464D1E13269CF49A00C32AE2 /* MapKit.framework */,
 				5A1B88076CE8FC1A9BA6328B /* Pods_favorites.framework */,
 				F520BB211E9F659EDFFD019D /* Pods_favorites_favoritesUITests.framework */,
 				D464BD913504612C1DB8FF88 /* Pods_favoritesTests.framework */,
@@ -197,7 +201,6 @@
 				62C4F1D93C24C2071D8AAC05 /* Pods-favoritesTests.debug.xcconfig */,
 				31FC1AED190C44A23AEBBBA3 /* Pods-favoritesTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

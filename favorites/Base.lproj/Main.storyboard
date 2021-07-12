@@ -16,18 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wWb-FO-iiz">
-                                <rect key="frame" x="187.5" y="437.5" width="39" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0N9-FX-0mC">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="wWb-FO-iiz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="3eJ-iv-dVr"/>
-                            <constraint firstItem="wWb-FO-iiz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dG0-cn-tOp"/>
+                            <constraint firstItem="0N9-FX-0mC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5uy-7H-Hfy"/>
+                            <constraint firstItem="0N9-FX-0mC" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="72W-Qw-eD2"/>
+                            <constraint firstItem="0N9-FX-0mC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="BTh-lF-Ds5"/>
+                            <constraint firstItem="0N9-FX-0mC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="KKn-5V-O4P"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8gr-lI-Qpy">
@@ -42,10 +41,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="0N9-FX-0mC" id="3af-WL-Pr7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1938" y="986"/>
+            <point key="canvasLocation" x="-1939.1304347826087" y="985.71428571428567"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="HHI-wz-DNa">

@@ -8,6 +8,7 @@ target 'favorites' do
   # Pods for favorites
   pod 'Parse'
 
+
   target 'favoritesTests' do
     inherit! :search_paths
     # Pods for testing
