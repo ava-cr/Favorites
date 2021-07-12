@@ -15,6 +15,10 @@
 		464D1DA3269C7EC000C32AE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1DA2269C7EC000C32AE2 /* main.m */; };
 		464D1DAD269C7EC300C32AE2 /* favoritesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1DAC269C7EC300C32AE2 /* favoritesTests.m */; };
 		464D1DB8269C7EC300C32AE2 /* favoritesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1DB7269C7EC300C32AE2 /* favoritesUITests.m */; };
+		464D1DC8269C8EC300C32AE2 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1DC7269C8EC300C32AE2 /* MapViewController.m */; };
+		464D1DCB269C8F2100C32AE2 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1DCA269C8F2100C32AE2 /* FeedViewController.m */; };
+		464D1DCE269C8F2900C32AE2 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1DCD269C8F2900C32AE2 /* ProfileViewController.m */; };
+		464D1DD1269C8FDF00C32AE2 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1DD0269C8FDF00C32AE2 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,14 @@
 		464D1DB3269C7EC300C32AE2 /* favoritesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = favoritesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		464D1DB7269C7EC300C32AE2 /* favoritesUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = favoritesUITests.m; sourceTree = "<group>"; };
 		464D1DB9269C7EC300C32AE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		464D1DC6269C8EC300C32AE2 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		464D1DC7269C8EC300C32AE2 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		464D1DC9269C8F2100C32AE2 /* FeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
+		464D1DCA269C8F2100C32AE2 /* FeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
+		464D1DCC269C8F2900C32AE2 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		464D1DCD269C8F2900C32AE2 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		464D1DCF269C8FDF00C32AE2 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		464D1DD0269C8FDF00C32AE2 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +113,7 @@
 		464D1D8F269C7EB500C32AE2 /* favorites */ = {
 			isa = PBXGroup;
 			children = (
+				464D1DC5269C8EAF00C32AE2 /* View Controllers */,
 				464D1D90269C7EB500C32AE2 /* AppDelegate.h */,
 				464D1D91269C7EB500C32AE2 /* AppDelegate.m */,
 				464D1D93269C7EB500C32AE2 /* SceneDelegate.h */,
@@ -130,6 +143,21 @@
 				464D1DB9269C7EC300C32AE2 /* Info.plist */,
 			);
 			path = favoritesUITests;
+			sourceTree = "<group>";
+		};
+		464D1DC5269C8EAF00C32AE2 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				464D1DC6269C8EC300C32AE2 /* MapViewController.h */,
+				464D1DC7269C8EC300C32AE2 /* MapViewController.m */,
+				464D1DC9269C8F2100C32AE2 /* FeedViewController.h */,
+				464D1DCA269C8F2100C32AE2 /* FeedViewController.m */,
+				464D1DCC269C8F2900C32AE2 /* ProfileViewController.h */,
+				464D1DCD269C8F2900C32AE2 /* ProfileViewController.m */,
+				464D1DCF269C8FDF00C32AE2 /* LoginViewController.h */,
+				464D1DD0269C8FDF00C32AE2 /* LoginViewController.m */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,8 +290,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				464D1D92269C7EB500C32AE2 /* AppDelegate.m in Sources */,
+				464D1DCB269C8F2100C32AE2 /* FeedViewController.m in Sources */,
 				464D1DA3269C7EC000C32AE2 /* main.m in Sources */,
 				464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */,
+				464D1DD1269C8FDF00C32AE2 /* LoginViewController.m in Sources */,
+				464D1DCE269C8F2900C32AE2 /* ProfileViewController.m in Sources */,
+				464D1DC8269C8EC300C32AE2 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
