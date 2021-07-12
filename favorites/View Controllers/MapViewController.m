@@ -6,6 +6,9 @@
 //
 
 #import "MapViewController.h"
+#import <Parse/Parse.h>
+#import "LoginViewController.h"
+#import "SceneDelegate.h"
 
 @interface MapViewController ()
 
@@ -16,6 +19,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+
+- (IBAction)didTapLogout:(id)sender {
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+    }];
+    
+    NSLog(@"%s", "logout");
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+    myDelegate.window.rootViewController = loginViewController;
 }
 
 /*
