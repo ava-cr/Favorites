@@ -22,6 +22,8 @@
 		464D1DCE269C8F2900C32AE2 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1DCD269C8F2900C32AE2 /* ProfileViewController.m */; };
 		464D1DD1269C8FDF00C32AE2 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1DD0269C8FDF00C32AE2 /* LoginViewController.m */; };
 		464D1E14269CF49A00C32AE2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 464D1E13269CF49A00C32AE2 /* MapKit.framework */; };
+		464D1E17269D323300C32AE2 /* SearchLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1E16269D323300C32AE2 /* SearchLocationsViewController.m */; };
+		464D1E1B269D328300C32AE2 /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1E1A269D328300C32AE2 /* LocationCell.m */; };
 		A50209F1761945099FC0662A /* Pods_favorites.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1B88076CE8FC1A9BA6328B /* Pods_favorites.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +73,10 @@
 		464D1DCF269C8FDF00C32AE2 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		464D1DD0269C8FDF00C32AE2 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		464D1E13269CF49A00C32AE2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		464D1E15269D323300C32AE2 /* SearchLocationsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchLocationsViewController.h; sourceTree = "<group>"; };
+		464D1E16269D323300C32AE2 /* SearchLocationsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchLocationsViewController.m; sourceTree = "<group>"; };
+		464D1E19269D328300C32AE2 /* LocationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationCell.h; sourceTree = "<group>"; };
+		464D1E1A269D328300C32AE2 /* LocationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
 		5A1B88076CE8FC1A9BA6328B /* Pods_favorites.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_favorites.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62C4F1D93C24C2071D8AAC05 /* Pods-favoritesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favoritesTests.debug.xcconfig"; path = "Target Support Files/Pods-favoritesTests/Pods-favoritesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A347F2FD08F02FC1F06C3623 /* Pods-favorites-favoritesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favorites-favoritesUITests.debug.xcconfig"; path = "Target Support Files/Pods-favorites-favoritesUITests/Pods-favorites-favoritesUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -144,6 +150,7 @@
 		464D1D8F269C7EB500C32AE2 /* favorites */ = {
 			isa = PBXGroup;
 			children = (
+				464D1E18269D326800C32AE2 /* Views */,
 				464D1DC5269C8EAF00C32AE2 /* View Controllers */,
 				464D1D90269C7EB500C32AE2 /* AppDelegate.h */,
 				464D1D91269C7EB500C32AE2 /* AppDelegate.m */,
@@ -187,8 +194,19 @@
 				464D1DCD269C8F2900C32AE2 /* ProfileViewController.m */,
 				464D1DCF269C8FDF00C32AE2 /* LoginViewController.h */,
 				464D1DD0269C8FDF00C32AE2 /* LoginViewController.m */,
+				464D1E15269D323300C32AE2 /* SearchLocationsViewController.h */,
+				464D1E16269D323300C32AE2 /* SearchLocationsViewController.m */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		464D1E18269D326800C32AE2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				464D1E19269D328300C32AE2 /* LocationCell.h */,
+				464D1E1A269D328300C32AE2 /* LocationCell.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		DAD0E4DF48AB1C00C6E228CA /* Pods */ = {
@@ -441,9 +459,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				464D1E1B269D328300C32AE2 /* LocationCell.m in Sources */,
 				464D1D92269C7EB500C32AE2 /* AppDelegate.m in Sources */,
 				464D1DCB269C8F2100C32AE2 /* FeedViewController.m in Sources */,
 				464D1DA3269C7EC000C32AE2 /* main.m in Sources */,
+				464D1E17269D323300C32AE2 /* SearchLocationsViewController.m in Sources */,
 				464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */,
 				464D1DD1269C8FDF00C32AE2 /* LoginViewController.m in Sources */,
 				464D1DCE269C8F2900C32AE2 /* ProfileViewController.m in Sources */,
