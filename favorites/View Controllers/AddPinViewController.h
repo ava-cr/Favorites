@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AddPinViewController : UIViewController
 
 @property (strong, nonatomic) MKMapItem *location;
+@property (strong, nonatomic) NSString *notes;
 
 @end
 

@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 #import <CoreLocation/CoreLocation.h>
+#import "AddPinViewController.h"
 
 
 @interface MapViewController () <CLLocationManagerDelegate>
@@ -36,6 +37,8 @@
     if ([self.locationManager authorizationStatus ] == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestWhenInUseAuthorization];
     }
+    
+    
 
 }
 
@@ -47,10 +50,25 @@
     
     MKCoordinateRegion region = MKCoordinateRegionMake(center, MKCoordinateSpanMake(0.01, 0.01));
     
+    
     [self.mapView setRegion:region animated:TRUE];
     [self.mapView setShowsUserLocation:TRUE];
+    
+    [self.locationManager stopUpdatingLocation]; // add a button to recenter on user's location and make it so that whenever the user returns to this tab, it recenters.
+    
 
-    //mMapView.setRegion(mRegion, animated: true)
+}
+
+
+
+/// - TAG: unwind seque
+- (IBAction) myUnwindAction:(UIStoryboardSegue*)unwindSegue {
+    NSLog(@"unwinding from add pin to search locations");
+    
+    AddPinViewController *addPinVC = [unwindSegue sourceViewController];
+    NSLog(@"pin notes: %@", addPinVC.notes);
+    
+    
 }
 
 
