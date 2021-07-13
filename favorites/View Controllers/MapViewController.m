@@ -8,13 +8,14 @@
 #import "MapViewController.h"
 #import <Parse/Parse.h>
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
-#import <CoreLocation/CoreLocation.h>
 #import "AddPinViewController.h"
+#import "PinAnnotation.h"
 
 
-@interface MapViewController () <CLLocationManagerDelegate>
+@interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property CLLocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -25,7 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.mapView.delegate = self;
     
     if (self.locationManager == nil ) {
             self.locationManager = [[CLLocationManager alloc] init];
@@ -37,9 +39,6 @@
     if ([self.locationManager authorizationStatus ] == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestWhenInUseAuthorization];
     }
-    
-    
-
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
@@ -52,11 +51,14 @@
     
     
     [self.mapView setRegion:region animated:TRUE];
-    [self.mapView setShowsUserLocation:TRUE];
+    //[self.mapView setShowsUserLocation:TRUE];
     
     [self.locationManager stopUpdatingLocation]; // add a button to recenter on user's location and make it so that whenever the user returns to this tab, it recenters.
     
 
+}
+- (IBAction)didTapCenterUser:(id)sender {
+    [self.locationManager startUpdatingLocation];
 }
 
 
@@ -68,7 +70,43 @@
     AddPinViewController *addPinVC = [unwindSegue sourceViewController];
     NSLog(@"pin notes: %@", addPinVC.notes);
     
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(addPinVC.pin.placemark.location.coordinate.latitude, addPinVC.pin.placemark.coordinate.longitude);
     
+    PinAnnotation *annotation = [[PinAnnotation alloc] init];
+    annotation.coordinate = coordinate;
+    
+    [self.mapView addAnnotation:annotation];
+    
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
+    
+    if (annotationView == nil) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+        
+//        UIImageView *image = [[UIImageView alloc] initWithImage:[self resizeImage:self.image withSize:annotationView.image.size]];
+//        image.layer .cornerRadius = image.layer.frame.size.width / 2;
+//        image.layer.masksToBounds = YES;
+//
+//        [annotationView addSubview:image];
+        
+        
+        annotationView.canShowCallout = true;
+        
+//        UIImageView *leftImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 50.0, 50.0)];
+//        leftImageView.contentMode = UIViewContentModeScaleAspectFill;
+//        leftImageView.clipsToBounds = YES;
+//
+//        annotationView.leftCalloutAccessoryView = leftImageView;
+        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    }
+
+//    UIImageView *imageView = (UIImageView *)annotationView.leftCalloutAccessoryView;
+//    imageView.image = self.image;
+
+    return annotationView;
 }
 
 

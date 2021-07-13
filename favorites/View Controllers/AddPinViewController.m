@@ -20,8 +20,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.titleLabel.text = self.location.name;
-    self.subtitleLabel.text = self.location.phoneNumber;
+    self.titleLabel.text = self.pin.name;
+    self.subtitleLabel.text = self.pin.phoneNumber;
     
     self.notesTextView.layer.borderColor = [UIColor.whiteColor CGColor];
     self.notesTextView.layer.borderWidth = 1.0;

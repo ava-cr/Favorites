@@ -9,7 +9,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SearchLocationsViewController : UIViewController <UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
+
+
+@interface SearchLocationsViewController : UIViewController
+
+
 
 @end
 

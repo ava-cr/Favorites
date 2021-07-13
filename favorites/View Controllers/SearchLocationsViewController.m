@@ -258,17 +258,6 @@
     
 }
 
-/*
- override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-     var header = NSLocalizedString("SEARCH_RESULTS", comment: "Standard result text")
-     if let city = currentPlacemark?.locality {
-         let templateString = NSLocalizedString("SEARCH_RESULTS_LOCATION", comment: "Search result text with city")
-         header = String(format: templateString, city)
-     }
-     
-     return header
- }
- */
 
 
 /*
@@ -293,7 +282,7 @@
         NSLog(@"location chosen");        
         AddPinViewController *addPinVC = [segue destinationViewController];
         NSLog(@"segue-ing with chosen place = %@", self.chosenPlace.name);
-        addPinVC.location = self.chosenPlace;
+        addPinVC.pin = self.chosenPlace;
     }
     
 }
