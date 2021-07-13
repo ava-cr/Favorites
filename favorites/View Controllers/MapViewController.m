@@ -13,12 +13,14 @@
 #import "SceneDelegate.h"
 #import "AddPinViewController.h"
 #import "PinAnnotation.h"
+#import "Pin.h"
 
 
 @interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property CLLocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) NSArray<MKMapItem *> *pins;
 
 @end
 
@@ -26,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self getPins];
     
     self.mapView.delegate = self;
     
@@ -39,6 +43,44 @@
     if ([self.locationManager authorizationStatus ] == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestWhenInUseAuthorization];
     }
+}
+
+-(void) viewDidAppear:(BOOL)animated {
+    
+    if (self.pins) {
+        NSMutableArray* annotations = [[NSMutableArray alloc] init];
+        
+        for (MKMapItem *pin in self.pins) {
+            PinAnnotation *annotation = [[PinAnnotation alloc] init];
+            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(pin.placemark.location.coordinate.latitude, pin.placemark.coordinate.longitude);
+            annotation.coordinate = coordinate;
+            [annotations addObject:annotation];
+        }
+        
+        [self.mapView addAnnotations:annotations];
+    }
+    
+    /*
+     guard let mapItems = mapItems else { return }
+     
+     if mapItems.count == 1, let item = mapItems.first {
+         title = item.name
+     } else {
+         title = NSLocalizedString("TITLE_ALL_PLACES", comment: "All Places view controller title")
+     }
+     
+     // Turn the array of MKMapItem objects into an annotation with a title and URL that can be shown on the map.
+     let annotations = mapItems.compactMap { (mapItem) -> PlaceAnnotation? in
+         guard let coordinate = mapItem.placemark.location?.coordinate else { return nil }
+         
+         let annotation = PlaceAnnotation(coordinate: coordinate)
+         annotation.title = mapItem.name
+         annotation.url = mapItem.url
+         
+         return annotation
+     }
+     mapView.addAnnotations(annotations)
+     */
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
@@ -70,6 +112,8 @@
     AddPinViewController *addPinVC = [unwindSegue sourceViewController];
     NSLog(@"pin notes: %@", addPinVC.notes);
     
+    MKMapItem *pin = addPinVC.pin;
+    
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(addPinVC.pin.placemark.location.coordinate.latitude, addPinVC.pin.placemark.coordinate.longitude);
     
     PinAnnotation *annotation = [[PinAnnotation alloc] init];
@@ -77,6 +121,55 @@
     
     [self.mapView addAnnotation:annotation];
     
+    NSNumber *lat = [NSNumber numberWithDouble:pin.placemark.location.coordinate.latitude];
+    NSNumber *lng = [NSNumber numberWithDouble:pin.placemark.location.coordinate.longitude];
+        
+    [Pin postUserPin:pin.name withNotes:addPinVC.notes latitude:lat longitude:lng urlString:pin.url.absoluteString withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"the pin was posted!");
+        } else {
+            NSLog(@"problem saving pin: %@", error.localizedDescription);
+        }
+    }];
+    
+    
+}
+
+- (void) getPins {
+    // construct query
+    PFQuery *query = [PFQuery queryWithClassName:@"Pin"];
+    NSArray *keys = @[@"author", @"title", @"notes", @"url", @"latitude", @"longitude"];
+    [query includeKeys:keys];
+    // [query orderByDescending:@"createdAt"];
+    // query.limit = numberPosts;
+    query.limit = 20;
+
+    // fetch data asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *pins, NSError *error) {
+        if (pins != nil) {
+            self.pins = pins;
+            NSLog(@"got pins");
+            [self placePins];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+-(void) placePins {
+    if (self.pins) {
+        NSMutableArray* annotations = [[NSMutableArray alloc] init];
+        
+        for (Pin *pin in self.pins) {
+            PinAnnotation *annotation = [[PinAnnotation alloc] init];
+            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([pin.latitude doubleValue] , [pin.longitude doubleValue]);
+            
+            annotation.coordinate = coordinate;
+            [annotations addObject:annotation];
+        }
+        
+        [self.mapView addAnnotations:annotations];
+    }
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {

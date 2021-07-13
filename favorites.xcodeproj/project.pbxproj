@@ -26,6 +26,7 @@
 		464D1E1B269D328300C32AE2 /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1E1A269D328300C32AE2 /* LocationCell.m */; };
 		464D1E1E269DBB0D00C32AE2 /* AddPinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1E1D269DBB0D00C32AE2 /* AddPinViewController.m */; };
 		464D1E21269E350D00C32AE2 /* PinAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1E20269E350D00C32AE2 /* PinAnnotation.m */; };
+		464D1E25269E511C00C32AE2 /* Pin.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1E24269E511C00C32AE2 /* Pin.m */; };
 		A50209F1761945099FC0662A /* Pods_favorites.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1B88076CE8FC1A9BA6328B /* Pods_favorites.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,8 @@
 		464D1E1D269DBB0D00C32AE2 /* AddPinViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddPinViewController.m; sourceTree = "<group>"; };
 		464D1E1F269E350D00C32AE2 /* PinAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PinAnnotation.h; sourceTree = "<group>"; };
 		464D1E20269E350D00C32AE2 /* PinAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PinAnnotation.m; sourceTree = "<group>"; };
+		464D1E23269E511C00C32AE2 /* Pin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pin.h; sourceTree = "<group>"; };
+		464D1E24269E511C00C32AE2 /* Pin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pin.m; sourceTree = "<group>"; };
 		5A1B88076CE8FC1A9BA6328B /* Pods_favorites.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_favorites.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62C4F1D93C24C2071D8AAC05 /* Pods-favoritesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favoritesTests.debug.xcconfig"; path = "Target Support Files/Pods-favoritesTests/Pods-favoritesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A347F2FD08F02FC1F06C3623 /* Pods-favorites-favoritesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favorites-favoritesUITests.debug.xcconfig"; path = "Target Support Files/Pods-favorites-favoritesUITests/Pods-favorites-favoritesUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +159,7 @@
 		464D1D8F269C7EB500C32AE2 /* favorites */ = {
 			isa = PBXGroup;
 			children = (
+				464D1E22269E50EA00C32AE2 /* Models */,
 				464D1E18269D326800C32AE2 /* Views */,
 				464D1DC5269C8EAF00C32AE2 /* View Controllers */,
 				464D1D90269C7EB500C32AE2 /* AppDelegate.h */,
@@ -217,6 +221,15 @@
 				464D1E20269E350D00C32AE2 /* PinAnnotation.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		464D1E22269E50EA00C32AE2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				464D1E23269E511C00C32AE2 /* Pin.h */,
+				464D1E24269E511C00C32AE2 /* Pin.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		DAD0E4DF48AB1C00C6E228CA /* Pods */ = {
@@ -472,6 +485,7 @@
 				464D1E1B269D328300C32AE2 /* LocationCell.m in Sources */,
 				464D1D92269C7EB500C32AE2 /* AppDelegate.m in Sources */,
 				464D1DCB269C8F2100C32AE2 /* FeedViewController.m in Sources */,
+				464D1E25269E511C00C32AE2 /* Pin.m in Sources */,
 				464D1DA3269C7EC000C32AE2 /* main.m in Sources */,
 				464D1E17269D323300C32AE2 /* SearchLocationsViewController.m in Sources */,
 				464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */,

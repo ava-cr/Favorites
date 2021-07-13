@@ -6,6 +6,7 @@
 //
 
 #import "PinAnnotation.h"
+#import <MapKit/MapKit.h>
 
 @interface PinAnnotation()
 
@@ -18,4 +19,5 @@
 - (NSString *)title {
     return [NSString stringWithFormat:@"%f", self.coordinate.latitude];
 }
+
 @end
