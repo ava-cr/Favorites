@@ -51,7 +51,7 @@
     
     
     [self.mapView setRegion:region animated:TRUE];
-    //[self.mapView setShowsUserLocation:TRUE];
+    [self.mapView setShowsUserLocation:TRUE];
     
     [self.locationManager stopUpdatingLocation]; // add a button to recenter on user's location and make it so that whenever the user returns to this tab, it recenters.
     
@@ -80,6 +80,10 @@
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
     
     MKPinAnnotationView *annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
     
