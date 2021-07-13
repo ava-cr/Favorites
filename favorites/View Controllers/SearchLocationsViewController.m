@@ -9,6 +9,7 @@
 #import "LocationCell.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "AddPinViewController.h"
 
 @interface SearchLocationsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating, MKLocalSearchCompleterDelegate>
 
@@ -17,9 +18,14 @@
 @property UISearchController *searchController;
 @property (strong, nonatomic) MKLocalSearchCompleter *searchCompleter;
 @property (nonatomic) MKCoordinateRegion searchRegion;
+@property (nonatomic) MKCoordinateRegion boundingRegion;
 @property (strong, nonatomic) CLPlacemark *currentPlacemark;
 @property (strong, nonatomic) NSArray<MKLocalSearchCompletion *> *completerResults;
 @property BOOL providingCompletions;
+
+@property (strong, nonatomic) NSArray<MKMapItem *> *places;
+@property (strong, nonatomic) MKMapItem *chosenPlace;
+@property (strong, nonatomic) MKLocalSearch *localSearch;
 
 @end
 
@@ -28,7 +34,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // set up
+    self.places = nil;
+    [self.localSearch cancel];
+    
+    
     self.searchRegion = MKCoordinateRegionForMapRect(MKMapRectWorld);
+    self.boundingRegion = MKCoordinateRegionForMapRect(MKMapRectWorld);
 
     
     self.tableView.delegate = self;
@@ -85,15 +97,9 @@
 
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
+
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     LocationCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
@@ -103,6 +109,7 @@
         
         cell.titleLabel.text = suggestion.title;
         cell.subtitleLabel.text = suggestion.subtitle;
+        
     }
     
     
@@ -149,6 +156,107 @@
 
 - (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
     return true;
+}
+
+
+// search functions
+
+/// - Parameter suggestedCompletion: A search completion provided by `MKLocalSearchCompleter` when tapping on a search completion table row
+-(void) searchForSuggestedCompletion: (MKLocalSearchCompletion *) suggestedCompletion {
+    MKLocalSearchRequest *searchRequest = [[MKLocalSearchRequest alloc] initWithCompletion:suggestedCompletion];
+    [self searchUsing:searchRequest];
+}
+
+/// - Parameter queryString: A search string from the text the user entered into `UISearchBar`
+-(void) searchForQueryString: (NSString *) queryString {
+    MKLocalSearchRequest *searchRequest = [[MKLocalSearchRequest alloc] init];
+    searchRequest.naturalLanguageQuery = queryString;
+    [self searchUsing:searchRequest];
+}
+
+/// - Tag: SearchRequest
+-(void) searchUsing: (MKLocalSearchRequest *)searchRequest {
+    // Confine the map search area to an area around the user's current location.
+    searchRequest.region = self.boundingRegion;
+    
+    // Include only point of interest results. This excludes results based on address matches.
+    searchRequest.resultTypes = MKLocalSearchResultTypePointOfInterest;
+    
+    self.localSearch = [[MKLocalSearch alloc] initWithRequest:searchRequest];
+    
+    [self.localSearch startWithCompletionHandler:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
+        if (error == nil) {
+            self.places = response.mapItems;
+            self.chosenPlace = response.mapItems[0];
+            
+            NSLog(@"%@", self.chosenPlace);
+            
+            // Used when setting the map's region in `prepareForSegue`.
+            MKCoordinateRegion updatedRegion = response.boundingRegion;
+            self.boundingRegion = updatedRegion;
+            
+            [self performSegueWithIdentifier:@"locationChosen" sender:nil];
+            
+            
+            
+        }
+        else {
+            NSLog(@"Error with searchUsing = %@", [error.userInfo description]);
+            
+        }
+        [self.localSearch cancel];
+    }];
+    
+    
+    
+}
+
+// when you select a suggestion
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.completerResults) {
+        //[self stopProvidingCompletions];
+        MKLocalSearchCompletion *suggestion = [[MKLocalSearchCompletion alloc] init];
+        
+        suggestion = self.completerResults[indexPath.row];
+        
+        NSLog(@"selected row with suggestion = %@", suggestion.title);
+        
+        self.searchController.active = FALSE;
+        self.searchController.searchBar.text = suggestion.title;
+        [self searchForSuggestedCompletion:suggestion];
+    }
+}
+
+
+/*
+ private func displaySearchError(_ error: Error?) {
+     if let error = error as NSError?, let errorString = error.userInfo[NSLocalizedDescriptionKey] as? String {
+         let alertController = UIAlertController(title: "Could not find any places.", message: errorString, preferredStyle: .alert)
+         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+         present(alertController, animated: true, completion: nil)
+     }
+ }
+ */
+
+
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqual:@"locationChosen"]) {
+        NSLog(@"location chosen");
+        //UITableViewCell *tappedCell = sender;
+        //NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        //MKLocalSearchCompletion *location = self.completerResults[indexPath.row];
+        
+        AddPinViewController *addPinVC = [segue destinationViewController];
+        NSLog(@"segue-ing with chosen place = %@", self.chosenPlace.name);
+        addPinVC.location = self.chosenPlace;
+    }
+    
 }
 
 @end
