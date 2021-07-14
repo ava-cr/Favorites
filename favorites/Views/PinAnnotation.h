@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import "Pin.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString *titleString;
 @property (strong, nonatomic) NSString *notes;
+@property (strong, nonatomic) Pin *pin;
 
 
 @end

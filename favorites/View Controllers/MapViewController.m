@@ -22,6 +22,7 @@
 @property CLLocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) NSArray<MKMapItem *> *pins;
+@property (strong, nonatomic) NSArray<PinAnnotation *> *annotations;
 
 @end
 
@@ -67,6 +68,30 @@
     [self.locationManager startUpdatingLocation];
 }
 
+- (IBAction) updatedPinUnwind:(UIStoryboardSegue*)unwindSegue {
+    
+    PinDetailsViewController *pdVC = [unwindSegue sourceViewController];
+    NSLog(@"new notes = %@", pdVC.annotation.pin.notes);
+    
+    Pin *pin = pdVC.annotation.pin;
+    pin[@"notes"] = pin.notes;
+    
+    [pin saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"updated pin!");
+            [self dismissViewControllerAnimated:true completion:nil];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    [self reloadMapView];
+}
+
+- (void) reloadMapView {
+    NSLog(@"reloading pins");
+    [self.mapView removeAnnotations:self.annotations];
+    [self getPins];
+}
 
 
 /// - TAG: unwind seque
@@ -74,18 +99,19 @@
     NSLog(@"unwinding from add pin to search locations");
     
     AddPinViewController *addPinVC = [unwindSegue sourceViewController];
-    NSLog(@"pin notes: %@", addPinVC.notes);
+    //NSLog(@"pin notes: %@", addPinVC.notes);
     
     MKMapItem *pin = addPinVC.pin;
-    
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(addPinVC.pin.placemark.location.coordinate.latitude, addPinVC.pin.placemark.coordinate.longitude);
-    
-    
-    
-    PinAnnotation *annotation = [[PinAnnotation alloc] init];
-    annotation.coordinate = coordinate;
-    
-    [self.mapView addAnnotation:annotation];
+//
+//    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(addPinVC.pin.placemark.location.coordinate.latitude, addPinVC.pin.placemark.coordinate.longitude);
+//
+//
+//
+//    PinAnnotation *annotation = [[PinAnnotation alloc] init];
+//    annotation.coordinate = coordinate;
+//
+//
+//    [self.mapView addAnnotation:annotation];
     
     NSNumber *lat = [NSNumber numberWithDouble:pin.placemark.location.coordinate.latitude];
     NSNumber *lng = [NSNumber numberWithDouble:pin.placemark.location.coordinate.longitude];
@@ -97,12 +123,11 @@
     [Pin postUserPin:pin.name withNotes:addPinVC.notes latitude:lat longitude:lng urlString:urlString withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"the pin was posted!");
+            [self reloadMapView];
         } else {
             NSLog(@"problem saving pin: %@", error.localizedDescription);
         }
     }];
-    
-    
 }
 
 - (void) getPins {
@@ -127,6 +152,7 @@
 }
 
 -(void) placePins {
+    
     if (self.pins) {
         NSMutableArray* annotations = [[NSMutableArray alloc] init];
         
@@ -137,9 +163,10 @@
             annotation.coordinate = coordinate;
             annotation.titleString = pin.title;
             annotation.notes = pin.notes;
+            annotation.pin = pin;
             [annotations addObject:annotation];
         }
-        
+        self.annotations = annotations;
         [self.mapView addAnnotations:annotations];
     }
 }
