@@ -6,11 +6,15 @@
 //
 
 #import "ComposeUpdateViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface ComposeUpdateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ComposeUpdateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *picImageView;
 @property (weak, nonatomic) IBOutlet UITextField *captionTextField;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property CLLocationManager *locationManager;
+@property CLLocation *userLocation;
 
 @end
 
@@ -18,12 +22,46 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    if (self.locationManager == nil ) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        [self.locationManager startUpdatingLocation];
+    }
+    if ([self.locationManager authorizationStatus ] == kCLAuthorizationStatusNotDetermined) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    CLLocation *userLocation = locations[0];
+    self.userLocation = userLocation;
+}
+
+- (IBAction)addLocationTapped:(id)sender {
+    UIAlertController *addLoc = [UIAlertController alertControllerWithTitle:@"Add Location" message:@""preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *myLocation = [UIAlertAction actionWithTitle:@"Use My Location"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+        self.locationLabel.text = [NSString stringWithFormat:@"%f", self.userLocation.coordinate.latitude];
+        
+    }];
+    UIAlertAction *chooseLocation = [UIAlertAction actionWithTitle:@"Choose From Locations"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+        [self choosePhoto]; // choose photo
+    }];
+    [addLoc addAction:myLocation];
+    [addLoc addAction:chooseLocation];
+    [self presentViewController:addLoc animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+    }];
+    
+    
 }
 - (IBAction)addPhotoTapped:(id)sender {
-    
     UIAlertController *addPic = [UIAlertController alertControllerWithTitle:@"Add Photo" message:@""preferredStyle:(UIAlertControllerStyleAlert)];
-    
     UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"Take Photo"
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
@@ -34,7 +72,6 @@
                                                      handler:^(UIAlertAction * _Nonnull action) {
         [self choosePhoto]; // choose photo
     }];
-    
     [addPic addAction:takePhoto];
     [addPic addAction:choosePhoto];
     [self presentViewController:addPic animated:YES completion:^{

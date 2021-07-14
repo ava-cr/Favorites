@@ -19,5 +19,8 @@
 
     // Configure the view for the selected state
 }
+- (IBAction)didTapLocation:(id)sender {
+    NSLog(@"tapped location!");
+}
 
 @end

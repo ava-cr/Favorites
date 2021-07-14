@@ -76,10 +76,10 @@
         cell.bottomUsernameLabel.text = update.author.username;
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
         cell.captionTextField.text = update.caption;
-//
-//        NSURL *url = [NSURL URLWithString:update.image.url];
-//        NSData *urlData = [NSData dataWithContentsOfURL:url];
-//        cell.picImageView.image = [[UIImage alloc] initWithData:urlData];
+
+        NSURL *url = [NSURL URLWithString:update.image.url];
+        NSData *urlData = [NSData dataWithContentsOfURL:url];
+        cell.picImageView.image = [[UIImage alloc] initWithData:urlData];
         
 //        NSDate *createdAt = post.createdAt;
 //        NSString *createdAtString = createdAt.shortTimeAgoSinceNow;
@@ -96,9 +96,6 @@
 //            cell.numLikesLabel.text = [cell.post.likeCount.stringValue stringByAppendingString:@" like"];
 //        }
 //        else cell.numLikesLabel.text = [cell.post.likeCount.stringValue stringByAppendingString:@" likes"];
-    }
-    else {
-        NSLog(@"no updates");
     }
     
     return cell;
