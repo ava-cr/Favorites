@@ -200,20 +200,12 @@
 			isa = PBXGroup;
 			children = (
 				464D1E29269E5F2300C32AE2 /* Map */,
-				464D1DC6269C8EC300C32AE2 /* MapViewController.h */,
-				464D1DC7269C8EC300C32AE2 /* MapViewController.m */,
 				464D1DC9269C8F2100C32AE2 /* FeedViewController.h */,
 				464D1DCA269C8F2100C32AE2 /* FeedViewController.m */,
 				464D1DCC269C8F2900C32AE2 /* ProfileViewController.h */,
 				464D1DCD269C8F2900C32AE2 /* ProfileViewController.m */,
 				464D1DCF269C8FDF00C32AE2 /* LoginViewController.h */,
 				464D1DD0269C8FDF00C32AE2 /* LoginViewController.m */,
-				464D1E15269D323300C32AE2 /* SearchLocationsViewController.h */,
-				464D1E16269D323300C32AE2 /* SearchLocationsViewController.m */,
-				464D1E1C269DBB0D00C32AE2 /* AddPinViewController.h */,
-				464D1E1D269DBB0D00C32AE2 /* AddPinViewController.m */,
-				464D1E26269E5F1900C32AE2 /* PinDetailsViewController.h */,
-				464D1E27269E5F1900C32AE2 /* PinDetailsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -241,6 +233,14 @@
 		464D1E29269E5F2300C32AE2 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				464D1DC6269C8EC300C32AE2 /* MapViewController.h */,
+				464D1DC7269C8EC300C32AE2 /* MapViewController.m */,
+				464D1E15269D323300C32AE2 /* SearchLocationsViewController.h */,
+				464D1E16269D323300C32AE2 /* SearchLocationsViewController.m */,
+				464D1E1C269DBB0D00C32AE2 /* AddPinViewController.h */,
+				464D1E1D269DBB0D00C32AE2 /* AddPinViewController.m */,
+				464D1E26269E5F1900C32AE2 /* PinDetailsViewController.h */,
+				464D1E27269E5F1900C32AE2 /* PinDetailsViewController.m */,
 			);
 			path = Map;
 			sourceTree = "<group>";

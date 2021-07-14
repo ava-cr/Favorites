@@ -79,7 +79,6 @@
     [pin saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"updated pin!");
-            [self dismissViewControllerAnimated:true completion:nil];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
