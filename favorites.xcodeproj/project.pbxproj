@@ -34,6 +34,8 @@
 		46A36B31269F7475003C3429 /* MyPinsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A36B30269F7475003C3429 /* MyPinsViewController.m */; };
 		46A36B35269F7568003C3429 /* MyPinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A36B34269F7568003C3429 /* MyPinCell.m */; };
 		46A36B38269F8CD6003C3429 /* ShowLocationOnMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A36B37269F8CD6003C3429 /* ShowLocationOnMapViewController.m */; };
+		46A36B3B269F9A85003C3429 /* AddFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A36B3A269F9A85003C3429 /* AddFriendsViewController.m */; };
+		46A36B3E269F9AE4003C3429 /* AddFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A36B3D269F9AE4003C3429 /* AddFriendCell.m */; };
 		A50209F1761945099FC0662A /* Pods_favorites.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1B88076CE8FC1A9BA6328B /* Pods_favorites.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +109,10 @@
 		46A36B34269F7568003C3429 /* MyPinCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPinCell.m; sourceTree = "<group>"; };
 		46A36B36269F8CD6003C3429 /* ShowLocationOnMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowLocationOnMapViewController.h; sourceTree = "<group>"; };
 		46A36B37269F8CD6003C3429 /* ShowLocationOnMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowLocationOnMapViewController.m; sourceTree = "<group>"; };
+		46A36B39269F9A85003C3429 /* AddFriendsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFriendsViewController.h; sourceTree = "<group>"; };
+		46A36B3A269F9A85003C3429 /* AddFriendsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddFriendsViewController.m; sourceTree = "<group>"; };
+		46A36B3C269F9AE4003C3429 /* AddFriendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFriendCell.h; sourceTree = "<group>"; };
+		46A36B3D269F9AE4003C3429 /* AddFriendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddFriendCell.m; sourceTree = "<group>"; };
 		5A1B88076CE8FC1A9BA6328B /* Pods_favorites.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_favorites.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62C4F1D93C24C2071D8AAC05 /* Pods-favoritesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favoritesTests.debug.xcconfig"; path = "Target Support Files/Pods-favoritesTests/Pods-favoritesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A347F2FD08F02FC1F06C3623 /* Pods-favorites-favoritesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favorites-favoritesUITests.debug.xcconfig"; path = "Target Support Files/Pods-favorites-favoritesUITests/Pods-favorites-favoritesUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -230,6 +236,8 @@
 				464D1DD0269C8FDF00C32AE2 /* LoginViewController.m */,
 				46A36B36269F8CD6003C3429 /* ShowLocationOnMapViewController.h */,
 				46A36B37269F8CD6003C3429 /* ShowLocationOnMapViewController.m */,
+				46A36B39269F9A85003C3429 /* AddFriendsViewController.h */,
+				46A36B3A269F9A85003C3429 /* AddFriendsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -245,6 +253,8 @@
 				460DABEF269F30E7000220D0 /* UpdateCell.m */,
 				46A36B33269F7568003C3429 /* MyPinCell.h */,
 				46A36B34269F7568003C3429 /* MyPinCell.m */,
+				46A36B3C269F9AE4003C3429 /* AddFriendCell.h */,
+				46A36B3D269F9AE4003C3429 /* AddFriendCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -533,9 +543,11 @@
 				46A36B31269F7475003C3429 /* MyPinsViewController.m in Sources */,
 				46A36B35269F7568003C3429 /* MyPinCell.m in Sources */,
 				464D1E25269E511C00C32AE2 /* Pin.m in Sources */,
+				46A36B3B269F9A85003C3429 /* AddFriendsViewController.m in Sources */,
 				464D1DA3269C7EC000C32AE2 /* main.m in Sources */,
 				460DABF6269F3AEA000220D0 /* Update.m in Sources */,
 				460DABF0269F30E7000220D0 /* UpdateCell.m in Sources */,
+				46A36B3E269F9AE4003C3429 /* AddFriendCell.m in Sources */,
 				464D1E17269D323300C32AE2 /* SearchLocationsViewController.m in Sources */,
 				464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */,
 				464D1DD1269C8FDF00C32AE2 /* LoginViewController.m in Sources */,

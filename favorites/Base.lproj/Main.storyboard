@@ -450,33 +450,76 @@
             </objects>
             <point key="canvasLocation" x="1838" y="2482"/>
         </scene>
-        <!--View Controller-->
+        <!--Search for Friends!-->
         <scene sceneID="cMA-2u-6Bg">
             <objects>
-                <viewController id="pe0-ts-y1C" sceneMemberID="viewController">
+                <viewController id="pe0-ts-y1C" customClass="AddFriendsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fDI-6s-3Z2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWV-nu-8dw">
-                                <rect key="frame" x="161" y="437.5" width="92" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="qkL-e3-Let">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0wF-HV-jDI">
+                                <rect key="frame" x="0.0" y="51" width="414" height="757"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddFriendCell" rowHeight="110" id="WPI-mM-cqI" customClass="AddFriendCell">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="110"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WPI-mM-cqI" id="rwX-GF-h4O">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="prk-pf-NKd">
+                                                    <rect key="frame" x="20" y="21" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="GSI-y4-OqM"/>
+                                                        <constraint firstAttribute="width" constant="50" id="Gkb-02-TeU"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLV-tQ-Xzd">
+                                                    <rect key="frame" x="78" y="35.5" width="76" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="prk-pf-NKd" firstAttribute="top" secondItem="rwX-GF-h4O" secondAttribute="topMargin" constant="10" id="1fo-Qa-Yps"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="tLV-tQ-Xzd" secondAttribute="trailing" constant="10" id="Miu-Dl-iIn"/>
+                                                <constraint firstItem="tLV-tQ-Xzd" firstAttribute="centerY" secondItem="prk-pf-NKd" secondAttribute="centerY" id="a6k-wi-iQf"/>
+                                                <constraint firstItem="tLV-tQ-Xzd" firstAttribute="leading" secondItem="prk-pf-NKd" secondAttribute="trailing" constant="8" id="cfS-6z-RXv"/>
+                                                <constraint firstItem="prk-pf-NKd" firstAttribute="leading" secondItem="rwX-GF-h4O" secondAttribute="leadingMargin" id="qE3-OB-5In"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="prk-pf-NKd" secondAttribute="bottom" constant="10" id="tqS-em-U2V"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="io7-A6-tl7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="SWV-nu-8dw" firstAttribute="centerX" secondItem="fDI-6s-3Z2" secondAttribute="centerX" id="UwF-AS-Ye7"/>
-                            <constraint firstItem="SWV-nu-8dw" firstAttribute="centerY" secondItem="fDI-6s-3Z2" secondAttribute="centerY" id="yld-JU-sLk"/>
+                            <constraint firstItem="qkL-e3-Let" firstAttribute="leading" secondItem="io7-A6-tl7" secondAttribute="leading" id="3h8-lH-XWP"/>
+                            <constraint firstItem="0wF-HV-jDI" firstAttribute="trailing" secondItem="io7-A6-tl7" secondAttribute="trailing" id="5Fe-UX-Vy5"/>
+                            <constraint firstItem="0wF-HV-jDI" firstAttribute="bottom" secondItem="io7-A6-tl7" secondAttribute="bottom" id="UQH-rV-cxs"/>
+                            <constraint firstItem="0wF-HV-jDI" firstAttribute="top" secondItem="qkL-e3-Let" secondAttribute="bottom" id="Zlr-jd-ZV0"/>
+                            <constraint firstItem="qkL-e3-Let" firstAttribute="top" secondItem="io7-A6-tl7" secondAttribute="top" id="eSn-ut-K2J"/>
+                            <constraint firstItem="qkL-e3-Let" firstAttribute="trailing" secondItem="io7-A6-tl7" secondAttribute="trailing" id="elJ-ju-UYo"/>
+                            <constraint firstItem="0wF-HV-jDI" firstAttribute="leading" secondItem="io7-A6-tl7" secondAttribute="leading" id="plt-G4-KeS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="9mY-Wj-5mi"/>
+                    <navigationItem key="navigationItem" title="Search for Friends!" id="9mY-Wj-5mi"/>
+                    <connections>
+                        <outlet property="tableView" destination="0wF-HV-jDI" id="Egs-o6-N5g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AHO-lf-wgy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-742" y="1748"/>
+            <point key="canvasLocation" x="-742.02898550724649" y="1747.7678571428571"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="mkA-BM-9Vy">
@@ -614,7 +657,7 @@
                             </barButtonItem>
                             <barButtonItem title="Add Friends" image="person.badge.plus" catalog="system" id="UM6-sO-Wkd">
                                 <connections>
-                                    <segue destination="pe0-ts-y1C" kind="show" id="Ef6-i1-PEs"/>
+                                    <segue destination="pe0-ts-y1C" kind="presentation" id="Ef6-i1-PEs"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
