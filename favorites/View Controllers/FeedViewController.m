@@ -13,7 +13,7 @@
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) NSArray *updates;
+@property (strong, nonatomic) NSArray *updates;
 
 @end
 
@@ -72,10 +72,10 @@
     if (self.updates) {
         //cell.post = post;
         //cell.delegate = self; // for tap gesture recognizer
-        cell.usernameLabel.text = @"hello";
-//        cell.bottomUsernameLabel.text = update.author.username;
-//        cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
-//        cell.captionTextField.text = update.caption;
+        cell.usernameLabel.text = update.author.username;
+        cell.bottomUsernameLabel.text = update.author.username;
+        cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
+        cell.captionTextField.text = update.caption;
 //
 //        NSURL *url = [NSURL URLWithString:update.image.url];
 //        NSData *urlData = [NSData dataWithContentsOfURL:url];
