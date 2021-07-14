@@ -44,8 +44,6 @@
 - (IBAction)cancelTapped:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
-- (IBAction)postTapped:(id)sender {
-}
 
 #pragma mark - Photo Functions
 
@@ -104,15 +102,16 @@
 }
 
 
-
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqual:@"postedUpdate"]) {
+        self.image = self.picImageView.image;
+        self.caption = self.captionTextField.text;
+    }
+    
 }
-*/
 
 @end

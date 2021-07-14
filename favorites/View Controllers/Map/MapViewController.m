@@ -92,8 +92,6 @@
     [self getPins];
 }
 
-
-/// - TAG: unwind seque
 - (IBAction) myUnwindAction:(UIStoryboardSegue*)unwindSegue {
     NSLog(@"unwinding from add pin to search locations");
     

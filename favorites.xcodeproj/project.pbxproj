@@ -11,6 +11,7 @@
 		3028EF99693778FD2071D593 /* Pods_favoritesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D464BD913504612C1DB8FF88 /* Pods_favoritesTests.framework */; };
 		460DABF0269F30E7000220D0 /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 460DABEF269F30E7000220D0 /* UpdateCell.m */; };
 		460DABF3269F3631000220D0 /* ComposeUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 460DABF2269F3631000220D0 /* ComposeUpdateViewController.m */; };
+		460DABF6269F3AEA000220D0 /* Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 460DABF5269F3AEA000220D0 /* Update.m */; };
 		464D1D92269C7EB500C32AE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D91269C7EB500C32AE2 /* AppDelegate.m */; };
 		464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D94269C7EB500C32AE2 /* SceneDelegate.m */; };
 		464D1D9B269C7EB500C32AE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D1D99269C7EB500C32AE2 /* Main.storyboard */; };
@@ -58,6 +59,8 @@
 		460DABEF269F30E7000220D0 /* UpdateCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateCell.m; sourceTree = "<group>"; };
 		460DABF1269F3631000220D0 /* ComposeUpdateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeUpdateViewController.h; sourceTree = "<group>"; };
 		460DABF2269F3631000220D0 /* ComposeUpdateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeUpdateViewController.m; sourceTree = "<group>"; };
+		460DABF4269F3AEA000220D0 /* Update.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Update.h; sourceTree = "<group>"; };
+		460DABF5269F3AEA000220D0 /* Update.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Update.m; sourceTree = "<group>"; };
 		464D1D8D269C7EB500C32AE2 /* favorites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = favorites.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464D1D90269C7EB500C32AE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		464D1D91269C7EB500C32AE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -236,6 +239,8 @@
 			children = (
 				464D1E23269E511C00C32AE2 /* Pin.h */,
 				464D1E24269E511C00C32AE2 /* Pin.m */,
+				460DABF4269F3AEA000220D0 /* Update.h */,
+				460DABF5269F3AEA000220D0 /* Update.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -511,6 +516,7 @@
 				464D1DCB269C8F2100C32AE2 /* FeedViewController.m in Sources */,
 				464D1E25269E511C00C32AE2 /* Pin.m in Sources */,
 				464D1DA3269C7EC000C32AE2 /* main.m in Sources */,
+				460DABF6269F3AEA000220D0 /* Update.m in Sources */,
 				460DABF0269F30E7000220D0 /* UpdateCell.m in Sources */,
 				464D1E17269D323300C32AE2 /* SearchLocationsViewController.m in Sources */,
 				464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */,

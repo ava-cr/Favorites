@@ -11,6 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ComposeUpdateViewController : UIViewController
 
+@property (strong, nonatomic) UIImage *image;
+@property (strong, nonatomic) NSString *caption;
+
 @end
 
 NS_ASSUME_NONNULL_END

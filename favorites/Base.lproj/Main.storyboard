@@ -367,6 +367,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Post" id="g8C-H3-TEE">
                             <connections>
                                 <action selector="postTapped:" destination="dbK-so-hRB" id="xVq-nF-fXP"/>
+                                <segue destination="IAs-Lm-Ymq" kind="unwind" identifier="postedUpdate" unwindAction="postedUpdateUnwind:" id="FZN-94-ZQ5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -376,6 +377,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ewN-EE-6Hl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="IAs-Lm-Ymq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1003" y="2482"/>
         </scene>
@@ -479,7 +481,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="587" id="O3C-jN-WyH" customClass="UpdateCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UpdateCell" rowHeight="587" id="O3C-jN-WyH" customClass="UpdateCell">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="587"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O3C-jN-WyH" id="C2p-23-cIU">
@@ -583,6 +585,9 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="PTV-cu-mh8" id="tks-OQ-UgK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a00-oO-7yU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
