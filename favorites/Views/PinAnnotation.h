@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PinAnnotation : NSObject <MKAnnotation>
 
-
+@property (strong, nonatomic) NSString *titleString;
+@property (strong, nonatomic) NSString *notes;
 
 
 @end

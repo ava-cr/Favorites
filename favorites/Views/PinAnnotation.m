@@ -17,7 +17,10 @@
 @implementation PinAnnotation
 
 - (NSString *)title {
-    return [NSString stringWithFormat:@"%f", self.coordinate.latitude];
+    return [NSString stringWithFormat:@"%@", self.titleString];
 }
+//-(void) returnNotes {
+//    return self.notes;
+//}
 
 @end

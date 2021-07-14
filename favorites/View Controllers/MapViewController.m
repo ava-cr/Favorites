@@ -14,6 +14,7 @@
 #import "AddPinViewController.h"
 #import "PinAnnotation.h"
 #import "Pin.h"
+#import "PinDetailsViewController.h"
 
 
 @interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
@@ -45,43 +46,6 @@
     }
 }
 
--(void) viewDidAppear:(BOOL)animated {
-    
-    if (self.pins) {
-        NSMutableArray* annotations = [[NSMutableArray alloc] init];
-        
-        for (MKMapItem *pin in self.pins) {
-            PinAnnotation *annotation = [[PinAnnotation alloc] init];
-            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(pin.placemark.location.coordinate.latitude, pin.placemark.coordinate.longitude);
-            annotation.coordinate = coordinate;
-            [annotations addObject:annotation];
-        }
-        
-        [self.mapView addAnnotations:annotations];
-    }
-    
-    /*
-     guard let mapItems = mapItems else { return }
-     
-     if mapItems.count == 1, let item = mapItems.first {
-         title = item.name
-     } else {
-         title = NSLocalizedString("TITLE_ALL_PLACES", comment: "All Places view controller title")
-     }
-     
-     // Turn the array of MKMapItem objects into an annotation with a title and URL that can be shown on the map.
-     let annotations = mapItems.compactMap { (mapItem) -> PlaceAnnotation? in
-         guard let coordinate = mapItem.placemark.location?.coordinate else { return nil }
-         
-         let annotation = PlaceAnnotation(coordinate: coordinate)
-         annotation.title = mapItem.name
-         annotation.url = mapItem.url
-         
-         return annotation
-     }
-     mapView.addAnnotations(annotations)
-     */
-}
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     
@@ -116,6 +80,8 @@
     
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(addPinVC.pin.placemark.location.coordinate.latitude, addPinVC.pin.placemark.coordinate.longitude);
     
+    
+    
     PinAnnotation *annotation = [[PinAnnotation alloc] init];
     annotation.coordinate = coordinate;
     
@@ -123,8 +89,12 @@
     
     NSNumber *lat = [NSNumber numberWithDouble:pin.placemark.location.coordinate.latitude];
     NSNumber *lng = [NSNumber numberWithDouble:pin.placemark.location.coordinate.longitude];
-        
-    [Pin postUserPin:pin.name withNotes:addPinVC.notes latitude:lat longitude:lng urlString:pin.url.absoluteString withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    
+    NSString *urlString = [NSString alloc];
+    if (pin.url) urlString = pin.url.absoluteString;
+    else urlString = @"";
+    
+    [Pin postUserPin:pin.name withNotes:addPinVC.notes latitude:lat longitude:lng urlString:urlString withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"the pin was posted!");
         } else {
@@ -165,6 +135,8 @@
             CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([pin.latitude doubleValue] , [pin.longitude doubleValue]);
             
             annotation.coordinate = coordinate;
+            annotation.titleString = pin.title;
+            annotation.notes = pin.notes;
             [annotations addObject:annotation];
         }
         
@@ -197,6 +169,7 @@
 //        leftImageView.clipsToBounds = YES;
 //
 //        annotationView.leftCalloutAccessoryView = leftImageView;
+        annotationView.largeContentTitle = annotation.title;
         annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
 
@@ -206,6 +179,11 @@
     return annotationView;
 }
 
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    if ([control isKindOfClass:[UIButton class]]) {
+        [self performSegueWithIdentifier:@"pinDetails" sender:view.annotation];
+    }
+}
 
 - (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
     NSLog(@"authorization is now");
@@ -226,14 +204,21 @@
     myDelegate.window.rootViewController = loginViewController;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if([segue.identifier isEqual:@"pinDetails"]) {
+        PinDetailsViewController *pdVC = [segue destinationViewController];
+        PinAnnotation *annotation = sender;
+        pdVC.title = annotation.titleString;
+        pdVC.annotation = annotation;
+    }
 }
-*/
+
 
 @end

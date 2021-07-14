@@ -55,11 +55,60 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="0N9-FX-0mC" id="3af-WL-Pr7"/>
+                        <segue destination="atg-mE-fSd" kind="show" identifier="pinDetails" id="Ldp-kw-Npj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1939.1304347826087" y="985.71428571428567"/>
+        </scene>
+        <!--Pin Details View Controller-->
+        <scene sceneID="iRO-9V-59P">
+            <objects>
+                <viewController id="atg-mE-fSd" customClass="PinDetailsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ebU-8x-lFE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8y-Bc-plI">
+                                <rect key="frame" x="20" y="20" width="52" height="33.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jiU-wg-4N3">
+                                <rect key="frame" x="20" y="83.5" width="374" height="300"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="2rp-74-5bo"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KIs-C5-GCb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="jiU-wg-4N3" secondAttribute="trailing" constant="20" id="5FT-eC-WWK"/>
+                            <constraint firstItem="KIs-C5-GCb" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="jiU-wg-4N3" secondAttribute="bottom" constant="20" id="Qg0-Y5-pGE"/>
+                            <constraint firstItem="O8y-Bc-plI" firstAttribute="leading" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="20" id="Ufw-gV-UEY"/>
+                            <constraint firstItem="jiU-wg-4N3" firstAttribute="top" secondItem="O8y-Bc-plI" secondAttribute="bottom" constant="30" id="Uvq-wf-Hi9"/>
+                            <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="O8y-Bc-plI" secondAttribute="trailing" constant="20" id="ZTp-uj-1Gu"/>
+                            <constraint firstItem="KIs-C5-GCb" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="O8y-Bc-plI" secondAttribute="bottom" constant="20" id="fir-dQ-Qxd"/>
+                            <constraint firstItem="jiU-wg-4N3" firstAttribute="leading" secondItem="O8y-Bc-plI" secondAttribute="leading" id="rJl-vg-Vs4"/>
+                            <constraint firstItem="O8y-Bc-plI" firstAttribute="top" secondItem="KIs-C5-GCb" secondAttribute="top" constant="20" id="sgD-zn-nhw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="1R5-8C-F44"/>
+                    <connections>
+                        <outlet property="notesTextView" destination="jiU-wg-4N3" id="Ozb-ND-Nle"/>
+                        <outlet property="titleLabel" destination="O8y-Bc-plI" id="8We-0u-VMN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K4N-Dw-c1Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1939.1304347826087" y="1747.7678571428571"/>
         </scene>
         <!--Search Locations View Controller-->
         <scene sceneID="HHI-wz-DNa">
@@ -138,7 +187,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHg-8s-blG">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHg-8s-blG">
                                 <rect key="frame" x="20" y="40" width="55.5" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
@@ -202,7 +251,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hh9-bt-IkN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="LNC-Cq-6br" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1939.1304347826087" y="1747.7678571428571"/>
+            <point key="canvasLocation" x="-2668" y="2482"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="wTu-lN-eEt">
