@@ -135,7 +135,6 @@
     [query includeKeys:keys];
     [query whereKey:@"author" equalTo:[PFUser currentUser]];
     // [query orderByDescending:@"createdAt"];
-    // query.limit = numberPosts;
     query.limit = 20;
 
     // fetch data asynchronously

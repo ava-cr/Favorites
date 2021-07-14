@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1BA2AA65C4DBAEAE0086E1AE /* Pods_favorites_favoritesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F520BB211E9F659EDFFD019D /* Pods_favorites_favoritesUITests.framework */; };
 		3028EF99693778FD2071D593 /* Pods_favoritesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D464BD913504612C1DB8FF88 /* Pods_favoritesTests.framework */; };
+		460DABF0269F30E7000220D0 /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 460DABEF269F30E7000220D0 /* UpdateCell.m */; };
+		460DABF3269F3631000220D0 /* ComposeUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 460DABF2269F3631000220D0 /* ComposeUpdateViewController.m */; };
 		464D1D92269C7EB500C32AE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D91269C7EB500C32AE2 /* AppDelegate.m */; };
 		464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D94269C7EB500C32AE2 /* SceneDelegate.m */; };
 		464D1D9B269C7EB500C32AE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D1D99269C7EB500C32AE2 /* Main.storyboard */; };
@@ -52,6 +54,10 @@
 		0210087384DCC8DAD2D8B50F /* Pods-favorites-favoritesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favorites-favoritesUITests.release.xcconfig"; path = "Target Support Files/Pods-favorites-favoritesUITests/Pods-favorites-favoritesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		10D093E72DD4F3B51C40D178 /* Pods-favorites.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favorites.release.xcconfig"; path = "Target Support Files/Pods-favorites/Pods-favorites.release.xcconfig"; sourceTree = "<group>"; };
 		31FC1AED190C44A23AEBBBA3 /* Pods-favoritesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favoritesTests.release.xcconfig"; path = "Target Support Files/Pods-favoritesTests/Pods-favoritesTests.release.xcconfig"; sourceTree = "<group>"; };
+		460DABEE269F30E7000220D0 /* UpdateCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateCell.h; sourceTree = "<group>"; };
+		460DABEF269F30E7000220D0 /* UpdateCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateCell.m; sourceTree = "<group>"; };
+		460DABF1269F3631000220D0 /* ComposeUpdateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeUpdateViewController.h; sourceTree = "<group>"; };
+		460DABF2269F3631000220D0 /* ComposeUpdateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeUpdateViewController.m; sourceTree = "<group>"; };
 		464D1D8D269C7EB500C32AE2 /* favorites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = favorites.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464D1D90269C7EB500C32AE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		464D1D91269C7EB500C32AE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -206,6 +212,8 @@
 				464D1DCD269C8F2900C32AE2 /* ProfileViewController.m */,
 				464D1DCF269C8FDF00C32AE2 /* LoginViewController.h */,
 				464D1DD0269C8FDF00C32AE2 /* LoginViewController.m */,
+				460DABF1269F3631000220D0 /* ComposeUpdateViewController.h */,
+				460DABF2269F3631000220D0 /* ComposeUpdateViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -217,6 +225,8 @@
 				464D1E1A269D328300C32AE2 /* LocationCell.m */,
 				464D1E1F269E350D00C32AE2 /* PinAnnotation.h */,
 				464D1E20269E350D00C32AE2 /* PinAnnotation.m */,
+				460DABEE269F30E7000220D0 /* UpdateCell.h */,
+				460DABEF269F30E7000220D0 /* UpdateCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -501,6 +511,7 @@
 				464D1DCB269C8F2100C32AE2 /* FeedViewController.m in Sources */,
 				464D1E25269E511C00C32AE2 /* Pin.m in Sources */,
 				464D1DA3269C7EC000C32AE2 /* main.m in Sources */,
+				460DABF0269F30E7000220D0 /* UpdateCell.m in Sources */,
 				464D1E17269D323300C32AE2 /* SearchLocationsViewController.m in Sources */,
 				464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */,
 				464D1DD1269C8FDF00C32AE2 /* LoginViewController.m in Sources */,
@@ -508,6 +519,7 @@
 				464D1E21269E350D00C32AE2 /* PinAnnotation.m in Sources */,
 				464D1E1E269DBB0D00C32AE2 /* AddPinViewController.m in Sources */,
 				464D1DC8269C8EC300C32AE2 /* MapViewController.m in Sources */,
+				460DABF3269F3631000220D0 /* ComposeUpdateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
