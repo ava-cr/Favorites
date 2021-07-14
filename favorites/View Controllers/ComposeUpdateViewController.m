@@ -56,6 +56,11 @@
         // choosing my location
         NSString *username = [PFUser currentUser].username;
         self.locationLabel.text = [username stringByAppendingString:@"'s location"];
+        NSNumber *lat = [NSNumber numberWithDouble:self.userLocation.coordinate.latitude];
+        NSNumber *lng = [NSNumber numberWithDouble:self.userLocation.coordinate.longitude];
+        self.latitude = lat;
+        self.longitude = lng;
+        
     }];
     UIAlertAction *chooseLocation = [UIAlertAction actionWithTitle:@"Choose From Locations"
                                                        style:UIAlertActionStyleDefault

@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *bottomUsernameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *captionTextField;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
+@property (weak, nonatomic) IBOutlet UILabel *isAtLabel;
 @property (strong, nonatomic) Update *update;
 @property (nonatomic, weak) id<UpdateCellDelegate> delegate;
 

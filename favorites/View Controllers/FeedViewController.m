@@ -76,7 +76,18 @@
         cell.bottomUsernameLabel.text = update.author.username;
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
         cell.captionTextField.text = update.caption;
+        
+        
+        if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:@"'s location"]]) {
+            cell.isAtLabel.text = @"";
+        }
+        else {
+            cell.isAtLabel.text = @"is at ";
+            
+        }
         [cell.locationButton setTitle:update.locationTitle forState:UIControlStateNormal];
+        
+        
         
 
         NSURL *url = [NSURL URLWithString:update.image.url];

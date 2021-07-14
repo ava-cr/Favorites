@@ -514,7 +514,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmD-2Q-zoP">
-                                                    <rect key="frame" x="65" y="16" width="78" height="21"/>
+                                                    <rect key="frame" x="65" y="21" width="78" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -537,13 +537,13 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is at " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNb-oi-gln">
-                                                    <rect key="frame" x="65" y="48" width="32.5" height="18"/>
+                                                    <rect key="frame" x="65" y="43" width="32.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPL-SR-auZ">
-                                                    <rect key="frame" x="97.5" y="48" width="56" height="18"/>
+                                                    <rect key="frame" x="97.5" y="43" width="56" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="VGH-WY-KUc"/>
                                                     </constraints>
@@ -558,7 +558,7 @@
                                                 <constraint firstItem="hmD-2Q-zoP" firstAttribute="leading" secondItem="i7e-QM-Q7l" secondAttribute="trailing" constant="5" id="0RD-WG-CQz"/>
                                                 <constraint firstItem="9ON-Yl-3IP" firstAttribute="leading" secondItem="RnN-WU-hsz" secondAttribute="trailing" constant="5" id="2xP-A9-eaC"/>
                                                 <constraint firstItem="HQ8-Wr-b7s" firstAttribute="top" secondItem="i7e-QM-Q7l" secondAttribute="bottom" constant="10" id="8xF-yw-4kw"/>
-                                                <constraint firstItem="SNb-oi-gln" firstAttribute="bottom" secondItem="i7e-QM-Q7l" secondAttribute="bottom" id="FP0-r4-1Ro"/>
+                                                <constraint firstItem="SNb-oi-gln" firstAttribute="bottom" secondItem="i7e-QM-Q7l" secondAttribute="bottom" constant="-5" id="FP0-r4-1Ro"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="RnN-WU-hsz" secondAttribute="bottom" constant="10" id="GRM-hH-7Jo"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="XPL-SR-auZ" secondAttribute="trailing" constant="10" id="K39-B5-Efv"/>
                                                 <constraint firstItem="XPL-SR-auZ" firstAttribute="leading" secondItem="SNb-oi-gln" secondAttribute="trailing" id="Lk6-ct-h5G"/>
@@ -573,7 +573,7 @@
                                                 <constraint firstItem="mdZ-Y3-wy3" firstAttribute="top" secondItem="HQ8-Wr-b7s" secondAttribute="bottom" constant="10" id="kPz-VH-ii3"/>
                                                 <constraint firstItem="i7e-QM-Q7l" firstAttribute="leading" secondItem="C2p-23-cIU" secondAttribute="leading" constant="10" id="mlc-zF-Si9"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="hmD-2Q-zoP" secondAttribute="trailing" constant="10" id="tRM-df-xKR"/>
-                                                <constraint firstItem="hmD-2Q-zoP" firstAttribute="top" secondItem="i7e-QM-Q7l" secondAttribute="top" id="uct-pe-0mt"/>
+                                                <constraint firstItem="hmD-2Q-zoP" firstAttribute="top" secondItem="i7e-QM-Q7l" secondAttribute="top" constant="5" id="uct-pe-0mt"/>
                                                 <constraint firstItem="RnN-WU-hsz" firstAttribute="top" secondItem="mdZ-Y3-wy3" secondAttribute="bottom" constant="10" id="vPb-tN-tH9"/>
                                                 <constraint firstItem="HQ8-Wr-b7s" firstAttribute="leading" secondItem="C2p-23-cIU" secondAttribute="leading" id="vic-3c-gmf"/>
                                             </constraints>
@@ -581,6 +581,7 @@
                                         <connections>
                                             <outlet property="bottomUsernameLabel" destination="RnN-WU-hsz" id="Bdc-wK-7P8"/>
                                             <outlet property="captionTextField" destination="9ON-Yl-3IP" id="C1o-hl-bCR"/>
+                                            <outlet property="isAtLabel" destination="SNb-oi-gln" id="sOo-HN-5c6"/>
                                             <outlet property="locationButton" destination="XPL-SR-auZ" id="7cS-sp-QLF"/>
                                             <outlet property="picImageView" destination="HQ8-Wr-b7s" id="4DF-jT-V4y"/>
                                             <outlet property="profilePicImageView" destination="i7e-QM-Q7l" id="Kfa-zB-eyt"/>
