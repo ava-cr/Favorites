@@ -21,6 +21,7 @@
 }
 - (IBAction)didTapLocation:(id)sender {
     NSLog(@"tapped location!");
+    [self.delegate updateCell:self pressedLocation:self.update];
 }
 
 @end

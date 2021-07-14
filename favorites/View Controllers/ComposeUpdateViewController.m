@@ -34,6 +34,13 @@
     if ([self.locationManager authorizationStatus ] == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestWhenInUseAuthorization];
     }
+    
+    UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tapScreen];
+}
+
+-(void)dismissKeyboard {
+    [self.captionTextField resignFirstResponder];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
@@ -46,9 +53,9 @@
     UIAlertAction *myLocation = [UIAlertAction actionWithTitle:@"Use My Location"
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
-        // self.locationLabel.text = [NSString stringWithFormat:@"%f", self.userLocation.coordinate.latitude];
-        self.locationLabel.text = @"My Current Location";
-        
+        // choosing my location
+        NSString *username = [PFUser currentUser].username;
+        self.locationLabel.text = [username stringByAppendingString:@"'s location"];
     }];
     UIAlertAction *chooseLocation = [UIAlertAction actionWithTitle:@"Choose From Locations"
                                                        style:UIAlertActionStyleDefault
@@ -149,6 +156,8 @@
     Pin *pin = pinsVC.chosenPin;
     
     self.locationLabel.text = pin.title;
+    self.latitude = pin.latitude;
+    self.longitude = pin.longitude;
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -157,6 +166,7 @@
     if ([segue.identifier isEqual:@"postedUpdate"]) {
         self.image = self.picImageView.image;
         self.caption = self.captionTextField.text;
+        self.locationTitle = self.locationLabel.text;
     }
     
 }

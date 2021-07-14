@@ -9,8 +9,9 @@
 #import "Update.h"
 #import "ComposeUpdateViewController.h"
 #import "UpdateCell.h"
+#import "ShowLocationOnMapViewController.h"
 
-@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UpdateCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *updates;
@@ -69,12 +70,14 @@
     Update *update = self.updates[indexPath.row];
     
     if (self.updates) {
-        //cell.post = post;
-        //cell.delegate = self; // for tap gesture recognizer
+        cell.update = update;
+        cell.delegate = self;
         cell.usernameLabel.text = update.author.username;
         cell.bottomUsernameLabel.text = update.author.username;
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
         cell.captionTextField.text = update.caption;
+        [cell.locationButton setTitle:update.locationTitle forState:UIControlStateNormal];
+        
 
         NSURL *url = [NSURL URLWithString:update.image.url];
         NSData *urlData = [NSData dataWithContentsOfURL:url];
@@ -100,13 +103,24 @@
     return cell;
 }
 
+- (void)updateCell:(UpdateCell *)updateCell pressedLocation:(Update *)update {
+    [self performSegueWithIdentifier:@"showLocationOnMap" sender:update];
+}
+
+
+//- (void)upda:(PostCell *)postCell didTap:(PFUser *)user{
+//    // TODO: Perform segue to profile view controller
+//    NSLog(@"%@", user.username);
+//    [self performSegueWithIdentifier:@"showProfile" sender:user];
+//}
+
 
 #pragma mark - Navigation
 
 - (IBAction) postedUpdateUnwind:(UIStoryboardSegue*)unwindSegue {
     ComposeUpdateViewController *composeVC = [unwindSegue sourceViewController];
     
-    [Update postUserUpdate:composeVC.image withCaption:composeVC.caption withCompletion:^(BOOL succeeded, NSError * error) {
+    [Update postUserUpdate:composeVC.image withCaption:composeVC.caption locationTitle:composeVC.locationTitle lat:composeVC.latitude lng:composeVC.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"the update was posted!");
             [self getUpdates];
@@ -117,12 +131,20 @@
 }
 
 
-/*
+
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqual:@"showLocationOnMap"]) {
+        ShowLocationOnMapViewController *vc = [segue destinationViewController];
+        Update *update = sender;
+        vc.update = update;
+        vc.title = update.locationTitle;
+    }
+    
 }
-*/
+
 
 @end

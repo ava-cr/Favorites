@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) NSString *caption;
+@property (strong, nonatomic) NSString *locationTitle;
+@property (strong, nonatomic) NSNumber *latitude;
+@property (strong, nonatomic) NSNumber *longitude;
 
 @end
 
