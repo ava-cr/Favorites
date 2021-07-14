@@ -6,6 +6,8 @@
 //
 
 #import "ComposeUpdateViewController.h"
+#import "MyPinsViewController.h"
+#import "Pin.h"
 #import <CoreLocation/CoreLocation.h>
 
 @interface ComposeUpdateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
@@ -44,13 +46,14 @@
     UIAlertAction *myLocation = [UIAlertAction actionWithTitle:@"Use My Location"
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
-        self.locationLabel.text = [NSString stringWithFormat:@"%f", self.userLocation.coordinate.latitude];
+        // self.locationLabel.text = [NSString stringWithFormat:@"%f", self.userLocation.coordinate.latitude];
+        self.locationLabel.text = @"My Current Location";
         
     }];
     UIAlertAction *chooseLocation = [UIAlertAction actionWithTitle:@"Choose From Locations"
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
-        [self choosePhoto]; // choose photo
+        [self performSegueWithIdentifier:@"showMyPins" sender:nil];
     }];
     [addLoc addAction:myLocation];
     [addLoc addAction:chooseLocation];
@@ -140,6 +143,13 @@
 
 
 #pragma mark - Navigation
+
+- (IBAction) pinForPostChosenUnwind:(UIStoryboardSegue*)unwindSegue {
+    MyPinsViewController *pinsVC = [unwindSegue sourceViewController];
+    Pin *pin = pinsVC.chosenPin;
+    
+    self.locationLabel.text = pin.title;
+}
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

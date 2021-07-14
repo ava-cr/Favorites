@@ -31,6 +31,8 @@
 		464D1E21269E350D00C32AE2 /* PinAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1E20269E350D00C32AE2 /* PinAnnotation.m */; };
 		464D1E25269E511C00C32AE2 /* Pin.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1E24269E511C00C32AE2 /* Pin.m */; };
 		464D1E28269E5F1900C32AE2 /* PinDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1E27269E5F1900C32AE2 /* PinDetailsViewController.m */; };
+		46A36B31269F7475003C3429 /* MyPinsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A36B30269F7475003C3429 /* MyPinsViewController.m */; };
+		46A36B35269F7568003C3429 /* MyPinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A36B34269F7568003C3429 /* MyPinCell.m */; };
 		A50209F1761945099FC0662A /* Pods_favorites.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1B88076CE8FC1A9BA6328B /* Pods_favorites.framework */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +100,10 @@
 		464D1E24269E511C00C32AE2 /* Pin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pin.m; sourceTree = "<group>"; };
 		464D1E26269E5F1900C32AE2 /* PinDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PinDetailsViewController.h; sourceTree = "<group>"; };
 		464D1E27269E5F1900C32AE2 /* PinDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PinDetailsViewController.m; sourceTree = "<group>"; };
+		46A36B2F269F7475003C3429 /* MyPinsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPinsViewController.h; sourceTree = "<group>"; };
+		46A36B30269F7475003C3429 /* MyPinsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPinsViewController.m; sourceTree = "<group>"; };
+		46A36B33269F7568003C3429 /* MyPinCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPinCell.h; sourceTree = "<group>"; };
+		46A36B34269F7568003C3429 /* MyPinCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPinCell.m; sourceTree = "<group>"; };
 		5A1B88076CE8FC1A9BA6328B /* Pods_favorites.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_favorites.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62C4F1D93C24C2071D8AAC05 /* Pods-favoritesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favoritesTests.debug.xcconfig"; path = "Target Support Files/Pods-favoritesTests/Pods-favoritesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A347F2FD08F02FC1F06C3623 /* Pods-favorites-favoritesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favorites-favoritesUITests.debug.xcconfig"; path = "Target Support Files/Pods-favorites-favoritesUITests/Pods-favorites-favoritesUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -208,15 +214,17 @@
 		464D1DC5269C8EAF00C32AE2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				464D1E29269E5F2300C32AE2 /* Map */,
 				464D1DC9269C8F2100C32AE2 /* FeedViewController.h */,
 				464D1DCA269C8F2100C32AE2 /* FeedViewController.m */,
+				460DABF1269F3631000220D0 /* ComposeUpdateViewController.h */,
+				460DABF2269F3631000220D0 /* ComposeUpdateViewController.m */,
+				46A36B2F269F7475003C3429 /* MyPinsViewController.h */,
+				46A36B30269F7475003C3429 /* MyPinsViewController.m */,
+				464D1E29269E5F2300C32AE2 /* Map */,
 				464D1DCC269C8F2900C32AE2 /* ProfileViewController.h */,
 				464D1DCD269C8F2900C32AE2 /* ProfileViewController.m */,
 				464D1DCF269C8FDF00C32AE2 /* LoginViewController.h */,
 				464D1DD0269C8FDF00C32AE2 /* LoginViewController.m */,
-				460DABF1269F3631000220D0 /* ComposeUpdateViewController.h */,
-				460DABF2269F3631000220D0 /* ComposeUpdateViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -230,6 +238,8 @@
 				464D1E20269E350D00C32AE2 /* PinAnnotation.m */,
 				460DABEE269F30E7000220D0 /* UpdateCell.h */,
 				460DABEF269F30E7000220D0 /* UpdateCell.m */,
+				46A36B33269F7568003C3429 /* MyPinCell.h */,
+				46A36B34269F7568003C3429 /* MyPinCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -514,6 +524,8 @@
 				464D1E28269E5F1900C32AE2 /* PinDetailsViewController.m in Sources */,
 				464D1D92269C7EB500C32AE2 /* AppDelegate.m in Sources */,
 				464D1DCB269C8F2100C32AE2 /* FeedViewController.m in Sources */,
+				46A36B31269F7475003C3429 /* MyPinsViewController.m in Sources */,
+				46A36B35269F7568003C3429 /* MyPinCell.m in Sources */,
 				464D1E25269E511C00C32AE2 /* Pin.m in Sources */,
 				464D1DA3269C7EC000C32AE2 /* main.m in Sources */,
 				460DABF6269F3AEA000220D0 /* Update.m in Sources */,

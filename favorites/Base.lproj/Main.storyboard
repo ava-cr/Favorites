@@ -375,6 +375,7 @@
                         <outlet property="captionTextField" destination="nnn-0L-jJT" id="LCJ-2q-7il"/>
                         <outlet property="locationLabel" destination="P3D-MC-Wds" id="fgJ-SU-Oh8"/>
                         <outlet property="picImageView" destination="VJJ-Af-azW" id="ilR-W3-lWh"/>
+                        <segue destination="ixH-Pd-UmQ" kind="presentation" identifier="showMyPins" id="bnY-sX-6gr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ewN-EE-6Hl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -382,19 +383,19 @@
             </objects>
             <point key="canvasLocation" x="1003" y="2482"/>
         </scene>
-        <!--View Controller-->
+        <!--My Pins View Controller-->
         <scene sceneID="p19-br-h4a">
             <objects>
-                <viewController id="ixH-Pd-UmQ" sceneMemberID="viewController">
+                <viewController id="ixH-Pd-UmQ" customClass="MyPinsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yDi-2i-rHG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LQC-C0-qd1">
-                                <rect key="frame" x="0.0" y="95" width="414" height="801"/>
+                                <rect key="frame" x="0.0" y="51" width="414" height="791"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="125" id="9gl-E1-7pk">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyPinCell" rowHeight="125" id="9gl-E1-7pk" customClass="MyPinCell">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9gl-E1-7pk" id="GFz-TG-pUR">
@@ -415,11 +416,15 @@
                                                 <constraint firstItem="nNl-SY-8dL" firstAttribute="top" secondItem="GFz-TG-pUR" secondAttribute="topMargin" constant="30" id="QYQ-6t-v2q"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="nNl-SY-8dL" id="bfe-tJ-B2g"/>
+                                            <segue destination="GdQ-VI-pne" kind="unwind" identifier="locationChosen" unwindAction="pinForPostChosenUnwind:" id="vka-U7-eQ2"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Zxl-FS-9xf">
-                                <rect key="frame" x="0.0" y="44" width="414" height="51"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>
@@ -436,8 +441,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="x13-Jw-ZXx"/>
+                    <connections>
+                        <outlet property="tableView" destination="LQC-C0-qd1" id="BNz-hb-CVP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vyp-fb-d4C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="GdQ-VI-pne" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1838" y="2482"/>
         </scene>

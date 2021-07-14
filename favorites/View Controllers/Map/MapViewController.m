@@ -93,7 +93,7 @@
 }
 
 - (IBAction) myUnwindAction:(UIStoryboardSegue*)unwindSegue {
-    NSLog(@"unwinding from add pin to search locations");
+    NSLog(@"unwinding from add pin to map");
     
     AddPinViewController *addPinVC = [unwindSegue sourceViewController];
     

@@ -66,9 +66,8 @@
     
     UpdateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UpdateCell"];
     
-    
     Update *update = self.updates[indexPath.row];
-    NSLog(@"%@", update.caption);
+    
     if (self.updates) {
         //cell.post = post;
         //cell.delegate = self; // for tap gesture recognizer
