@@ -98,7 +98,6 @@
     NSLog(@"unwinding from add pin to search locations");
     
     AddPinViewController *addPinVC = [unwindSegue sourceViewController];
-    //NSLog(@"pin notes: %@", addPinVC.notes);
     
     MKMapItem *pin = addPinVC.pin;
 //
@@ -134,6 +133,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Pin"];
     NSArray *keys = @[@"author", @"title", @"notes", @"url", @"latitude", @"longitude"];
     [query includeKeys:keys];
+    [query whereKey:@"author" equalTo:[PFUser currentUser]];
     // [query orderByDescending:@"createdAt"];
     // query.limit = numberPosts;
     query.limit = 20;
