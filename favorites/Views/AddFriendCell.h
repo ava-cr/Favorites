@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AddFriendCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addFriendButton;
 @property (strong, nonatomic) PFUser *user;
 @property (nonatomic, weak) id<AddFriendCellDelegate> delegate;
 

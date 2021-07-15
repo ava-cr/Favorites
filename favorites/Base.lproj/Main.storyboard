@@ -507,6 +507,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="addFriendButton" destination="kP7-YJ-Uo3" id="cW2-5X-XVC"/>
                                             <outlet property="profilePicImageView" destination="prk-pf-NKd" id="tNH-aA-9PV"/>
                                             <outlet property="usernameLabel" destination="tLV-tQ-Xzd" id="0mI-Nd-Pkq"/>
                                         </connections>

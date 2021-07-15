@@ -19,6 +19,7 @@
 }
 - (IBAction)didTapAddFriend:(id)sender {
     [self.delegate addFriendCell:self pressedAdd:self.user];
+    [self.addFriendButton setEnabled:FALSE];
     //NSLog(@"add friend: %@", self.user.username);
 }
 

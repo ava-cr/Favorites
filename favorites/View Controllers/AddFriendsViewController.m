@@ -7,6 +7,7 @@
 
 #import "AddFriendsViewController.h"
 #import "AddFriendCell.h"
+#import "FriendRequest.h"
 #import <Parse/Parse.h>
 
 @interface AddFriendsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, AddFriendCellDelegate>
@@ -15,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *users;
 @property (strong, nonatomic) NSMutableArray *filteredUsers;
+// @property (strong, nonatomic) NSMutableArray *requests;
+@property (strong, nonatomic) NSMutableArray *requestedUsers;
 
 @end
 
@@ -27,7 +30,8 @@
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
     
-    [self getUsers];
+    [self getFriendRequests];
+    // [self getUsers];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -45,6 +49,12 @@
         cell.delegate = self;
         cell.usernameLabel.text = user.username;
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
+        if ([self.requestedUsers containsObject:user]) {
+            [cell.addFriendButton setHidden:TRUE];
+            [cell.addFriendButton setTitle:@"Requested" forState:UIControlStateNormal];
+            NSLog(@"here");
+        }
+        // else [cell.addFriendButton setEnabled:TRUE];
     }
     return cell;
 }
@@ -53,8 +63,8 @@
     // construct query
     PFQuery *query = [PFUser query];
     [query includeKey:@"username"];
+    [query whereKey:@"objectId" notContainedIn:self.requestedUsers];
     [query whereKey:@"objectId" notEqualTo:[PFUser currentUser].objectId];
-    //query.limit = 20;
 
     // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
@@ -62,11 +72,30 @@
             self.users = users;
             self.filteredUsers = [NSMutableArray arrayWithArray:self.users];
             [self.tableView reloadData];
-            NSLog(@"got users");
-            NSLog(@"%lu", (unsigned long)[self.users count]);
-            for (PFUser *user in self.users) {
-                NSLog(@"%@", user.username);
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+- (void) getFriendRequests {
+    // construct query
+    PFQuery *query = [PFQuery queryWithClassName:@"FriendRequest"];
+    [query includeKey:@"requestee"];
+    [query includeKey:@"objectId"];
+    [query whereKey:@"requester" equalTo:[PFUser currentUser]];
+
+    // fetch data asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *requests, NSError *error) {
+        if (requests != nil) {
+            // self.requests = [NSMutableArray arrayWithArray:requests];
+            NSLog(@"# of requests: %lu", (unsigned long)[requests count]);
+            self.requestedUsers = [[NSMutableArray alloc] init];
+            for (FriendRequest *request in requests) {
+                [self.requestedUsers addObject:request.requestee.objectId];
             }
+            NSLog(@"%@", self.requestedUsers);
+            [self getUsers];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
@@ -75,7 +104,14 @@
 
 - (void)addFriendCell:(AddFriendCell *)addFriendCell pressedAdd:(PFUser *)user {
     NSLog(@"add friend: %@", user.username);
-    
+    [FriendRequest createFriendRequest:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"friend requested %@", user.username);
+            //[self getFriendRequests];
+        } else {
+            NSLog(@"problem saving friend request: %@", error.localizedDescription);
+        }
+    }];
 }
 
 # pragma mark - Search Bar Functions
