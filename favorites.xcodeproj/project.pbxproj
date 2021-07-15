@@ -42,6 +42,7 @@
 		46A36B4A26A08C55003C3429 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A36B4926A08C55003C3429 /* Friend.m */; };
 		46A36B4D26A0D01A003C3429 /* ProfileHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A36B4C26A0D01A003C3429 /* ProfileHeaderCell.m */; };
 		46A36B5026A0D32E003C3429 /* ProfileUpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A36B4F26A0D32E003C3429 /* ProfileUpdateCell.m */; };
+		46A36B5326A0ECE4003C3429 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A36B5226A0ECE4003C3429 /* EditProfileViewController.m */; };
 		A50209F1761945099FC0662A /* Pods_favorites.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1B88076CE8FC1A9BA6328B /* Pods_favorites.framework */; };
 /* End PBXBuildFile section */
 
@@ -131,6 +132,8 @@
 		46A36B4C26A0D01A003C3429 /* ProfileHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileHeaderCell.m; sourceTree = "<group>"; };
 		46A36B4E26A0D32E003C3429 /* ProfileUpdateCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileUpdateCell.h; sourceTree = "<group>"; };
 		46A36B4F26A0D32E003C3429 /* ProfileUpdateCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileUpdateCell.m; sourceTree = "<group>"; };
+		46A36B5126A0ECE4003C3429 /* EditProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
+		46A36B5226A0ECE4003C3429 /* EditProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		5A1B88076CE8FC1A9BA6328B /* Pods_favorites.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_favorites.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62C4F1D93C24C2071D8AAC05 /* Pods-favoritesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favoritesTests.debug.xcconfig"; path = "Target Support Files/Pods-favoritesTests/Pods-favoritesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A347F2FD08F02FC1F06C3623 /* Pods-favorites-favoritesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favorites-favoritesUITests.debug.xcconfig"; path = "Target Support Files/Pods-favorites-favoritesUITests/Pods-favorites-favoritesUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -258,6 +261,8 @@
 				46A36B3A269F9A85003C3429 /* AddFriendsViewController.m */,
 				46A36B4226A0839E003C3429 /* NotificationsViewController.h */,
 				46A36B4326A0839E003C3429 /* NotificationsViewController.m */,
+				46A36B5126A0ECE4003C3429 /* EditProfileViewController.h */,
+				46A36B5226A0ECE4003C3429 /* EditProfileViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -581,6 +586,7 @@
 				460DABF6269F3AEA000220D0 /* Update.m in Sources */,
 				460DABF0269F30E7000220D0 /* UpdateCell.m in Sources */,
 				46A36B3E269F9AE4003C3429 /* AddFriendCell.m in Sources */,
+				46A36B5326A0ECE4003C3429 /* EditProfileViewController.m in Sources */,
 				464D1E17269D323300C32AE2 /* SearchLocationsViewController.m in Sources */,
 				46A36B4426A0839E003C3429 /* NotificationsViewController.m in Sources */,
 				464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */,

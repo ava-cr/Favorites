@@ -6,6 +6,7 @@
 //
 
 #import "ProfileViewController.h"
+#import "EditProfileViewController.h"
 #import "ProfileHeaderCell.h"
 #import "ProfileUpdateCell.h"
 #import <Parse/Parse.h>
@@ -87,10 +88,14 @@ static int numFriends;
         cell.numPostsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPosts"]] stringByAppendingString:@" Posts"];
         cell.numPinsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPins"]] stringByAppendingString:@" Pins"];
         cell.numFriendsLabel.text = [[NSString stringWithFormat:@"%d", numFriends] stringByAppendingString:@" Friends"];
-        cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
         cell.editProfileButton.layer.cornerRadius = 5;
         cell.editProfileButton.layer.borderColor = [UIColor.systemBlueColor CGColor];
         cell.editProfileButton.layer.borderWidth = 0.5;
+        cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
+        PFFileObject *pfFile = [self.user objectForKey:@"profilePic"];
+        NSURL *url = [NSURL URLWithString:pfFile.url];
+        NSData *urlData = [NSData dataWithContentsOfURL:url];
+        cell.profilePicImageView.image = [[UIImage alloc] initWithData:urlData];
         return cell;
     }
     else {
@@ -113,6 +118,21 @@ static int numFriends;
          
         return cell;
     }
+}
+
+- (IBAction) unwindToProfile:(UIStoryboardSegue *)unwindSegue {
+    EditProfileViewController *sourceVC = [unwindSegue sourceViewController];
+    PFUser *user = [PFUser currentUser];
+    PFFileObject *pfFile = [Update getPFFileFromImage:sourceVC.profilePicture];
+    user[@"profilePic"] = pfFile;
+    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+      if (succeeded) {
+          NSLog(@"updated profile picture!");
+          [self.tableView reloadData];
+      } else {
+          NSLog(@"%@", error.localizedDescription);
+      }
+    }];
 }
 
 @end
