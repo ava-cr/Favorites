@@ -7,6 +7,7 @@
 
 #import "AddFriendsViewController.h"
 #import "AddFriendCell.h"
+#import "Friend.h"
 #import "FriendRequest.h"
 #import <Parse/Parse.h>
 
@@ -18,6 +19,7 @@
 @property (strong, nonatomic) NSMutableArray *filteredUsers;
 // @property (strong, nonatomic) NSMutableArray *requests;
 @property (strong, nonatomic) NSMutableArray *requestedUsers;
+@property (strong, nonatomic) NSMutableArray *friends;
 
 @end
 
@@ -63,7 +65,9 @@
     // construct query
     PFQuery *query = [PFUser query];
     [query includeKey:@"username"];
-    [query whereKey:@"objectId" notContainedIn:self.requestedUsers];
+    NSArray *offLimits = [self.requestedUsers arrayByAddingObjectsFromArray:self.friends];
+    [query whereKey:@"objectId" notContainedIn:offLimits];
+    //[query whereKey:@"objectId" notContainedIn:self.friends];
     [query whereKey:@"objectId" notEqualTo:[PFUser currentUser].objectId];
 
     // fetch data asynchronously
@@ -95,6 +99,36 @@
                 [self.requestedUsers addObject:request.requestee.objectId];
             }
             NSLog(@"%@", self.requestedUsers);
+            [self getFriends];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+- (void) getFriends {
+    // construct query
+    PFQuery *queryUser1 = [PFQuery queryWithClassName:@"Friend"];
+    [queryUser1 whereKey:@"user1" equalTo:[PFUser currentUser]];
+    
+    PFQuery *queryUser2 = [PFQuery queryWithClassName:@"Friend"];
+    [queryUser2 whereKey:@"user2" equalTo:[PFUser currentUser]];
+    
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[queryUser1,queryUser2]];
+    NSArray *keys = @[@"user1", @"user2", @"objectId"];
+    [query includeKeys:keys];
+
+    // fetch data asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *friends, NSError *error) {
+        if (friends != nil) {
+            NSLog(@"# of friends: %lu", (unsigned long)[friends count]);
+            self.friends = [[NSMutableArray alloc] init];
+            for (Friend *friend in friends) {
+                if ([friend.user1.objectId isEqual:[PFUser currentUser].objectId]) {
+                    [self.friends addObject:friend.user2.objectId];
+                }
+                else [self.friends addObject:friend.user1.objectId];
+            }
             [self getUsers];
         } else {
             NSLog(@"%@", error.localizedDescription);

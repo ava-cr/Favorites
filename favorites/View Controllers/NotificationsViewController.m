@@ -8,7 +8,7 @@
 #import "NotificationsViewController.h"
 #import "FriendRequestCell.h"
 #import "FriendRequest.h"
-#import "Friend.h";
+#import "Friend.h"
 #import <Parse/Parse.h>
 
 @interface NotificationsViewController () <UITableViewDelegate, UITableViewDataSource, FriendRequestCellDelegate>
