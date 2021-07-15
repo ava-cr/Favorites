@@ -104,7 +104,6 @@ static int numFriends;
          if (self.updates) {
              cell.usernameLabel.text = update.author.username;
              cell.bottomUsernameLabel.text = update.author.username;
-             cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
              cell.captionTextField.text = update.caption;
              if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:@"'s location"]]) {
                  cell.isAtLabel.text = @"";
@@ -114,6 +113,12 @@ static int numFriends;
              NSURL *url = [NSURL URLWithString:update.image.url];
              NSData *urlData = [NSData dataWithContentsOfURL:url];
              cell.picImageView.image = [[UIImage alloc] initWithData:urlData];
+             cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
+             PFFileObject *pfFile = [self.user objectForKey:@"profilePic"];
+             NSURL *profURL = [NSURL URLWithString:pfFile.url];
+             NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
+             cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+             
          }
          
         return cell;

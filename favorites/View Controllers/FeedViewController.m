@@ -71,6 +71,11 @@
         cell.usernameLabel.text = update.author.username;
         cell.bottomUsernameLabel.text = update.author.username;
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
+        cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
+        PFFileObject *pfFile = [update.author objectForKey:@"profilePic"];
+        NSURL *profURL = [NSURL URLWithString:pfFile.url];
+        NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
+        cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
         cell.captionTextField.text = update.caption;
         
         if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:@"'s location"]]) {
