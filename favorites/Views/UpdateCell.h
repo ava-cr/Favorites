@@ -26,8 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @protocol UpdateCellDelegate
-// TODO: Add required methods the delegate needs to implement
+// required methods the delegate needs to implement
 - (void)updateCell:(UpdateCell *) updateCell pressedLocation: (Update *)update;
+
 @end
 
 NS_ASSUME_NONNULL_END

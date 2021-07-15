@@ -35,7 +35,6 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
     [query includeKey:@"author"];
     [query orderByDescending:@"createdAt"];
-    //query.limit = numberPosts;
     query.limit = 20;
 
     // fetch data asynchronously
@@ -47,8 +46,6 @@
             for (Update *update in self.updates) {
                 NSLog(@"%@", update.caption);
             }
-            //if ([self.updates count] < numberPosts) self.loadedAllData = true;
-            
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
@@ -66,7 +63,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UpdateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UpdateCell"];
-    
     Update *update = self.updates[indexPath.row];
     
     if (self.updates) {
@@ -77,54 +73,23 @@
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
         cell.captionTextField.text = update.caption;
         
-        
         if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:@"'s location"]]) {
             cell.isAtLabel.text = @"";
         }
         else {
             cell.isAtLabel.text = @"is at ";
-            
         }
         [cell.locationButton setTitle:update.locationTitle forState:UIControlStateNormal];
-        
-        
-        
-
         NSURL *url = [NSURL URLWithString:update.image.url];
         NSData *urlData = [NSData dataWithContentsOfURL:url];
         cell.picImageView.image = [[UIImage alloc] initWithData:urlData];
-        
-//        NSDate *createdAt = post.createdAt;
-//        NSString *createdAtString = createdAt.shortTimeAgoSinceNow;
-//        cell.timestampLabel.text = [createdAtString stringByAppendingString:@" ago"];
-//
-//        PFFileObject *pfFile = [post.author objectForKey:@"profilePic"];
-        
-//        NSURL *profURL = [NSURL URLWithString:pfFile.url];
-//        NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
-//        cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
-        
-        // num likes label
-//        if (cell.post.likeCount.intValue == 1) {
-//            cell.numLikesLabel.text = [cell.post.likeCount.stringValue stringByAppendingString:@" like"];
-//        }
-//        else cell.numLikesLabel.text = [cell.post.likeCount.stringValue stringByAppendingString:@" likes"];
     }
-    
     return cell;
 }
 
 - (void)updateCell:(UpdateCell *)updateCell pressedLocation:(Update *)update {
     [self performSegueWithIdentifier:@"showLocationOnMap" sender:update];
 }
-
-
-//- (void)upda:(PostCell *)postCell didTap:(PFUser *)user{
-//    // TODO: Perform segue to profile view controller
-//    NSLog(@"%@", user.username);
-//    [self performSegueWithIdentifier:@"showProfile" sender:user];
-//}
-
 
 #pragma mark - Navigation
 
@@ -141,12 +106,7 @@
     }];
 }
 
-
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     
     if ([segue.identifier isEqual:@"showLocationOnMap"]) {
         ShowLocationOnMapViewController *vc = [segue destinationViewController];
@@ -154,8 +114,6 @@
         vc.update = update;
         vc.title = update.locationTitle;
     }
-    
 }
-
 
 @end

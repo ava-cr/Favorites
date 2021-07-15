@@ -19,8 +19,5 @@
 - (NSString *)title {
     return [NSString stringWithFormat:@"%@", self.titleString];
 }
-//-(void) returnNotes {
-//    return self.notes;
-//}
 
 @end

@@ -21,14 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *latitude;
 @property (nonatomic, strong) NSNumber *longitude;
 
-//@property (nonatomic, strong) PFFileObject *image;
-//@property (nonatomic, strong) NSNumber *likeCount;
-//@property (nonatomic, strong) NSNumber *commentCount;
-
 + (void) postUserPin: ( NSString * _Nullable )title withNotes: ( NSString * _Nullable )notes latitude:( NSNumber * _Nullable )lat longitude:( NSNumber * _Nullable )lng urlString:( NSString * _Nullable )url withCompletion: (PFBooleanResultBlock  _Nullable)completion;
-
-//+ (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
-
 
 @end
 

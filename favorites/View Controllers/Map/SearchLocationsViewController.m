@@ -34,21 +34,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // set up
     self.places = nil;
     [self.localSearch cancel];
-    
-    
+        
     self.searchRegion = MKCoordinateRegionForMapRect(MKMapRectWorld);
     self.boundingRegion = MKCoordinateRegionForMapRect(MKMapRectWorld);
 
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    
     // Place the search bar in the navigation bar.
     self.navigationItem.searchController = self.searchController;
     // Keep the search bar visible at all times.
@@ -56,16 +51,12 @@
     self.searchController.searchBar.delegate = self;
     self.searchController.hidesNavigationBarDuringPresentation = NO;
     self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
-
     self.searchController.searchResultsUpdater = self;
     self.searchController.searchBar.placeholder = @"Search here...";
     [self.searchController.searchBar sizeToFit];
-
     self.searchController.delegate = self;
     
 }
-
-
 
 -(void) viewDidDisappear {
     [super viewDidDisappear:TRUE];
@@ -91,19 +82,14 @@
     self.searchCompleter.region = self.searchRegion;
 }
 
-
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     LocationCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
     
     if (self.completerResults) {
         MKLocalSearchCompletion *suggestion = self.completerResults[indexPath.row];
-        
         cell.titleLabel.text = suggestion.title;
         cell.subtitleLabel.text = suggestion.subtitle;
-        
     }
-    
-    
     return cell;
 }
 
@@ -116,12 +102,9 @@
 
 
 - (void)updateSearchResultsForSearchController:(nonnull UISearchController *)searchController {
-    // Ask `MKLocalSearchCompleter` for new completion suggestions based on the change in the text entered in `UISearchBar`.
     
     if (!self.providingCompletions) [self startProvidingCompletions];
-    
     NSLog(@"SEARCH BAR TEXT IS %@", self.searchController.searchBar.text);
-    
     
     if (self.searchController.searchBar.text) {
         self.searchCompleter.queryFragment = self.searchController.searchBar.text;
@@ -132,9 +115,6 @@
         self.searchCompleter.queryFragment = @"";
     }
     NSLog(@"in update search results: query frag: %@", self.searchCompleter.queryFragment);
-    
-    
-    //[self.tableView reloadData];
 }
 
 - (void)completerDidUpdateResults:(MKLocalSearchCompleter *)completer {
@@ -160,26 +140,20 @@
 
 
 // search functions
-
-/// - Parameter suggestedCompletion: A search completion provided by `MKLocalSearchCompleter` when tapping on a search completion table row
 -(void) searchForSuggestedCompletion: (MKLocalSearchCompletion *) suggestedCompletion {
     MKLocalSearchRequest *searchRequest = [[MKLocalSearchRequest alloc] initWithCompletion:suggestedCompletion];
     [self searchUsing:searchRequest];
 }
 
-/// - Parameter queryString: A search string from the text the user entered into `UISearchBar`
 -(void) searchForQueryString: (NSString *) queryString {
     MKLocalSearchRequest *searchRequest = [[MKLocalSearchRequest alloc] init];
     searchRequest.naturalLanguageQuery = queryString;
     [self searchUsing:searchRequest];
 }
 
-/// - Tag: SearchRequest
 -(void) searchUsing: (MKLocalSearchRequest *)searchRequest {
-    // Confine the map search area to an area around the user's current location.
-    searchRequest.region = self.boundingRegion;
     
-    // Include only point of interest results. This excludes results based on address matches.
+    searchRequest.region = self.boundingRegion;
     searchRequest.resultTypes = MKLocalSearchResultTypePointOfInterest;
     
     self.localSearch = [[MKLocalSearch alloc] initWithRequest:searchRequest];
@@ -196,7 +170,6 @@
             self.boundingRegion = updatedRegion;
             
             [self performSegueWithIdentifier:@"locationChosen" sender:nil];
-            
         }
         else {
             NSLog(@"Error with searchUsing = %@", [error.userInfo description]);
@@ -224,7 +197,6 @@
     self.searchController.active = FALSE;
 }
 
-
 // when you select a suggestion
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.completerResults) {
@@ -251,40 +223,22 @@
     if (city) {
         NSString *templateString = NSLocalizedString(@"Search Results near %@", city);
         header = [city initWithFormat:@"%@", templateString];
-        //header = String(format: templateString, city);
     }
     
     return header;
     
 }
 
-
-
-/*
- private func displaySearchError(_ error: Error?) {
-     if let error = error as NSError?, let errorString = error.userInfo[NSLocalizedDescriptionKey] as? String {
-         let alertController = UIAlertController(title: "Could not find any places.", message: errorString, preferredStyle: .alert)
-         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-         present(alertController, animated: true, completion: nil)
-     }
- }
- */
-
-
-
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
     if ([segue.identifier isEqual:@"locationChosen"]) {
         NSLog(@"location chosen");        
         AddPinViewController *addPinVC = [segue destinationViewController];
         NSLog(@"segue-ing with chosen place = %@", self.chosenPlace.name);
         addPinVC.pin = self.chosenPlace;
     }
-    
 }
 
 @end

@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *pins;
 
-
 @end
 
 @implementation MyPinsViewController
@@ -34,7 +33,6 @@
     NSArray *keys = @[@"author", @"title", @"notes", @"url", @"latitude", @"longitude"];
     [query includeKeys:keys];
     [query whereKey:@"author" equalTo:[PFUser currentUser]];
-    // [query orderByDescending:@"createdAt"];
     query.limit = 20;
 
     // fetch data asynchronously
@@ -69,11 +67,8 @@
     return cell;
 }
 
-
-
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqual:@"locationChosen"]) {

@@ -101,15 +101,9 @@
 
 // image picker delegate function
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
     // Get the image captured by the UIImagePickerController
-    //UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-
-    // Do something with the images (based on your use case)
     self.picImageView.image = [self resizeImage:editedImage withSize:CGSizeMake(700.0, 700.0)];
-    
-    // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -165,7 +159,6 @@
     self.longitude = pin.longitude;
 }
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqual:@"postedUpdate"]) {
@@ -173,7 +166,6 @@
         self.caption = self.captionTextField.text;
         self.locationTitle = self.locationLabel.text;
     }
-    
 }
 
 @end

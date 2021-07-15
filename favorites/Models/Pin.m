@@ -18,7 +18,6 @@
 @dynamic longitude;
 @dynamic urlString;
 
-
 + (nonnull NSString *)parseClassName {
     return @"Pin";
 }
