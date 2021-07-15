@@ -17,5 +17,9 @@
     [super setSelected:selected animated:animated];
     // Configure the view for the selected state
 }
+- (IBAction)didTapAddFriend:(id)sender {
+    [self.delegate addFriendCell:self pressedAdd:self.user];
+    //NSLog(@"add friend: %@", self.user.username);
+}
 
 @end
