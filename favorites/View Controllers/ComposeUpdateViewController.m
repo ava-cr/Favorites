@@ -103,8 +103,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     // Get the image captured by the UIImagePickerController
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    self.picImageView.image = [self resizeImage:editedImage withSize:CGSizeMake(700.0, 700.0)];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    self.picImageView.image = [self resizeImage:editedImage withSize:CGSizeMake(650.0, 650.0)];
+    NSLog(@"%f", self.picImageView.image.size.height);
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void) takePhoto {
@@ -134,17 +135,11 @@
 
 // function to resize images for Parse
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
-    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    
-    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
-    resizeImageView.image = image;
-    
-    UIGraphicsBeginImageContext(size);
-    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
+    UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:size];
+    UIImage *newImage = [renderer imageWithActions:^(UIGraphicsImageRendererContext*_Nonnull myContext) {
+        [image drawInRect:(CGRect) {.size = size}];
+    }];
+    return [newImage imageWithRenderingMode:image.renderingMode];
 }
 
 

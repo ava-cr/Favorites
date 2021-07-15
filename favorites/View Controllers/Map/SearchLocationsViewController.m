@@ -11,10 +11,11 @@
 #import <CoreLocation/CoreLocation.h>
 #import "AddPinViewController.h"
 
+static NSString *locationChosenSegueId = @"locationChosen";
+
 @interface SearchLocationsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating, MKLocalSearchCompleterDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @property UISearchController *searchController;
 @property (strong, nonatomic) MKLocalSearchCompleter *searchCompleter;
 @property (nonatomic) MKCoordinateRegion searchRegion;
@@ -22,7 +23,6 @@
 @property (strong, nonatomic) CLPlacemark *currentPlacemark;
 @property (strong, nonatomic) NSArray<MKLocalSearchCompletion *> *completerResults;
 @property BOOL providingCompletions;
-
 @property (strong, nonatomic) NSArray<MKMapItem *> *places;
 @property (strong, nonatomic) MKMapItem *chosenPlace;
 @property (strong, nonatomic) MKLocalSearch *localSearch;
@@ -82,25 +82,6 @@
     self.searchCompleter.region = self.searchRegion;
 }
 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    LocationCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
-    
-    if (self.completerResults) {
-        MKLocalSearchCompletion *suggestion = self.completerResults[indexPath.row];
-        cell.titleLabel.text = suggestion.title;
-        cell.subtitleLabel.text = suggestion.subtitle;
-    }
-    return cell;
-}
-
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.completerResults) {
-        return [self.completerResults count];
-    }
-    else return 0;
-}
-
-
 - (void)updateSearchResultsForSearchController:(nonnull UISearchController *)searchController {
     
     if (!self.providingCompletions) [self startProvidingCompletions];
@@ -127,19 +108,16 @@
     NSLog(@"The query fragment is: %@", completer.queryFragment);
 }
 
-
-
 - (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
     return parentSize;
 }
-
 
 - (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
     return true;
 }
 
+# pragma mark - Search Functions
 
-// search functions
 -(void) searchForSuggestedCompletion: (MKLocalSearchCompletion *) suggestedCompletion {
     MKLocalSearchRequest *searchRequest = [[MKLocalSearchRequest alloc] initWithCompletion:suggestedCompletion];
     [self searchUsing:searchRequest];
@@ -157,7 +135,6 @@
     searchRequest.resultTypes = MKLocalSearchResultTypePointOfInterest;
     
     self.localSearch = [[MKLocalSearch alloc] initWithRequest:searchRequest];
-    
     [self.localSearch startWithCompletionHandler:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
         if (error == nil) {
             self.places = response.mapItems;
@@ -169,7 +146,7 @@
             MKCoordinateRegion updatedRegion = response.boundingRegion;
             self.boundingRegion = updatedRegion;
             
-            [self performSegueWithIdentifier:@"locationChosen" sender:nil];
+            [self performSegueWithIdentifier:locationChosenSegueId sender:nil];
         }
         else {
             NSLog(@"Error with searchUsing = %@", [error.userInfo description]);
@@ -197,7 +174,19 @@
     self.searchController.active = FALSE;
 }
 
-// when you select a suggestion
+# pragma mark - Table View
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    LocationCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
+    
+    if (self.completerResults) {
+        MKLocalSearchCompletion *suggestion = self.completerResults[indexPath.row];
+        cell.titleLabel.text = suggestion.title;
+        cell.subtitleLabel.text = suggestion.subtitle;
+    }
+    return cell;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.completerResults) {
         [self stopProvidingCompletions];
@@ -216,25 +205,28 @@
     }
 }
 
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.completerResults) {
+        return [self.completerResults count];
+    }
+    else return 0;
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    
     NSString *header = NSLocalizedString(@"Search Results", @"Standard result text");
     NSString *city = self.currentPlacemark.locality;
     if (city) {
         NSString *templateString = NSLocalizedString(@"Search Results near %@", city);
         header = [city initWithFormat:@"%@", templateString];
     }
-    
     return header;
-    
 }
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqual:@"locationChosen"]) {
-        NSLog(@"location chosen");        
+    if ([segue.identifier isEqual:locationChosenSegueId]) {
         AddPinViewController *addPinVC = [segue destinationViewController];
         NSLog(@"segue-ing with chosen place = %@", self.chosenPlace.name);
         addPinVC.pin = self.chosenPlace;
