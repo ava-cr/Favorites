@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property CLLocationManager *locationManager;
 @property CLLocation *userLocation;
+@property (assign, nonatomic) BOOL useGraphicsRenderer;
 
 @end
 
@@ -135,6 +136,7 @@
 
 // function to resize images for Parse
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    // use boolean to test images created with initial method and with renderer
     UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:size];
     UIImage *newImage = [renderer imageWithActions:^(UIGraphicsImageRendererContext*_Nonnull myContext) {
         [image drawInRect:(CGRect) {.size = size}];

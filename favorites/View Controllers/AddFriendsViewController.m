@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *users;
 @property (strong, nonatomic) NSMutableArray *filteredUsers;
-// @property (strong, nonatomic) NSMutableArray *requests;
 @property (strong, nonatomic) NSMutableArray *requestedUsers;
 @property (strong, nonatomic) NSMutableArray *friends;
 
@@ -33,7 +32,6 @@
     self.searchBar.delegate = self;
     
     [self getFriendRequests];
-    // [self getUsers];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -56,7 +54,6 @@
             [cell.addFriendButton setTitle:@"Requested" forState:UIControlStateNormal];
             NSLog(@"here");
         }
-        // else [cell.addFriendButton setEnabled:TRUE];
     }
     return cell;
 }
@@ -141,7 +138,6 @@
     [FriendRequest createFriendRequest:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"friend requested %@", user.username);
-            //[self getFriendRequests];
         } else {
             NSLog(@"problem saving friend request: %@", error.localizedDescription);
         }

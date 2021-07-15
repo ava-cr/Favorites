@@ -84,8 +84,19 @@
     [self getPins];
 }
 
-- (IBAction) myUnwindAction:(UIStoryboardSegue*)unwindSegue {
+- (IBAction) addPin:(UIStoryboardSegue*)unwindSegue {
     NSLog(@"unwinding from add pin to map");
+    
+    PFUser *currentUser = [PFUser currentUser];
+    currentUser[@"numPins"] = [NSNumber numberWithInt:([currentUser[@"numPins"] intValue] + 1)];
+    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"updated user pin count!");
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    
     AddPinViewController *addPinVC = [unwindSegue sourceViewController];
     MKMapItem *pin = addPinVC.pin;
     NSNumber *lat = [NSNumber numberWithDouble:pin.placemark.location.coordinate.latitude];

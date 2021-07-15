@@ -96,6 +96,16 @@
 - (IBAction) postedUpdateUnwind:(UIStoryboardSegue*)unwindSegue {
     ComposeUpdateViewController *composeVC = [unwindSegue sourceViewController];
     
+    PFUser *currentUser = [PFUser currentUser];
+    currentUser[@"numPosts"] = [NSNumber numberWithInt:([currentUser[@"numPosts"] intValue] + 1)];
+    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"updated user post count!");
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    
     [Update postUserUpdate:composeVC.image withCaption:composeVC.caption locationTitle:composeVC.locationTitle lat:composeVC.latitude lng:composeVC.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"the update was posted!");
