@@ -18,8 +18,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tapScreen];
 }
+
+-(void)dismissKeyboard {
+    [self.usernameField resignFirstResponder];
+    [self.passwordField resignFirstResponder];
+}
+
 - (IBAction)didTapLogIn:(id)sender {
     NSString *username = self.usernameField.text;
         NSString *password = self.passwordField.text;
@@ -53,15 +60,5 @@
         }
     }];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
