@@ -63,11 +63,6 @@
 [self dismissViewControllerAnimated:TRUE completion:nil];
 }
 
--(void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:TRUE];
-    [self reloadMapView];
-}
-
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     
     CLLocation *userLocation = locations[0];
@@ -139,6 +134,19 @@
     }];
 }
 
+- (IBAction) deletePin:(UIStoryboardSegue*)unwindSegue {
+    PinDetailsViewController *sourceVC = [unwindSegue sourceViewController];
+    [sourceVC.annotation.pin deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"deleted pin %@", sourceVC.annotation.pin.title);
+            [self reloadMapView];
+        }
+        else {
+            NSLog(@"problem deleting pin: %@", error.localizedDescription);
+        }
+    }];
+}
+
 - (void) getPins {
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Pin"];
@@ -146,7 +154,7 @@
     [query includeKeys:keys];
     [query whereKey:@"author" equalTo:self.user];
     query.limit = 20;
-
+    [self.mapView removeAnnotations:self.annotations];
     // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *pins, NSError *error) {
         if (pins != nil) {
@@ -160,7 +168,6 @@
 }
 
 -(void) placePins {
-    
     if (self.pins) {
         NSMutableArray* annotations = [[NSMutableArray alloc] init];
         for (Pin *pin in self.pins) {

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *notesTextView;
 @property (weak, nonatomic) IBOutlet UIButton *addPinButton;
 @property (weak, nonatomic) IBOutlet UILabel *notesLabel;
+@property (weak, nonatomic) IBOutlet UIButton *deletePinButton;
 
 @end
 
@@ -31,8 +32,13 @@
     }
     if (![self.user isEqual:[PFUser currentUser]]) {
         [self.notesTextView setEditable:FALSE];
+        [self.deletePinButton setHidden:TRUE];
+        [self.deletePinButton setEnabled:FALSE];
     }
     else {
+        self.deletePinButton.layer.cornerRadius = 5;
+        self.deletePinButton.layer.borderColor = [UIColor.systemBlueColor CGColor];
+        self.deletePinButton.layer.borderWidth = 0.5;
         [self.addPinButton setHidden:TRUE];
         [self.addPinButton setEnabled:FALSE];
     }
@@ -74,6 +80,22 @@
         } else {
             NSLog(@"problem saving pin: %@", error.localizedDescription);
         }
+    }];
+}
+- (IBAction)deletePinTapped:(id)sender {
+    UIAlertController *deletePin = [UIAlertController alertControllerWithTitle:@"Are you sure?" message:@""preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete Pin"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+        [self performSegueWithIdentifier:@"deletePin" sender:nil];
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {}];
+    [deletePin addAction:delete];
+    [deletePin addAction:cancel];
+    [self presentViewController:deletePin animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
     }];
 }
 
