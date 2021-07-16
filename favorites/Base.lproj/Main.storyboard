@@ -386,7 +386,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write caption here.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nnn-0L-jJT">
                                 <rect key="frame" x="87" y="394" width="240" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZq-zo-7qg">
                                 <rect key="frame" x="87" y="488" width="240" height="30"/>
@@ -1064,28 +1064,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVa-kO-byK">
-                                <rect key="frame" x="136" y="460" width="42" height="30"/>
+                                <rect key="frame" x="136" y="435" width="42" height="30"/>
                                 <state key="normal" title="Log In"/>
                                 <connections>
                                     <action selector="didTapLogIn:" destination="xNF-9z-WAk" eventType="touchUpInside" id="uq1-Fx-bLX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="157-Yg-MSg">
-                                <rect key="frame" x="230" y="460" width="54" height="30"/>
+                                <rect key="frame" x="230" y="435" width="54" height="30"/>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <action selector="didTapSignUp:" destination="xNF-9z-WAk" eventType="touchUpInside" id="anU-h4-P2D"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TuE-cv-HjQ">
-                                <rect key="frame" x="28" y="386" width="366" height="34"/>
+                                <rect key="frame" x="28" y="361" width="366" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ABI-xs-bXP">
-                                <rect key="frame" x="28" y="344" width="366" height="34"/>
+                                <rect key="frame" x="28" y="319" width="366" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="w10-Mj-wwg"/>
@@ -1094,7 +1094,7 @@
                             <constraint firstItem="157-Yg-MSg" firstAttribute="centerX" secondItem="UkA-wU-MKO" secondAttribute="centerX" constant="50" id="3N6-Lg-lmf"/>
                             <constraint firstItem="TuE-cv-HjQ" firstAttribute="trailing" secondItem="ABI-xs-bXP" secondAttribute="trailing" id="Jqz-Eg-2sJ"/>
                             <constraint firstItem="ABI-xs-bXP" firstAttribute="leading" secondItem="w10-Mj-wwg" secondAttribute="leading" constant="28" id="L60-cc-JGy"/>
-                            <constraint firstItem="ABI-xs-bXP" firstAttribute="top" secondItem="w10-Mj-wwg" secondAttribute="top" constant="300" id="N7R-ng-gxA"/>
+                            <constraint firstItem="ABI-xs-bXP" firstAttribute="top" secondItem="w10-Mj-wwg" secondAttribute="top" constant="275" id="N7R-ng-gxA"/>
                             <constraint firstItem="TuE-cv-HjQ" firstAttribute="leading" secondItem="ABI-xs-bXP" secondAttribute="leading" id="NjJ-lN-wW1"/>
                             <constraint firstItem="w10-Mj-wwg" firstAttribute="trailing" secondItem="ABI-xs-bXP" secondAttribute="trailing" constant="20" id="fnh-iK-rXG"/>
                             <constraint firstItem="tVa-kO-byK" firstAttribute="top" secondItem="TuE-cv-HjQ" secondAttribute="bottom" constant="40" id="k10-ND-Bds"/>

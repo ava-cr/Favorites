@@ -109,7 +109,7 @@
         cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
         cell.captionTextField.text = update.caption;
         
-        if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:@"'s location"]]) {
+        if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:@"'s location"]] || [update.locationTitle isEqual:@""]) {
             cell.isAtLabel.text = @"";
         }
         else {

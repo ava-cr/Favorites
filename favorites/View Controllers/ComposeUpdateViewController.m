@@ -66,12 +66,18 @@
                                                      handler:^(UIAlertAction * _Nonnull action) {
         [self performSegueWithIdentifier:@"showMyPins" sender:nil];
     }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+    }];
     [addLoc addAction:myLocation];
     [addLoc addAction:chooseLocation];
+    [addLoc addAction:cancel];
     [self presentViewController:addLoc animated:YES completion:^{
         // optional code for what happens after the alert controller has finished presenting
     }];
 }
+
 - (IBAction)addPhotoTapped:(id)sender {
     UIAlertController *addPic = [UIAlertController alertControllerWithTitle:@"Add Photo" message:@""preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"Take Photo"
@@ -90,6 +96,7 @@
         // optional code for what happens after the alert controller has finished presenting
     }];
 }
+
 - (IBAction)cancelTapped:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
