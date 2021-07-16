@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property CLLocationManager *locationManager;
 @property CLLocation *userLocation;
-@property (assign, nonatomic) BOOL useGraphicsRenderer;
 
 @end
 
@@ -25,7 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     if (self.locationManager == nil ) {
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
@@ -73,8 +71,6 @@
     [self presentViewController:addLoc animated:YES completion:^{
         // optional code for what happens after the alert controller has finished presenting
     }];
-    
-    
 }
 - (IBAction)addPhotoTapped:(id)sender {
     UIAlertController *addPic = [UIAlertController alertControllerWithTitle:@"Add Photo" message:@""preferredStyle:(UIAlertControllerStyleAlert)];
@@ -104,7 +100,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     // Get the image captured by the UIImagePickerController
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    self.picImageView.image = [self resizeImage:editedImage withSize:CGSizeMake(650.0, 650.0)];
+    self.picImageView.image = [self resizeImage:editedImage withSize:CGSizeMake(1300.0, 1300.0)];
     NSLog(@"%f", self.picImageView.image.size.height);
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -121,7 +117,6 @@
         NSLog(@"Camera 🚫 available so we will use photo library instead");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
-
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
@@ -136,12 +131,14 @@
 
 // function to resize images for Parse
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
-    // use boolean to test images created with initial method and with renderer
-    UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:size];
-    UIImage *newImage = [renderer imageWithActions:^(UIGraphicsImageRendererContext*_Nonnull myContext) {
-        [image drawInRect:(CGRect) {.size = size}];
-    }];
-    return [newImage imageWithRenderingMode:image.renderingMode];
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 
