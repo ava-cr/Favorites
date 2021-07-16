@@ -6,6 +6,7 @@
 //
 
 #import "ListFriendsViewController.h"
+#import "ProfileViewController.h"
 #import "ListFriendCell.h"
 
 @interface ListFriendsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
@@ -36,6 +37,9 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"showFriendProfile" sender:self.filteredFriends[indexPath.row]];
+}
 # pragma mark - Search Bar Functions
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -58,6 +62,14 @@
     self.searchBar.showsCancelButton = NO;
     self.searchBar.text = @"";
     [self.searchBar resignFirstResponder];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqual:@"showFriendProfile"]) {
+        ProfileViewController *profVC = [segue destinationViewController];
+        PFUser *friend = sender;
+        profVC.user = friend;
+    }
 }
 
 
