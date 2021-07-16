@@ -23,6 +23,10 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) NSArray<MKMapItem *> *pins;
 @property (strong, nonatomic) NSArray<PinAnnotation *> *annotations;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addPinButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+
 
 @end
 
@@ -30,9 +34,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self getPins];
     self.mapView.delegate = self;
-    
+    if (!self.user) self.user = [PFUser currentUser];
+    if ([self.user isEqual:[PFUser currentUser]]) {
+        self.title = @"Your Pins";
+        [self.cancelButton setEnabled:FALSE];
+        [self.cancelButton setHidden:TRUE];
+    }
+    else {
+        [self.addPinButton setEnabled:FALSE];
+        //[self.addPinButton setImage:nil];
+        [self.addPinButton setTitle:@""];
+        [self.logoutButton setEnabled:FALSE];
+        [self.logoutButton setTitle:@""];
+        self.title = [self.user.username stringByAppendingString:@"'s Pins"];
+    }
+    [self getPins];
     if (self.locationManager == nil ) {
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
@@ -42,6 +59,9 @@
     if ([self.locationManager authorizationStatus ] == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestWhenInUseAuthorization];
     }
+}
+- (IBAction)cancelButtonTapped:(id)sender {
+[self dismissViewControllerAnimated:TRUE completion:nil];
 }
 
 
@@ -121,7 +141,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Pin"];
     NSArray *keys = @[@"author", @"title", @"notes", @"url", @"latitude", @"longitude"];
     [query includeKeys:keys];
-    [query whereKey:@"author" equalTo:[PFUser currentUser]];
+    [query whereKey:@"author" equalTo:self.user];
     query.limit = 20;
 
     // fetch data asynchronously

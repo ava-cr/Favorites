@@ -14,14 +14,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0N9-FX-0mC">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wnQ-tU-LA9">
-                                <rect key="frame" x="359" y="671" width="25" height="24"/>
+                                <rect key="frame" x="359" y="754" width="25" height="24"/>
                                 <state key="normal">
                                     <imageReference key="image" image="paperplane.circle" catalog="system" symbolScale="large"/>
                                 </state>
@@ -29,16 +29,26 @@
                                     <action selector="didTapCenterUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="awI-w3-Xw4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61u-mG-5to">
+                                <rect key="frame" x="346" y="20" width="48" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tN9-ZE-0Y4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="61u-mG-5to" secondAttribute="trailing" constant="20" id="0MZ-0o-rsh"/>
                             <constraint firstItem="0N9-FX-0mC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5uy-7H-Hfy"/>
-                            <constraint firstItem="0N9-FX-0mC" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="72W-Qw-eD2"/>
+                            <constraint firstItem="0N9-FX-0mC" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="34" id="72W-Qw-eD2"/>
                             <constraint firstItem="0N9-FX-0mC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="BTh-lF-Ds5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wnQ-tU-LA9" secondAttribute="bottom" constant="30" id="BnT-be-N9S"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wnQ-tU-LA9" secondAttribute="trailing" constant="30" id="DWd-gS-kiW"/>
                             <constraint firstItem="0N9-FX-0mC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="KKn-5V-O4P"/>
+                            <constraint firstItem="61u-mG-5to" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="OP5-DL-vlr"/>
+                            <constraint firstItem="61u-mG-5to" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ufh-q4-xgk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8gr-lI-Qpy">
@@ -54,6 +64,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addPinButton" destination="jVR-fE-hra" id="TcL-PS-nqK"/>
+                        <outlet property="cancelButton" destination="61u-mG-5to" id="nfp-H8-DVk"/>
+                        <outlet property="logoutButton" destination="fJf-OT-nKI" id="Bio-ka-1tG"/>
                         <outlet property="mapView" destination="0N9-FX-0mC" id="3af-WL-Pr7"/>
                         <segue destination="atg-mE-fSd" kind="show" identifier="pinDetails" id="Ldp-kw-Npj"/>
                     </connections>
@@ -67,7 +80,7 @@
             <objects>
                 <viewController id="atg-mE-fSd" customClass="PinDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ebU-8x-lFE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8y-Bc-plI">
@@ -131,11 +144,11 @@
             <objects>
                 <viewController id="FDp-gV-nRA" customClass="SearchLocationsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1I6-sv-9XS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tde-TR-oT9">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="98" id="E6n-9B-KGs" customClass="LocationCell">
@@ -200,7 +213,7 @@
             <objects>
                 <viewController id="gxX-3r-VIw" customClass="AddPinViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I2p-kq-S25">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHg-8s-blG">
@@ -819,8 +832,7 @@
                                                     <rect key="frame" x="20" y="103" width="374" height="0.0"/>
                                                     <state key="normal" title="Edit Profile"/>
                                                     <connections>
-                                                        <action selector="editProfileTapped:" destination="KJr-AJ-X8X" eventType="touchUpInside" id="NYd-Uo-19g"/>
-                                                        <segue destination="bnp-GR-SS9" kind="show" id="ZHW-dV-I2p"/>
+                                                        <action selector="didTapProfileButton:" destination="KJr-AJ-X8X" eventType="touchUpInside" id="vRj-os-7Bx"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -961,6 +973,8 @@
                     <navigationItem key="navigationItem" id="Y2N-pW-qj7"/>
                     <connections>
                         <outlet property="tableView" destination="gAe-gX-ve5" id="eCe-CM-oEg"/>
+                        <segue destination="bnp-GR-SS9" kind="show" identifier="showProfile" id="ZGT-pt-vER"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showUserPins" id="9tI-lf-D44"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C1y-tB-2q1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1199,6 +1213,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="H2C-Ip-B2u"/>
+        <segue reference="9tI-lf-D44"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark" catalog="system" width="128" height="114"/>

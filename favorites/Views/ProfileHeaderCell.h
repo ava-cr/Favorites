@@ -6,8 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol ProfileHeaderCellDelegate;
 
 @interface ProfileHeaderCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicImageView;
@@ -15,6 +18,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *numFriendsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numPostsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *editProfileButton;
+@property (nonatomic, weak) id<ProfileHeaderCellDelegate> delegate;
+@property (strong, nonatomic) PFUser *user;
+
+@end
+
+@protocol ProfileHeaderCellDelegate
+
+- (void)profileHeaderCell:(ProfileHeaderCell *)profileHeaderCell;
 
 @end
 

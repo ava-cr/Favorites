@@ -9,7 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 @interface ProfileUpdateCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *picImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;

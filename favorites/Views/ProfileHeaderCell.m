@@ -6,6 +6,7 @@
 //
 
 #import "ProfileHeaderCell.h"
+#import <Parse/Parse.h>
 
 @implementation ProfileHeaderCell
 
@@ -13,13 +14,12 @@
     [super awakeFromNib];
     // Initialization code
 }
-- (IBAction)editProfileTapped:(id)sender {
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+}
+- (IBAction)didTapProfileButton:(id)sender {
+    [self.delegate profileHeaderCell:self];
 }
 
 @end

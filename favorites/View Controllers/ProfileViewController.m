@@ -7,6 +7,7 @@
 
 #import "ProfileViewController.h"
 #import "EditProfileViewController.h"
+#import "MapViewController.h"
 #import "ProfileHeaderCell.h"
 #import "ProfileUpdateCell.h"
 #import <Parse/Parse.h>
@@ -14,7 +15,7 @@
 
 static int numFriends;
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, ProfileHeaderCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *updates;
@@ -77,6 +78,18 @@ static int numFriends;
     }];
 }
 
+- (void)profileHeaderCell:(ProfileHeaderCell *)profileHeaderCell {
+    if ([self.user isEqual:[PFUser currentUser]]) {
+        [self performSegueWithIdentifier:@"showProfile" sender:nil];
+    }
+    else {
+        NSLog(@"show pins");
+        [self performSegueWithIdentifier:@"showUserPins" sender:nil];
+    }
+}
+
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.updates count] + 1;
 }
@@ -85,6 +98,10 @@ static int numFriends;
     if (indexPath.row == 0) {
         if (!self.user) self.user = [PFUser currentUser];
         ProfileHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
+        cell.delegate = self;
+        if (![self.user isEqual:[PFUser currentUser]]) {
+            [cell.editProfileButton setTitle:@"See Pins" forState:UIControlStateNormal];
+        }
         cell.numPostsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPosts"]] stringByAppendingString:@" Posts"];
         cell.numPinsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPins"]] stringByAppendingString:@" Pins"];
         cell.numFriendsLabel.text = [[NSString stringWithFormat:@"%d", numFriends] stringByAppendingString:@" Friends"];
@@ -125,6 +142,8 @@ static int numFriends;
     }
 }
 
+# pragma mark - Navigation
+
 - (IBAction) unwindToProfile:(UIStoryboardSegue *)unwindSegue {
     EditProfileViewController *sourceVC = [unwindSegue sourceViewController];
     PFUser *user = [PFUser currentUser];
@@ -138,6 +157,13 @@ static int numFriends;
           NSLog(@"%@", error.localizedDescription);
       }
     }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqual:@"showUserPins"]) {
+        MapViewController *mapVC = [segue destinationViewController];
+        mapVC.user = self.user;
+    }
 }
 
 @end
