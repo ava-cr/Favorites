@@ -37,7 +37,7 @@ static int numFriends;
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
     [query includeKey:@"author"];
-    [query whereKey:@"author" equalTo:[PFUser currentUser]];
+    [query whereKey:@"author" equalTo:self.user];
     [query orderByDescending:@"createdAt"];
     query.limit = 20;
 
@@ -60,9 +60,9 @@ static int numFriends;
 - (void) getFriends {
     // construct query
     PFQuery *queryUser1 = [PFQuery queryWithClassName:@"Friend"];
-    [queryUser1 whereKey:@"user1" equalTo:[PFUser currentUser]];
+    [queryUser1 whereKey:@"user1" equalTo:self.user];
     PFQuery *queryUser2 = [PFQuery queryWithClassName:@"Friend"];
-    [queryUser2 whereKey:@"user2" equalTo:[PFUser currentUser]];
+    [queryUser2 whereKey:@"user2" equalTo:self.user];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[queryUser1,queryUser2]];
 
     // fetch data asynchronously

@@ -10,6 +10,7 @@
 #import "ComposeUpdateViewController.h"
 #import "UpdateCell.h"
 #import "ShowLocationOnMapViewController.h"
+#import "ProfileViewController.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UpdateCellDelegate>
 
@@ -96,6 +97,10 @@
     [self performSegueWithIdentifier:@"showLocationOnMap" sender:update];
 }
 
+- (void)updateCell:(UpdateCell *)updateCell didTapUser:(PFUser *)user {
+    [self performSegueWithIdentifier:@"showProfile" sender:user];
+}
+
 #pragma mark - Navigation
 
 - (IBAction) postedUpdateUnwind:(UIStoryboardSegue*)unwindSegue {
@@ -128,6 +133,11 @@
         Update *update = sender;
         vc.update = update;
         vc.title = update.locationTitle;
+    }
+    else if ([segue.identifier isEqual:@"showProfile"]) {
+        ProfileViewController *vc = [segue destinationViewController];
+        PFUser *user = sender;
+        vc.user = user;
     }
 }
 

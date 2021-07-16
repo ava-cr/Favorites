@@ -732,6 +732,7 @@
                     <connections>
                         <outlet property="tableView" destination="PTV-cu-mh8" id="tks-OQ-UgK"/>
                         <segue destination="4wK-vl-P5r" kind="show" identifier="showLocationOnMap" id="Hvl-zz-9Jy"/>
+                        <segue destination="hDA-ZI-eSw" kind="show" identifier="showProfile" id="H2C-Ip-B2u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a00-oO-7yU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1196,6 +1197,9 @@
             <point key="canvasLocation" x="3392.753623188406" y="985.71428571428567"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="H2C-Ip-B2u"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="heart" catalog="system" width="128" height="109"/>
