@@ -114,16 +114,27 @@
         if (!self.user) self.user = [PFUser currentUser];
         ProfileHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
         cell.delegate = self;
-        if (![self.user isEqual:[PFUser currentUser]]) {
-            [cell.editProfileButton setTitle:@"See Pins" forState:UIControlStateNormal];
+        // number of posts/pins/friends labels
+        if ([[self.user objectForKey:@"numPosts"] isEqual:[NSNumber numberWithInt:1]]) {
+            cell.numPostsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPosts"]] stringByAppendingString:@" Post"];
         }
-        cell.numPostsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPosts"]] stringByAppendingString:@" Posts"];
-        cell.numPinsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPins"]] stringByAppendingString:@" Pins"];
-        cell.numFriendsLabel.text = [[NSString stringWithFormat:@"%d", (int)[self.friends count]] stringByAppendingString:@" Friends"];
+        else cell.numPostsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPosts"]] stringByAppendingString:@" Posts"];
+        
+        if ([[self.user objectForKey:@"numPins"] isEqual:[NSNumber numberWithInt:1]]) {
+            cell.numPinsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPins"]] stringByAppendingString:@" Pin"];
+        }
+        else cell.numPinsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPins"]] stringByAppendingString:@" Pins"];
+        if ((int)[self.friends count] == 1) {
+            cell.numFriendsLabel.text = [[NSString stringWithFormat:@"%d", (int)[self.friends count]] stringByAppendingString:@" Friend"];
+        }
+        else cell.numFriendsLabel.text = [[NSString stringWithFormat:@"%d", (int)[self.friends count]] stringByAppendingString:@" Friends"];
+        // edit profile / see pins button
+        if (![self.user isEqual:[PFUser currentUser]]) [cell.editProfileButton setTitle:@"See Pins" forState:UIControlStateNormal];
         cell.editProfileButton.layer.cornerRadius = 5;
         cell.editProfileButton.layer.borderColor = [UIColor.systemBlueColor CGColor];
         cell.editProfileButton.layer.borderWidth = 0.5;
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
+        // profile picture
         PFFileObject *pfFile = [self.user objectForKey:@"profilePic"];
         NSURL *url = [NSURL URLWithString:pfFile.url];
         NSData *urlData = [NSData dataWithContentsOfURL:url];
