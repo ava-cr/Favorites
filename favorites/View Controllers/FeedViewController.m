@@ -25,11 +25,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Initialize a UIRefreshControl
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.friends = [[NSMutableArray alloc] initWithObjects:[PFUser currentUser], nil];
     [self getFriends];
+}
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self getFriends];
+    [refreshControl endRefreshing];
 }
 
 - (void) getUpdates {

@@ -29,13 +29,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     if (!self.user) self.user = [PFUser currentUser];
     self.title = self.user.username;
-    self.friends = [[NSMutableArray alloc] init];
     [self getFriends];
     [self getUpdates];
+}
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self getFriends];
+    [self getUpdates];
+    [refreshControl endRefreshing];
 }
 
 - (void) getUpdates {
@@ -72,9 +80,9 @@
     NSArray *keys = @[@"user1", @"user2"];
     [query includeKeys:keys];
 
-    // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *friends, NSError *error) {
         if (friends != nil) {
+            self.friends = [[NSMutableArray alloc] init];
             NSLog(@"# of friends: %lu", (unsigned long)[friends count]);
             for (Friend *friend in friends) {
                 if ([friend.user1.objectId isEqual:self.user.objectId]) {
