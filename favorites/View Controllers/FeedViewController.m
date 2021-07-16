@@ -11,11 +11,13 @@
 #import "UpdateCell.h"
 #import "ShowLocationOnMapViewController.h"
 #import "ProfileViewController.h"
+#import "Friend.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UpdateCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *updates;
+@property (strong, nonatomic) NSMutableArray *friends;
 
 @end
 
@@ -23,12 +25,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    
-    [self getUpdates];
+    self.friends = [[NSMutableArray alloc] initWithObjects:[PFUser currentUser], nil];
+    [self getFriends];
 }
 
 - (void) getUpdates {
@@ -36,6 +37,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
     [query includeKey:@"author"];
     [query orderByDescending:@"createdAt"];
+    [query whereKey:@"author" containedIn:self.friends];
     query.limit = 20;
 
     // fetch data asynchronously
@@ -47,6 +49,34 @@
             for (Update *update in self.updates) {
                 NSLog(@"%@", update.caption);
             }
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+- (void) getFriends {
+    // construct query
+    PFQuery *queryUser1 = [PFQuery queryWithClassName:@"Friend"];
+    [queryUser1 whereKey:@"user1" equalTo:[PFUser currentUser]];
+    PFQuery *queryUser2 = [PFQuery queryWithClassName:@"Friend"];
+    [queryUser2 whereKey:@"user2" equalTo:[PFUser currentUser]];
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[queryUser1,queryUser2]];
+    NSArray *keys = @[@"user1", @"user2"];
+    [query includeKeys:keys];
+
+    // fetch data asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *friends, NSError *error) {
+        if (friends != nil) {
+            NSLog(@"# of friends: %lu", (unsigned long)[friends count]);
+            for (Friend *friend in friends) {
+                if ([friend.user1.objectId isEqual:[PFUser currentUser].objectId]) {
+                    [self.friends addObject:friend.user2];
+                }
+                else [self.friends addObject:friend.user1];
+            }
+            NSLog(@"%@", self.friends);
+            [self getUpdates];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
