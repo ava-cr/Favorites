@@ -7,18 +7,21 @@
 
 #import "ProfileViewController.h"
 #import "EditProfileViewController.h"
+#import "ListFriendsViewController.h"
 #import "MapViewController.h"
 #import "ProfileHeaderCell.h"
 #import "ProfileUpdateCell.h"
 #import <Parse/Parse.h>
 #import "Update.h"
+#import "Friend.h"
 
-static int numFriends;
+// static int numFriends;
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, ProfileHeaderCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *updates;
+@property (strong, nonatomic) NSMutableArray *friends;
 
 @end
 
@@ -30,6 +33,7 @@ static int numFriends;
     self.tableView.dataSource = self;
     if (!self.user) self.user = [PFUser currentUser];
     self.title = self.user.username;
+    self.friends = [[NSMutableArray alloc] init];
     [self getFriends];
     [self getUpdates];
 }
@@ -65,12 +69,19 @@ static int numFriends;
     PFQuery *queryUser2 = [PFQuery queryWithClassName:@"Friend"];
     [queryUser2 whereKey:@"user2" equalTo:self.user];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[queryUser1,queryUser2]];
+    NSArray *keys = @[@"user1", @"user2"];
+    [query includeKeys:keys];
 
     // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *friends, NSError *error) {
         if (friends != nil) {
             NSLog(@"# of friends: %lu", (unsigned long)[friends count]);
-            numFriends = (int)[friends count];
+            for (Friend *friend in friends) {
+                if ([friend.user1.objectId isEqual:self.user.objectId]) {
+                    [self.friends addObject:friend.user2];
+                }
+                else [self.friends addObject:friend.user1];
+            }
             [self.tableView reloadData];
         } else {
             NSLog(@"%@", error.localizedDescription);
@@ -78,7 +89,7 @@ static int numFriends;
     }];
 }
 
-- (void)profileHeaderCell:(ProfileHeaderCell *)profileHeaderCell {
+- (void)tappedProfileButton:(ProfileHeaderCell *)cell {
     if ([self.user isEqual:[PFUser currentUser]]) {
         [self performSegueWithIdentifier:@"showProfile" sender:nil];
     }
@@ -88,6 +99,10 @@ static int numFriends;
     }
 }
 
+- (void)tappedFriends:(ProfileHeaderCell *)cell {
+    NSLog(@"tapped friends");
+    [self performSegueWithIdentifier:@"listFriends" sender:nil];
+}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -104,7 +119,7 @@ static int numFriends;
         }
         cell.numPostsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPosts"]] stringByAppendingString:@" Posts"];
         cell.numPinsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPins"]] stringByAppendingString:@" Pins"];
-        cell.numFriendsLabel.text = [[NSString stringWithFormat:@"%d", numFriends] stringByAppendingString:@" Friends"];
+        cell.numFriendsLabel.text = [[NSString stringWithFormat:@"%d", (int)[self.friends count]] stringByAppendingString:@" Friends"];
         cell.editProfileButton.layer.cornerRadius = 5;
         cell.editProfileButton.layer.borderColor = [UIColor.systemBlueColor CGColor];
         cell.editProfileButton.layer.borderWidth = 0.5;
@@ -135,9 +150,7 @@ static int numFriends;
              NSURL *profURL = [NSURL URLWithString:pfFile.url];
              NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
              cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
-             
          }
-         
         return cell;
     }
 }
@@ -163,6 +176,10 @@ static int numFriends;
     if ([segue.identifier isEqual:@"showUserPins"]) {
         MapViewController *mapVC = [segue destinationViewController];
         mapVC.user = self.user;
+    }
+    else if ([segue.identifier isEqual:@"listFriends"]) {
+        ListFriendsViewController *friendsVC = [segue destinationViewController];
+        friendsVC.friends = self.friends;
     }
 }
 

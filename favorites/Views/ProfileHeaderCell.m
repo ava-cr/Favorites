@@ -12,14 +12,21 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    UITapGestureRecognizer *friendsLabelTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapFriends:)];
+    [self.numFriendsLabel addGestureRecognizer:friendsLabelTap];
+    [self.numFriendsLabel setUserInteractionEnabled:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
 - (IBAction)didTapProfileButton:(id)sender {
-    [self.delegate profileHeaderCell:self];
+    [self.delegate tappedProfileButton:self];
+}
+
+- (void) didTapFriends:(UITapGestureRecognizer *)sender{
+    [self.delegate tappedFriends:self];
 }
 
 @end

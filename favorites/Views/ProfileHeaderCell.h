@@ -25,7 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ProfileHeaderCellDelegate
 
-- (void)profileHeaderCell:(ProfileHeaderCell *)profileHeaderCell;
+- (void)tappedProfileButton:(ProfileHeaderCell *)cell;
+- (void)tappedFriends:(ProfileHeaderCell *)cell;
 
 @end
 

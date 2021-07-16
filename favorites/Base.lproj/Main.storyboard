@@ -862,7 +862,7 @@
                                             <outlet property="profilePicImageView" destination="WCc-Lv-SqG" id="NgA-jt-3ps"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileUpdateCell" rowHeight="573" id="qyn-NU-N6Q" customClass="ProfileUpdateCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProfileUpdateCell" rowHeight="573" id="qyn-NU-N6Q" customClass="ProfileUpdateCell">
                                         <rect key="frame" x="0.0" y="148.5" width="414" height="573"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qyn-NU-N6Q" id="FOh-2v-bhp">
@@ -975,6 +975,7 @@
                         <outlet property="tableView" destination="gAe-gX-ve5" id="eCe-CM-oEg"/>
                         <segue destination="bnp-GR-SS9" kind="show" identifier="showProfile" id="ZGT-pt-vER"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="showUserPins" id="9tI-lf-D44"/>
+                        <segue destination="7U2-2T-Zl3" kind="show" identifier="listFriends" id="SBY-uA-Ilk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C1y-tB-2q1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1190,6 +1191,81 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wDZ-cF-rLH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1002.8985507246377" y="1747.7678571428571"/>
+        </scene>
+        <!--List Friends View Controller-->
+        <scene sceneID="oty-4E-vir">
+            <objects>
+                <viewController id="7U2-2T-Zl3" customClass="ListFriendsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PeY-KC-l6w">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="thB-ya-f5P">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="iJM-YF-fIa">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListFriendCell" rowHeight="118" id="v62-d7-h7y" customClass="ListFriendCell">
+                                        <rect key="frame" x="0.0" y="68.5" width="414" height="118"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v62-d7-h7y" id="lko-Wh-1AM">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="118"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yX-Gr-ciC">
+                                                    <rect key="frame" x="78" y="45.5" width="76" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Z5P-EV-i2z">
+                                                    <rect key="frame" x="20" y="32.5" width="50" height="47.5"/>
+                                                    <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="b9b-Ce-L5X"/>
+                                                        <constraint firstAttribute="width" constant="50" id="h2T-Tl-li3"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Z5P-EV-i2z" firstAttribute="top" secondItem="lko-Wh-1AM" secondAttribute="topMargin" constant="20" id="3f1-Fr-0N3"/>
+                                                <constraint firstItem="Z5P-EV-i2z" firstAttribute="leading" secondItem="lko-Wh-1AM" secondAttribute="leadingMargin" id="AmM-SY-2cf"/>
+                                                <constraint firstItem="6yX-Gr-ciC" firstAttribute="centerY" secondItem="Z5P-EV-i2z" secondAttribute="centerY" id="KaS-UB-GgM"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Z5P-EV-i2z" secondAttribute="bottom" constant="20" id="Wbm-E7-Fw6"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="6yX-Gr-ciC" secondAttribute="trailing" id="o5l-EM-HO6"/>
+                                                <constraint firstItem="6yX-Gr-ciC" firstAttribute="leading" secondItem="Z5P-EV-i2z" secondAttribute="trailing" constant="8" id="yRd-lm-hCw"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="profilePicImageView" destination="Z5P-EV-i2z" id="4Wb-mm-hqO"/>
+                                            <outlet property="usernameLabel" destination="6yX-Gr-ciC" id="w8t-ME-FkB"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZKA-KN-Km4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="thB-ya-f5P" firstAttribute="trailing" secondItem="ZKA-KN-Km4" secondAttribute="trailing" id="LKp-Ta-oog"/>
+                            <constraint firstItem="thB-ya-f5P" firstAttribute="top" secondItem="ZKA-KN-Km4" secondAttribute="top" id="LaC-5G-2ui"/>
+                            <constraint firstItem="thB-ya-f5P" firstAttribute="leading" secondItem="ZKA-KN-Km4" secondAttribute="leading" id="Oad-1q-hr6"/>
+                            <constraint firstItem="thB-ya-f5P" firstAttribute="bottom" secondItem="ZKA-KN-Km4" secondAttribute="bottom" id="ey9-MN-i8P"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="21d-6e-vY0"/>
+                    <connections>
+                        <outlet property="searchBar" destination="iJM-YF-fIa" id="fXB-rR-BGh"/>
+                        <outlet property="tableView" destination="thB-ya-f5P" id="Tks-Bf-qhm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ly6-DE-okS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2586.9565217391305" y="1747.7678571428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HbO-5n-2XV">

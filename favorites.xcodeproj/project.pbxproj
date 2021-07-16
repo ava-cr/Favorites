@@ -12,6 +12,8 @@
 		460DABF0269F30E7000220D0 /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 460DABEF269F30E7000220D0 /* UpdateCell.m */; };
 		460DABF3269F3631000220D0 /* ComposeUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 460DABF2269F3631000220D0 /* ComposeUpdateViewController.m */; };
 		460DABF6269F3AEA000220D0 /* Update.m in Sources */ = {isa = PBXBuildFile; fileRef = 460DABF5269F3AEA000220D0 /* Update.m */; };
+		463278AC26A1C33E007BCA59 /* ListFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 463278AB26A1C33E007BCA59 /* ListFriendsViewController.m */; };
+		463278AF26A1C3BE007BCA59 /* ListFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 463278AE26A1C3BE007BCA59 /* ListFriendCell.m */; };
 		464D1D92269C7EB500C32AE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D91269C7EB500C32AE2 /* AppDelegate.m */; };
 		464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D94269C7EB500C32AE2 /* SceneDelegate.m */; };
 		464D1D9B269C7EB500C32AE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D1D99269C7EB500C32AE2 /* Main.storyboard */; };
@@ -73,6 +75,10 @@
 		460DABF2269F3631000220D0 /* ComposeUpdateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeUpdateViewController.m; sourceTree = "<group>"; };
 		460DABF4269F3AEA000220D0 /* Update.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Update.h; sourceTree = "<group>"; };
 		460DABF5269F3AEA000220D0 /* Update.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Update.m; sourceTree = "<group>"; };
+		463278AA26A1C33E007BCA59 /* ListFriendsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListFriendsViewController.h; sourceTree = "<group>"; };
+		463278AB26A1C33E007BCA59 /* ListFriendsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListFriendsViewController.m; sourceTree = "<group>"; };
+		463278AD26A1C3BE007BCA59 /* ListFriendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListFriendCell.h; sourceTree = "<group>"; };
+		463278AE26A1C3BE007BCA59 /* ListFriendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListFriendCell.m; sourceTree = "<group>"; };
 		464D1D8D269C7EB500C32AE2 /* favorites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = favorites.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464D1D90269C7EB500C32AE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		464D1D91269C7EB500C32AE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -263,6 +269,8 @@
 				46A36B4326A0839E003C3429 /* NotificationsViewController.m */,
 				46A36B5126A0ECE4003C3429 /* EditProfileViewController.h */,
 				46A36B5226A0ECE4003C3429 /* EditProfileViewController.m */,
+				463278AA26A1C33E007BCA59 /* ListFriendsViewController.h */,
+				463278AB26A1C33E007BCA59 /* ListFriendsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -286,6 +294,8 @@
 				46A36B4C26A0D01A003C3429 /* ProfileHeaderCell.m */,
 				46A36B4E26A0D32E003C3429 /* ProfileUpdateCell.h */,
 				46A36B4F26A0D32E003C3429 /* ProfileUpdateCell.m */,
+				463278AD26A1C3BE007BCA59 /* ListFriendCell.h */,
+				463278AE26A1C3BE007BCA59 /* ListFriendCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -583,9 +593,11 @@
 				464D1E25269E511C00C32AE2 /* Pin.m in Sources */,
 				46A36B3B269F9A85003C3429 /* AddFriendsViewController.m in Sources */,
 				464D1DA3269C7EC000C32AE2 /* main.m in Sources */,
+				463278AC26A1C33E007BCA59 /* ListFriendsViewController.m in Sources */,
 				460DABF6269F3AEA000220D0 /* Update.m in Sources */,
 				460DABF0269F30E7000220D0 /* UpdateCell.m in Sources */,
 				46A36B3E269F9AE4003C3429 /* AddFriendCell.m in Sources */,
+				463278AF26A1C3BE007BCA59 /* ListFriendCell.m in Sources */,
 				46A36B5326A0ECE4003C3429 /* EditProfileViewController.m in Sources */,
 				464D1E17269D323300C32AE2 /* SearchLocationsViewController.m in Sources */,
 				46A36B4426A0839E003C3429 /* NotificationsViewController.m in Sources */,
