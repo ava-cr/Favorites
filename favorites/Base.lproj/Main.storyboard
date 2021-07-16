@@ -105,11 +105,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZB2-M0-p2z">
+                                <rect key="frame" x="341" y="22" width="53" height="30"/>
+                                <state key="normal" title="Add Pin"/>
+                                <connections>
+                                    <action selector="addPinTapped:" destination="atg-mE-fSd" eventType="touchUpInside" id="FDM-KE-vkh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KIs-C5-GCb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="jiU-wg-4N3" secondAttribute="trailing" constant="20" id="5FT-eC-WWK"/>
+                            <constraint firstItem="ZB2-M0-p2z" firstAttribute="centerY" secondItem="O8y-Bc-plI" secondAttribute="centerY" id="5n3-Px-aY3"/>
                             <constraint firstItem="tgx-0I-9nd" firstAttribute="leading" secondItem="O8y-Bc-plI" secondAttribute="leading" id="OqH-a8-QCM"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tgx-0I-9nd" secondAttribute="trailing" constant="20" id="PGY-kh-3rd"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="jiU-wg-4N3" secondAttribute="bottom" constant="20" id="Qg0-Y5-pGE"/>
@@ -117,6 +125,8 @@
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="O8y-Bc-plI" secondAttribute="trailing" constant="20" id="ZTp-uj-1Gu"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="O8y-Bc-plI" secondAttribute="bottom" constant="20" id="fir-dQ-Qxd"/>
                             <constraint firstItem="jiU-wg-4N3" firstAttribute="top" secondItem="tgx-0I-9nd" secondAttribute="bottom" constant="10" id="lOf-Zb-UaC"/>
+                            <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="ZB2-M0-p2z" secondAttribute="trailing" constant="20" id="oGw-Wa-99M"/>
+                            <constraint firstItem="ZB2-M0-p2z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O8y-Bc-plI" secondAttribute="trailing" constant="10" id="qFq-7N-Inn"/>
                             <constraint firstItem="jiU-wg-4N3" firstAttribute="leading" secondItem="O8y-Bc-plI" secondAttribute="leading" id="rJl-vg-Vs4"/>
                             <constraint firstItem="O8y-Bc-plI" firstAttribute="top" secondItem="KIs-C5-GCb" secondAttribute="top" constant="20" id="sgD-zn-nhw"/>
                             <constraint firstItem="tgx-0I-9nd" firstAttribute="top" secondItem="O8y-Bc-plI" secondAttribute="bottom" constant="20" id="wUV-ny-W9n"/>
@@ -130,6 +140,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addPinButton" destination="ZB2-M0-p2z" id="WlW-Gs-ejD"/>
                         <outlet property="notesTextView" destination="jiU-wg-4N3" id="Ozb-ND-Nle"/>
                         <outlet property="titleLabel" destination="O8y-Bc-plI" id="8We-0u-VMN"/>
                     </connections>

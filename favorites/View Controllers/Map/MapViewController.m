@@ -43,7 +43,6 @@
     }
     else {
         [self.addPinButton setEnabled:FALSE];
-        //[self.addPinButton setImage:nil];
         [self.addPinButton setTitle:@""];
         [self.logoutButton setEnabled:FALSE];
         [self.logoutButton setTitle:@""];
@@ -64,6 +63,10 @@
 [self dismissViewControllerAnimated:TRUE completion:nil];
 }
 
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:TRUE];
+    [self reloadMapView];
+}
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     
