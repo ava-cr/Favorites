@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextView *notesTextView;
 @property (weak, nonatomic) IBOutlet UIButton *addPinButton;
+@property (weak, nonatomic) IBOutlet UILabel *notesLabel;
 
 @end
 
@@ -22,7 +23,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.titleLabel.text = self.annotation.titleString;
-    self.notesTextView.text = self.annotation.notes;
+    if (self.annotation.notes) {
+        self.notesTextView.text = self.annotation.notes;
+    }
+    else {
+        self.notesLabel.text = @"";
+    }
     if (![self.user isEqual:[PFUser currentUser]]) {
         [self.notesTextView setEditable:FALSE];
     }
@@ -42,7 +48,17 @@
             NSLog(@"%@", error.localizedDescription);
         }
     }];
-    [Pin postUserPin:self.annotation.titleString withNotes:self.annotation.notes latitude:self.annotation.pin.latitude longitude:self.annotation.pin.longitude urlString:self.annotation.pin.urlString withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    NSNumber *lat;
+    NSNumber *lng;
+    if (self.annotation.pin.latitude) {
+        lat = self.annotation.pin.latitude;
+        lng = self.annotation.pin.longitude;
+    }
+    else {
+        lat = [NSNumber numberWithDouble:self.annotation.coordinate.latitude];
+        lng = [NSNumber numberWithDouble:self.annotation.coordinate.longitude];
+    }
+    [Pin postUserPin:self.annotation.titleString withNotes:self.annotation.notes latitude:lat longitude:lng urlString:self.annotation.pin.urlString withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"the pin was added!");
             UIAlertController *pinAdded = [UIAlertController alertControllerWithTitle:@"Pin added to your map!" message:@""preferredStyle:(UIAlertControllerStyleAlert)];

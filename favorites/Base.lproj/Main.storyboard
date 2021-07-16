@@ -141,6 +141,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addPinButton" destination="ZB2-M0-p2z" id="WlW-Gs-ejD"/>
+                        <outlet property="notesLabel" destination="tgx-0I-9nd" id="Ji5-3c-kBp"/>
                         <outlet property="notesTextView" destination="jiU-wg-4N3" id="Ozb-ND-Nle"/>
                         <outlet property="titleLabel" destination="O8y-Bc-plI" id="8We-0u-VMN"/>
                     </connections>
@@ -787,6 +788,7 @@
                     <navigationItem key="navigationItem" id="T73-5S-ioQ"/>
                     <connections>
                         <outlet property="mapView" destination="fKa-Az-Bvv" id="pmZ-N6-iEe"/>
+                        <segue destination="atg-mE-fSd" kind="presentation" identifier="pinDetails" id="ypO-ly-HjC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xaN-4F-HxA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1301,6 +1303,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ks2-i2-p0q"/>
+        <segue reference="ypO-ly-HjC"/>
         <segue reference="9tI-lf-D44"/>
     </inferredMetricsTieBreakers>
     <resources>
