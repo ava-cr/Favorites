@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PinDetailsViewController : UIViewController
 
 @property (strong, nonatomic) PinAnnotation *annotation;
+@property (strong, nonatomic) PFUser *user;
 
 
 @end

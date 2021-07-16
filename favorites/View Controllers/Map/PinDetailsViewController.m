@@ -21,6 +21,9 @@
     [super viewDidLoad];
     self.titleLabel.text = self.annotation.titleString;
     self.notesTextView.text = self.annotation.notes;
+    if (![self.user isEqual:[PFUser currentUser]]) {
+        [self.notesTextView setEditable:FALSE];
+    }
 }
 
 

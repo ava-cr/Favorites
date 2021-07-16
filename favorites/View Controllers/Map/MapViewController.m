@@ -219,6 +219,7 @@
         PinDetailsViewController *pdVC = [segue destinationViewController];
         PinAnnotation *annotation = sender;
         pdVC.title = annotation.titleString;
+        pdVC.user = self.user;
         pdVC.annotation = annotation;
     }
 }
