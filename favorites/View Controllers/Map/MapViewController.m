@@ -135,6 +135,15 @@
 }
 
 - (IBAction) deletePin:(UIStoryboardSegue*)unwindSegue {
+    PFUser *currentUser = [PFUser currentUser];
+    currentUser[@"numPins"] = [NSNumber numberWithInt:([currentUser[@"numPins"] intValue] - 1)];
+    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"updated user pin count!");
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
     PinDetailsViewController *sourceVC = [unwindSegue sourceViewController];
     [sourceVC.annotation.pin deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {

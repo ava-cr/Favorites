@@ -24,25 +24,26 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }
 - (IBAction)tappedChangeProfilePic:(id)sender {
-    UIAlertController *changeProf = [UIAlertController alertControllerWithTitle:@"Change Profile Photo" message:@""preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertController *changeProf = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
     UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"Take Photo"
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
         [self takePhoto];
                                                      }];
-    // create a choose photo action
     UIAlertAction *choosePhoto = [UIAlertAction actionWithTitle:@"Choose From Library"
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
         // choose photo
         [self choosePhoto];
                                                      }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                       style:UIAlertActionStyleCancel
+                                                     handler:^(UIAlertAction * _Nonnull action) {}];
     // add the actions to the alert controller
     [changeProf addAction:takePhoto];
     [changeProf addAction:choosePhoto];
-    [self presentViewController:changeProf animated:YES completion:^{
-        // optional code for what happens after the alert controller has finished presenting
-    }];
+    [changeProf addAction:cancel];
+    [self presentViewController:changeProf animated:YES completion:nil];
 }
 
 // image picker delegate function

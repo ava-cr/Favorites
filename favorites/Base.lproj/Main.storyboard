@@ -113,8 +113,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3od-Y8-ChN">
-                                <rect key="frame" x="172" y="758" width="70" height="30"/>
-                                <state key="normal" title="Delete Pin"/>
+                                <rect key="frame" x="10" y="758" width="394" height="30"/>
+                                <state key="normal" title="Delete Pin">
+                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                </state>
                                 <connections>
                                     <action selector="deletePinTapped:" destination="atg-mE-fSd" eventType="touchUpInside" id="uvH-af-ESh"/>
                                 </connections>
@@ -129,6 +131,7 @@
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tgx-0I-9nd" secondAttribute="trailing" constant="20" id="PGY-kh-3rd"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="jiU-wg-4N3" secondAttribute="bottom" constant="20" id="Qg0-Y5-pGE"/>
                             <constraint firstItem="O8y-Bc-plI" firstAttribute="leading" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="20" id="Ufw-gV-UEY"/>
+                            <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="3od-Y8-ChN" secondAttribute="trailing" constant="10" id="VNu-LJ-pE1"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="bottom" secondItem="3od-Y8-ChN" secondAttribute="bottom" constant="20" id="Z2n-0x-TKJ"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="O8y-Bc-plI" secondAttribute="trailing" constant="20" id="ZTp-uj-1Gu"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="O8y-Bc-plI" secondAttribute="bottom" constant="20" id="fir-dQ-Qxd"/>
@@ -137,7 +140,7 @@
                             <constraint firstItem="ZB2-M0-p2z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O8y-Bc-plI" secondAttribute="trailing" constant="10" id="qFq-7N-Inn"/>
                             <constraint firstItem="jiU-wg-4N3" firstAttribute="leading" secondItem="O8y-Bc-plI" secondAttribute="leading" id="rJl-vg-Vs4"/>
                             <constraint firstItem="O8y-Bc-plI" firstAttribute="top" secondItem="KIs-C5-GCb" secondAttribute="top" constant="20" id="sgD-zn-nhw"/>
-                            <constraint firstItem="3od-Y8-ChN" firstAttribute="centerX" secondItem="ebU-8x-lFE" secondAttribute="centerX" id="v8A-2h-T7y"/>
+                            <constraint firstItem="3od-Y8-ChN" firstAttribute="leading" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="10" id="vhr-uU-Tuw"/>
                             <constraint firstItem="tgx-0I-9nd" firstAttribute="top" secondItem="O8y-Bc-plI" secondAttribute="bottom" constant="20" id="wUV-ny-W9n"/>
                         </constraints>
                     </view>
@@ -1344,6 +1347,9 @@
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

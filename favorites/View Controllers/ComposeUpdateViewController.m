@@ -79,7 +79,7 @@
 }
 
 - (IBAction)addPhotoTapped:(id)sender {
-    UIAlertController *addPic = [UIAlertController alertControllerWithTitle:@"Add Photo" message:@""preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertController *addPic = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
     UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"Take Photo"
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
@@ -90,11 +90,13 @@
                                                      handler:^(UIAlertAction * _Nonnull action) {
         [self choosePhoto]; // choose photo
     }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                       style:UIAlertActionStyleCancel
+                                                     handler:^(UIAlertAction * _Nonnull action) {}];
     [addPic addAction:takePhoto];
     [addPic addAction:choosePhoto];
-    [self presentViewController:addPic animated:YES completion:^{
-        // optional code for what happens after the alert controller has finished presenting
-    }];
+    [addPic addAction:cancel];
+    [self presentViewController:addPic animated:YES completion:nil];
 }
 
 - (IBAction)cancelTapped:(id)sender {
