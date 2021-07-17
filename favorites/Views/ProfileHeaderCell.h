@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *numPostsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *editProfileButton;
 @property (nonatomic, weak) id<ProfileHeaderCellDelegate> delegate;
-@property (strong, nonatomic) PFUser *user;
+//@property (strong, nonatomic) PFUser *user;
 
 @end
 

@@ -11,13 +11,16 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    UITapGestureRecognizer *editUpdateButton = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapEditButton:)];
+    [self.editUpdateLabel addGestureRecognizer:editUpdateButton];
+    [self.editUpdateLabel setUserInteractionEnabled:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+}
+- (void) didTapEditButton:(UITapGestureRecognizer *)sender{
+    [self.delegate didTapEditUpdate:self];
 }
 
 @end

@@ -17,7 +17,7 @@
 
 // static int numFriends;
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, ProfileHeaderCellDelegate>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, ProfileHeaderCellDelegate, ProfileUpdateCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *updates;
@@ -99,7 +99,7 @@
 
 - (void)tappedProfileButton:(ProfileHeaderCell *)cell {
     if ([self.user isEqual:[PFUser currentUser]]) {
-        [self performSegueWithIdentifier:@"showProfile" sender:nil];
+        [self performSegueWithIdentifier:@"editProfile" sender:nil];
     }
     else {
         NSLog(@"show pins");
@@ -112,14 +112,56 @@
     [self performSegueWithIdentifier:@"listFriends" sender:nil];
 }
 
+- (void)didTapEditUpdate:(ProfileUpdateCell *)updateCell {
+    UIAlertController *editUpdate = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
+    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
+                                                       style:UIAlertActionStyleDestructive
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController *deleteUpdate = [UIAlertController alertControllerWithTitle:@"Are you sure?" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
+                                                           style:UIAlertActionStyleDestructive
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+            PFUser *currentUser = [PFUser currentUser];
+            currentUser[@"numPosts"] = [NSNumber numberWithInt:([currentUser[@"numPosts"] intValue] - 1)];
+            [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    NSLog(@"updated user post count!");
+                } else {
+                    NSLog(@"%@", error.localizedDescription);
+                }
+            }];
+            [updateCell.update deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    NSLog(@"deleted post %@", updateCell.update.caption);
+                    [self getUpdates];
+                }
+                else {
+                    NSLog(@"problem deleting post: %@", error.localizedDescription);
+                }
+            }];
+         }];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction * _Nonnull action) {}];
+        [deleteUpdate addAction:cancel];
+        [deleteUpdate addAction:delete];
+        [self presentViewController:deleteUpdate animated:YES completion:nil];
+                                                     }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                       style:UIAlertActionStyleCancel
+                                                     handler:^(UIAlertAction * _Nonnull action) {}];
+    [editUpdate addAction:delete];
+    [editUpdate addAction:cancel];
+    [self presentViewController:editUpdate animated:YES completion:nil];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.updates count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (!self.user) self.user = [PFUser currentUser];
     if (indexPath.row == 0) {
-        if (!self.user) self.user = [PFUser currentUser];
         ProfileHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
         cell.delegate = self;
         // number of posts/pins/friends labels
@@ -151,7 +193,19 @@
     }
     else {
         ProfileUpdateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileUpdateCell"];
-         Update *update = self.updates[indexPath.row - 1];
+        Update *update = self.updates[indexPath.row - 1];
+        if([self.user isEqual:[PFUser currentUser]]) {
+            [cell.editUpdateLabel setEnabled:TRUE];
+            [cell.editUpdateLabel setHidden:FALSE];
+        }
+        else {
+            [cell.editUpdateLabel setEnabled:FALSE];
+            [cell.editUpdateLabel setHidden:TRUE];
+        }
+        cell.delegate = self;
+        cell.update = update;
+        cell.user = self.user;
+        NSLog(@"%@", cell.user.username);
          if (self.updates) {
              cell.usernameLabel.text = update.author.username;
              cell.bottomUsernameLabel.text = update.author.username;
