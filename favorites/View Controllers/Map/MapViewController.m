@@ -9,6 +9,7 @@
 #import <Parse/Parse.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 #import "AddPinViewController.h"
@@ -158,6 +159,7 @@
 
 - (void) getPins {
     // construct query
+    [SVProgressHUD show];
     PFQuery *query = [PFQuery queryWithClassName:@"Pin"];
     NSArray *keys = @[@"author", @"title", @"notes", @"url", @"latitude", @"longitude"];
     [query includeKeys:keys];
@@ -170,6 +172,7 @@
             self.pins = pins;
             NSLog(@"got pins");
             [self placePins];
+            [SVProgressHUD dismiss];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
@@ -228,6 +231,9 @@
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
     myDelegate.window.rootViewController = loginViewController;
+}
+- (IBAction)refreshButtonTapped:(id)sender {
+    [self reloadMapView];
 }
 
 #pragma mark - Navigation

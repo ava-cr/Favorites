@@ -36,6 +36,15 @@
                                     <action selector="cancelButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tN9-ZE-0Y4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5U-qM-pKR">
+                                <rect key="frame" x="357" y="705" width="29.5" height="24"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="arrow.triangle.2.circlepath" catalog="system" symbolScale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="refreshButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3qP-Z3-Gdl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -48,7 +57,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wnQ-tU-LA9" secondAttribute="trailing" constant="30" id="DWd-gS-kiW"/>
                             <constraint firstItem="0N9-FX-0mC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="KKn-5V-O4P"/>
                             <constraint firstItem="61u-mG-5to" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="OP5-DL-vlr"/>
+                            <constraint firstItem="wnQ-tU-LA9" firstAttribute="top" secondItem="f5U-qM-pKR" secondAttribute="bottom" constant="25" id="Sm0-ps-sZO"/>
                             <constraint firstItem="61u-mG-5to" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ufh-q4-xgk"/>
+                            <constraint firstItem="wnQ-tU-LA9" firstAttribute="centerX" secondItem="f5U-qM-pKR" secondAttribute="centerX" id="yBJ-gt-qEi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8gr-lI-Qpy">
@@ -1331,6 +1342,7 @@
         <segue reference="9tI-lf-D44"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrow.triangle.2.circlepath" catalog="system" width="128" height="101"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>
