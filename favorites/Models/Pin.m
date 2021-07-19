@@ -21,12 +21,13 @@
 @dynamic imageURL;
 @dynamic yelpID;
 @dynamic yelpURL;
+@dynamic address;
 
 + (nonnull NSString *)parseClassName {
     return @"Pin";
 }
 
-+ (void) postUserPin: ( NSString * _Nullable )title withNotes: ( NSString * _Nullable )notes latitude:( NSNumber * _Nullable )lat longitude:( NSNumber * _Nullable )lng urlString:( NSString * _Nullable )url phone:(NSString *)phone imageURL:(NSString *)imageURL yelpID:(NSString *)yelpID yelpURL:(NSString *)yelpURL withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) postUserPin: ( NSString * _Nullable )title withNotes: ( NSString * _Nullable )notes latitude:( NSNumber * _Nullable )lat longitude:( NSNumber * _Nullable )lng urlString:( NSString * _Nullable )url phone:(NSString *)phone imageURL:(NSString *)imageURL yelpID:(NSString *)yelpID yelpURL:(NSString *)yelpURL address:(NSString *)address withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Pin *newPin = [Pin new];
     newPin.title = title;
@@ -39,6 +40,7 @@
     newPin.imageURL = imageURL;
     newPin.yelpID = yelpID;
     newPin.yelpURL = yelpURL;
+    newPin.address = address;
         
     [newPin saveInBackgroundWithBlock: completion];
 }

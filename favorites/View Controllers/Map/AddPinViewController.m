@@ -24,7 +24,9 @@
     [super viewDidLoad];
     self.titleLabel.text = self.pin.name;
     self.title = self.pin.name;
-    self.subtitleLabel.text = self.pin.placemark.title;
+    self.phone = self.pin.phoneNumber;
+    self.address = self.pin.placemark.title;
+    self.subtitleLabel.text = self.address;
     self.notesTextView.layer.borderColor = [UIColor.labelColor CGColor];
     self.notesTextView.layer.borderWidth = 1.0;
     self.notesTextView.layer.cornerRadius = self.notesTextView.bounds.size.height / 6;
@@ -39,6 +41,12 @@
     
     self.manager = [APIManager new];
     [self businessMatch];
+    UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tapScreen];
+}
+
+-(void)dismissKeyboard {
+    [self.notesTextView resignFirstResponder];
 }
 
 -(void) businessMatch {
@@ -51,7 +59,9 @@
                 self.yelpID = results[@"id"];
                 [self businessDetails:self.yelpID];
             }
-            NSLog(@"no matching businesses found");
+            else {
+                NSLog(@"no matching businesses found");
+            }
         }
     }];
 }
@@ -63,7 +73,7 @@
         else {
             NSLog(@"got business details");
             NSLog(@"%@", results);
-            self.phone = results[@"phone"];
+            //self.phone = results[@"phone"];
             self.imageURL = results[@"image_url"];
             self.yelpURL = results[@"url"];
             NSURL *url = [NSURL URLWithString:self.imageURL];

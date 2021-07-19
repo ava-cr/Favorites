@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *addPinButton;
 @property (weak, nonatomic) IBOutlet UILabel *notesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *deletePinButton;
+@property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 
 @end
 
@@ -24,6 +26,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.titleLabel.text = self.annotation.titleString;
+    self.addressLabel.text = self.annotation.pin.address;
+    self.addPinButton.layer.cornerRadius = 8;
+    if (self.annotation.pin.imageURL) {
+        NSURL *url = [NSURL URLWithString:self.annotation.pin.imageURL];
+        NSData *urlData = [NSData dataWithContentsOfURL:url];
+        self.headerImageView.image = [[UIImage alloc] initWithData:urlData];
+    }
+    
     if (self.annotation.notes) {
         self.notesTextView.text = self.annotation.notes;
     }
@@ -42,7 +52,14 @@
         [self.addPinButton setHidden:TRUE];
         [self.addPinButton setEnabled:FALSE];
     }
+    UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tapScreen];
 }
+
+-(void)dismissKeyboard {
+    [self.notesTextView resignFirstResponder];
+}
+
 - (IBAction)addPinTapped:(id)sender {
     // update pin count & post pin to user's map
     PFUser *currentUser = [PFUser currentUser];
@@ -64,7 +81,7 @@
         lat = [NSNumber numberWithDouble:self.annotation.coordinate.latitude];
         lng = [NSNumber numberWithDouble:self.annotation.coordinate.longitude];
     }
-    [Pin postUserPin:self.annotation.titleString withNotes:self.annotation.notes latitude:lat longitude:lng urlString:self.annotation.pin.urlString phone:self.annotation.pin.phone imageURL:self.annotation.pin.imageURL yelpID:self.annotation.pin.yelpID yelpURL:self.annotation.pin.yelpURL withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Pin postUserPin:self.annotation.titleString withNotes:self.annotation.notes latitude:lat longitude:lng urlString:self.annotation.pin.urlString phone:self.annotation.pin.phone imageURL:self.annotation.pin.imageURL yelpID:self.annotation.pin.yelpID yelpURL:self.annotation.pin.yelpURL address:self.annotation.pin.address withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"the pin was added!");
             UIAlertController *pinAdded = [UIAlertController alertControllerWithTitle:@"Pin added to your map!" message:@""preferredStyle:(UIAlertControllerStyleAlert)];

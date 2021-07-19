@@ -24,8 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *imageURL;
 @property (strong, nonatomic) NSString *yelpID;
 @property (strong, nonatomic) NSString *yelpURL;
+@property (strong, nonatomic) NSString *address;
 
-+ (void) postUserPin: ( NSString * _Nullable )title withNotes: ( NSString * _Nullable )notes latitude:( NSNumber * _Nullable )lat longitude:( NSNumber * _Nullable )lng urlString:( NSString * _Nullable )url phone:(NSString *)phone imageURL:(NSString *)imageURL yelpID:(NSString *)yelpID yelpURL:(NSString *)yelpURL withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) postUserPin: ( NSString * _Nullable )title withNotes: ( NSString * _Nullable )notes latitude:( NSNumber * _Nullable )lat longitude:( NSNumber * _Nullable )lng urlString:( NSString * _Nullable )url phone:(NSString *)phone imageURL:(NSString *)imageURL yelpID:(NSString *)yelpID yelpURL:(NSString *)yelpURL address:(NSString *)address withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 
