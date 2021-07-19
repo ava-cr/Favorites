@@ -26,7 +26,11 @@
         UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
         self.window.rootViewController = tabBarController;
     }
+    
+    // insert this line if it is not there
+    [[[UIApplication sharedApplication] delegate] setWindow:self.window];
 }
+    
 
 
 - (void)sceneDidDisconnect:(UIScene *)scene {

@@ -12,6 +12,7 @@
 #import "ShowLocationOnMapViewController.h"
 #import "ProfileViewController.h"
 #import "Friend.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UpdateCellDelegate>
 
@@ -25,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Initialize a UIRefreshControl
+    [SVProgressHUD setContainerView:self.view];
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
@@ -42,6 +43,8 @@
 }
 
 - (void) getUpdates {
+    // activity monitor
+    [SVProgressHUD show];
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
     [query includeKey:@"author"];
@@ -55,6 +58,7 @@
             self.updates = updates;
             [self.tableView reloadData];
             NSLog(@"got updates");
+            [SVProgressHUD dismiss];
             for (Update *update in self.updates) {
                 NSLog(@"%@", update.caption);
             }
@@ -143,6 +147,7 @@
 #pragma mark - Navigation
 
 - (IBAction) postedUpdateUnwind:(UIStoryboardSegue*)unwindSegue {
+    
     ComposeUpdateViewController *composeVC = [unwindSegue sourceViewController];
     
     PFUser *currentUser = [PFUser currentUser];

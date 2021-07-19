@@ -4,19 +4,23 @@ PODS:
     - Parse/Core (= 1.19.2)
   - Parse/Core (1.19.2):
     - Bolts/Tasks (= 1.9.1)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - Parse
+  - SVProgressHUD
 
 SPEC REPOS:
   trunk:
     - Bolts
     - Parse
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   Parse: 081fb8755c3000fd11df817eec235def233d0af3
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 7ed7ad972844171d2be7d2b5937b97f5908396cb
+PODFILE CHECKSUM: c3209bcddf72f56dbfa05617ded6ec63ac04bb9d
 
 COCOAPODS: 1.10.1
