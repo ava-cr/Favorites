@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) MKMapItem *pin;
 @property (strong, nonatomic) NSString *notes;
+@property (strong, nonatomic) NSString *phone;
+@property (strong, nonatomic) NSString *imageURL;
+@property (strong, nonatomic) NSString *yelpID;
+@property (strong, nonatomic) NSString *yelpURL;
 
 @end
 

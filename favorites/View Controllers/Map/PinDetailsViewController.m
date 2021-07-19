@@ -64,7 +64,7 @@
         lat = [NSNumber numberWithDouble:self.annotation.coordinate.latitude];
         lng = [NSNumber numberWithDouble:self.annotation.coordinate.longitude];
     }
-    [Pin postUserPin:self.annotation.titleString withNotes:self.annotation.notes latitude:lat longitude:lng urlString:self.annotation.pin.urlString withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Pin postUserPin:self.annotation.titleString withNotes:self.annotation.notes latitude:lat longitude:lng urlString:self.annotation.pin.urlString phone:self.annotation.pin.phone imageURL:self.annotation.pin.imageURL yelpID:self.annotation.pin.yelpID yelpURL:self.annotation.pin.yelpURL withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"the pin was added!");
             UIAlertController *pinAdded = [UIAlertController alertControllerWithTitle:@"Pin added to your map!" message:@""preferredStyle:(UIAlertControllerStyleAlert)];

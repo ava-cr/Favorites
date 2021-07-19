@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) PinAnnotation *annotation;
 @property (strong, nonatomic) PFUser *user;
 
-
 @end
 
 NS_ASSUME_NONNULL_END
