@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *yelpURL;
 @property (strong, nonatomic) NSString *address;
 
-
 @end
 
 NS_ASSUME_NONNULL_END

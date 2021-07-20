@@ -100,6 +100,7 @@ static NSString *unwindSegueToMap = @"addPin";
     return formattedNumber;
 }
 - (IBAction)showWebsiteTapped:(id)sender {
+    NSLog(@"%@", [self.pin.url absoluteString]);
     NSString *subString = [[self.pin.url absoluteString] substringWithRange:NSMakeRange(0, 5)];
     if ([subString isEqual:@"https"]) {
         [self performSegueWithIdentifier:segueIdToWebsite sender:nil];
