@@ -15,14 +15,14 @@
 #import <DateTools/DateTools.h>
 #import "Update.h"
 #import "Friend.h"
-
-// static int numFriends;
+#import "Like.h"
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, ProfileHeaderCellDelegate, ProfileUpdateCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *updates;
 @property (strong, nonatomic) NSMutableArray *friends;
+@property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> *isLikedByUser;
 
 @end
 
@@ -46,11 +46,13 @@
     [self getUpdates];
     [refreshControl endRefreshing];
 }
+# pragma mark - Query Code
 
 - (void) getUpdates {
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
-    [query includeKey:@"author"];
+    NSArray *keys = @[@"update", @"author", @"objectId"];
+    [query includeKeys:keys];
     [query whereKey:@"author" equalTo:self.user];
     [query orderByDescending:@"createdAt"];
     query.limit = 20;
@@ -59,12 +61,12 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *updates, NSError *error) {
         if (updates != nil) {
             self.updates = updates;
-            [self.tableView reloadData];
             NSLog(@"got updates");
+            self.isLikedByUser = [[NSMutableDictionary alloc] init];
             for (Update *update in self.updates) {
-                NSLog(@"%@", update.caption);
+                [self.isLikedByUser setValue:@"0" forKey:update.objectId];
             }
-            [self.tableView reloadData];
+            [self getLikes];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
@@ -91,12 +93,31 @@
                 }
                 else [self.friends addObject:friend.user1];
             }
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+- (void) getLikes {
+    PFQuery *query = [PFQuery queryWithClassName:@"Like"];
+    NSArray *keys = @[@"update", @"objectId", @"like"];
+    [query includeKeys:keys];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    query.limit = 20;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *likes, NSError *error) {
+        if (likes != nil) {
+            NSLog(@"got likes");
+            for (Like *like in likes) {
+                [self.isLikedByUser setValue:@"1" forKey:like.update.objectId];
+            }
             [self.tableView reloadData];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
     }];
 }
+#pragma mark - Cell Delegate Functions
 
 - (void)tappedProfileButton:(ProfileHeaderCell *)cell {
     if ([self.user isEqual:[PFUser currentUser]]) {
@@ -141,20 +162,78 @@
                 }
             }];
          }];
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"don't delete post")
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"don't delete post")
                                                            style:UIAlertActionStyleCancel
                                                          handler:^(UIAlertAction * _Nonnull action) {}];
         [deleteUpdate addAction:cancel];
         [deleteUpdate addAction:delete];
         [self presentViewController:deleteUpdate animated:YES completion:nil];
                                                      }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"don't delete post")
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"don't delete post")
                                                        style:UIAlertActionStyleCancel
                                                      handler:^(UIAlertAction * _Nonnull action) {}];
     [editUpdate addAction:delete];
     [editUpdate addAction:cancel];
     [self presentViewController:editUpdate animated:YES completion:nil];
 }
+
+- (void)updateCell:(ProfileUpdateCell *)updateCell likedUpdate:(Update *)update {
+    NSLog(@"%@", self.isLikedByUser[update.objectId]);
+    if ([self.isLikedByUser[update.objectId] isEqual:@"0"]) {
+        // create a like object, increment like count
+        update[@"likeCount"] = [NSNumber numberWithInt:([update[@"likeCount"] intValue] + 1)];
+        [update saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"updated update like count! %@", update[@"likeCount"]);
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+        [self.isLikedByUser setValue:@"1" forKey:update.objectId];
+        [Like createLike:[PFUser currentUser] onUpdate:update withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"created new like!");
+                [self getUpdates];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+    }
+    else {
+        // delete a like object, decrememt like count
+        [self.isLikedByUser setValue:@"0" forKey:update.objectId];
+        update[@"likeCount"] = [NSNumber numberWithInt:([update[@"likeCount"] intValue] - 1)];
+        [update saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"updated update like count! %@", update[@"likeCount"]);
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+        [self deleteLike:update];
+    }
+}
+-(void) deleteLike:(Update *)update {
+    PFQuery *query = [PFQuery queryWithClassName:@"Like"];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query whereKey:@"update" equalTo:update];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *likes, NSError *error) {
+        if (likes != nil) {
+            Like *like = likes[0];
+            [like deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    NSLog(@"deleted like");
+                    [self getUpdates];
+                } else {
+                    NSLog(@"%@", error.localizedDescription);
+                }
+            }];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+#pragma mark - Table View Functions
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.updates count] + 1;
@@ -227,6 +306,26 @@
              NSDate *createdAt = update.createdAt;
              NSString *createdAtString = createdAt.shortTimeAgoSinceNow;
              cell.timestampLabel.text = [createdAtString stringByAppendingString:@" ago"];
+             // like label code
+             int likeCount = [cell.update[@"likeCount"] intValue];
+             NSString *singularLikedLabel = NSLocalizedString(@" other", @"post liked by 1 other");
+             NSString *pluralLikedLabel = NSLocalizedString(@" others", @"post liked by others");
+             if ([self.isLikedByUser[cell.update.objectId] isEqual:@"1"]) {
+                 NSString *labelText = [NSLocalizedString(@"liked by you and ", @"post liked by user") stringByAppendingString:[NSString stringWithFormat:@"%d", likeCount - 1]];
+                 if (likeCount == 2) cell.likedLabel.text = [labelText stringByAppendingString:singularLikedLabel];
+                 else cell.likedLabel.text = [labelText stringByAppendingString:pluralLikedLabel];
+                 cell.likedLabel.text = [@"💗" stringByAppendingString:cell.likedLabel.text];
+                 cell.likedLabel.textColor = UIColor.systemPinkColor;
+             }
+             else if (likeCount != 0) {
+                 NSString *labelText = [NSLocalizedString(@"liked by ", @"post not liked by user") stringByAppendingString:[NSString stringWithFormat:@"%d", likeCount]];
+                 if (likeCount == 1) cell.likedLabel.text = [labelText stringByAppendingString:singularLikedLabel];
+                 else cell.likedLabel.text = [labelText stringByAppendingString:pluralLikedLabel];
+                 cell.likedLabel.textColor = UIColor.labelColor;
+             }
+             else {
+                 cell.likedLabel.text = @"";
+             }
          }
         return cell;
     }
@@ -248,7 +347,6 @@
       }
     }];
 }
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqual:@"showUserPins"]) {
         MapViewController *mapVC = [segue destinationViewController];

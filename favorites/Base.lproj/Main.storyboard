@@ -1186,13 +1186,13 @@
                                                     <state key="normal" title="Location"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3LX-Q8-Ghx">
-                                                    <rect key="frame" x="10" y="500" width="76" height="21"/>
+                                                    <rect key="frame" x="10" y="526" width="76" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RKv-k9-1Hj">
-                                                    <rect key="frame" x="91" y="500" width="4" height="18.5"/>
+                                                    <rect key="frame" x="91" y="526" width="4" height="18.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -1203,15 +1203,23 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2s ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwx-xM-Yd6">
-                                                    <rect key="frame" x="10" y="529" width="46" height="18"/>
+                                                    <rect key="frame" x="10" y="555" width="46" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxb-zV-XUx">
+                                                    <rect key="frame" x="10" y="498" width="37" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="iZq-bc-6XW" firstAttribute="leading" secondItem="VU3-mV-mco" secondAttribute="trailing" constant="5" id="3WB-Ra-HNR"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xxb-zV-XUx" secondAttribute="trailing" constant="10" id="6UP-g1-E5t"/>
                                                 <constraint firstItem="mIw-Db-tuV" firstAttribute="trailing" secondItem="FOh-2v-bhp" secondAttribute="trailingMargin" id="8Gp-a1-Pvw"/>
+                                                <constraint firstItem="3LX-Q8-Ghx" firstAttribute="leading" secondItem="xxb-zV-XUx" secondAttribute="leading" id="E1e-ky-8BN"/>
                                                 <constraint firstItem="mIw-Db-tuV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R9G-Tc-2Qy" secondAttribute="trailing" constant="10" id="Gpf-nF-1ub"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="iZq-bc-6XW" secondAttribute="trailing" constant="5" id="H6v-ez-01z"/>
                                                 <constraint firstItem="RKv-k9-1Hj" firstAttribute="leading" secondItem="3LX-Q8-Ghx" secondAttribute="trailing" constant="5" id="IeJ-73-PRR"/>
@@ -1225,7 +1233,7 @@
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="R9G-Tc-2Qy" secondAttribute="trailing" constant="5" id="RgA-Qc-hRm"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="RKv-k9-1Hj" secondAttribute="trailing" constant="10" id="VHI-2E-dCr"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3LX-Q8-Ghx" secondAttribute="trailing" constant="10" id="Wdh-CM-eZA"/>
-                                                <constraint firstItem="3LX-Q8-Ghx" firstAttribute="top" secondItem="e4J-rp-2HH" secondAttribute="bottom" constant="10" id="c7z-jO-ofp"/>
+                                                <constraint firstItem="3LX-Q8-Ghx" firstAttribute="top" secondItem="xxb-zV-XUx" secondAttribute="bottom" constant="10" id="cds-00-2Ly"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fwx-xM-Yd6" secondAttribute="bottom" constant="10" id="iBu-Mw-lvG"/>
                                                 <constraint firstItem="mIw-Db-tuV" firstAttribute="centerY" secondItem="VU3-mV-mco" secondAttribute="centerY" id="iLj-aa-NA5"/>
                                                 <constraint firstItem="VhO-e3-mxk" firstAttribute="bottom" secondItem="VU3-mV-mco" secondAttribute="bottom" constant="-5" id="kLt-fT-pnI"/>
@@ -1235,6 +1243,7 @@
                                                 <constraint firstItem="VU3-mV-mco" firstAttribute="top" secondItem="FOh-2v-bhp" secondAttribute="topMargin" constant="5" id="sql-Q1-2PB"/>
                                                 <constraint firstItem="fwx-xM-Yd6" firstAttribute="leading" secondItem="3LX-Q8-Ghx" secondAttribute="leading" id="wHQ-WC-GCM"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fwx-xM-Yd6" secondAttribute="trailing" constant="10" id="xQI-ZY-vWX"/>
+                                                <constraint firstItem="xxb-zV-XUx" firstAttribute="top" secondItem="e4J-rp-2HH" secondAttribute="bottom" constant="8" id="yD2-Kn-vaY"/>
                                                 <constraint firstItem="iZq-bc-6XW" firstAttribute="top" secondItem="VU3-mV-mco" secondAttribute="top" constant="5" id="yyy-dq-ixH"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1243,6 +1252,7 @@
                                             <outlet property="captionTextField" destination="RKv-k9-1Hj" id="G5O-9V-gmj"/>
                                             <outlet property="editUpdateLabel" destination="mIw-Db-tuV" id="1sx-kk-fLG"/>
                                             <outlet property="isAtLabel" destination="VhO-e3-mxk" id="qdM-QT-cpl"/>
+                                            <outlet property="likedLabel" destination="xxb-zV-XUx" id="EbG-ov-58j"/>
                                             <outlet property="locationButton" destination="R9G-Tc-2Qy" id="6dM-xb-6ZH"/>
                                             <outlet property="picImageView" destination="e4J-rp-2HH" id="FKp-Pf-f6D"/>
                                             <outlet property="profilePicImageView" destination="VU3-mV-mco" id="aXv-SD-t8S"/>
