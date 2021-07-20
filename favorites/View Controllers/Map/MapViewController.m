@@ -16,7 +16,9 @@
 #import "PinAnnotation.h"
 #import "Pin.h"
 #import "PinDetailsViewController.h"
+#import "ListPinsViewController.h"
 
+static NSString *segueToPinsList = @"showPinsList";
 
 @interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
@@ -27,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addPinButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UIButton *listPinsButton;
 
 
 @end
@@ -235,17 +238,23 @@
 - (IBAction)refreshButtonTapped:(id)sender {
     [self reloadMapView];
 }
+- (IBAction)listPinsButtonTapped:(id)sender {
+    [self performSegueWithIdentifier:segueToPinsList sender:nil];
+}
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     if([segue.identifier isEqual:@"pinDetails"]) {
         PinDetailsViewController *pdVC = [segue destinationViewController];
         PinAnnotation *annotation = sender;
         pdVC.title = annotation.titleString;
         pdVC.user = self.user;
         pdVC.annotation = annotation;
+    }
+    else if ([segue.identifier isEqual:segueToPinsList]) {
+        ListPinsViewController *listVC = [segue destinationViewController];
+        listVC.user = self.user;
     }
 }
 

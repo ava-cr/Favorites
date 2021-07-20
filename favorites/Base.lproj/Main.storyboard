@@ -9,6 +9,63 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--List Pins View Controller-->
+        <scene sceneID="4C2-MJ-atw">
+            <objects>
+                <viewController id="vGY-4s-mrg" customClass="ListPinsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zym-cT-owj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vt8-8u-FJe">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListPinCell" rowHeight="157" id="EZD-CO-I9S" customClass="ListPinCell">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="157"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EZD-CO-I9S" id="1e5-uG-Kvg">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="157"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jfd-G0-ieM">
+                                                    <rect key="frame" x="20" y="31" width="33" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Jfd-G0-ieM" firstAttribute="top" secondItem="1e5-uG-Kvg" secondAttribute="topMargin" constant="20" id="MFN-oS-OY2"/>
+                                                <constraint firstItem="Jfd-G0-ieM" firstAttribute="leading" secondItem="1e5-uG-Kvg" secondAttribute="leadingMargin" id="Uqb-vb-yt7"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Jfd-G0-ieM" secondAttribute="bottom" constant="20" id="hQ1-Tv-I7k"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Jfd-G0-ieM" secondAttribute="trailing" id="nEg-FT-crb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="pinTitleLabel" destination="Jfd-G0-ieM" id="lw6-L8-5qm"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bZl-2m-iAF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="vt8-8u-FJe" secondAttribute="bottom" id="7tH-XX-lt8"/>
+                            <constraint firstItem="vt8-8u-FJe" firstAttribute="leading" secondItem="bZl-2m-iAF" secondAttribute="leading" id="CRW-oQ-5GW"/>
+                            <constraint firstItem="vt8-8u-FJe" firstAttribute="trailing" secondItem="bZl-2m-iAF" secondAttribute="trailing" id="R4a-Uz-9PP"/>
+                            <constraint firstItem="vt8-8u-FJe" firstAttribute="top" secondItem="Zym-cT-owj" secondAttribute="top" id="saa-cQ-g4Y"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="vt8-8u-FJe" id="YVI-EU-3eE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mDb-uM-1Gz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2668.1159420289855" y="985.71428571428567"/>
+        </scene>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -51,6 +108,19 @@
                                     <action selector="refreshButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3qP-Z3-Gdl"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kN1-fq-UxC">
+                                <rect key="frame" x="164.5" y="20" width="85" height="30"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="pYD-5L-jnU"/>
+                                </constraints>
+                                <state key="normal" title="List of Pins">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="listPinsButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uP1-Q8-2VR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -63,7 +133,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wnQ-tU-LA9" secondAttribute="trailing" constant="30" id="DWd-gS-kiW"/>
                             <constraint firstItem="0N9-FX-0mC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="KKn-5V-O4P"/>
                             <constraint firstItem="61u-mG-5to" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="OP5-DL-vlr"/>
+                            <constraint firstItem="61u-mG-5to" firstAttribute="centerY" secondItem="kN1-fq-UxC" secondAttribute="centerY" id="SV2-ry-mVq"/>
                             <constraint firstItem="wnQ-tU-LA9" firstAttribute="top" secondItem="f5U-qM-pKR" secondAttribute="bottom" constant="25" id="Sm0-ps-sZO"/>
+                            <constraint firstItem="kN1-fq-UxC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="q0O-yT-xI8"/>
                             <constraint firstItem="61u-mG-5to" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ufh-q4-xgk"/>
                             <constraint firstItem="wnQ-tU-LA9" firstAttribute="centerX" secondItem="f5U-qM-pKR" secondAttribute="centerX" id="yBJ-gt-qEi"/>
                         </constraints>
@@ -83,9 +155,11 @@
                     <connections>
                         <outlet property="addPinButton" destination="jVR-fE-hra" id="TcL-PS-nqK"/>
                         <outlet property="cancelButton" destination="61u-mG-5to" id="nfp-H8-DVk"/>
+                        <outlet property="listPinsButton" destination="kN1-fq-UxC" id="W7M-Im-6Lw"/>
                         <outlet property="logoutButton" destination="fJf-OT-nKI" id="Bio-ka-1tG"/>
                         <outlet property="mapView" destination="0N9-FX-0mC" id="3af-WL-Pr7"/>
                         <segue destination="atg-mE-fSd" kind="show" identifier="pinDetails" id="Ldp-kw-Npj"/>
+                        <segue destination="vGY-4s-mrg" kind="presentation" identifier="showPinsList" id="9m6-HU-7sD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
