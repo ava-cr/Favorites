@@ -40,12 +40,14 @@ static NSString *segueToPinsList = @"showPinsList";
     [super viewDidLoad];
     self.mapView.delegate = self;
     if (!self.user) self.user = [PFUser currentUser];
+    self.listPinsButton.layer.cornerRadius = 8;
     if ([self.user isEqual:[PFUser currentUser]]) {
         self.title = NSLocalizedString(@"Your Pins", @"the user's saved locations");
         [self.cancelButton setEnabled:FALSE];
         [self.cancelButton setHidden:TRUE];
     }
     else {
+        self.cancelButton.layer.cornerRadius = 8;
         [self.addPinButton setEnabled:FALSE];
         [self.addPinButton setTitle:@""];
         [self.logoutButton setEnabled:FALSE];

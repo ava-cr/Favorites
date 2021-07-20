@@ -8,6 +8,9 @@
 #import "ListPinsViewController.h"
 #import "ListPinCell.h"
 #import "Pin.h"
+#import "PinDetailsViewController.h"
+
+static NSString *segueToPinDetails = @"pinDetails";
 
 @interface ListPinsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -61,6 +64,21 @@
         cell.pin = pin;
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:segueToPinDetails sender:self.pins[indexPath.row]];
+}
+
+# pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqual:segueToPinDetails]) {
+        Pin *chosenPin = sender;
+        PinDetailsViewController *detailsVC = [segue destinationViewController];
+        detailsVC.pin = chosenPin;
+        detailsVC.user = self.user;
+    }
 }
 
 @end

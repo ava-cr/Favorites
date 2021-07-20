@@ -29,17 +29,16 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleLabel.text = self.annotation.titleString;
-    self.addressLabel.text = self.annotation.pin.address;
+    if (!self.pin) self.pin = self.annotation.pin;
+    self.titleLabel.text = self.pin.title;
+    self.addressLabel.text = self.pin.address;
     self.addPinButton.layer.cornerRadius = 8;
-    if (self.annotation.pin.imageURL) {
-        NSURL *url = [NSURL URLWithString:self.annotation.pin.imageURL];
+    if (self.pin.imageURL) {
+        NSURL *url = [NSURL URLWithString:self.pin.imageURL];
         NSData *urlData = [NSData dataWithContentsOfURL:url];
         self.headerImageView.image = [[UIImage alloc] initWithData:urlData];
     }
-    if (self.annotation.notes) {
-        self.notesTextView.text = self.annotation.notes;
-    }
+    if (self.pin.notes) self.notesTextView.text = self.pin.notes;
     if (![self.user isEqual:[PFUser currentUser]]) {
         [self.notesTextView setEditable:FALSE];
         [self.deletePinButton setHidden:TRUE];
@@ -71,17 +70,9 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
             NSLog(@"%@", error.localizedDescription);
         }
     }];
-    NSNumber *lat;
-    NSNumber *lng;
-    if (self.annotation.pin.latitude) {
-        lat = self.annotation.pin.latitude;
-        lng = self.annotation.pin.longitude;
-    }
-    else {
-        lat = [NSNumber numberWithDouble:self.annotation.coordinate.latitude];
-        lng = [NSNumber numberWithDouble:self.annotation.coordinate.longitude];
-    }
-    [Pin postUserPin:self.annotation.titleString withNotes:self.annotation.notes latitude:lat longitude:lng urlString:self.annotation.pin.urlString phone:self.annotation.pin.phone imageURL:self.annotation.pin.imageURL yelpID:self.annotation.pin.yelpID yelpURL:self.annotation.pin.yelpURL address:self.annotation.pin.address withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    NSNumber *lat = self.pin.latitude;;
+    NSNumber *lng = self.pin.longitude;
+    [Pin postUserPin:self.pin.title withNotes:self.pin.notes latitude:lat longitude:lng urlString:self.pin.urlString phone:self.pin.phone imageURL:self.pin.imageURL yelpID:self.pin.yelpID yelpURL:self.pin.yelpURL address:self.pin.address withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"the pin was added!");
             UIAlertController *pinAdded = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Pin added to your map!", @"message that pin was successfully added to user's map") message:@""preferredStyle:(UIAlertControllerStyleAlert)];
@@ -91,10 +82,9 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
                 [self dismissViewControllerAnimated:TRUE completion:nil];
                                                              }];
             [pinAdded addAction:ok];
-            [self presentViewController:pinAdded animated:YES completion:^{
-                // optional code for what happens after the alert controller has finished presenting
-            }];
-        } else {
+            [self presentViewController:pinAdded animated:YES completion:nil];
+        }
+        else {
             NSLog(@"problem saving pin: %@", error.localizedDescription);
         }
     }];
@@ -125,7 +115,7 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     [self presentViewController:editUpdate animated:YES completion:nil];
 }
 - (IBAction)callButtonTapped:(id)sender {
-    NSString *phoneNumber = [self formatPhoneNumber:self.annotation.pin.phone];
+    NSString *phoneNumber = [self formatPhoneNumber:self.pin.phone];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:phoneNumber]] options:@{} completionHandler:^(BOOL success) {
         if (success) {
             NSLog(@"call successful");
@@ -144,7 +134,7 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     return formattedNumber;
 }
 - (IBAction)showWebsiteTapped:(id)sender {
-    NSString *subString = [self.annotation.pin.urlString substringWithRange:NSMakeRange(0, 5)];
+    NSString *subString = [self.pin.urlString substringWithRange:NSMakeRange(0, 5)];
     NSLog(@"%@", subString);
     if ([subString isEqual:@"https"]) {
         [self performSegueWithIdentifier:segueIdToWebsite sender:nil];
@@ -164,11 +154,11 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqual:unwindSegueToMapSavePin]) {
-        self.annotation.pin.notes = self.notesTextView.text;
+        self.pin.notes = self.notesTextView.text;
     }
     else if ([segue.identifier isEqual:segueIdToWebsite]) {
         WebsiteViewController *webVC = [segue destinationViewController];
-        webVC.url = [NSURL URLWithString:self.annotation.pin.urlString];
+        webVC.url = [NSURL URLWithString:self.pin.urlString];
     }
 }
 
