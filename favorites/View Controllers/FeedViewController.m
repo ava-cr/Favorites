@@ -142,9 +142,21 @@
         NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
         cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
         cell.captionTextField.text = update.caption;
+        int likeCount = [cell.update[@"likeCount"] intValue];
+        NSString *singularLikedLabel = NSLocalizedString(@" other", @"post liked by 1 other");
+        NSString *pluralLikedLabel = NSLocalizedString(@" others", @"post liked by others");
         if ([self.isLikedByUser[cell.update.objectId] isEqual:@"1"]) {
-            cell.likedLabel.text = NSLocalizedString(@"Liked💗", @"updated liked by user");
+            NSString *labelText = [NSLocalizedString(@"liked by you and ", @"post liked by user") stringByAppendingString:[NSString stringWithFormat:@"%d", likeCount - 1]];
+            if (likeCount == 2) cell.likedLabel.text = [labelText stringByAppendingString:singularLikedLabel];
+            else cell.likedLabel.text = [labelText stringByAppendingString:pluralLikedLabel];
+            cell.likedLabel.text = [@"💗" stringByAppendingString:cell.likedLabel.text];
             cell.likedLabel.textColor = UIColor.systemPinkColor;
+        }
+        else if (likeCount != 0) {
+            NSString *labelText = [NSLocalizedString(@"liked by ", @"post not liked by user") stringByAppendingString:[NSString stringWithFormat:@"%d", likeCount]];
+            if (likeCount == 1) cell.likedLabel.text = [labelText stringByAppendingString:singularLikedLabel];
+            else cell.likedLabel.text = [labelText stringByAppendingString:pluralLikedLabel];
+            cell.likedLabel.textColor = UIColor.labelColor;
         }
         else {
             cell.likedLabel.text = @"";
