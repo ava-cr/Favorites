@@ -6,8 +6,12 @@
 //
 
 #import "AddPinViewController.h"
+#import "WebsiteViewController.h"
 #import <MapKit/MapKit.h>
 #import "APIManager.h"
+
+static NSString *segueIdToWebsite = @"showWebsite";
+static NSString *unwindSegueToMap = @"addPin";
 
 @interface AddPinViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -31,14 +35,6 @@
     self.notesTextView.layer.borderWidth = 1.0;
     self.notesTextView.layer.cornerRadius = self.notesTextView.bounds.size.height / 6;
     self.notesTextView.textContainer.lineFragmentPadding = 20;
-    NSLog(@"name, %@", self.pin.name);
-    NSLog(@"address1, %@", self.pin.placemark.title);
-    NSLog(@"city, %@", self.pin.placemark.locality);
-    NSLog(@"state code, %@", self.pin.placemark.administrativeArea);
-    NSLog(@"country code, %@", self.pin.placemark.ISOcountryCode);
-    NSLog(@"latitude, %f", self.pin.placemark.coordinate.latitude);
-    NSLog(@"longitude, %f", self.pin.placemark.coordinate.longitude);
-    
     self.manager = [APIManager new];
     [self businessMatch];
     UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
@@ -73,7 +69,6 @@
         else {
             NSLog(@"got business details");
             NSLog(@"%@", results);
-            //self.phone = results[@"phone"];
             self.imageURL = results[@"image_url"];
             self.yelpURL = results[@"url"];
             NSURL *url = [NSURL URLWithString:self.imageURL];
@@ -83,7 +78,8 @@
     }];
 }
 - (IBAction)callButtonTapped:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:self.phone]] options:@{} completionHandler:^(BOOL success) {
+    NSString *phoneNumber = [self formatPhoneNumber:self.phone];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:phoneNumber]] options:@{} completionHandler:^(BOOL success) {
         if (success) {
             NSLog(@"call successful");
         }
@@ -92,14 +88,39 @@
         }
     }];
 }
-- (IBAction)websiteButtonTapped:(id)sender {
-    NSLog(@"open a web view with the website!");
+-(NSString *) formatPhoneNumber:(NSString *)number {
+    NSString *formattedNumber = [number stringByReplacingOccurrencesOfString:@"(" withString:@""];
+    formattedNumber = [formattedNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
+    formattedNumber = [formattedNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+    formattedNumber = [formattedNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    return formattedNumber;
+}
+- (IBAction)showWebsiteTapped:(id)sender {
+    NSString *subString = [[self.pin.url absoluteString] substringWithRange:NSMakeRange(0, 5)];
+    if ([subString isEqual:@"https"]) {
+        [self performSegueWithIdentifier:segueIdToWebsite sender:nil];
+    }
+    else {
+        UIAlertController *insecureWebsiteWarning = [UIAlertController alertControllerWithTitle:@"Website Not Secure" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [insecureWebsiteWarning addAction:ok];
+        [self presentViewController:insecureWebsiteWarning animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    self.notes = self.notesTextView.text;
+    if ([segue.identifier isEqual:unwindSegueToMap]) {
+        self.notes = self.notesTextView.text;
+    }
+    else if ([segue.identifier isEqual:segueIdToWebsite]) {
+        WebsiteViewController *webVC = [segue destinationViewController];
+        webVC.url = self.pin.url;
+    }
 }
 
 

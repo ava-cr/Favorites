@@ -107,10 +107,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jiU-wg-4N3">
-                                <rect key="frame" x="20" y="339" width="374" height="200"/>
+                                <rect key="frame" x="20" y="339" width="374" height="175"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="xRF-y9-WxB"/>
+                                    <constraint firstAttribute="height" constant="175" id="xRF-y9-WxB"/>
                                 </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -150,20 +150,58 @@
                                 <color key="textColor" systemColor="secondaryLabelColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8J-61-UuR">
+                                <rect key="frame" x="347.5" y="699" width="25" height="23"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="phone" catalog="system" symbolScale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="callButtonTapped:" destination="atg-mE-fSd" eventType="touchUpInside" id="IGf-Mj-2mS"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Call" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SjW-PS-twS">
+                                <rect key="frame" x="345.5" y="727" width="28.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VRD-TU-vMW">
+                                <rect key="frame" x="272.5" y="698" width="25" height="24"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="network" catalog="system" symbolScale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="showWebsiteTapped:" destination="atg-mE-fSd" eventType="touchUpInside" id="IjV-Xf-kCQ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlP-IY-las">
+                                <rect key="frame" x="254" y="727" width="62" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KIs-C5-GCb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="zlP-IY-las" firstAttribute="centerX" secondItem="VRD-TU-vMW" secondAttribute="centerX" id="310-Aw-puI"/>
                             <constraint firstItem="D8b-hX-SaR" firstAttribute="leading" secondItem="KIs-C5-GCb" secondAttribute="leading" id="5SW-zU-M1R"/>
+                            <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="SjW-PS-twS" secondAttribute="trailing" constant="40" id="8gE-Dg-ahX"/>
                             <constraint firstItem="D8b-hX-SaR" firstAttribute="top" secondItem="KIs-C5-GCb" secondAttribute="top" id="9Mm-KZ-Q0g"/>
+                            <constraint firstItem="VRD-TU-vMW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jiU-wg-4N3" secondAttribute="bottom" constant="10" id="DQA-Z7-Jae"/>
                             <constraint firstItem="ZB2-M0-p2z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="20" id="Dtc-k9-Xhj"/>
+                            <constraint firstItem="h8J-61-UuR" firstAttribute="leading" secondItem="VRD-TU-vMW" secondAttribute="trailing" constant="50" id="E8R-ig-W5T"/>
                             <constraint firstItem="O8y-Bc-plI" firstAttribute="top" secondItem="D8b-hX-SaR" secondAttribute="bottom" constant="10" id="GZ7-Ui-bfQ"/>
                             <constraint firstItem="jiU-wg-4N3" firstAttribute="top" secondItem="mSK-hP-WU6" secondAttribute="bottom" constant="20" id="L3Z-Bh-7jt"/>
+                            <constraint firstItem="SjW-PS-twS" firstAttribute="bottom" secondItem="zlP-IY-las" secondAttribute="bottom" id="ODN-oS-Fuc"/>
+                            <constraint firstItem="SjW-PS-twS" firstAttribute="top" secondItem="h8J-61-UuR" secondAttribute="bottom" constant="5" id="Sl3-oN-Jho"/>
+                            <constraint firstItem="3od-Y8-ChN" firstAttribute="top" secondItem="SjW-PS-twS" secondAttribute="bottom" constant="10" id="SuF-PI-7Ko"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="jiU-wg-4N3" secondAttribute="trailing" constant="20" id="UCB-UZ-EyN"/>
-                            <constraint firstItem="3od-Y8-ChN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jiU-wg-4N3" secondAttribute="bottom" constant="20" id="UuO-AP-s6r"/>
                             <constraint firstItem="O8y-Bc-plI" firstAttribute="leading" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="20" id="aeX-nz-qfF"/>
                             <constraint firstItem="ZB2-M0-p2z" firstAttribute="top" secondItem="KIs-C5-GCb" secondAttribute="top" constant="20" id="c1L-An-LxC"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="bottom" secondItem="3od-Y8-ChN" secondAttribute="bottom" constant="20" id="c8X-xA-1vl"/>
+                            <constraint firstItem="SjW-PS-twS" firstAttribute="centerX" secondItem="h8J-61-UuR" secondAttribute="centerX" id="eod-tb-TvK"/>
+                            <constraint firstItem="h8J-61-UuR" firstAttribute="bottom" secondItem="VRD-TU-vMW" secondAttribute="bottom" id="g7J-A2-qUB"/>
                             <constraint firstItem="D8b-hX-SaR" firstAttribute="trailing" secondItem="KIs-C5-GCb" secondAttribute="trailing" id="hJv-mN-tlS"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mSK-hP-WU6" secondAttribute="trailing" constant="20" id="jQJ-g1-EWd"/>
                             <constraint firstItem="jiU-wg-4N3" firstAttribute="leading" secondItem="O8y-Bc-plI" secondAttribute="leading" id="k33-km-mRe"/>
@@ -190,6 +228,7 @@
                         <outlet property="notesTextView" destination="jiU-wg-4N3" id="Ozb-ND-Nle"/>
                         <outlet property="titleLabel" destination="O8y-Bc-plI" id="8We-0u-VMN"/>
                         <segue destination="6cd-f5-Gi2" kind="unwind" identifier="deletePin" unwindAction="deletePin:" id="5C4-i4-gKy"/>
+                        <segue destination="rb9-1J-lNC" kind="presentation" identifier="showWebsite" id="0IP-IJ-Hde"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K4N-Dw-c1Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -329,7 +368,7 @@
                                     <imageReference key="image" image="network" catalog="system" symbolScale="large"/>
                                 </state>
                                 <connections>
-                                    <action selector="websiteButtonTapped:" destination="gxX-3r-VIw" eventType="touchUpInside" id="fxP-dh-ACJ"/>
+                                    <action selector="showWebsiteTapped:" destination="gxX-3r-VIw" eventType="touchUpInside" id="4TV-fc-8rT"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVf-bs-WOc">
@@ -372,7 +411,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Save Pin" image="checkmark" catalog="system" id="0HK-0E-rV5">
                             <connections>
                                 <action selector="didTapSavePin:" destination="gxX-3r-VIw" id="lKY-1l-gqs"/>
-                                <segue destination="LNC-Cq-6br" kind="unwind" unwindAction="addPin:" id="5hK-Lz-lDd"/>
+                                <segue destination="LNC-Cq-6br" kind="unwind" identifier="addPin" unwindAction="addPin:" id="5hK-Lz-lDd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -381,12 +420,47 @@
                         <outlet property="notesTextView" destination="Sk9-R2-xkP" id="i9V-Xh-Ahl"/>
                         <outlet property="subtitleLabel" destination="Eha-FY-oDj" id="GXG-Pz-WwL"/>
                         <outlet property="titleLabel" destination="vHg-8s-blG" id="PuP-bx-G3e"/>
+                        <segue destination="rb9-1J-lNC" kind="presentation" identifier="showWebsite" id="KGr-TS-F6e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hh9-bt-IkN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="LNC-Cq-6br" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-2668.1159420289855" y="2481.6964285714284"/>
+        </scene>
+        <!--Website View Controller-->
+        <scene sceneID="7AM-ol-EMw">
+            <objects>
+                <viewController id="rb9-1J-lNC" customClass="WebsiteViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QMO-lI-eFs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wBV-r9-ags">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yt4-oY-3a2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wBV-r9-ags" firstAttribute="top" secondItem="yt4-oY-3a2" secondAttribute="top" id="E8g-Tr-SrY"/>
+                            <constraint firstItem="yt4-oY-3a2" firstAttribute="bottom" secondItem="wBV-r9-ags" secondAttribute="bottom" id="aiO-sc-yjV"/>
+                            <constraint firstItem="wBV-r9-ags" firstAttribute="leading" secondItem="yt4-oY-3a2" secondAttribute="leading" id="bGC-4m-vdT"/>
+                            <constraint firstItem="yt4-oY-3a2" firstAttribute="trailing" secondItem="wBV-r9-ags" secondAttribute="trailing" id="kRA-ym-8Zx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="wBV-r9-ags" id="JL7-OF-3SO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ACM-wo-2U4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1939" y="2482"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="wTu-lN-eEt">
@@ -1407,6 +1481,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="H2C-Ip-B2u"/>
+        <segue reference="0IP-IJ-Hde"/>
         <segue reference="Ldp-kw-Npj"/>
         <segue reference="9tI-lf-D44"/>
     </inferredMetricsTieBreakers>

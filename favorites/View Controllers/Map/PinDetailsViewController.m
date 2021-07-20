@@ -6,15 +6,19 @@
 //
 
 #import "PinDetailsViewController.h"
+#import "WebsiteViewController.h"
 #import <MapKit/MapKit.h>
 #import <Parse/Parse.h>
 #import "Pin.h"
+
+static NSString *segueIdToWebsite = @"showWebsite";
+static NSString *unwindSegueToMapSavePin = @"savePin";
+static NSString *unwindSegueToMapDeletePin = @"deletePin";
 
 @interface PinDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextView *notesTextView;
 @property (weak, nonatomic) IBOutlet UIButton *addPinButton;
-@property (weak, nonatomic) IBOutlet UILabel *notesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *deletePinButton;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
@@ -33,12 +37,8 @@
         NSData *urlData = [NSData dataWithContentsOfURL:url];
         self.headerImageView.image = [[UIImage alloc] initWithData:urlData];
     }
-    
     if (self.annotation.notes) {
         self.notesTextView.text = self.annotation.notes;
-    }
-    else {
-        self.notesLabel.text = @"";
     }
     if (![self.user isEqual:[PFUser currentUser]]) {
         [self.notesTextView setEditable:FALSE];
@@ -108,7 +108,7 @@
         UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
                                                            style:UIAlertActionStyleDestructive
                                                          handler:^(UIAlertAction * _Nonnull action) {
-            [self performSegueWithIdentifier:@"deletePin" sender:nil];
+            [self performSegueWithIdentifier:unwindSegueToMapDeletePin sender:nil];
          }];
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
                                                            style:UIAlertActionStyleCancel
@@ -124,12 +124,51 @@
     [editUpdate addAction:cancel];
     [self presentViewController:editUpdate animated:YES completion:nil];
 }
+- (IBAction)callButtonTapped:(id)sender {
+    NSString *phoneNumber = [self formatPhoneNumber:self.annotation.pin.phone];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:phoneNumber]] options:@{} completionHandler:^(BOOL success) {
+        if (success) {
+            NSLog(@"call successful");
+        }
+        else {
+            NSLog(@"call not successful");
+        }
+    }];
+}
+
+-(NSString *) formatPhoneNumber:(NSString *)number {
+    NSString *formattedNumber = [number stringByReplacingOccurrencesOfString:@"(" withString:@""];
+    formattedNumber = [formattedNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
+    formattedNumber = [formattedNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+    formattedNumber = [formattedNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    return formattedNumber;
+}
+- (IBAction)showWebsiteTapped:(id)sender {
+    NSString *subString = [self.annotation.pin.urlString substringWithRange:NSMakeRange(0, 5)];
+    NSLog(@"%@", subString);
+    if ([subString isEqual:@"https"]) {
+        [self performSegueWithIdentifier:segueIdToWebsite sender:nil];
+    }
+    else {
+        UIAlertController *insecureWebsiteWarning = [UIAlertController alertControllerWithTitle:@"Website Not Secure" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [insecureWebsiteWarning addAction:ok];
+        [self presentViewController:insecureWebsiteWarning animated:YES completion:nil];
+    }
+}
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqual:@"savePin"]) {
+    if([segue.identifier isEqual:unwindSegueToMapSavePin]) {
         self.annotation.pin.notes = self.notesTextView.text;
+    }
+    else if ([segue.identifier isEqual:segueIdToWebsite]) {
+        WebsiteViewController *webVC = [segue destinationViewController];
+        webVC.url = [NSURL URLWithString:self.annotation.pin.urlString];
     }
 }
 
