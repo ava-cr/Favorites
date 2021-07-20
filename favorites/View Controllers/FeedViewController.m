@@ -142,7 +142,13 @@
         NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
         cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
         cell.captionTextField.text = update.caption;
-        
+        if ([self.isLikedByUser[cell.update.objectId] isEqual:@"1"]) {
+            cell.likedLabel.text = NSLocalizedString(@"Liked💗", @"updated liked by user");
+            cell.likedLabel.textColor = UIColor.systemPinkColor;
+        }
+        else {
+            cell.likedLabel.text = @"";
+        }
         if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:NSLocalizedString(@"'s location", nil)]] || [update.locationTitle isEqual:@""]) {
             cell.isAtLabel.text = @"";
         }
@@ -179,6 +185,7 @@
         [Like createLike:[PFUser currentUser] onUpdate:update withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
                 NSLog(@"created new like!");
+                [self getUpdates];
             } else {
                 NSLog(@"%@", error.localizedDescription);
             }
@@ -208,6 +215,7 @@
             [like deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if(succeeded) {
                     NSLog(@"deleted like");
+                    [self getUpdates];
                 }
                 else {
                     NSLog(@"%@", error.localizedDescription);

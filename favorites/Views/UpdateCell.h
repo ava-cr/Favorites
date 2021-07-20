@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *isAtLabel;
 @property (strong, nonatomic) Update *update;
 @property (nonatomic, weak) id<UpdateCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UILabel *likedLabel;
 
 @end
 
