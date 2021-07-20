@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Update *update;
 @property (nonatomic, weak) id<UpdateCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UILabel *likedLabel;
+@property (weak, nonatomic) IBOutlet UIButton *commentButton;
 
 @end
 
@@ -31,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateCell:(UpdateCell *)updateCell pressedLocation:(Update *)update;
 - (void)updateCell:(UpdateCell *)updateCell didTapUser:(PFUser *)user;
 - (void)updateCell:(UpdateCell *)updateCell likedUpdate:(Update *)update;
+- (void)pressedComments:(UpdateCell *)updateCell;
 
 @end
 

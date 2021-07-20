@@ -11,9 +11,12 @@
 #import "UpdateCell.h"
 #import "ShowLocationOnMapViewController.h"
 #import "ProfileViewController.h"
+#import "CommentsViewController.h"
 #import "Friend.h"
 #import "Like.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+
+static NSString *segueToComments = @"showComments";
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UpdateCellDelegate>
 
@@ -175,6 +178,7 @@
     return cell;
 }
 
+# pragma mark - Update Cell Delegate Methods
 - (void)updateCell:(UpdateCell *)updateCell pressedLocation:(Update *)update {
     [self performSegueWithIdentifier:@"showLocationOnMap" sender:update];
 }
@@ -238,6 +242,9 @@
         }
     }];
 }
+- (void)pressedComments:(UpdateCell *)updateCell {
+    [self performSegueWithIdentifier:segueToComments sender:updateCell.update];
+}
 
 #pragma mark - Navigation
 
@@ -277,6 +284,11 @@
         ProfileViewController *vc = [segue destinationViewController];
         PFUser *user = sender;
         vc.user = user;
+    }
+    else if ([segue.identifier isEqual:segueToComments]) {
+        Update *update = sender;
+        CommentsViewController *commentsVC = [segue destinationViewController];
+        commentsVC.update = update;
     }
 }
 

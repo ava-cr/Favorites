@@ -34,5 +34,8 @@
     NSLog(@"like image!");
     [self.delegate updateCell:self likedUpdate:self.update];
 }
+- (IBAction)didTapComments:(id)sender {
+    [self.delegate pressedComments:self];
+}
 
 @end
