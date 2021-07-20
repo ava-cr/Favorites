@@ -13,7 +13,7 @@
 @interface CommentsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *comments;
+@property (strong, nonatomic) NSMutableArray *comments;
 
 @end
 
@@ -38,7 +38,6 @@ static NSString *commentCellID = @"CommentCell";
         if (succeeded) {
             NSLog(@"the comment was posted!");
             [self getComments];
-            [self.tableView reloadData];
             self.commentTextView.text = @"";
             [self.view endEditing:YES];
         } else {
@@ -48,12 +47,13 @@ static NSString *commentCellID = @"CommentCell";
 }
 - (void) getComments {
     PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
-    [query includeKey:@"author"];
+    NSArray *keys = @[@"author", @"update"];
+    [query includeKeys:keys];
     [query whereKey:@"update" equalTo:self.update];
     query.limit = 20;
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         if (comments != nil) {
-            self.comments = comments;
+            self.comments = [NSMutableArray arrayWithArray:comments];
             NSLog(@"got comments");
             [self.tableView reloadData];
         } else {
@@ -81,6 +81,35 @@ static NSString *commentCellID = @"CommentCell";
     }
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%ld", (long)indexPath.row);
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Comment *comment = self.comments[indexPath.row];
+        [comment deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"deleted comment");
+            }
+            else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+        [self.comments removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+     }
+    else {
+        NSLog(@"Unhandled editing style! %ld", (long)editingStyle);
+    }
+}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // can only delete a comment if it is your post or your comment
+    Comment *comment = self.comments[indexPath.row];
+    if ([comment.author.objectId isEqual:[PFUser currentUser].objectId] || [comment.update.author.objectId isEqual:[PFUser currentUser].objectId]) {
+        return TRUE;
+    }
+    else return FALSE;
+}
+
 // code to move the view up when the keyboard shows
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
