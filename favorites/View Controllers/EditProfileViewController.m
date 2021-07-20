@@ -25,18 +25,18 @@
 }
 - (IBAction)tappedChangeProfilePic:(id)sender {
     UIAlertController *changeProf = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
-    UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"Take Photo"
+    UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"Take Photo", @"use camera to take photo for post")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
         [self takePhoto];
                                                      }];
-    UIAlertAction *choosePhoto = [UIAlertAction actionWithTitle:@"Choose From Library"
+    UIAlertAction *choosePhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"Choose From Library", @"choose photo from library for post")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
         // choose photo
         [self choosePhoto];
                                                      }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"close alert controller")
                                                        style:UIAlertActionStyleCancel
                                                      handler:^(UIAlertAction * _Nonnull action) {}];
     // add the actions to the alert controller

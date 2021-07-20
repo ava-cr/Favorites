@@ -48,25 +48,25 @@
 }
 
 - (IBAction)addLocationTapped:(id)sender {
-    UIAlertController *addLoc = [UIAlertController alertControllerWithTitle:@"Add Location" message:@""preferredStyle:(UIAlertControllerStyleAlert)];
-    UIAlertAction *myLocation = [UIAlertAction actionWithTitle:@"Use My Location"
+    UIAlertController *addLoc = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Add Location", @"prompt the user to choose a location for their post") message:@""preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *myLocation = [UIAlertAction actionWithTitle:NSLocalizedString(@"Use My Location", @"use the user's current location")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
         // choosing my location
         NSString *username = [PFUser currentUser].username;
-        self.locationLabel.text = [username stringByAppendingString:@"'s location"];
+        self.locationLabel.text = [username stringByAppendingString:NSLocalizedString(@"'s location", nil)];
         NSNumber *lat = [NSNumber numberWithDouble:self.userLocation.coordinate.latitude];
         NSNumber *lng = [NSNumber numberWithDouble:self.userLocation.coordinate.longitude];
         self.latitude = lat;
         self.longitude = lng;
         
     }];
-    UIAlertAction *chooseLocation = [UIAlertAction actionWithTitle:@"Choose From Locations"
+    UIAlertAction *chooseLocation = [UIAlertAction actionWithTitle:NSLocalizedString(@"Choose From Locations", @"use one of the user's pre-saved locations")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
         [self performSegueWithIdentifier:@"showMyPins" sender:nil];
     }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"close alert controller")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
     }];
@@ -80,17 +80,17 @@
 
 - (IBAction)addPhotoTapped:(id)sender {
     UIAlertController *addPic = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
-    UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"Take Photo"
+    UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"Take Photo", @"use camera to take photo for post")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
         [self takePhoto]; // take photo
     }];
-    UIAlertAction *choosePhoto = [UIAlertAction actionWithTitle:@"Choose From Library"
+    UIAlertAction *choosePhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"Choose From Library", @"choose photo from library for post")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
         [self choosePhoto]; // choose photo
     }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"close alert controller")
                                                        style:UIAlertActionStyleCancel
                                                      handler:^(UIAlertAction * _Nonnull action) {}];
     [addPic addAction:takePhoto];

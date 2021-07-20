@@ -114,11 +114,11 @@
 
 - (void)didTapEditUpdate:(ProfileUpdateCell *)updateCell {
     UIAlertController *editUpdate = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
-    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
+    UIAlertAction *delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"delete post")
                                                        style:UIAlertActionStyleDestructive
                                                      handler:^(UIAlertAction * _Nonnull action) {
-        UIAlertController *deleteUpdate = [UIAlertController alertControllerWithTitle:@"Are you sure?" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
+        UIAlertController *deleteUpdate = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Are you sure?", @"message ensuring the user wants to delete their post") message:nil preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"delete post")
                                                            style:UIAlertActionStyleDestructive
                                                          handler:^(UIAlertAction * _Nonnull action) {
             PFUser *currentUser = [PFUser currentUser];
@@ -140,14 +140,14 @@
                 }
             }];
          }];
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"don't delete post")
                                                            style:UIAlertActionStyleCancel
                                                          handler:^(UIAlertAction * _Nonnull action) {}];
         [deleteUpdate addAction:cancel];
         [deleteUpdate addAction:delete];
         [self presentViewController:deleteUpdate animated:YES completion:nil];
                                                      }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"don't delete post")
                                                        style:UIAlertActionStyleCancel
                                                      handler:^(UIAlertAction * _Nonnull action) {}];
     [editUpdate addAction:delete];
@@ -166,20 +166,20 @@
         cell.delegate = self;
         // number of posts/pins/friends labels
         if ([[self.user objectForKey:@"numPosts"] isEqual:[NSNumber numberWithInt:1]]) {
-            cell.numPostsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPosts"]] stringByAppendingString:@" Post"];
+            cell.numPostsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPosts"]] stringByAppendingString:NSLocalizedString(@" Post", @"user's post singular")];
         }
-        else cell.numPostsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPosts"]] stringByAppendingString:@" Posts"];
+        else cell.numPostsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPosts"]] stringByAppendingString:NSLocalizedString(@" Posts", @"user's posts plural")];
         
         if ([[self.user objectForKey:@"numPins"] isEqual:[NSNumber numberWithInt:1]]) {
-            cell.numPinsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPins"]] stringByAppendingString:@" Pin"];
+            cell.numPinsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPins"]] stringByAppendingString:NSLocalizedString(@" Pin", @"user's pin singular")];
         }
-        else cell.numPinsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPins"]] stringByAppendingString:@" Pins"];
+        else cell.numPinsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPins"]] stringByAppendingString:NSLocalizedString(@" Pins", @"user's pins plural")];
         if ((int)[self.friends count] == 1) {
-            cell.numFriendsLabel.text = [[NSString stringWithFormat:@"%d", (int)[self.friends count]] stringByAppendingString:@" Friend"];
+            cell.numFriendsLabel.text = [[NSString stringWithFormat:@"%d", (int)[self.friends count]] stringByAppendingString:NSLocalizedString(@" Friend", @"user's friend singular")];
         }
-        else cell.numFriendsLabel.text = [[NSString stringWithFormat:@"%d", (int)[self.friends count]] stringByAppendingString:@" Friends"];
+        else cell.numFriendsLabel.text = [[NSString stringWithFormat:@"%d", (int)[self.friends count]] stringByAppendingString:NSLocalizedString(@" Friends", @"user's friends plural")];
         // edit profile / see pins button
-        if (![self.user isEqual:[PFUser currentUser]]) [cell.editProfileButton setTitle:@"See Pins" forState:UIControlStateNormal];
+        if (![self.user isEqual:[PFUser currentUser]]) [cell.editProfileButton setTitle:NSLocalizedString(@"See Pins", @"show user's pins") forState:UIControlStateNormal];
         cell.editProfileButton.layer.cornerRadius = 5;
         cell.editProfileButton.layer.borderColor = [UIColor.systemBlueColor CGColor];
         cell.editProfileButton.layer.borderWidth = 0.5;
@@ -210,7 +210,7 @@
              cell.usernameLabel.text = update.author.username;
              cell.bottomUsernameLabel.text = update.author.username;
              cell.captionTextField.text = update.caption;
-             if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:@"'s location"]]) {
+             if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:NSLocalizedString(@"'s location", @"adding the word location to the user's username")]]) {
                  cell.isAtLabel.text = @"";
              }
              else cell.isAtLabel.text = @"is at ";

@@ -84,7 +84,7 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     [Pin postUserPin:self.annotation.titleString withNotes:self.annotation.notes latitude:lat longitude:lng urlString:self.annotation.pin.urlString phone:self.annotation.pin.phone imageURL:self.annotation.pin.imageURL yelpID:self.annotation.pin.yelpID yelpURL:self.annotation.pin.yelpURL address:self.annotation.pin.address withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"the pin was added!");
-            UIAlertController *pinAdded = [UIAlertController alertControllerWithTitle:@"Pin added to your map!" message:@""preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertController *pinAdded = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Pin added to your map!", @"message that pin was successfully added to user's map") message:@""preferredStyle:(UIAlertControllerStyleAlert)];
             UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
                                                                style:UIAlertActionStyleDefault
                                                              handler:^(UIAlertAction * _Nonnull action) {
@@ -101,23 +101,23 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
 }
 - (IBAction)deletePinTapped:(id)sender {
     UIAlertController *editUpdate = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
-    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
+    UIAlertAction *delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"delete pin")
                                                        style:UIAlertActionStyleDestructive
                                                      handler:^(UIAlertAction * _Nonnull action) {
-        UIAlertController *deleteUpdate = [UIAlertController alertControllerWithTitle:@"Are you sure?" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
+        UIAlertController *deleteUpdate = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Are you sure?", @"message ensuring the user wants to delete their pin") message:nil preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"delete pin")
                                                            style:UIAlertActionStyleDestructive
                                                          handler:^(UIAlertAction * _Nonnull action) {
             [self performSegueWithIdentifier:unwindSegueToMapDeletePin sender:nil];
          }];
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"don't delete pin")
                                                            style:UIAlertActionStyleCancel
                                                          handler:^(UIAlertAction * _Nonnull action) {}];
         [deleteUpdate addAction:cancel];
         [deleteUpdate addAction:delete];
         [self presentViewController:deleteUpdate animated:YES completion:nil];
                                                      }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"don't delete pin")
                                                        style:UIAlertActionStyleCancel
                                                      handler:^(UIAlertAction * _Nonnull action) {}];
     [editUpdate addAction:delete];
@@ -150,8 +150,8 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
         [self performSegueWithIdentifier:segueIdToWebsite sender:nil];
     }
     else {
-        UIAlertController *insecureWebsiteWarning = [UIAlertController alertControllerWithTitle:@"Website Not Secure" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+        UIAlertController *insecureWebsiteWarning = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Website Not Secure", @"alert message that website is unsecure") message:nil preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"accepting alert message")
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * _Nonnull action) {
         }];

@@ -52,7 +52,7 @@ static NSString *locationChosenSegueId = @"locationChosen";
     self.searchController.hidesNavigationBarDuringPresentation = NO;
     self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     self.searchController.searchResultsUpdater = self;
-    self.searchController.searchBar.placeholder = @"Search here...";
+    self.searchController.searchBar.placeholder = NSLocalizedString(@"Search here...", @"placeholder for the search bar");
     [self.searchController.searchBar sizeToFit];
     self.searchController.delegate = self;
     

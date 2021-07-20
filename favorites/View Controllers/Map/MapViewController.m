@@ -38,7 +38,7 @@
     self.mapView.delegate = self;
     if (!self.user) self.user = [PFUser currentUser];
     if ([self.user isEqual:[PFUser currentUser]]) {
-        self.title = @"Your Pins";
+        self.title = NSLocalizedString(@"Your Pins", @"the user's saved locations");
         [self.cancelButton setEnabled:FALSE];
         [self.cancelButton setHidden:TRUE];
     }

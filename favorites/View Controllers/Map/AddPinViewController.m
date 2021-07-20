@@ -106,8 +106,8 @@ static NSString *unwindSegueToMap = @"addPin";
         [self performSegueWithIdentifier:segueIdToWebsite sender:nil];
     }
     else {
-        UIAlertController *insecureWebsiteWarning = [UIAlertController alertControllerWithTitle:@"Website Not Secure" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+        UIAlertController *insecureWebsiteWarning = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Website Not Secure", @"alert message that website is unsecure") message:nil preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"accepting alert message")
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * _Nonnull action) {
         }];

@@ -122,11 +122,11 @@
         cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
         cell.captionTextField.text = update.caption;
         
-        if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:@"'s location"]] || [update.locationTitle isEqual:@""]) {
+        if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:NSLocalizedString(@"'s location", nil)]] || [update.locationTitle isEqual:@""]) {
             cell.isAtLabel.text = @"";
         }
         else {
-            cell.isAtLabel.text = @"is at ";
+            cell.isAtLabel.text = NSLocalizedString(@"is at ", @"formulating location string");
         }
         [cell.locationButton setTitle:update.locationTitle forState:UIControlStateNormal];
         NSURL *url = [NSURL URLWithString:update.image.url];
