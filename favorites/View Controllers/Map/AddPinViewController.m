@@ -8,6 +8,7 @@
 #import "AddPinViewController.h"
 #import "WebsiteViewController.h"
 #import <MapKit/MapKit.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "APIManager.h"
 
 static NSString *segueIdToWebsite = @"showWebsite";
@@ -46,6 +47,7 @@ static NSString *unwindSegueToMap = @"addPin";
 }
 
 -(void) businessMatch {
+    [SVProgressHUD show];
     [self.manager getBusinessMatch:self.pin.placemark.name withAddress:self.pin.placemark.title city:self.pin.placemark.locality state:self.pin.placemark.administrativeArea country:self.pin.placemark.ISOcountryCode lat:self.pin.placemark.coordinate.latitude lng:self.pin.placemark.coordinate.longitude withCompletion:^(NSDictionary *results, NSError * _Nonnull error) {
         if (error != nil) {
             NSLog(@"%@", [error localizedDescription]);
@@ -56,6 +58,7 @@ static NSString *unwindSegueToMap = @"addPin";
                 [self businessDetails:self.yelpID];
             }
             else {
+                [SVProgressHUD dismiss];
                 NSLog(@"no matching businesses found");
             }
         }
@@ -75,6 +78,7 @@ static NSString *unwindSegueToMap = @"addPin";
             NSData *urlData = [NSData dataWithContentsOfURL:url];
             self.headerImageView.image = [[UIImage alloc] initWithData:urlData];
         }
+        [SVProgressHUD dismiss];
     }];
 }
 - (IBAction)callButtonTapped:(id)sender {
