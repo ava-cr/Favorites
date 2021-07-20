@@ -203,6 +203,40 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4648296326A73B4100482CB1 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				464D1DC9269C8F2100C32AE2 /* FeedViewController.h */,
+				464D1DCA269C8F2100C32AE2 /* FeedViewController.m */,
+				460DABF1269F3631000220D0 /* ComposeUpdateViewController.h */,
+				460DABF2269F3631000220D0 /* ComposeUpdateViewController.m */,
+				46A36B2F269F7475003C3429 /* MyPinsViewController.h */,
+				46A36B30269F7475003C3429 /* MyPinsViewController.m */,
+				46A36B36269F8CD6003C3429 /* ShowLocationOnMapViewController.h */,
+				46A36B37269F8CD6003C3429 /* ShowLocationOnMapViewController.m */,
+				46A36B39269F9A85003C3429 /* AddFriendsViewController.h */,
+				46A36B3A269F9A85003C3429 /* AddFriendsViewController.m */,
+				46A36B4226A0839E003C3429 /* NotificationsViewController.h */,
+				46A36B4326A0839E003C3429 /* NotificationsViewController.m */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		4648296526A73B8900482CB1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				464D1DCC269C8F2900C32AE2 /* ProfileViewController.h */,
+				464D1DCD269C8F2900C32AE2 /* ProfileViewController.m */,
+				46A36B5126A0ECE4003C3429 /* EditProfileViewController.h */,
+				46A36B5226A0ECE4003C3429 /* EditProfileViewController.m */,
+				463278AA26A1C33E007BCA59 /* ListFriendsViewController.h */,
+				463278AB26A1C33E007BCA59 /* ListFriendsViewController.m */,
+				46B59A3626A66CE900D384D4 /* ListPinsViewController.h */,
+				46B59A3726A66CE900D384D4 /* ListPinsViewController.m */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		464D1D84269C7EB400C32AE2 = {
 			isa = PBXGroup;
 			children = (
@@ -266,31 +300,11 @@
 		464D1DC5269C8EAF00C32AE2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				464D1DC9269C8F2100C32AE2 /* FeedViewController.h */,
-				464D1DCA269C8F2100C32AE2 /* FeedViewController.m */,
-				460DABF1269F3631000220D0 /* ComposeUpdateViewController.h */,
-				460DABF2269F3631000220D0 /* ComposeUpdateViewController.m */,
-				46A36B2F269F7475003C3429 /* MyPinsViewController.h */,
-				46A36B30269F7475003C3429 /* MyPinsViewController.m */,
+				4648296526A73B8900482CB1 /* Profile */,
+				4648296326A73B4100482CB1 /* Feed */,
 				464D1E29269E5F2300C32AE2 /* Map */,
-				464D1DCC269C8F2900C32AE2 /* ProfileViewController.h */,
-				464D1DCD269C8F2900C32AE2 /* ProfileViewController.m */,
 				464D1DCF269C8FDF00C32AE2 /* LoginViewController.h */,
 				464D1DD0269C8FDF00C32AE2 /* LoginViewController.m */,
-				46A36B36269F8CD6003C3429 /* ShowLocationOnMapViewController.h */,
-				46A36B37269F8CD6003C3429 /* ShowLocationOnMapViewController.m */,
-				46A36B39269F9A85003C3429 /* AddFriendsViewController.h */,
-				46A36B3A269F9A85003C3429 /* AddFriendsViewController.m */,
-				46A36B4226A0839E003C3429 /* NotificationsViewController.h */,
-				46A36B4326A0839E003C3429 /* NotificationsViewController.m */,
-				46A36B5126A0ECE4003C3429 /* EditProfileViewController.h */,
-				46A36B5226A0ECE4003C3429 /* EditProfileViewController.m */,
-				463278AA26A1C33E007BCA59 /* ListFriendsViewController.h */,
-				463278AB26A1C33E007BCA59 /* ListFriendsViewController.m */,
-				46B59A3326A642F600D384D4 /* WebsiteViewController.h */,
-				46B59A3426A642F600D384D4 /* WebsiteViewController.m */,
-				46B59A3626A66CE900D384D4 /* ListPinsViewController.h */,
-				46B59A3726A66CE900D384D4 /* ListPinsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -350,6 +364,8 @@
 				464D1E1D269DBB0D00C32AE2 /* AddPinViewController.m */,
 				464D1E26269E5F1900C32AE2 /* PinDetailsViewController.h */,
 				464D1E27269E5F1900C32AE2 /* PinDetailsViewController.m */,
+				46B59A3326A642F600D384D4 /* WebsiteViewController.h */,
+				46B59A3426A642F600D384D4 /* WebsiteViewController.m */,
 			);
 			path = Map;
 			sourceTree = "<group>";
