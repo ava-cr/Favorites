@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 // required methods the delegate needs to implement
 - (void)updateCell:(UpdateCell *)updateCell pressedLocation:(Update *)update;
 - (void)updateCell:(UpdateCell *)updateCell didTapUser:(PFUser *)user;
+- (void)updateCell:(UpdateCell *)updateCell likedUpdate:(Update *)update;
 
 @end
 

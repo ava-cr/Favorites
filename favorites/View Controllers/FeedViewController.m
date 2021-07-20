@@ -12,12 +12,14 @@
 #import "ShowLocationOnMapViewController.h"
 #import "ProfileViewController.h"
 #import "Friend.h"
+#import "Like.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UpdateCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *updates;
+@property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> *isLikedByUser;
 @property (strong, nonatomic) NSMutableArray *friends;
 
 @end
@@ -45,9 +47,9 @@
 - (void) getUpdates {
     // activity monitor
     [SVProgressHUD show];
-    // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
-    [query includeKey:@"author"];
+    NSArray *keys = @[@"update", @"author", @"objectId"];
+    [query includeKeys:keys];
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"author" containedIn:self.friends];
     query.limit = 20;
@@ -56,18 +58,37 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *updates, NSError *error) {
         if (updates != nil) {
             self.updates = updates;
-            [self.tableView reloadData];
             NSLog(@"got updates");
-            [SVProgressHUD dismiss];
-            for (Update *update in self.updates) {
-                NSLog(@"%@", update.caption);
+            self.isLikedByUser = [[NSMutableDictionary alloc] init];
+            for (Update *update in self.updates) { // set all updates to unliked initially
+                [self.isLikedByUser setValue:@"0" forKey:update.objectId];
+                NSLog(@"%@", self.isLikedByUser[update.objectId]);
             }
+            [self getLikes];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
     }];
 }
-
+- (void) getLikes {
+    PFQuery *query = [PFQuery queryWithClassName:@"Like"];
+    NSArray *keys = @[@"update", @"objectId", @"like"];
+    [query includeKeys:keys];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    query.limit = 20;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *likes, NSError *error) {
+        if (likes != nil) {
+            NSLog(@"got likes");
+            for (Like *like in likes) {
+                [self.isLikedByUser setValue:@"1" forKey:like.update.objectId];
+            }
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        [SVProgressHUD dismiss];
+    }];
+}
 - (void) getFriends {
     // construct query
     PFQuery *queryUser1 = [PFQuery queryWithClassName:@"Friend"];
@@ -139,9 +160,63 @@
 - (void)updateCell:(UpdateCell *)updateCell pressedLocation:(Update *)update {
     [self performSegueWithIdentifier:@"showLocationOnMap" sender:update];
 }
-
 - (void)updateCell:(UpdateCell *)updateCell didTapUser:(PFUser *)user {
     [self performSegueWithIdentifier:@"showProfile" sender:user];
+}
+- (void)updateCell:(UpdateCell *)updateCell likedUpdate:(Update *)update {
+    NSLog(@"%@", self.isLikedByUser[update.objectId]);
+    if ([self.isLikedByUser[update.objectId] isEqual:@"0"]) {
+        // create a like object, increment like count
+        update[@"likeCount"] = [NSNumber numberWithInt:([update[@"likeCount"] intValue] + 1)];
+        [update saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"updated update like count! %@", update[@"likeCount"]);
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+        [self.isLikedByUser setValue:@"1" forKey:update.objectId];
+        [Like createLike:[PFUser currentUser] onUpdate:update withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"created new like!");
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+    }
+    else {
+        // delete a like object, decrememt like count
+        [self.isLikedByUser setValue:@"0" forKey:update.objectId];
+        update[@"likeCount"] = [NSNumber numberWithInt:([update[@"likeCount"] intValue] - 1)];
+        [update saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"updated update like count! %@", update[@"likeCount"]);
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+        [self deleteLike:update];
+    }
+}
+-(void) deleteLike:(Update *)update {
+    PFQuery *query = [PFQuery queryWithClassName:@"Like"];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query whereKey:@"update" equalTo:update];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *likes, NSError *error) {
+        if (likes != nil) {
+            Like *like = likes[0];
+            [like deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded) {
+                    NSLog(@"deleted like");
+                }
+                else {
+                    NSLog(@"%@", error.localizedDescription);
+                }
+            }];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
 }
 
 #pragma mark - Navigation
