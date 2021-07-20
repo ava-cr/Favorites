@@ -1,5 +1,6 @@
 PODS:
   - Bolts/Tasks (1.9.1)
+  - DateTools (2.0.0)
   - Parse (1.19.2):
     - Parse/Core (= 1.19.2)
   - Parse/Core (1.19.2):
@@ -7,20 +8,23 @@ PODS:
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - DateTools
   - Parse
   - SVProgressHUD
 
 SPEC REPOS:
   trunk:
     - Bolts
+    - DateTools
     - Parse
     - SVProgressHUD
 
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
+  DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   Parse: 081fb8755c3000fd11df817eec235def233d0af3
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: c3209bcddf72f56dbfa05617ded6ec63ac04bb9d
+PODFILE CHECKSUM: be20090773f01b817a66e3d62da994f0fba7fd50
 
 COCOAPODS: 1.10.1

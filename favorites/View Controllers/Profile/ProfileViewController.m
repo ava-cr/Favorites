@@ -12,6 +12,7 @@
 #import "ProfileHeaderCell.h"
 #import "ProfileUpdateCell.h"
 #import <Parse/Parse.h>
+#import <DateTools/DateTools.h>
 #import "Update.h"
 #import "Friend.h"
 
@@ -223,6 +224,9 @@
              NSURL *profURL = [NSURL URLWithString:pfFile.url];
              NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
              cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+             NSDate *createdAt = update.createdAt;
+             NSString *createdAtString = createdAt.shortTimeAgoSinceNow;
+             cell.timestampLabel.text = [createdAtString stringByAppendingString:@" ago"];
          }
         return cell;
     }

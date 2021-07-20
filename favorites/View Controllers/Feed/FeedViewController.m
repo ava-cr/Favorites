@@ -15,6 +15,7 @@
 #import "Friend.h"
 #import "Like.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import <DateTools/DateTools.h>
 
 static NSString *segueToComments = @"showComments";
 
@@ -174,6 +175,9 @@ static NSString *segueToComments = @"showComments";
         NSURL *url = [NSURL URLWithString:update.image.url];
         NSData *urlData = [NSData dataWithContentsOfURL:url];
         cell.picImageView.image = [[UIImage alloc] initWithData:urlData];
+        NSDate *createdAt = update.createdAt;
+        NSString *createdAtString = createdAt.shortTimeAgoSinceNow;
+        cell.timestampLabel.text = [createdAtString stringByAppendingString:@" ago"];
     }
     return cell;
 }

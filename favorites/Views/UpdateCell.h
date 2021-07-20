@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<UpdateCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UILabel *likedLabel;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
+@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 
 @end
 

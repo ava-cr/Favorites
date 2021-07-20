@@ -8,6 +8,7 @@ target 'favorites' do
   # Pods for favorites
   pod 'Parse'
   pod 'SVProgressHUD'
+  pod 'DateTools'
 
 
   target 'favoritesTests' do
