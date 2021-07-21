@@ -15,6 +15,7 @@
 #import "AddPinViewController.h"
 #import "PinDetailsViewController.h"
 #import "ListPinsViewController.h"
+#import "UpdateDetailsViewController.h"
 #import "PinAnnotation.h"
 #import "UpdateAnnotation.h"
 #import "Pin.h"
@@ -22,6 +23,7 @@
 #import "Friend.h"
 
 static NSString *segueToPinsList = @"showPinsList";
+static NSString *segueToUpdateDetails = @"showUpdateDetails";
 
 @interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
@@ -250,6 +252,7 @@ static NSString *segueToPinsList = @"showPinsList";
         else {
             UpdateAnnotation *updateAnnotation = view.annotation;
             NSLog(@"perform a segue to update details page");
+            [self performSegueWithIdentifier:segueToUpdateDetails sender:updateAnnotation.update];
         }
     }
 }
@@ -370,6 +373,11 @@ static NSString *segueToPinsList = @"showPinsList";
     else if ([segue.identifier isEqual:segueToPinsList]) {
         ListPinsViewController *listVC = [segue destinationViewController];
         listVC.user = self.user;
+    }
+    else if ([segue.identifier isEqual:segueToUpdateDetails]) {
+        Update *update = sender;
+        UpdateDetailsViewController *updateDetailsVC = [segue destinationViewController];
+        updateDetailsVC.update = update;
     }
 }
 
