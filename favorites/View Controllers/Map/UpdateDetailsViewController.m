@@ -53,8 +53,68 @@ static NSString *segueToComments = @"showComments";
      NSDate *createdAt = self.update.createdAt;
      NSString *createdAtString = createdAt.shortTimeAgoSinceNow;
      self.timestampLabel.text = [createdAtString stringByAppendingString:@" ago"];
+    UITapGestureRecognizer *doubleTapToLike = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didLikeUpdate:)];
+    [self.picImageView addGestureRecognizer:doubleTapToLike];
+    [doubleTapToLike setNumberOfTapsRequired:2];
+    [self.picImageView setUserInteractionEnabled:YES];
 }
 
+- (void)didLikeUpdate:(UITapGestureRecognizer *)sender {
+    if (!self.isLikedByUser) {
+        // create a like object, increment like count
+        self.update[@"likeCount"] = [NSNumber numberWithInt:([self.update[@"likeCount"] intValue] + 1)];
+        [self.update saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"updated update like count! %@", self.update[@"likeCount"]);
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+        self.isLikedByUser = TRUE;
+        [Like createLike:[PFUser currentUser] onUpdate:self.update withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"created new like!");
+                [self getLiked];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+    }
+    else {
+        // delete a like object, decrememt like count
+        self.isLikedByUser = FALSE;
+        self.update[@"likeCount"] = [NSNumber numberWithInt:([self.update[@"likeCount"] intValue] - 1)];
+        [self.update saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"updated update like count! %@", self.update[@"likeCount"]);
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+        [self deleteLike:self.update];
+    }
+}
+-(void) deleteLike:(Update *)update {
+    PFQuery *query = [PFQuery queryWithClassName:@"Like"];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query whereKey:@"update" equalTo:update];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *likes, NSError *error) {
+        if (likes != nil) {
+            Like *like = likes[0];
+            [like deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded) {
+                    NSLog(@"deleted like");
+                    [self getLiked];
+                }
+                else {
+                    NSLog(@"%@", error.localizedDescription);
+                }
+            }];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
 - (void) getLiked {
     PFQuery *query = [PFQuery queryWithClassName:@"Like"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
