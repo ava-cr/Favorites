@@ -18,7 +18,7 @@
 		4648296826A73DBA00482CB1 /* CommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648296726A73DBA00482CB1 /* CommentsViewController.m */; };
 		4648296B26A743D200482CB1 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648296A26A743D200482CB1 /* CommentCell.m */; };
 		4648296E26A7458900482CB1 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648296D26A7458900482CB1 /* Comment.m */; };
-		4648297226A7B99800482CB1 /* FriendsMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648297126A7B99800482CB1 /* FriendsMapViewController.m */; };
+		4648297526A8566A00482CB1 /* UpdateAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648297426A8566A00482CB1 /* UpdateAnnotation.m */; };
 		464D1D92269C7EB500C32AE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D91269C7EB500C32AE2 /* AppDelegate.m */; };
 		464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D94269C7EB500C32AE2 /* SceneDelegate.m */; };
 		464D1D9B269C7EB500C32AE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D1D99269C7EB500C32AE2 /* Main.storyboard */; };
@@ -97,8 +97,8 @@
 		4648296C26A7458900482CB1 /* Comment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		4648296D26A7458900482CB1 /* Comment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		4648296F26A7B05400482CB1 /* favorites.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = favorites.entitlements; sourceTree = "<group>"; };
-		4648297026A7B99800482CB1 /* FriendsMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsMapViewController.h; sourceTree = "<group>"; };
-		4648297126A7B99800482CB1 /* FriendsMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsMapViewController.m; sourceTree = "<group>"; };
+		4648297326A8566A00482CB1 /* UpdateAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateAnnotation.h; sourceTree = "<group>"; };
+		4648297426A8566A00482CB1 /* UpdateAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateAnnotation.m; sourceTree = "<group>"; };
 		464D1D8D269C7EB500C32AE2 /* favorites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = favorites.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464D1D90269C7EB500C32AE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		464D1D91269C7EB500C32AE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -332,6 +332,8 @@
 				464D1E1A269D328300C32AE2 /* LocationCell.m */,
 				464D1E1F269E350D00C32AE2 /* PinAnnotation.h */,
 				464D1E20269E350D00C32AE2 /* PinAnnotation.m */,
+				4648297326A8566A00482CB1 /* UpdateAnnotation.h */,
+				4648297426A8566A00482CB1 /* UpdateAnnotation.m */,
 				460DABEE269F30E7000220D0 /* UpdateCell.h */,
 				460DABEF269F30E7000220D0 /* UpdateCell.m */,
 				46A36B33269F7568003C3429 /* MyPinCell.h */,
@@ -386,8 +388,6 @@
 				464D1E27269E5F1900C32AE2 /* PinDetailsViewController.m */,
 				46B59A3326A642F600D384D4 /* WebsiteViewController.h */,
 				46B59A3426A642F600D384D4 /* WebsiteViewController.m */,
-				4648297026A7B99800482CB1 /* FriendsMapViewController.h */,
-				4648297126A7B99800482CB1 /* FriendsMapViewController.m */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -675,7 +675,6 @@
 				46A36B5326A0ECE4003C3429 /* EditProfileViewController.m in Sources */,
 				464D1E17269D323300C32AE2 /* SearchLocationsViewController.m in Sources */,
 				46A36B4426A0839E003C3429 /* NotificationsViewController.m in Sources */,
-				4648297226A7B99800482CB1 /* FriendsMapViewController.m in Sources */,
 				46B59A3226A5E4C000D384D4 /* APIManager.m in Sources */,
 				464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */,
 				464D1DD1269C8FDF00C32AE2 /* LoginViewController.m in Sources */,
@@ -686,6 +685,7 @@
 				460DABF3269F3631000220D0 /* ComposeUpdateViewController.m in Sources */,
 				4648296B26A743D200482CB1 /* CommentCell.m in Sources */,
 				4648296826A73DBA00482CB1 /* CommentsViewController.m in Sources */,
+				4648297526A8566A00482CB1 /* UpdateAnnotation.m in Sources */,
 				46A36B4D26A0D01A003C3429 /* ProfileHeaderCell.m in Sources */,
 				46A36B4726A0844A003C3429 /* FriendRequestCell.m in Sources */,
 				46B59A3B26A66D1800D384D4 /* ListPinCell.m in Sources */,

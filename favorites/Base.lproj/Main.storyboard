@@ -128,8 +128,9 @@
                                 <state key="normal">
                                     <imageReference key="image" image="person.3" catalog="system" symbolScale="medium"/>
                                 </state>
+                                <state key="selected" image="person.3.fill" catalog="system"/>
                                 <connections>
-                                    <segue destination="i8x-RC-Rum" kind="presentation" id="SML-7O-haa"/>
+                                    <action selector="friendsButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zni-gH-0YN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -179,53 +180,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2352" y="986"/>
-        </scene>
-        <!--Friends Map View Controller-->
-        <scene sceneID="Xg1-1R-eYV">
-            <objects>
-                <viewController id="i8x-RC-Rum" customClass="FriendsMapViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HZf-yV-u7l">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xdK-DY-Z16">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSW-WI-FRm">
-                                <rect key="frame" x="344" y="20" width="50" height="30"/>
-                                <color key="backgroundColor" systemColor="linkColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="aQL-Bh-Erb"/>
-                                </constraints>
-                                <state key="normal" title="Close">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="closeButtonTapped:" destination="i8x-RC-Rum" eventType="touchUpInside" id="i24-3Z-gVU"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="IjG-kv-bhz"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="xdK-DY-Z16" firstAttribute="top" secondItem="IjG-kv-bhz" secondAttribute="top" id="AFu-2a-oDg"/>
-                            <constraint firstItem="xdK-DY-Z16" firstAttribute="leading" secondItem="IjG-kv-bhz" secondAttribute="leading" id="FOX-1j-7Im"/>
-                            <constraint firstItem="YSW-WI-FRm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IjG-kv-bhz" secondAttribute="leading" constant="20" id="GGG-5j-LuV"/>
-                            <constraint firstItem="YSW-WI-FRm" firstAttribute="top" secondItem="IjG-kv-bhz" secondAttribute="top" constant="20" id="UB5-56-0U2"/>
-                            <constraint firstAttribute="bottom" secondItem="xdK-DY-Z16" secondAttribute="bottom" id="Xe8-qm-Lsf"/>
-                            <constraint firstItem="xdK-DY-Z16" firstAttribute="trailing" secondItem="IjG-kv-bhz" secondAttribute="trailing" id="obA-Ml-o6n"/>
-                            <constraint firstItem="IjG-kv-bhz" firstAttribute="trailing" secondItem="YSW-WI-FRm" secondAttribute="trailing" constant="20" id="rei-Z4-A6B"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="VGI-wm-RXe"/>
-                    <connections>
-                        <outlet property="closeButton" destination="YSW-WI-FRm" id="cyp-Qk-dOu"/>
-                        <outlet property="mapView" destination="xdK-DY-Z16" id="LOM-yD-Aay"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iCM-9g-g50" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1620.289855072464" y="1747.7678571428571"/>
         </scene>
         <!--Pin Details View Controller-->
         <scene sceneID="iRO-9V-59P">
@@ -1791,6 +1745,7 @@
         <image name="paperplane.circle" catalog="system" width="128" height="121"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.3" catalog="system" width="128" height="62"/>
+        <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="person.badge.plus" catalog="system" width="128" height="124"/>
         <image name="phone" catalog="system" width="128" height="115"/>
         <image name="plus" catalog="system" width="128" height="113"/>
