@@ -30,6 +30,7 @@ static NSString *segueToPinsList = @"showPinsList";
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *listPinsButton;
+@property (weak, nonatomic) IBOutlet UIButton *friendsButton;
 
 
 @end
@@ -47,6 +48,8 @@ static NSString *segueToPinsList = @"showPinsList";
         [self.cancelButton setHidden:TRUE];
     }
     else {
+        [self.friendsButton setEnabled:FALSE];
+        [self.friendsButton setHidden:TRUE];
         self.cancelButton.layer.cornerRadius = 8;
         [self.addPinButton setEnabled:FALSE];
         [self.addPinButton setTitle:@""];
