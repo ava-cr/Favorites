@@ -9,6 +9,7 @@
 #import "EditProfileViewController.h"
 #import "ListFriendsViewController.h"
 #import "MapViewController.h"
+#import "CommentsViewController.h"
 #import "ProfileHeaderCell.h"
 #import "ProfileUpdateCell.h"
 #import <Parse/Parse.h>
@@ -17,6 +18,8 @@
 #import "Update.h"
 #import "Friend.h"
 #import "Like.h"
+
+static NSString *segueToComments = @"showComments";
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, ProfileHeaderCellDelegate, ProfileUpdateCellDelegate>
 
@@ -236,6 +239,9 @@
         }
     }];
 }
+- (void)pressedComments:(ProfileUpdateCell *)updateCell {
+    [self performSegueWithIdentifier:segueToComments sender:updateCell.update];
+}
 #pragma mark - Table View Functions
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -358,6 +364,11 @@
     else if ([segue.identifier isEqual:@"listFriends"]) {
         ListFriendsViewController *friendsVC = [segue destinationViewController];
         friendsVC.friends = self.friends;
+    }
+    else if ([segue.identifier isEqual:segueToComments]) {
+        Update *update = sender;
+        CommentsViewController *commentsVC = [segue destinationViewController];
+        commentsVC.update = update;
     }
 }
 

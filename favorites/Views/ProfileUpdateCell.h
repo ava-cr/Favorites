@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *editUpdateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likedLabel;
+@property (weak, nonatomic) IBOutlet UIButton *commentButton;
 @property (strong, nonatomic) Update *update;
 @property (strong, nonatomic) PFUser *user;
 @property (nonatomic, weak) id<ProfileUpdateCellDelegate> delegate;
@@ -35,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)didTapEditUpdate:(ProfileUpdateCell *)updateCell;
 - (void)updateCell:(ProfileUpdateCell *)updateCell likedUpdate:(Update *)update;
+- (void)pressedComments:(ProfileUpdateCell *)updateCell;
 
 @end
 
