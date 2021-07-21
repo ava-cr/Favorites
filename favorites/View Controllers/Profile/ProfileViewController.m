@@ -13,6 +13,7 @@
 #import "ProfileUpdateCell.h"
 #import <Parse/Parse.h>
 #import <DateTools/DateTools.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "Update.h"
 #import "Friend.h"
 #import "Like.h"
@@ -50,6 +51,7 @@
 
 - (void) getUpdates {
     // construct query
+    [SVProgressHUD show];
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
     NSArray *keys = @[@"update", @"author", @"objectId"];
     [query includeKeys:keys];
@@ -112,6 +114,7 @@
                 [self.isLikedByUser setValue:@"1" forKey:like.update.objectId];
             }
             [self.tableView reloadData];
+            [SVProgressHUD dismiss];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
