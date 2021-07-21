@@ -57,7 +57,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    MyPinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyPinCell"];
+    MyPinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyPinCell" forIndexPath:indexPath];
     Pin *pin = self.pins[indexPath.row];
     
     if (self.pins) {

@@ -57,7 +57,7 @@ static NSString *segueToPinDetails = @"pinDetails";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ListPinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPinCell"];
+    ListPinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPinCell" forIndexPath:indexPath];
     Pin *pin = self.pins[indexPath.row];
     if (self.pins) {
         cell.pinTitleLabel.text = pin.title;

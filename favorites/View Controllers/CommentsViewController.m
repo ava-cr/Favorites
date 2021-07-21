@@ -68,7 +68,7 @@ static NSString *commentCellID = @"CommentCell";
     else return 0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:commentCellID];
+    CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:commentCellID forIndexPath:indexPath];
     if (self.comments) {
         Comment *comment = self.comments[indexPath.row];
         cell.commentLabel.text = comment.text;

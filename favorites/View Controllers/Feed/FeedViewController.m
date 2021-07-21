@@ -131,7 +131,7 @@ static NSString *segueToComments = @"showComments";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UpdateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UpdateCell"];
+    UpdateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UpdateCell" forIndexPath:indexPath];
     Update *update = self.updates[indexPath.row];
     
     if (self.updates) {

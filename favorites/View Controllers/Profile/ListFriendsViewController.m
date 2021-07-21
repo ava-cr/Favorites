@@ -31,7 +31,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ListFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListFriendCell"];
+    ListFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListFriendCell" forIndexPath:indexPath];
     PFUser *friend = self.filteredFriends[indexPath.row];
     cell.usernameLabel.text = friend.username;
     return cell;
