@@ -116,6 +116,10 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     NSLog(@"reloading pins");
     [self.mapView removeAnnotations:self.annotations];
     [self getPins];
+    if ([self.friendsButton isSelected]) {
+        [self.mapView removeAnnotations:self.updateAnnotations];
+        [self getFriends];
+    }
 }
 
 - (IBAction) addPin:(UIStoryboardSegue*)unwindSegue {
