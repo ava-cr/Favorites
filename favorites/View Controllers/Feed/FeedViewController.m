@@ -278,10 +278,14 @@ static NSString *segueToComments = @"showComments";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqual:@"showLocationOnMap"]) {
-        ShowLocationOnMapViewController *vc = [segue destinationViewController];
+        ShowLocationOnMapViewController *showLocationVC = [segue destinationViewController];
         Update *update = sender;
-        vc.update = update;
-        vc.title = update.locationTitle;
+        showLocationVC.update = update;
+        showLocationVC.title = update.locationTitle;
+        if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:NSLocalizedString(@"'s location", nil)]]) {
+            showLocationVC.isPin = FALSE;
+        }
+        else showLocationVC.isPin = TRUE;
     }
     else if ([segue.identifier isEqual:@"showProfile"]) {
         ProfileViewController *vc = [segue destinationViewController];

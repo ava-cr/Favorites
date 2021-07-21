@@ -22,6 +22,7 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
 @property (weak, nonatomic) IBOutlet UIButton *deletePinButton;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UIButton *modalSaveButton;
 
 @end
 
@@ -39,12 +40,16 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
         self.headerImageView.image = [[UIImage alloc] initWithData:urlData];
     }
     if (self.pin.notes) self.notesTextView.text = self.pin.notes;
-    if (![self.user isEqual:[PFUser currentUser]]) {
+    if (![self.user.objectId isEqual:[PFUser currentUser].objectId]) {
         [self.notesTextView setEditable:FALSE];
         [self.deletePinButton setHidden:TRUE];
         [self.deletePinButton setEnabled:FALSE];
+        [self.modalSaveButton setHidden:TRUE];
+        [self.modalSaveButton setEnabled:FALSE];
     }
     else {
+        [self.modalSaveButton setTitle:NSLocalizedString(@"Save", @"save pin") forState:UIControlStateNormal];
+        self.modalSaveButton.layer.cornerRadius = 8;
         self.deletePinButton.layer.cornerRadius = 5;
         self.deletePinButton.layer.borderColor = [UIColor.systemRedColor CGColor];
         self.deletePinButton.layer.borderWidth = 0.5;
@@ -100,14 +105,14 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
                                                          handler:^(UIAlertAction * _Nonnull action) {
             [self performSegueWithIdentifier:unwindSegueToMapDeletePin sender:nil];
          }];
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"don't delete pin")
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"don't delete pin")
                                                            style:UIAlertActionStyleCancel
                                                          handler:^(UIAlertAction * _Nonnull action) {}];
         [deleteUpdate addAction:cancel];
         [deleteUpdate addAction:delete];
         [self presentViewController:deleteUpdate animated:YES completion:nil];
                                                      }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"don't delete pin")
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"don't delete pin")
                                                        style:UIAlertActionStyleCancel
                                                      handler:^(UIAlertAction * _Nonnull action) {}];
     [editUpdate addAction:delete];

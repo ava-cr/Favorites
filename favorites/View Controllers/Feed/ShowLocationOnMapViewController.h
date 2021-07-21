@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ShowLocationOnMapViewController : UIViewController
 
 @property (strong, nonatomic) Update *update;
+@property (nonatomic, assign) BOOL isPin;
 
 @end
 

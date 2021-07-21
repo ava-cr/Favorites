@@ -97,9 +97,9 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
 - (IBAction) updatedPinUnwind:(UIStoryboardSegue*)unwindSegue {
     
     PinDetailsViewController *pdVC = [unwindSegue sourceViewController];
-    NSLog(@"new notes = %@", pdVC.annotation.pin.notes);
+    NSLog(@"new notes = %@", pdVC.pin.notes);
     
-    Pin *pin = pdVC.annotation.pin;
+    Pin *pin = pdVC.pin;
     pin[@"notes"] = pin.notes;
     
     [pin saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -165,9 +165,9 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
         }
     }];
     PinDetailsViewController *sourceVC = [unwindSegue sourceViewController];
-    [sourceVC.annotation.pin deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+    [sourceVC.pin deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
-            NSLog(@"deleted pin %@", sourceVC.annotation.pin.title);
+            NSLog(@"deleted pin %@", sourceVC.pin.title);
             [self reloadMapView];
         }
         else {
@@ -248,7 +248,8 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     if ([control isKindOfClass:[UIButton class]]) {
         if ([view isKindOfClass:[MKMarkerAnnotationView class]]) {
             NSLog(@"do pin details segue");
-            [self performSegueWithIdentifier:@"pinDetails" sender:view.annotation];
+            PinAnnotation *pinAnnotation = view.annotation;
+            [self performSegueWithIdentifier:@"pinDetails" sender:pinAnnotation.pin];
         }
         else {
             UpdateAnnotation *updateAnnotation = view.annotation;
@@ -366,10 +367,10 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqual:@"pinDetails"]) {
         PinDetailsViewController *pdVC = [segue destinationViewController];
-        PinAnnotation *annotation = sender;
-        pdVC.title = annotation.titleString;
+        Pin *pin = sender;
+        pdVC.title = pin.title;
         pdVC.user = self.user;
-        pdVC.annotation = annotation;
+        pdVC.pin = pin;
     }
     else if ([segue.identifier isEqual:segueToPinsList]) {
         ListPinsViewController *listVC = [segue destinationViewController];

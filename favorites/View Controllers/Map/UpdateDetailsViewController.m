@@ -6,9 +6,12 @@
 //
 
 #import "UpdateDetailsViewController.h"
+#import "CommentsViewController.h"
 #import <Parse/Parse.h>
 #import <DateTools/DateTools.h>
 #import "Like.h"
+
+static NSString *segueToComments = @"showComments";
 
 @interface UpdateDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *picImageView;
@@ -86,6 +89,14 @@
     }
     else {
         self.likedLabel.text = @"";
+    }
+}
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqual:segueToComments]) {
+        CommentsViewController *commentsVC = [segue destinationViewController];
+        commentsVC.update = self.update;
     }
 }
 

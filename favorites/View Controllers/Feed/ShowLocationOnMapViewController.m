@@ -8,11 +8,15 @@
 #import "ShowLocationOnMapViewController.h"
 #import "PinDetailsViewController.h"
 #import <MapKit/MapKit.h>
+#import <Parse/Parse.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "PinAnnotation.h"
+#import "Pin.h"
 
 @interface ShowLocationOnMapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) PinAnnotation *annotation;
+@property (strong, nonatomic) Pin *pin;
 
 @end
 
@@ -23,12 +27,42 @@
     self.mapView.delegate = self;
     CLLocationCoordinate2D center =  CLLocationCoordinate2DMake([self.update.latitude doubleValue], [self.update.longitude doubleValue]);
     MKCoordinateRegion region = MKCoordinateRegionMake(center, MKCoordinateSpanMake(0.01, 0.01));
-    
     [self.mapView setRegion:region animated:TRUE];
-    [self placePin];
+    if (!self.isPin) [self placeUserLocation];
+    else [self getPin];
 }
 
--(void) placePin {
+- (void)getPin {
+    [SVProgressHUD show];
+    PFQuery *query = [PFQuery queryWithClassName:@"Pin"];
+    NSArray *keys = @[@"author", @"title", @"notes", @"url", @"latitude", @"longitude"];
+    [query includeKeys:keys];
+    [query whereKey:@"author" equalTo:self.update.author];
+    [query whereKey:@"latitude" equalTo:self.update.latitude];
+    [query whereKey:@"longitude" equalTo:self.update.longitude];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *pins, NSError *error) {
+        if (pins != nil) {
+            self.pin = pins[0];
+            NSLog(@"got pin");
+            [SVProgressHUD dismiss];
+            [self placePin];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+- (void)placePin {
+    PinAnnotation *annotation = [[PinAnnotation alloc] init];
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([self.pin.latitude doubleValue] , [self.pin.longitude doubleValue]);
+    annotation.coordinate = coordinate;
+    annotation.titleString = self.pin.title;
+    annotation.notes = self.pin.notes;
+    annotation.pin = self.pin;
+    [self.mapView addAnnotation:annotation];
+}
+
+- (void)placeUserLocation {
     self.annotation = [[PinAnnotation alloc] init];
     CLLocationCoordinate2D coordinate =  CLLocationCoordinate2DMake([self.update.latitude doubleValue], [self.update.longitude doubleValue]);
     self.annotation.coordinate = coordinate;
@@ -38,30 +72,30 @@
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    MKPinAnnotationView *annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
+    MKMarkerAnnotationView *annotationView = (MKMarkerAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Mark"];
     if (annotationView == nil) {
-        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+        annotationView = [[MKMarkerAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Mark"];
         annotationView.canShowCallout = true;
         annotationView.largeContentTitle = annotation.title;
-        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        if (self.isPin) {
+            annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        }
     }
     return annotationView;
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     if ([control isKindOfClass:[UIButton class]]) {
-        [self performSegueWithIdentifier:@"pinDetails" sender:self.annotation];
+        [self performSegueWithIdentifier:@"pinDetails" sender:nil];
     }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     if([segue.identifier isEqual:@"pinDetails"]) {
         PinDetailsViewController *pdVC = [segue destinationViewController];
-        PinAnnotation *annotation = sender;
-        pdVC.title = annotation.titleString;
+        pdVC.title = self.pin.title;
         pdVC.user = self.update.author;
-        pdVC.annotation = self.annotation;
+        pdVC.pin = self.pin;
     }
 }
 
