@@ -220,22 +220,19 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
         if (annotationView == nil) {
             annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
             annotationView.canShowCallout = true;
-            annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 50.0, 50.0)];
             annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         }
-        UIImageView *imageView = (UIImageView*)annotationView.leftCalloutAccessoryView;
         UpdateAnnotation *updateAnnotation = annotation;
         NSURL *url = [NSURL URLWithString:updateAnnotation.update.image.url];
         NSData *urlData = [NSData dataWithContentsOfURL:url];
         UIImage *picImage = [self resizeImage:[[UIImage alloc] initWithData:urlData] withSize:CGSizeMake(50.0, 50.0)];
-        imageView.image = picImage;
         annotationView.image = picImage;
         return annotationView;
     }
     else {
-        MKPinAnnotationView *annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
+        MKMarkerAnnotationView *annotationView = (MKMarkerAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Mark"];
         if (annotationView == nil) {
-            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+            annotationView = [[MKMarkerAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Mark"];
             annotationView.canShowCallout = true;
             annotationView.largeContentTitle = annotation.title;
             annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
@@ -245,7 +242,7 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
 }
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     if ([control isKindOfClass:[UIButton class]]) {
-        if ([view isKindOfClass:[MKPinAnnotationView class]]) {
+        if ([view isKindOfClass:[MKMarkerAnnotationView class]]) {
             NSLog(@"do pin details segue");
             [self performSegueWithIdentifier:@"pinDetails" sender:view.annotation];
         }
