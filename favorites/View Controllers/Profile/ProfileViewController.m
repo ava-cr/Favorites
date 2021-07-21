@@ -18,6 +18,7 @@
 #import "Update.h"
 #import "Friend.h"
 #import "Like.h"
+#import "Comment.h"
 
 static NSString *segueToComments = @"showComments";
 
@@ -158,15 +159,7 @@ static NSString *segueToComments = @"showComments";
                     NSLog(@"%@", error.localizedDescription);
                 }
             }];
-            [updateCell.update deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if (succeeded) {
-                    NSLog(@"deleted post %@", updateCell.update.caption);
-                    [self getUpdates];
-                }
-                else {
-                    NSLog(@"problem deleting post: %@", error.localizedDescription);
-                }
-            }];
+            [self deleteUpdate:updateCell.update];
          }];
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"don't delete post")
                                                            style:UIAlertActionStyleCancel
@@ -182,7 +175,54 @@ static NSString *segueToComments = @"showComments";
     [editUpdate addAction:cancel];
     [self presentViewController:editUpdate animated:YES completion:nil];
 }
-
+- (void) deleteUpdate:(Update *)update {
+    [update deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"deleted post %@", update.caption);
+            // delete all likes and comments
+            [self deleteLikes:update];
+        }
+        else {
+            NSLog(@"problem deleting post: %@", error.localizedDescription);
+        }
+    }];
+}
+-(void) deleteLikes:(Update *)update {
+    PFQuery *query = [PFQuery queryWithClassName:@"Like"];
+    [query whereKey:@"update" equalTo:update];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *likes, NSError *error) {
+        if (likes != nil) {
+            [Like deleteAllInBackground:likes block:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    NSLog(@"deleted likes");
+                    [self deleteComments:update];
+                } else {
+                    NSLog(@"%@", error.localizedDescription);
+                }
+            }];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+-(void) deleteComments:(Update *)update {
+    PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
+    [query whereKey:@"update" equalTo:update];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
+        if (comments != nil) {
+            [Comment deleteAllInBackground:comments block:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    NSLog(@"deleted comments");
+                    [self getUpdates];
+                } else {
+                    NSLog(@"%@", error.localizedDescription);
+                }
+            }];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
 - (void)updateCell:(ProfileUpdateCell *)updateCell likedUpdate:(Update *)update {
     NSLog(@"%@", self.isLikedByUser[update.objectId]);
     if ([self.isLikedByUser[update.objectId] isEqual:@"0"]) {
@@ -216,10 +256,10 @@ static NSString *segueToComments = @"showComments";
                 NSLog(@"%@", error.localizedDescription);
             }
         }];
-        [self deleteLike:update];
+        [self deleteUserLike:update];
     }
 }
--(void) deleteLike:(Update *)update {
+-(void) deleteUserLike:(Update *)update {
     PFQuery *query = [PFQuery queryWithClassName:@"Like"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query whereKey:@"update" equalTo:update];
@@ -251,7 +291,8 @@ static NSString *segueToComments = @"showComments";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!self.user) self.user = [PFUser currentUser];
     if (indexPath.row == 0) {
-        ProfileHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
+        ProfileHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell" forIndexPath:indexPath];
+        // ProfileHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
         cell.delegate = self;
         // number of posts/pins/friends labels
         if ([[self.user objectForKey:@"numPosts"] isEqual:[NSNumber numberWithInt:1]]) {
@@ -281,7 +322,7 @@ static NSString *segueToComments = @"showComments";
         return cell;
     }
     else {
-        ProfileUpdateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileUpdateCell"];
+        ProfileUpdateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileUpdateCell" forIndexPath:indexPath];
         Update *update = self.updates[indexPath.row - 1];
         if([self.user isEqual:[PFUser currentUser]]) {
             [cell.editUpdateLabel setEnabled:TRUE];
