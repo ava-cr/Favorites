@@ -8,12 +8,14 @@
 #import "UpdateDetailsViewController.h"
 #import "CommentsViewController.h"
 #import "LikesViewController.h"
+#import "ProfileViewController.h"
 #import <Parse/Parse.h>
 #import <DateTools/DateTools.h>
 #import "Like.h"
 
 static NSString *segueToComments = @"showComments";
 static NSString *segueToLikes = @"showLikes";
+static NSString *segueToProfile = @"showProfile";
 
 @interface UpdateDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *picImageView;
@@ -62,12 +64,16 @@ static NSString *segueToLikes = @"showLikes";
     UITapGestureRecognizer *tapLikeLabel = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapLikeLabel:)];
     [self.likedLabel addGestureRecognizer:tapLikeLabel];
     [self.likedLabel setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profilePicImageView addGestureRecognizer:profileTapGestureRecognizer];
+    [self.profilePicImageView setUserInteractionEnabled:YES];
 }
-
+- (void)didTapUserProfile:(UITapGestureRecognizer *)sender {
+    [self performSegueWithIdentifier:segueToProfile sender:self.update.author];
+}
 - (void)didTapLikeLabel:(UITapGestureRecognizer *)sender {
     [self performSegueWithIdentifier:segueToLikes sender:nil];
 }
-
 - (void)didLikeUpdate:(UITapGestureRecognizer *)sender {
     if (!self.isLikedByUser) {
         // create a like object, increment like count
@@ -198,6 +204,11 @@ static NSString *segueToLikes = @"showLikes";
     else if ([segue.identifier isEqual:segueToLikes]) {
         LikesViewController *likesVC = [segue destinationViewController];
         likesVC.update = self.update;
+    }
+    else if ([segue.identifier isEqual:segueToProfile]) {
+        ProfileViewController *profVC = [segue destinationViewController];
+        PFUser *user = sender;
+        profVC.user = user;
     }
 }
 
