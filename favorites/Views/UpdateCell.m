@@ -19,6 +19,9 @@
     [self.picImageView addGestureRecognizer:doubleTapToLike];
     [doubleTapToLike setNumberOfTapsRequired:2];
     [self.picImageView setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tapLikeLabel = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapLikeLabel:)];
+    [self.likedLabel addGestureRecognizer:tapLikeLabel];
+    [self.likedLabel setUserInteractionEnabled:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -36,6 +39,9 @@
 }
 - (IBAction)didTapComments:(id)sender {
     [self.delegate pressedComments:self];
+}
+- (void)didTapLikeLabel:(UITapGestureRecognizer *)sender {
+    [self.delegate pressedLikeLabel:self];
 }
 
 @end

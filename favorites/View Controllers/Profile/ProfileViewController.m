@@ -10,6 +10,7 @@
 #import "ListFriendsViewController.h"
 #import "MapViewController.h"
 #import "CommentsViewController.h"
+#import "LikesViewController.h"
 #import "ProfileHeaderCell.h"
 #import "ProfileUpdateCell.h"
 #import <Parse/Parse.h>
@@ -21,6 +22,7 @@
 #import "Comment.h"
 
 static NSString *segueToComments = @"showComments";
+static NSString *segueToLikes = @"showLikes";
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, ProfileHeaderCellDelegate, ProfileUpdateCellDelegate>
 
@@ -283,6 +285,9 @@ static NSString *segueToComments = @"showComments";
 - (void)pressedComments:(ProfileUpdateCell *)updateCell {
     [self performSegueWithIdentifier:segueToComments sender:updateCell.update];
 }
+- (void)pressedLikeLabel:(ProfileUpdateCell *)updateCell {
+    [self performSegueWithIdentifier:segueToLikes sender:updateCell.update];
+}
 - (void)sendLikePush:(Update *)update {
     NSString *message = [[PFUser currentUser].username stringByAppendingString:@" liked your post"];
     [PFCloud callFunctionInBackground:@"sendPushToUser"
@@ -439,6 +444,11 @@ static NSString *segueToComments = @"showComments";
         Update *update = sender;
         CommentsViewController *commentsVC = [segue destinationViewController];
         commentsVC.update = update;
+    }
+    else if ([segue.identifier isEqual:segueToLikes]) {
+        Update *update = sender;
+        LikesViewController *likesVC = [segue destinationViewController];
+        likesVC.update = update;
     }
 }
 

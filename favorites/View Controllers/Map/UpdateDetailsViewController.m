@@ -7,11 +7,13 @@
 
 #import "UpdateDetailsViewController.h"
 #import "CommentsViewController.h"
+#import "LikesViewController.h"
 #import <Parse/Parse.h>
 #import <DateTools/DateTools.h>
 #import "Like.h"
 
 static NSString *segueToComments = @"showComments";
+static NSString *segueToLikes = @"showLikes";
 
 @interface UpdateDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *picImageView;
@@ -57,6 +59,13 @@ static NSString *segueToComments = @"showComments";
     [self.picImageView addGestureRecognizer:doubleTapToLike];
     [doubleTapToLike setNumberOfTapsRequired:2];
     [self.picImageView setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tapLikeLabel = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapLikeLabel:)];
+    [self.likedLabel addGestureRecognizer:tapLikeLabel];
+    [self.likedLabel setUserInteractionEnabled:YES];
+}
+
+- (void)didTapLikeLabel:(UITapGestureRecognizer *)sender {
+    [self performSegueWithIdentifier:segueToLikes sender:nil];
 }
 
 - (void)didLikeUpdate:(UITapGestureRecognizer *)sender {
@@ -185,6 +194,10 @@ static NSString *segueToComments = @"showComments";
     if ([segue.identifier isEqual:segueToComments]) {
         CommentsViewController *commentsVC = [segue destinationViewController];
         commentsVC.update = self.update;
+    }
+    else if ([segue.identifier isEqual:segueToLikes]) {
+        LikesViewController *likesVC = [segue destinationViewController];
+        likesVC.update = self.update;
     }
 }
 

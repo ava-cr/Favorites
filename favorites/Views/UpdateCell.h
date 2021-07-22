@@ -34,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateCell:(UpdateCell *)updateCell didTapUser:(PFUser *)user;
 - (void)updateCell:(UpdateCell *)updateCell likedUpdate:(Update *)update;
 - (void)pressedComments:(UpdateCell *)updateCell;
+- (void)pressedLikeLabel:(UpdateCell *)updateCell;
 
 @end
 

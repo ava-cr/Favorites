@@ -20,6 +20,8 @@
 		4648296E26A7458900482CB1 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648296D26A7458900482CB1 /* Comment.m */; };
 		4648297526A8566A00482CB1 /* UpdateAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648297426A8566A00482CB1 /* UpdateAnnotation.m */; };
 		4648297826A87A9700482CB1 /* UpdateDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648297726A87A9700482CB1 /* UpdateDetailsViewController.m */; };
+		4648297E26AA10DE00482CB1 /* LikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648297D26AA10DE00482CB1 /* LikesViewController.m */; };
+		4648298126AA117500482CB1 /* LikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648298026AA117500482CB1 /* LikeCell.m */; };
 		464D1D92269C7EB500C32AE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D91269C7EB500C32AE2 /* AppDelegate.m */; };
 		464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D94269C7EB500C32AE2 /* SceneDelegate.m */; };
 		464D1D9B269C7EB500C32AE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D1D99269C7EB500C32AE2 /* Main.storyboard */; };
@@ -102,6 +104,10 @@
 		4648297426A8566A00482CB1 /* UpdateAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateAnnotation.m; sourceTree = "<group>"; };
 		4648297626A87A9700482CB1 /* UpdateDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateDetailsViewController.h; sourceTree = "<group>"; };
 		4648297726A87A9700482CB1 /* UpdateDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateDetailsViewController.m; sourceTree = "<group>"; };
+		4648297C26AA10DE00482CB1 /* LikesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LikesViewController.h; sourceTree = "<group>"; };
+		4648297D26AA10DE00482CB1 /* LikesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LikesViewController.m; sourceTree = "<group>"; };
+		4648297F26AA117500482CB1 /* LikeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LikeCell.h; sourceTree = "<group>"; };
+		4648298026AA117500482CB1 /* LikeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LikeCell.m; sourceTree = "<group>"; };
 		464D1D8D269C7EB500C32AE2 /* favorites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = favorites.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464D1D90269C7EB500C32AE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		464D1D91269C7EB500C32AE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -234,6 +240,8 @@
 				46A36B3A269F9A85003C3429 /* AddFriendsViewController.m */,
 				46A36B4226A0839E003C3429 /* NotificationsViewController.h */,
 				46A36B4326A0839E003C3429 /* NotificationsViewController.m */,
+				4648297C26AA10DE00482CB1 /* LikesViewController.h */,
+				4648297D26AA10DE00482CB1 /* LikesViewController.m */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -355,6 +363,8 @@
 				46B59A3A26A66D1800D384D4 /* ListPinCell.m */,
 				4648296926A743D200482CB1 /* CommentCell.h */,
 				4648296A26A743D200482CB1 /* CommentCell.m */,
+				4648297F26AA117500482CB1 /* LikeCell.h */,
+				4648298026AA117500482CB1 /* LikeCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -670,6 +680,7 @@
 				46A36B35269F7568003C3429 /* MyPinCell.m in Sources */,
 				464D1E25269E511C00C32AE2 /* Pin.m in Sources */,
 				46A36B3B269F9A85003C3429 /* AddFriendsViewController.m in Sources */,
+				4648298126AA117500482CB1 /* LikeCell.m in Sources */,
 				464D1DA3269C7EC000C32AE2 /* main.m in Sources */,
 				4648296226A706C400482CB1 /* Like.m in Sources */,
 				463278AC26A1C33E007BCA59 /* ListFriendsViewController.m in Sources */,
@@ -681,6 +692,7 @@
 				464D1E17269D323300C32AE2 /* SearchLocationsViewController.m in Sources */,
 				46A36B4426A0839E003C3429 /* NotificationsViewController.m in Sources */,
 				4648297826A87A9700482CB1 /* UpdateDetailsViewController.m in Sources */,
+				4648297E26AA10DE00482CB1 /* LikesViewController.m in Sources */,
 				46B59A3226A5E4C000D384D4 /* APIManager.m in Sources */,
 				464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */,
 				464D1DD1269C8FDF00C32AE2 /* LoginViewController.m in Sources */,
