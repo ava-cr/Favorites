@@ -38,12 +38,26 @@ static NSString *commentCellID = @"CommentCell";
         if (succeeded) {
             NSLog(@"the comment was posted!");
             [self getComments];
+            [self sendPush:self.commentTextView.text];
             self.commentTextView.text = @"";
             [self.view endEditing:YES];
         } else {
             NSLog(@"problem saving comment: %@", error.localizedDescription);
         }
     }];
+}
+- (void)sendPush:(NSString *)comment {
+    NSString *message = [[PFUser currentUser].username stringByAppendingString:@" commented '"];
+    message = [[message stringByAppendingString:comment] stringByAppendingString:@"'on your post."];
+    [PFCloud callFunctionInBackground:@"sendPushToUser"
+                       withParameters:@{@"message": message, @"userid": self.update.author.objectId}
+                                block:^(id object, NSError *error) {
+                                    if (!error) {
+                                        NSLog(@"PUSH SENT");
+                                    }else{
+                                        //[self displayMessageToUser:error.debugDescription];
+                                    }
+                                }];
 }
 - (void) getComments {
     PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
