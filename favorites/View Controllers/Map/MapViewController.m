@@ -11,6 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "SceneDelegate.h"
+#import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "AddPinViewController.h"
 #import "PinDetailsViewController.h"
@@ -74,6 +75,48 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     if ([self.locationManager authorizationStatus ] == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestWhenInUseAuthorization];
     }
+}
+- (void)viewDidAppear:(BOOL)animated {
+     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+     [delegate registerForRemoteNotifications];
+//    SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+//    myDelegate.window.rootViewController = loginViewController;
+}
+- (IBAction)sendPushToYourself:(id)sender {
+    [PFCloud callFunctionInBackground:@"sendPushToYourself"
+                       withParameters:@{@"message": @"hello"}
+                                block:^(id object, NSError *error) {
+                                    if (!error) {
+                                        NSLog(@"PUSH SENT");
+                                    }else{
+                                        [self displayMessageToUser:error.debugDescription];
+                                    }
+                                }];
+}
+- (IBAction)sendPushToGroup:(id)sender {
+    [PFCloud callFunctionInBackground:@"sendPushToAllUsers"
+                       withParameters:@{}
+                                block:^(id object, NSError *error) {
+                                    if (!error) {
+                                        NSLog(@"PUSH SENT");
+                                    }else{
+                                        [self displayMessageToUser:error.debugDescription];
+                                    }
+                                }];
+}
+- (void)displayMessageToUser:(NSString*)message {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Message"
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIPopoverPresentationController *popPresenter = [alert popoverPresentationController];
+    popPresenter.sourceView = self.view;
+    UIAlertAction *Okbutton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+
+    }];
+    [alert addAction:Okbutton];
+    popPresenter.sourceRect = self.view.frame;
+    alert.modalPresentationStyle = UIModalPresentationPopover;
+    [self presentViewController:alert animated:YES completion:nil];
 }
 - (IBAction)cancelButtonTapped:(id)sender {
 [self dismissViewControllerAnimated:TRUE completion:nil];

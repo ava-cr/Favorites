@@ -11,6 +11,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+- (void)registerForRemoteNotifications;
 
 @end
 
