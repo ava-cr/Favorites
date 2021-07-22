@@ -204,6 +204,7 @@ static NSString *segueToComments = @"showComments";
         [Like createLike:[PFUser currentUser] onUpdate:update withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
                 NSLog(@"created new like!");
+                [self sendLikePush:update];
                 [self getUpdates];
             } else {
                 NSLog(@"%@", error.localizedDescription);
@@ -247,6 +248,33 @@ static NSString *segueToComments = @"showComments";
 }
 - (void)pressedComments:(UpdateCell *)updateCell {
     [self performSegueWithIdentifier:segueToComments sender:updateCell.update];
+}
+- (void)sendLikePush:(Update *)update {
+    NSString *message = [[PFUser currentUser].username stringByAppendingString:@" liked your post"];
+    [PFCloud callFunctionInBackground:@"sendPushToUser"
+                       withParameters:@{@"message": message, @"userid": update.author.objectId}
+                                block:^(id object, NSError *error) {
+                                    if (!error) {
+                                        NSLog(@"PUSH SENT");
+                                    } else {
+                                        [self displayMessageToUser:error.debugDescription];
+                                    }
+    }];
+}
+// push notification error message display function
+- (void)displayMessageToUser:(NSString*)message {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Message"
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIPopoverPresentationController *popPresenter = [alert popoverPresentationController];
+    popPresenter.sourceView = self.view;
+    UIAlertAction *Okbutton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+
+    }];
+    [alert addAction:Okbutton];
+    popPresenter.sourceRect = self.view.frame;
+    alert.modalPresentationStyle = UIModalPresentationPopover;
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - Navigation

@@ -47,17 +47,17 @@ static NSString *commentCellID = @"CommentCell";
     }];
 }
 - (void)sendPush:(NSString *)comment {
-    NSString *message = [[PFUser currentUser].username stringByAppendingString:@" commented '"];
-    message = [[message stringByAppendingString:comment] stringByAppendingString:@"'on your post."];
+    NSString *message = [[PFUser currentUser].username stringByAppendingString:@" commented:"];
+    message = [message stringByAppendingString:comment];
     [PFCloud callFunctionInBackground:@"sendPushToUser"
                        withParameters:@{@"message": message, @"userid": self.update.author.objectId}
                                 block:^(id object, NSError *error) {
                                     if (!error) {
                                         NSLog(@"PUSH SENT");
-                                    }else{
-                                        //[self displayMessageToUser:error.debugDescription];
+                                    } else {
+                                        [self displayMessageToUser:error.debugDescription];
                                     }
-                                }];
+    }];
 }
 - (void) getComments {
     PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
@@ -150,6 +150,21 @@ static NSString *commentCellID = @"CommentCell";
         f.origin.y = 0.0f;
         self.view.frame = f;
     }];
+}
+// push notification error message display function
+- (void)displayMessageToUser:(NSString*)message {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Message"
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIPopoverPresentationController *popPresenter = [alert popoverPresentationController];
+    popPresenter.sourceView = self.view;
+    UIAlertAction *Okbutton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+
+    }];
+    [alert addAction:Okbutton];
+    popPresenter.sourceRect = self.view.frame;
+    alert.modalPresentationStyle = UIModalPresentationPopover;
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end
