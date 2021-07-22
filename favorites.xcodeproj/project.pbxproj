@@ -22,6 +22,7 @@
 		4648297826A87A9700482CB1 /* UpdateDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648297726A87A9700482CB1 /* UpdateDetailsViewController.m */; };
 		4648297E26AA10DE00482CB1 /* LikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648297D26AA10DE00482CB1 /* LikesViewController.m */; };
 		4648298126AA117500482CB1 /* LikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648298026AA117500482CB1 /* LikeCell.m */; };
+		4648298426AA2AD600482CB1 /* CommentNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648298326AA2AD600482CB1 /* CommentNotificationCell.m */; };
 		464D1D92269C7EB500C32AE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D91269C7EB500C32AE2 /* AppDelegate.m */; };
 		464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D94269C7EB500C32AE2 /* SceneDelegate.m */; };
 		464D1D9B269C7EB500C32AE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D1D99269C7EB500C32AE2 /* Main.storyboard */; };
@@ -108,6 +109,8 @@
 		4648297D26AA10DE00482CB1 /* LikesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LikesViewController.m; sourceTree = "<group>"; };
 		4648297F26AA117500482CB1 /* LikeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LikeCell.h; sourceTree = "<group>"; };
 		4648298026AA117500482CB1 /* LikeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LikeCell.m; sourceTree = "<group>"; };
+		4648298226AA2AD600482CB1 /* CommentNotificationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentNotificationCell.h; sourceTree = "<group>"; };
+		4648298326AA2AD600482CB1 /* CommentNotificationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentNotificationCell.m; sourceTree = "<group>"; };
 		464D1D8D269C7EB500C32AE2 /* favorites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = favorites.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464D1D90269C7EB500C32AE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		464D1D91269C7EB500C32AE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -365,6 +368,8 @@
 				4648296A26A743D200482CB1 /* CommentCell.m */,
 				4648297F26AA117500482CB1 /* LikeCell.h */,
 				4648298026AA117500482CB1 /* LikeCell.m */,
+				4648298226AA2AD600482CB1 /* CommentNotificationCell.h */,
+				4648298326AA2AD600482CB1 /* CommentNotificationCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -686,6 +691,7 @@
 				463278AC26A1C33E007BCA59 /* ListFriendsViewController.m in Sources */,
 				460DABF6269F3AEA000220D0 /* Update.m in Sources */,
 				460DABF0269F30E7000220D0 /* UpdateCell.m in Sources */,
+				4648298426AA2AD600482CB1 /* CommentNotificationCell.m in Sources */,
 				46A36B3E269F9AE4003C3429 /* AddFriendCell.m in Sources */,
 				463278AF26A1C3BE007BCA59 /* ListFriendCell.m in Sources */,
 				46A36B5326A0ECE4003C3429 /* EditProfileViewController.m in Sources */,

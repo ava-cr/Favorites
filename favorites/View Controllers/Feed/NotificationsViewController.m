@@ -7,14 +7,20 @@
 
 #import "NotificationsViewController.h"
 #import "FriendRequestCell.h"
+#import "CommentNotificationCell.h"
 #import "FriendRequest.h"
 #import "Friend.h"
+#import "Comment.h"
 #import <Parse/Parse.h>
+
+static NSString *commentCellID = @"CommentNotificationCell";
 
 @interface NotificationsViewController () <UITableViewDelegate, UITableViewDataSource, FriendRequestCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *friendRequests;
+@property (strong, nonatomic) NSArray *comments;
+@property (strong, nonatomic) NSArray *updates;
 
 @end
 
@@ -25,6 +31,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self getFriendRequests];
+    [self getUpdates];
 }
 
 - (void) getFriendRequests {
@@ -37,7 +44,7 @@
         if (requests != nil) {
             NSLog(@"%lu", (unsigned long)[requests count]);
             self.friendRequests = requests;
-            [self.tableView reloadData];
+            //[self.tableView reloadData];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
@@ -57,31 +64,88 @@
         }
     }];
 }
+- (void) getUpdates {
+    PFQuery *query = [PFQuery queryWithClassName:@"Update"];
+    //NSArray *keys = @[@"author", @"image"];
+    [query includeKey:@"author"];
+    [query whereKey:@"author" equalTo:[PFUser currentUser]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *updates, NSError *error) {
+        if (updates != nil) {
+            self.updates = updates;
+            [self getComments];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+- (void) getComments {
+    PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
+    [query whereKey:@"update" containedIn:self.updates];
+    NSArray *keys = @[@"author", @"text", @"update", @"image"];
+    [query includeKeys:keys];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
+        if (comments != nil) {
+            self.comments = comments;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.friendRequests) {
-        return [self.friendRequests count];
+    if (section == 0) {
+        if (self.friendRequests) {
+            return [self.friendRequests count];
+        }
+        else return 0;
     }
-    else return 0;
+    else {
+        if (self.comments) {
+            return [self.comments count];
+        }
+        else return 0;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    FriendRequestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendRequestCell" forIndexPath:indexPath];
-    if (self.friendRequests) {
-        FriendRequest *request = self.friendRequests[indexPath.row];
-        cell.request = request;
-        cell.delegate = self;
-        cell.usernameLabel.text = request.requester.username;
-        cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
+    if (indexPath.section == 0) {
+        FriendRequestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendRequestCell" forIndexPath:indexPath];
+        if (self.friendRequests) {
+            FriendRequest *request = self.friendRequests[indexPath.row];
+            cell.request = request;
+            cell.delegate = self;
+            cell.usernameLabel.text = request.requester.username;
+            cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
+        }
+        return cell;
     }
-    return cell;
+    else {
+        CommentNotificationCell *cell = [tableView dequeueReusableCellWithIdentifier:commentCellID forIndexPath:indexPath];
+        Comment *comment = self.comments[indexPath.row - [self.friendRequests count]];
+        cell.usernameLabel.text = comment.author.username;
+        cell.commentLabel.text = comment.text;
+        PFFileObject *pfFile = [comment.author objectForKey:@"profilePic"];
+        NSURL *profURL = [NSURL URLWithString:pfFile.url];
+        NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
+        cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+        cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
+        NSURL *url = [NSURL URLWithString:comment.update.image.url];
+        NSData *urlData = [NSData dataWithContentsOfURL:url];
+        cell.picImageView.image = [[UIImage alloc] initWithData:urlData];
+        return cell;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return @"Friend Requests";
+        return @" Friend Requests";
     }
-    else return @"";
+    else return @" Comments";
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
 }
 - (void)sendFriendAcceptedPush:(PFUser *)user {
     NSString *message = [[PFUser currentUser].username stringByAppendingString:@" accepted your friend request!"];
