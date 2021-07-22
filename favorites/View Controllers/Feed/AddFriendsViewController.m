@@ -138,10 +138,38 @@
     [FriendRequest createFriendRequest:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"friend requested %@", user.username);
+            [self sendFriendRequestPush:user];
         } else {
             NSLog(@"problem saving friend request: %@", error.localizedDescription);
         }
     }];
+}
+- (void)sendFriendRequestPush:(PFUser *)user {
+    NSString *message = [[PFUser currentUser].username stringByAppendingString:@" wants to be friends!"];
+    [PFCloud callFunctionInBackground:@"sendPushToUser"
+                       withParameters:@{@"message": message, @"userid": user.objectId}
+                                block:^(id object, NSError *error) {
+                                    if (!error) {
+                                        NSLog(@"PUSH SENT");
+                                    } else {
+                                        [self displayMessageToUser:error.debugDescription];
+                                    }
+    }];
+}
+// push notification error message display function
+- (void)displayMessageToUser:(NSString*)message {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Message"
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIPopoverPresentationController *popPresenter = [alert popoverPresentationController];
+    popPresenter.sourceView = self.view;
+    UIAlertAction *Okbutton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+
+    }];
+    [alert addAction:Okbutton];
+    popPresenter.sourceRect = self.view.frame;
+    alert.modalPresentationStyle = UIModalPresentationPopover;
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 # pragma mark - Search Bar Functions

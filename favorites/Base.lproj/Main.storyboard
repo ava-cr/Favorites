@@ -133,32 +133,11 @@
                                     <action selector="friendsButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zni-gH-0YN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crN-C0-V7D">
-                                <rect key="frame" x="131.5" y="250" width="151" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Send Push to Yourself">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendPushToYourself:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fDz-j3-zgV"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z0-Fs-XfB">
-                                <rect key="frame" x="138" y="300" width="138" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Send Push to Group">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendPushToGroup:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P9M-ck-DAj"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="61u-mG-5to" secondAttribute="trailing" constant="20" id="0MZ-0o-rsh"/>
-                            <constraint firstItem="3Z0-Fs-XfB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5XJ-B4-SdH"/>
                             <constraint firstItem="0N9-FX-0mC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5uy-7H-Hfy"/>
                             <constraint firstItem="0N9-FX-0mC" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="34" id="72W-Qw-eD2"/>
                             <constraint firstItem="0N9-FX-0mC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="BTh-lF-Ds5"/>
@@ -168,14 +147,11 @@
                             <constraint firstItem="61u-mG-5to" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="OP5-DL-vlr"/>
                             <constraint firstItem="f5U-qM-pKR" firstAttribute="centerX" secondItem="wIm-BP-7ha" secondAttribute="centerX" id="PVN-5S-FhR"/>
                             <constraint firstItem="wnQ-tU-LA9" firstAttribute="top" secondItem="f5U-qM-pKR" secondAttribute="bottom" constant="25" id="Sm0-ps-sZO"/>
-                            <constraint firstItem="crN-C0-V7D" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WqP-Md-UCt"/>
-                            <constraint firstItem="3Z0-Fs-XfB" firstAttribute="top" secondItem="crN-C0-V7D" secondAttribute="bottom" constant="20" id="d3g-df-wiB"/>
                             <constraint firstItem="f5U-qM-pKR" firstAttribute="top" secondItem="wIm-BP-7ha" secondAttribute="bottom" constant="25" id="hu4-BB-bpu"/>
                             <constraint firstItem="wnQ-tU-LA9" firstAttribute="centerY" secondItem="kN1-fq-UxC" secondAttribute="centerY" id="pQq-8Q-D8Z"/>
                             <constraint firstItem="kN1-fq-UxC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="q0O-yT-xI8"/>
                             <constraint firstItem="61u-mG-5to" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ufh-q4-xgk"/>
                             <constraint firstItem="wnQ-tU-LA9" firstAttribute="centerX" secondItem="f5U-qM-pKR" secondAttribute="centerX" id="yBJ-gt-qEi"/>
-                            <constraint firstItem="crN-C0-V7D" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="250" id="zr1-xV-U9N"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8gr-lI-Qpy">
