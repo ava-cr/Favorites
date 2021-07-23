@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchscreen-1" translatesAutoresizingMaskIntoConstraints="NO" id="Nq7-qz-kHQ">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchscreen" translatesAutoresizingMaskIntoConstraints="NO" id="MYj-tc-yHX">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
@@ -30,16 +29,15 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="MYj-tc-yHX" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6Ws-5V-DKf"/>
                             <constraint firstItem="03u-BT-R4g" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="8Xb-Zl-9oF"/>
-                            <constraint firstItem="Nq7-qz-kHQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="AYC-Qz-eSs"/>
+                            <constraint firstItem="MYj-tc-yHX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Au5-3N-X7o"/>
                             <constraint firstItem="03u-BT-R4g" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="CH5-Yr-d3i"/>
-                            <constraint firstAttribute="bottom" secondItem="Nq7-qz-kHQ" secondAttribute="bottom" id="GaC-lJ-mBp"/>
                             <constraint firstItem="03u-BT-R4g" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="J9Q-x4-gdf"/>
-                            <constraint firstItem="Nq7-qz-kHQ" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="hde-dg-j5f"/>
+                            <constraint firstAttribute="bottom" secondItem="MYj-tc-yHX" secondAttribute="bottom" id="V9C-bu-M9x"/>
+                            <constraint firstItem="MYj-tc-yHX" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="jVu-Hk-1XR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="03u-BT-R4g" secondAttribute="trailing" constant="5" id="oPW-zz-DwO"/>
-                            <constraint firstItem="Nq7-qz-kHQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pvg-co-3qT"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -49,9 +47,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launchscreen-1" width="1050" height="1050"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="launchscreen" width="1050" height="1050"/>
     </resources>
 </document>
