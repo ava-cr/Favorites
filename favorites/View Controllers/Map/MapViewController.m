@@ -65,7 +65,7 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
         [self.logoutButton setTitle:@""];
         self.title = [self.user.username stringByAppendingString:@"'s Pins"];
     }
-    [self getPins];
+    // [self getPins];
     if (self.locationManager == nil ) {
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
