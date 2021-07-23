@@ -20,6 +20,7 @@ static NSString *unwindSegueToMap = @"addPin";
 @property (weak, nonatomic) IBOutlet UITextView *notesTextView;
 @property (strong, nonatomic) APIManager *manager;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
 @end
 
@@ -40,6 +41,7 @@ static NSString *unwindSegueToMap = @"addPin";
     [self businessMatch];
     UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tapScreen];
+    
 }
 
 -(void)dismissKeyboard {
@@ -121,6 +123,7 @@ static NSString *unwindSegueToMap = @"addPin";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqual:unwindSegueToMap]) {
         self.notes = self.notesTextView.text;
+        self.category = [NSNumber numberWithInteger:self.segmentedControl.selectedSegmentIndex];
     }
     else if ([segue.identifier isEqual:segueIdToWebsite]) {
         WebsiteViewController *webVC = [segue destinationViewController];

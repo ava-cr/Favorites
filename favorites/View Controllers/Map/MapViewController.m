@@ -65,7 +65,7 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
         [self.logoutButton setTitle:@""];
         self.title = [self.user.username stringByAppendingString:@"'s Pins"];
     }
-    // [self getPins];
+    [self getPins];
     if (self.locationManager == nil ) {
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
@@ -149,7 +149,7 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     if (pin.url) urlString = pin.url.absoluteString;
     else urlString = @"";
     
-    [Pin postUserPin:pin.name withNotes:addPinVC.notes latitude:lat longitude:lng urlString:urlString phone:addPinVC.phone imageURL:addPinVC.imageURL yelpID:addPinVC.yelpID yelpURL:addPinVC.yelpURL address:addPinVC.address withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Pin postUserPin:pin.name withNotes:addPinVC.notes latitude:lat longitude:lng urlString:urlString phone:addPinVC.phone imageURL:addPinVC.imageURL yelpID:addPinVC.yelpID yelpURL:addPinVC.yelpURL address:addPinVC.address category:addPinVC.category withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"the pin was posted!");
             [self reloadMapView];
@@ -185,7 +185,7 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     // construct query
     [SVProgressHUD show];
     PFQuery *query = [PFQuery queryWithClassName:@"Pin"];
-    NSArray *keys = @[@"author", @"title", @"notes", @"url", @"latitude", @"longitude"];
+    NSArray *keys = @[@"author", @"title", @"notes", @"url", @"latitude", @"longitude", @"category"];
     [query includeKeys:keys];
     [query whereKey:@"author" equalTo:self.user];
     query.limit = 20;
@@ -240,12 +240,85 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     }
     else {
         MKMarkerAnnotationView *annotationView = (MKMarkerAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Mark"];
+        annotationView = [[MKMarkerAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Mark"];
         if (annotationView == nil) {
-            annotationView = [[MKMarkerAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Mark"];
+            
             annotationView.canShowCallout = true;
             annotationView.largeContentTitle = annotation.title;
             annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            
+//            if (category == 0) {
+//                annotationView.glyphImage = [UIImage imageNamed:@"eat"];
+//                annotationView.markerTintColor = UIColor.redColor;
+//                return annotationView;
+//            }
+//            else if (category == 1) {
+//                annotationView.glyphImage = [UIImage imageNamed:@"cup"];
+//                return annotationView;
+//            }
+//            else if (category == 2) {
+//                annotationView.glyphImage = [UIImage imageNamed:@"drink"];
+//                annotationView.markerTintColor = UIColor.blueColor;
+//                return annotationView;
+//            }
+//            else if (category == 3) {
+//                annotationView.glyphImage = [UIImage imageNamed:@"dessert"];
+//                return annotationView;
+//            }
+//            else if (category == 4) {
+//                annotationView.glyphImage = [UIImage imageNamed:@"shop"];
+//                return annotationView;
+//            }
+//            else if (category == 5) {
+//                annotationView.glyphImage = [UIImage imageNamed:@"heart"];
+//                return annotationView;
+//            }
+//            else annotationView.glyphImage = [UIImage imageNamed:@"star"];
+            
         }
+        PinAnnotation *annotation = annotationView.annotation;
+        int category = [annotation.pin.category intValue];
+        UIColor *color = [[UIColor alloc] init];
+        UIImage *image = [[UIImage alloc] init];
+        NSLog(@"%@", annotation.titleString);
+        switch (category) {
+            case 0:
+                color = UIColor.systemRedColor;
+                image = [UIImage imageNamed:@"eat"];
+                break;
+            case 1:
+                color = UIColor.systemOrangeColor;
+                image = [UIImage imageNamed:@"cup"];
+                break;
+            case 2:
+                color = UIColor.systemPurpleColor;
+                image = [UIImage imageNamed:@"drink"];
+                break;
+            case 3:
+                color = UIColor.systemBlueColor;
+                image = [UIImage imageNamed:@"dessert"];
+                break;
+            case 4:
+                color = UIColor.systemGreenColor;
+                image = [UIImage imageNamed:@"shop"];
+                break;
+            case 5:
+                color = UIColor.systemPinkColor;
+                image = [UIImage imageNamed:@"heart"];
+                break;
+            case 6:
+                color = UIColor.systemYellowColor;
+                image = [UIImage imageNamed:@"star"];
+                break;
+                
+            default:
+                color = UIColor.systemGrayColor;
+                image = [UIImage imageNamed:@"pin"];
+                break;
+        }
+        NSLog(@"%d", category);
+        annotationView.markerTintColor = color;
+        annotationView.glyphImage = image;
         return annotationView;
     }
 }

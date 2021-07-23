@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *yelpID;
 @property (strong, nonatomic) NSString *yelpURL;
 @property (strong, nonatomic) NSString *address;
+@property (strong, nonatomic) NSNumber *category;
 
 @end
 

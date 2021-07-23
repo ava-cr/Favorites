@@ -77,7 +77,7 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     }];
     NSNumber *lat = self.pin.latitude;;
     NSNumber *lng = self.pin.longitude;
-    [Pin postUserPin:self.pin.title withNotes:self.pin.notes latitude:lat longitude:lng urlString:self.pin.urlString phone:self.pin.phone imageURL:self.pin.imageURL yelpID:self.pin.yelpID yelpURL:self.pin.yelpURL address:self.pin.address withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Pin postUserPin:self.pin.title withNotes:self.pin.notes latitude:lat longitude:lng urlString:self.pin.urlString phone:self.pin.phone imageURL:self.pin.imageURL yelpID:self.pin.yelpID yelpURL:self.pin.yelpURL address:self.pin.address category:self.pin.category withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"the pin was added!");
             UIAlertController *pinAdded = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Pin added to your map!", @"message that pin was successfully added to user's map") message:@""preferredStyle:(UIAlertControllerStyleAlert)];
