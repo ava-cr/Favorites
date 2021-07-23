@@ -284,6 +284,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hD3-5E-hrg">
+                                <rect key="frame" x="359.5" y="258" width="34.5" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hD3-5E-hrg" secondAttribute="height" multiplier="24:25" id="vqm-ru-LIc"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KIs-C5-GCb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -292,6 +298,7 @@
                             <constraint firstItem="D8b-hX-SaR" firstAttribute="leading" secondItem="KIs-C5-GCb" secondAttribute="leading" id="5SW-zU-M1R"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="SjW-PS-twS" secondAttribute="trailing" constant="40" id="8gE-Dg-ahX"/>
                             <constraint firstItem="D8b-hX-SaR" firstAttribute="top" secondItem="KIs-C5-GCb" secondAttribute="top" id="9Mm-KZ-Q0g"/>
+                            <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="hD3-5E-hrg" secondAttribute="trailing" constant="20" id="CMI-hZ-Q90"/>
                             <constraint firstItem="VRD-TU-vMW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jiU-wg-4N3" secondAttribute="bottom" constant="10" id="DQA-Z7-Jae"/>
                             <constraint firstItem="ZB2-M0-p2z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="20" id="Dtc-k9-Xhj"/>
                             <constraint firstItem="h8J-61-UuR" firstAttribute="leading" secondItem="VRD-TU-vMW" secondAttribute="trailing" constant="50" id="E8R-ig-W5T"/>
@@ -303,6 +310,8 @@
                             <constraint firstItem="SjW-PS-twS" firstAttribute="top" secondItem="h8J-61-UuR" secondAttribute="bottom" constant="5" id="Sl3-oN-Jho"/>
                             <constraint firstItem="3od-Y8-ChN" firstAttribute="top" secondItem="SjW-PS-twS" secondAttribute="bottom" constant="15" id="SuF-PI-7Ko"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="jiU-wg-4N3" secondAttribute="trailing" constant="20" id="UCB-UZ-EyN"/>
+                            <constraint firstItem="hD3-5E-hrg" firstAttribute="top" secondItem="O8y-Bc-plI" secondAttribute="top" id="WaQ-OZ-Duz"/>
+                            <constraint firstItem="hD3-5E-hrg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O8y-Bc-plI" secondAttribute="trailing" constant="10" id="ZVg-rS-OJ8"/>
                             <constraint firstItem="O8y-Bc-plI" firstAttribute="leading" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="20" id="aeX-nz-qfF"/>
                             <constraint firstItem="ZB2-M0-p2z" firstAttribute="top" secondItem="KIs-C5-GCb" secondAttribute="top" constant="20" id="c1L-An-LxC"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="bottom" secondItem="3od-Y8-ChN" secondAttribute="bottom" constant="20" id="c8X-xA-1vl"/>
@@ -312,11 +321,11 @@
                             <constraint firstItem="D8b-hX-SaR" firstAttribute="trailing" secondItem="KIs-C5-GCb" secondAttribute="trailing" id="hJv-mN-tlS"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mSK-hP-WU6" secondAttribute="trailing" constant="20" id="jQJ-g1-EWd"/>
                             <constraint firstItem="jiU-wg-4N3" firstAttribute="leading" secondItem="O8y-Bc-plI" secondAttribute="leading" id="k33-km-mRe"/>
+                            <constraint firstItem="hD3-5E-hrg" firstAttribute="bottom" secondItem="O8y-Bc-plI" secondAttribute="bottom" id="nB9-5d-mXx"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="ZB2-M0-p2z" secondAttribute="trailing" constant="20" id="oSW-qB-amO"/>
                             <constraint firstItem="3od-Y8-ChN" firstAttribute="leading" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="10" id="uKb-lf-GP5"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="3od-Y8-ChN" secondAttribute="trailing" constant="10" id="x2j-Eu-lre"/>
                             <constraint firstItem="mSK-hP-WU6" firstAttribute="leading" secondItem="O8y-Bc-plI" secondAttribute="leading" id="xEe-tG-jz6"/>
-                            <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="O8y-Bc-plI" secondAttribute="trailing" constant="20" id="xyS-O7-Wgy"/>
                             <constraint firstItem="mSK-hP-WU6" firstAttribute="top" secondItem="O8y-Bc-plI" secondAttribute="bottom" constant="8" id="zmJ-6A-uYw"/>
                         </constraints>
                     </view>
@@ -326,6 +335,7 @@
                     <connections>
                         <outlet property="addPinButton" destination="ZB2-M0-p2z" id="WlW-Gs-ejD"/>
                         <outlet property="addressLabel" destination="mSK-hP-WU6" id="XKE-0s-QVF"/>
+                        <outlet property="categoryImageView" destination="hD3-5E-hrg" id="41N-4Y-GJR"/>
                         <outlet property="deletePinButton" destination="3od-Y8-ChN" id="6zr-KH-jcD"/>
                         <outlet property="headerImageView" destination="D8b-hX-SaR" id="5hI-b3-KjN"/>
                         <outlet property="modalSaveButton" destination="tyB-IT-IfF" id="FYz-sy-W4R"/>
@@ -338,7 +348,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K4N-Dw-c1Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="6cd-f5-Gi2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-2352" y="1748"/>
+            <point key="canvasLocation" x="-2352.1739130434785" y="1747.7678571428571"/>
         </scene>
         <!--Update Details View Controller-->
         <scene sceneID="qiR-hp-Git">
@@ -2021,7 +2031,7 @@
         <segue reference="UMX-5n-MsD"/>
         <segue reference="UQe-ax-ap8"/>
         <segue reference="HkM-xv-pqN"/>
-        <segue reference="KGr-TS-F6e"/>
+        <segue reference="0IP-IJ-Hde"/>
         <segue reference="hda-eY-N8b"/>
         <segue reference="Ldp-kw-Npj"/>
         <segue reference="9tI-lf-D44"/>
@@ -2034,8 +2044,8 @@
         <image name="dessert" width="48" height="48"/>
         <image name="drink" width="48" height="48"/>
         <image name="eat" width="48" height="48"/>
-        <image name="heart" width="48" height="48"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="heart" width="48" height="48"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <image name="network" catalog="system" width="128" height="121"/>

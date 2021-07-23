@@ -23,6 +23,7 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UIButton *modalSaveButton;
+@property (weak, nonatomic) IBOutlet UIImageView *categoryImageView;
 
 @end
 
@@ -58,10 +59,50 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     }
     UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tapScreen];
+    [self setCategoryImage];
 }
 
 -(void)dismissKeyboard {
     [self.notesTextView resignFirstResponder];
+}
+- (void)setCategoryImage {
+    int category = [self.pin.category intValue];
+    self.categoryImageView.tintColor = UIColor.whiteColor;
+    UIColor *color = [[UIColor alloc] init];
+    UIImage *image = [[UIImage alloc] init];
+    switch (category) {
+        case 0:
+            color = UIColor.systemRedColor;
+            image = [UIImage imageNamed:@"eat"];
+            break;
+        case 1:
+            color = UIColor.systemOrangeColor;
+            image = [UIImage imageNamed:@"cup"];
+            break;
+        case 2:
+            color = UIColor.systemPurpleColor;
+            image = [UIImage imageNamed:@"drink"];
+            break;
+        case 3:
+            color = UIColor.systemBlueColor;
+            image = [UIImage imageNamed:@"dessert"];
+            break;
+        case 4:
+            color = UIColor.systemGreenColor;
+            image = [UIImage imageNamed:@"shop"];
+            break;
+        case 5:
+            color = UIColor.systemPinkColor;
+            image = [UIImage imageNamed:@"heart"];
+            break;
+        case 6:
+            color = UIColor.systemYellowColor;
+            image = [UIImage imageNamed:@"star"];
+            break;
+    }
+    self.categoryImageView.image = image;
+    self.categoryImageView.backgroundColor = color;
+    self.categoryImageView.layer.cornerRadius = 8;
 }
 
 - (IBAction)addPinTapped:(id)sender {

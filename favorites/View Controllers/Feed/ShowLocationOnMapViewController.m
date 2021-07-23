@@ -35,7 +35,7 @@
 - (void)getPin {
     [SVProgressHUD show];
     PFQuery *query = [PFQuery queryWithClassName:@"Pin"];
-    NSArray *keys = @[@"author", @"title", @"notes", @"url", @"latitude", @"longitude"];
+    NSArray *keys = @[@"author", @"title", @"notes", @"url", @"latitude", @"longitude", @"category"];
     [query includeKeys:keys];
     [query whereKey:@"author" equalTo:self.update.author];
     [query whereKey:@"latitude" equalTo:self.update.latitude];
@@ -79,6 +79,47 @@
         annotationView.largeContentTitle = annotation.title;
         if (self.isPin) {
             annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            int category = [self.pin.category intValue];
+            UIColor *color = [[UIColor alloc] init];
+            UIImage *image = [[UIImage alloc] init];
+            switch (category) {
+                case 0:
+                    color = UIColor.systemRedColor;
+                    image = [UIImage imageNamed:@"eat"];
+                    break;
+                case 1:
+                    color = UIColor.systemOrangeColor;
+                    image = [UIImage imageNamed:@"cup"];
+                    break;
+                case 2:
+                    color = UIColor.systemPurpleColor;
+                    image = [UIImage imageNamed:@"drink"];
+                    break;
+                case 3:
+                    color = UIColor.systemBlueColor;
+                    image = [UIImage imageNamed:@"dessert"];
+                    break;
+                case 4:
+                    color = UIColor.systemGreenColor;
+                    image = [UIImage imageNamed:@"shop"];
+                    break;
+                case 5:
+                    color = UIColor.systemPinkColor;
+                    image = [UIImage imageNamed:@"heart"];
+                    break;
+                case 6:
+                    color = UIColor.systemYellowColor;
+                    image = [UIImage imageNamed:@"star"];
+                    break;
+                    
+                default:
+                    color = UIColor.systemGrayColor;
+                    image = [UIImage imageNamed:@"pin"];
+                    break;
+            }
+            annotationView.markerTintColor = color;
+            annotationView.glyphImage = image;
+            return annotationView;
         }
     }
     return annotationView;

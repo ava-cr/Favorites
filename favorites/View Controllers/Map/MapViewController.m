@@ -241,46 +241,13 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     else {
         MKMarkerAnnotationView *annotationView = (MKMarkerAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Mark"];
         annotationView = [[MKMarkerAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Mark"];
-        if (annotationView == nil) {
-            
-            annotationView.canShowCallout = true;
-            annotationView.largeContentTitle = annotation.title;
-            annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-            
-//            if (category == 0) {
-//                annotationView.glyphImage = [UIImage imageNamed:@"eat"];
-//                annotationView.markerTintColor = UIColor.redColor;
-//                return annotationView;
-//            }
-//            else if (category == 1) {
-//                annotationView.glyphImage = [UIImage imageNamed:@"cup"];
-//                return annotationView;
-//            }
-//            else if (category == 2) {
-//                annotationView.glyphImage = [UIImage imageNamed:@"drink"];
-//                annotationView.markerTintColor = UIColor.blueColor;
-//                return annotationView;
-//            }
-//            else if (category == 3) {
-//                annotationView.glyphImage = [UIImage imageNamed:@"dessert"];
-//                return annotationView;
-//            }
-//            else if (category == 4) {
-//                annotationView.glyphImage = [UIImage imageNamed:@"shop"];
-//                return annotationView;
-//            }
-//            else if (category == 5) {
-//                annotationView.glyphImage = [UIImage imageNamed:@"heart"];
-//                return annotationView;
-//            }
-//            else annotationView.glyphImage = [UIImage imageNamed:@"star"];
-            
-        }
+        annotationView.canShowCallout = true;
+        annotationView.largeContentTitle = annotation.title;
+        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         PinAnnotation *annotation = annotationView.annotation;
         int category = [annotation.pin.category intValue];
         UIColor *color = [[UIColor alloc] init];
         UIImage *image = [[UIImage alloc] init];
-        NSLog(@"%@", annotation.titleString);
         switch (category) {
             case 0:
                 color = UIColor.systemRedColor;
@@ -316,7 +283,6 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
                 image = [UIImage imageNamed:@"pin"];
                 break;
         }
-        NSLog(@"%d", category);
         annotationView.markerTintColor = color;
         annotationView.glyphImage = image;
         return annotationView;
