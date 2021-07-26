@@ -26,11 +26,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
-    
     [self getFriendRequests];
 }
 
@@ -52,95 +50,97 @@
         if ([self.requestedUsers containsObject:user]) {
             [cell.addFriendButton setHidden:TRUE];
             [cell.addFriendButton setTitle:@"Requested" forState:UIControlStateNormal];
-            NSLog(@"here");
         }
     }
     return cell;
 }
 
 - (void) getUsers {
-    // construct query
     PFQuery *query = [PFUser query];
     [query includeKey:@"username"];
     NSArray *offLimits = [self.requestedUsers arrayByAddingObjectsFromArray:self.friends];
     [query whereKey:@"objectId" notContainedIn:offLimits];
-    //[query whereKey:@"objectId" notContainedIn:self.friends];
     [query whereKey:@"objectId" notEqualTo:[PFUser currentUser].objectId];
-
-    // fetch data asynchronously
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
-        if (users != nil) {
-            self.users = users;
-            self.filteredUsers = [NSMutableArray arrayWithArray:self.users];
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (users != nil) {
+                strongSelf.users = users;
+                strongSelf.filteredUsers = [NSMutableArray arrayWithArray:strongSelf.users];
+                [strongSelf.tableView reloadData];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
         }
     }];
 }
 
 - (void) getFriendRequests {
-    // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"FriendRequest"];
     [query includeKey:@"requestee"];
     [query includeKey:@"objectId"];
     [query whereKey:@"requester" equalTo:[PFUser currentUser]];
-
-    // fetch data asynchronously
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *requests, NSError *error) {
-        if (requests != nil) {
-            // self.requests = [NSMutableArray arrayWithArray:requests];
-            NSLog(@"# of requests: %lu", (unsigned long)[requests count]);
-            self.requestedUsers = [[NSMutableArray alloc] init];
-            for (FriendRequest *request in requests) {
-                [self.requestedUsers addObject:request.requestee.objectId];
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (requests != nil) {
+                NSLog(@"# of requests: %lu", (unsigned long)[requests count]);
+                strongSelf.requestedUsers = [[NSMutableArray alloc] init];
+                for (FriendRequest *request in requests) {
+                    [strongSelf.requestedUsers addObject:request.requestee.objectId];
+                }
+                NSLog(@"%@", strongSelf.requestedUsers);
+                [strongSelf getFriends];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
             }
-            NSLog(@"%@", self.requestedUsers);
-            [self getFriends];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
         }
     }];
 }
 
 - (void) getFriends {
-    // construct query
     PFQuery *queryUser1 = [PFQuery queryWithClassName:@"Friend"];
     [queryUser1 whereKey:@"user1" equalTo:[PFUser currentUser]];
-    
     PFQuery *queryUser2 = [PFQuery queryWithClassName:@"Friend"];
     [queryUser2 whereKey:@"user2" equalTo:[PFUser currentUser]];
-    
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[queryUser1,queryUser2]];
     NSArray *keys = @[@"user1", @"user2", @"objectId"];
     [query includeKeys:keys];
-
-    // fetch data asynchronously
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *friends, NSError *error) {
-        if (friends != nil) {
-            NSLog(@"# of friends: %lu", (unsigned long)[friends count]);
-            self.friends = [[NSMutableArray alloc] init];
-            for (Friend *friend in friends) {
-                if ([friend.user1.objectId isEqual:[PFUser currentUser].objectId]) {
-                    [self.friends addObject:friend.user2.objectId];
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (friends != nil) {
+                NSLog(@"# of friends: %lu", (unsigned long)[friends count]);
+                strongSelf.friends = [[NSMutableArray alloc] init];
+                for (Friend *friend in friends) {
+                    if ([friend.user1.objectId isEqual:[PFUser currentUser].objectId]) {
+                        [strongSelf.friends addObject:friend.user2.objectId];
+                    }
+                    else [strongSelf.friends addObject:friend.user1.objectId];
                 }
-                else [self.friends addObject:friend.user1.objectId];
+                [strongSelf getUsers];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
             }
-            [self getUsers];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
         }
     }];
 }
 
 - (void)addFriendCell:(AddFriendCell *)addFriendCell pressedAdd:(PFUser *)user {
     NSLog(@"add friend: %@", user.username);
+    typeof(self) __weak weakSelf = self;
     [FriendRequest createFriendRequest:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"friend requested %@", user.username);
-            [self sendFriendRequestPush:user];
-        } else {
-            NSLog(@"problem saving friend request: %@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (succeeded) {
+                NSLog(@"friend requested %@", user.username);
+                [strongSelf sendFriendRequestPush:user];
+            } else {
+                NSLog(@"problem saving friend request: %@", error.localizedDescription);
+            }
         }
     }];
 }
@@ -176,7 +176,6 @@
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if (searchText.length != 0) {
-        NSLog(@"%@", searchText);
         NSArray *filteredUsers = [self.users filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(username contains[c] %@)", searchText]];
         self.filteredUsers = [NSMutableArray arrayWithArray:filteredUsers];
     }

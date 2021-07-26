@@ -156,14 +156,12 @@
 - (IBAction) pinForPostChosenUnwind:(UIStoryboardSegue*)unwindSegue {
     MyPinsViewController *pinsVC = [unwindSegue sourceViewController];
     Pin *pin = pinsVC.chosenPin;
-    
     self.locationLabel.text = pin.title;
     self.latitude = pin.latitude;
     self.longitude = pin.longitude;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     if ([segue.identifier isEqual:@"postedUpdate"]) {
         self.image = self.picImageView.image;
         self.caption = self.captionTextField.text;

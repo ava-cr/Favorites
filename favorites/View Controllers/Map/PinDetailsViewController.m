@@ -118,20 +118,24 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     }];
     NSNumber *lat = self.pin.latitude;;
     NSNumber *lng = self.pin.longitude;
+    typeof(self) __weak weakSelf = self;
     [Pin postUserPin:self.pin.title withNotes:self.pin.notes latitude:lat longitude:lng urlString:self.pin.urlString phone:self.pin.phone imageURL:self.pin.imageURL yelpID:self.pin.yelpID yelpURL:self.pin.yelpURL address:self.pin.address category:self.pin.category withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"the pin was added!");
-            UIAlertController *pinAdded = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Pin added to your map!", @"message that pin was successfully added to user's map") message:@""preferredStyle:(UIAlertControllerStyleAlert)];
-            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:^(UIAlertAction * _Nonnull action) {
-                [self dismissViewControllerAnimated:TRUE completion:nil];
-                                                             }];
-            [pinAdded addAction:ok];
-            [self presentViewController:pinAdded animated:YES completion:nil];
-        }
-        else {
-            NSLog(@"problem saving pin: %@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (succeeded) {
+                NSLog(@"the pin was added!");
+                UIAlertController *pinAdded = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Pin added to your map!", @"message that pin was successfully added to user's map") message:@""preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+                                                                   style:UIAlertActionStyleDefault
+                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                    [strongSelf dismissViewControllerAnimated:TRUE completion:nil];
+                                                                 }];
+                [pinAdded addAction:ok];
+                [strongSelf presentViewController:pinAdded animated:YES completion:nil];
+            }
+            else {
+                NSLog(@"problem saving pin: %@", error.localizedDescription);
+            }
         }
     }];
 }

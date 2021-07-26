@@ -51,52 +51,57 @@ static NSString *segueToLikes = @"showLikes";
 }
 
 - (void) getUpdates {
-    // activity monitor
-    [SVProgressHUD show];
+    [SVProgressHUD show]; // activity monitor
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
     NSArray *keys = @[@"update", @"author", @"objectId"];
     [query includeKeys:keys];
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"author" containedIn:self.friends];
     query.limit = 20;
-
-    // fetch data asynchronously
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *updates, NSError *error) {
-        if (updates != nil) {
-            self.updates = updates;
-            NSLog(@"got updates");
-            self.isLikedByUser = [[NSMutableDictionary alloc] init];
-            for (Update *update in self.updates) { // set all updates to unliked initially
-                [self.isLikedByUser setValue:@"0" forKey:update.objectId];
-                NSLog(@"%@", self.isLikedByUser[update.objectId]);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (updates != nil) {
+                strongSelf.updates = updates;
+                NSLog(@"got updates");
+                strongSelf.isLikedByUser = [[NSMutableDictionary alloc] init];
+                for (Update *update in strongSelf.updates) { // set all updates to unliked initially
+                    [strongSelf.isLikedByUser setValue:@"0" forKey:update.objectId];
+                }
+                [strongSelf getLikes];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
             }
-            [self getLikes];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
         }
     }];
 }
+
 - (void) getLikes {
     PFQuery *query = [PFQuery queryWithClassName:@"Like"];
     NSArray *keys = @[@"update", @"objectId", @"like"];
     [query includeKeys:keys];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     query.limit = 20;
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *likes, NSError *error) {
-        if (likes != nil) {
-            NSLog(@"got likes");
-            for (Like *like in likes) {
-                [self.isLikedByUser setValue:@"1" forKey:like.update.objectId];
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (likes != nil) {
+                NSLog(@"got likes");
+                for (Like *like in likes) {
+                    [strongSelf.isLikedByUser setValue:@"1" forKey:like.update.objectId];
+                }
+                [strongSelf.tableView reloadData];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
             }
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
         }
         [SVProgressHUD dismiss];
     }];
 }
+
 - (void) getFriends {
-    // construct query
     PFQuery *queryUser1 = [PFQuery queryWithClassName:@"Friend"];
     [queryUser1 whereKey:@"user1" equalTo:[PFUser currentUser]];
     PFQuery *queryUser2 = [PFQuery queryWithClassName:@"Friend"];
@@ -104,21 +109,21 @@ static NSString *segueToLikes = @"showLikes";
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[queryUser1,queryUser2]];
     NSArray *keys = @[@"user1", @"user2"];
     [query includeKeys:keys];
-
-    // fetch data asynchronously
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *friends, NSError *error) {
-        if (friends != nil) {
-            NSLog(@"# of friends: %lu", (unsigned long)[friends count]);
-            for (Friend *friend in friends) {
-                if ([friend.user1.objectId isEqual:[PFUser currentUser].objectId]) {
-                    [self.friends addObject:friend.user2];
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (friends != nil) {
+                for (Friend *friend in friends) {
+                    if ([friend.user1.objectId isEqual:[PFUser currentUser].objectId]) {
+                        [strongSelf.friends addObject:friend.user2];
+                    }
+                    else [strongSelf.friends addObject:friend.user1];
                 }
-                else [self.friends addObject:friend.user1];
+                [strongSelf getUpdates];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
             }
-            NSLog(@"%@", self.friends);
-            [self getUpdates];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
         }
     }];
 }
@@ -132,10 +137,8 @@ static NSString *segueToLikes = @"showLikes";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     UpdateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UpdateCell" forIndexPath:indexPath];
     Update *update = self.updates[indexPath.row];
-    
     if (self.updates) {
         cell.update = update;
         cell.delegate = self;
@@ -203,18 +206,21 @@ static NSString *segueToLikes = @"showLikes";
             }
         }];
         [self.isLikedByUser setValue:@"1" forKey:update.objectId];
+        typeof(self) __weak weakSelf = self;
         [Like createLike:[PFUser currentUser] onUpdate:update withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            if (succeeded) {
-                NSLog(@"created new like!");
-                [self sendLikePush:update];
-                [self getUpdates];
-            } else {
-                NSLog(@"%@", error.localizedDescription);
+            typeof(weakSelf) strongSelf = weakSelf;
+            if (strongSelf) {
+                if (succeeded) {
+                    NSLog(@"created new like!");
+                    [strongSelf sendLikePush:update];
+                    [strongSelf getUpdates];
+                } else {
+                    NSLog(@"%@", error.localizedDescription);
+                }
             }
         }];
     }
-    else {
-        // delete a like object, decrememt like count
+    else { // delete a like object, decrememt like count
         [self.isLikedByUser setValue:@"0" forKey:update.objectId];
         update[@"likeCount"] = [NSNumber numberWithInt:([update[@"likeCount"] intValue] - 1)];
         [update saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -227,33 +233,41 @@ static NSString *segueToLikes = @"showLikes";
         [self deleteLike:update];
     }
 }
+
 -(void) deleteLike:(Update *)update {
     PFQuery *query = [PFQuery queryWithClassName:@"Like"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query whereKey:@"update" equalTo:update];
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *likes, NSError *error) {
-        if (likes != nil) {
-            Like *like = likes[0];
-            [like deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if(succeeded) {
-                    NSLog(@"deleted like");
-                    [self getUpdates];
-                }
-                else {
-                    NSLog(@"%@", error.localizedDescription);
-                }
-            }];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (likes != nil) {
+                Like *like = likes[0];
+                [like deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if(succeeded) {
+                        NSLog(@"deleted like");
+                        [strongSelf getUpdates];
+                    }
+                    else {
+                        NSLog(@"%@", error.localizedDescription);
+                    }
+                }];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
         }
     }];
 }
+
 - (void)pressedComments:(UpdateCell *)updateCell {
     [self performSegueWithIdentifier:segueToComments sender:updateCell.update];
 }
+
 - (void)pressedLikeLabel:(UpdateCell *)updateCell {
     [self performSegueWithIdentifier:segueToLikes sender:updateCell.update];
 }
+
 - (void)sendLikePush:(Update *)update {
     NSString *message = [[PFUser currentUser].username stringByAppendingString:@" liked your post"];
     [PFCloud callFunctionInBackground:@"sendPushToUser"
@@ -285,9 +299,7 @@ static NSString *segueToLikes = @"showLikes";
 #pragma mark - Navigation
 
 - (IBAction) postedUpdateUnwind:(UIStoryboardSegue*)unwindSegue {
-    
     ComposeUpdateViewController *composeVC = [unwindSegue sourceViewController];
-    
     PFUser *currentUser = [PFUser currentUser];
     currentUser[@"numPosts"] = [NSNumber numberWithInt:([currentUser[@"numPosts"] intValue] + 1)];
     [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -297,19 +309,21 @@ static NSString *segueToLikes = @"showLikes";
             NSLog(@"%@", error.localizedDescription);
         }
     }];
-    
+    typeof(self) __weak weakSelf = self;
     [Update postUserUpdate:composeVC.image withCaption:composeVC.caption locationTitle:composeVC.locationTitle lat:composeVC.latitude lng:composeVC.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"the update was posted!");
-            [self getUpdates];
-        } else {
-            NSLog(@"problem saving update: %@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (succeeded) {
+                NSLog(@"the update was posted!");
+                [strongSelf getUpdates];
+            } else {
+                NSLog(@"problem saving update: %@", error.localizedDescription);
+            }
         }
     }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     if ([segue.identifier isEqual:@"showLocationOnMap"]) {
         ShowLocationOnMapViewController *showLocationVC = [segue destinationViewController];
         Update *update = sender;

@@ -33,12 +33,16 @@ static NSString *segueToUserProfile = @"showProfile";
     PFQuery *query = [PFQuery queryWithClassName:@"Like"];
     [query includeKey:@"user"];
     [query whereKey:@"update" equalTo:self.update];
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable likes, NSError * _Nullable error) {
-        if (likes != nil) {
-            self.likes = likes;
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (likes != nil) {
+                strongSelf.likes = likes;
+                [strongSelf.tableView reloadData];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
         }
     }];
 }

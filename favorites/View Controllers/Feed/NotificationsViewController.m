@@ -36,8 +36,7 @@ static NSString *segueToUpdate = @"showUpdate";
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    //[self getFriendRequests];
-    
+    [self getFriendRequests];
     self.commentsAndLikes = [[NSMutableArray alloc] init];
     [self getUpdates];
 }
@@ -46,30 +45,38 @@ static NSString *segueToUpdate = @"showUpdate";
     PFQuery *query = [PFQuery queryWithClassName:@"FriendRequest"];
     [query includeKey:@"requester"];
     [query whereKey:@"requestee" equalTo:[PFUser currentUser]];
-
-    // fetch data asynchronously
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *requests, NSError *error) {
-        if (requests != nil) {
-            NSLog(@"%lu", (unsigned long)[requests count]);
-            self.friendRequests = requests;
-        } else {
-            NSLog(@"%@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (requests != nil) {
+                NSLog(@"%lu", (unsigned long)[requests count]);
+                strongSelf.friendRequests = requests;
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
         }
     }];
 }
+
 - (void)friendRequestCell:(FriendRequestCell *)friendRequestCell pressedAccept:(FriendRequest *)request {
     // delete friend request object & create a friend object
     [request deleteInBackground];
+    typeof(self) __weak weakSelf = self;
     [Friend createFriends:request.requester withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"the current user and %@ are now friends!", request.requester.username);
-            [self sendFriendAcceptedPush:request.requester];
-        }
-        else {
-            NSLog(@"problem saving friend: %@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (succeeded) {
+                NSLog(@"the current user and %@ are now friends!", request.requester.username);
+                [strongSelf sendFriendAcceptedPush:request.requester];
+            }
+            else {
+                NSLog(@"problem saving friend: %@", error.localizedDescription);
+            }
         }
     }];
 }
+
 - (void) getUpdates { // only have notifications from last 3 posts
     [SVProgressHUD show];
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
@@ -77,15 +84,20 @@ static NSString *segueToUpdate = @"showUpdate";
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"author"];
     [query whereKey:@"author" equalTo:[PFUser currentUser]];
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *updates, NSError *error) {
-        if (updates != nil) {
-            self.updates = updates;
-            [self getComments];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (updates != nil) {
+                strongSelf.updates = updates;
+                [strongSelf getComments];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
         }
     }];
 }
+
 - (void) getComments {
     PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
     [query whereKey:@"update" containedIn:self.updates];
@@ -93,15 +105,20 @@ static NSString *segueToUpdate = @"showUpdate";
     query.limit = 10;
     NSArray *keys = @[@"author", @"text", @"update", @"image", @"username"];
     [query includeKeys:keys];
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
-        if (comments != nil) {
-            [self.commentsAndLikes addObjectsFromArray:comments];
-            [self getLikes];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (comments != nil) {
+                [strongSelf.commentsAndLikes addObjectsFromArray:comments];
+                [strongSelf getLikes];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
         }
     }];
 }
+
 - (void) getLikes {
     NSLog(@"getting likes");
     PFQuery *query = [PFQuery queryWithClassName:@"Like"];
@@ -109,23 +126,28 @@ static NSString *segueToUpdate = @"showUpdate";
     [query includeKeys:keys];
     [query whereKey:@"update" containedIn:self.updates];
     [query orderByDescending:@"createdAt"];
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *likes, NSError *error) {
-        if (likes != nil) { // get one like item for each update
-            for (Update *update in self.updates) {
-                for (Like *like in likes) {
-                    if ([like.update.objectId isEqual:update.objectId]) {
-                        [self.commentsAndLikes addObject:like];
-                        break;
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (likes != nil) { // get one like item for each update
+                for (Update *update in strongSelf.updates) {
+                    for (Like *like in likes) {
+                        if ([like.update.objectId isEqual:update.objectId]) {
+                            [strongSelf.commentsAndLikes addObject:like];
+                            break;
+                        }
                     }
                 }
+                [SVProgressHUD dismiss];
+                [strongSelf.tableView reloadData];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
             }
-            [SVProgressHUD dismiss];
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
         }
     }];
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         if (self.friendRequests) return [self.friendRequests count];
@@ -185,6 +207,7 @@ static NSString *segueToUpdate = @"showUpdate";
         return cell;
     }
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.commentsAndLikes[indexPath.row - [self.friendRequests count]] isKindOfClass:[Comment class]]) {
         Comment *comment = self.commentsAndLikes[indexPath.row - [self.friendRequests count]];
@@ -203,9 +226,11 @@ static NSString *segueToUpdate = @"showUpdate";
         }
     }
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
+
 - (void)sendFriendAcceptedPush:(PFUser *)user {
     NSString *message = [[PFUser currentUser].username stringByAppendingString:@" accepted your friend request!"];
     [PFCloud callFunctionInBackground:@"sendPushToUser"

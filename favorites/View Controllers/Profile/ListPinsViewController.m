@@ -29,21 +29,22 @@ static NSString *segueToPinDetails = @"pinDetails";
 }
 
 -(void) getPins {
-    // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Pin"];
     NSArray *keys = @[@"author", @"title", @"notes", @"url", @"latitude", @"longitude"];
     [query includeKeys:keys];
     [query whereKey:@"author" equalTo:self.user];
     query.limit = 20;
-
-    // fetch data asynchronously
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *pins, NSError *error) {
-        if (pins != nil) {
-            self.pins = pins;
-            NSLog(@"got pins");
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (pins != nil) {
+                strongSelf.pins = pins;
+                NSLog(@"got pins");
+                [strongSelf.tableView reloadData];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
         }
     }];
 }

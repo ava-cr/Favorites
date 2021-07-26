@@ -129,7 +129,6 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
 
 - (IBAction) addPin:(UIStoryboardSegue*)unwindSegue {
     NSLog(@"unwinding from add pin to map");
-    
     PFUser *currentUser = [PFUser currentUser];
     currentUser[@"numPins"] = [NSNumber numberWithInt:([currentUser[@"numPins"] intValue] + 1)];
     [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -148,13 +147,16 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     
     if (pin.url) urlString = pin.url.absoluteString;
     else urlString = @"";
-    
+    typeof(self) __weak weakSelf = self;
     [Pin postUserPin:pin.name withNotes:addPinVC.notes latitude:lat longitude:lng urlString:urlString phone:addPinVC.phone imageURL:addPinVC.imageURL yelpID:addPinVC.yelpID yelpURL:addPinVC.yelpURL address:addPinVC.address category:addPinVC.category withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"the pin was posted!");
-            [self reloadMapView];
-        } else {
-            NSLog(@"problem saving pin: %@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (succeeded) {
+                NSLog(@"the pin was posted!");
+                [strongSelf reloadMapView];
+            } else {
+                NSLog(@"problem saving pin: %@", error.localizedDescription);
+            }
         }
     }];
 }
@@ -170,19 +172,22 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
         }
     }];
     PinDetailsViewController *sourceVC = [unwindSegue sourceViewController];
+    typeof(self) __weak weakSelf = self;
     [sourceVC.pin deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"deleted pin %@", sourceVC.pin.title);
-            [self reloadMapView];
-        }
-        else {
-            NSLog(@"problem deleting pin: %@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (succeeded) {
+                NSLog(@"deleted pin %@", sourceVC.pin.title);
+                [strongSelf reloadMapView];
+            }
+            else {
+                NSLog(@"problem deleting pin: %@", error.localizedDescription);
+            }
         }
     }];
 }
 
 - (void) getPins {
-    // construct query
     [SVProgressHUD show];
     PFQuery *query = [PFQuery queryWithClassName:@"Pin"];
     NSArray *keys = @[@"author", @"title", @"notes", @"url", @"latitude", @"longitude", @"category"];
@@ -190,15 +195,18 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     [query whereKey:@"author" equalTo:self.user];
     query.limit = 20;
     [self.mapView removeAnnotations:self.annotations];
-    // fetch data asynchronously
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *pins, NSError *error) {
-        if (pins != nil) {
-            self.pins = pins;
-            NSLog(@"got pins");
-            [self placePins];
-            [SVProgressHUD dismiss];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (pins != nil) {
+                strongSelf.pins = pins;
+                NSLog(@"got pins");
+                [strongSelf placePins];
+                [SVProgressHUD dismiss];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
         }
     }];
 }
@@ -339,7 +347,6 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     }
 }
 - (void) getFriends {
-    // construct query
     PFQuery *queryUser1 = [PFQuery queryWithClassName:@"Friend"];
     [queryUser1 whereKey:@"user1" equalTo:[PFUser currentUser]];
     PFQuery *queryUser2 = [PFQuery queryWithClassName:@"Friend"];
@@ -347,19 +354,23 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[queryUser1,queryUser2]];
     NSArray *keys = @[@"user1", @"user2"];
     [query includeKeys:keys];
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *friends, NSError *error) {
-        if (friends != nil) {
-            NSLog(@"# of friends: %lu", (unsigned long)[friends count]);
-            for (Friend *friend in friends) {
-                if ([friend.user1.objectId isEqual:[PFUser currentUser].objectId]) {
-                    [self.friends addObject:friend.user2];
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (friends != nil) {
+                NSLog(@"# of friends: %lu", (unsigned long)[friends count]);
+                for (Friend *friend in friends) {
+                    if ([friend.user1.objectId isEqual:[PFUser currentUser].objectId]) {
+                        [strongSelf.friends addObject:friend.user2];
+                    }
+                    else [strongSelf.friends addObject:friend.user1];
                 }
-                else [self.friends addObject:friend.user1];
+                NSLog(@"%@", strongSelf.friends);
+                [strongSelf getUpdates];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
             }
-            NSLog(@"%@", self.friends);
-            [self getUpdates];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
         }
     }];
 }
@@ -370,13 +381,17 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"author" containedIn:self.friends];
     query.limit = 20;
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *updates, NSError *error) {
-        if (updates != nil) {
-            self.updates = updates;
-            NSLog(@"got updates");
-            [self placeUpdatePins];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (updates != nil) {
+                strongSelf.updates = updates;
+                NSLog(@"got updates");
+                [strongSelf placeUpdatePins];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
         }
     }];
 }

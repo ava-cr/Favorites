@@ -75,8 +75,7 @@ static NSString *segueToProfile = @"showProfile";
     [self performSegueWithIdentifier:segueToLikes sender:nil];
 }
 - (void)didLikeUpdate:(UITapGestureRecognizer *)sender {
-    if (!self.isLikedByUser) {
-        // create a like object, increment like count
+    if (!self.isLikedByUser) { // create a like object, increment like count
         self.update[@"likeCount"] = [NSNumber numberWithInt:([self.update[@"likeCount"] intValue] + 1)];
         [self.update saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
@@ -86,13 +85,17 @@ static NSString *segueToProfile = @"showProfile";
             }
         }];
         self.isLikedByUser = TRUE;
+        typeof(self) __weak weakSelf = self;
         [Like createLike:[PFUser currentUser] onUpdate:self.update withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            if (succeeded) {
-                NSLog(@"created new like!");
-                [self sendLikePush];
-                [self getLiked];
-            } else {
-                NSLog(@"%@", error.localizedDescription);
+            typeof(weakSelf) strongSelf = weakSelf;
+            if (strongSelf) {
+                if (succeeded) {
+                    NSLog(@"created new like!");
+                    [strongSelf sendLikePush];
+                    [strongSelf getLiked];
+                } else {
+                    NSLog(@"%@", error.localizedDescription);
+                }
             }
         }];
     }
@@ -102,7 +105,7 @@ static NSString *segueToProfile = @"showProfile";
         self.update[@"likeCount"] = [NSNumber numberWithInt:([self.update[@"likeCount"] intValue] - 1)];
         [self.update saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                NSLog(@"updated update like count! %@", self.update[@"likeCount"]);
+                NSLog(@"updated update like count!");
             } else {
                 NSLog(@"%@", error.localizedDescription);
             }
@@ -114,20 +117,24 @@ static NSString *segueToProfile = @"showProfile";
     PFQuery *query = [PFQuery queryWithClassName:@"Like"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query whereKey:@"update" equalTo:update];
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *likes, NSError *error) {
-        if (likes != nil) {
-            Like *like = likes[0];
-            [like deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if(succeeded) {
-                    NSLog(@"deleted like");
-                    [self getLiked];
-                }
-                else {
-                    NSLog(@"%@", error.localizedDescription);
-                }
-            }];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (likes != nil) {
+                Like *like = likes[0];
+                [like deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if(succeeded) {
+                        NSLog(@"deleted like");
+                        [strongSelf getLiked];
+                    }
+                    else {
+                        NSLog(@"%@", error.localizedDescription);
+                    }
+                }];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
         }
     }];
 }
@@ -135,13 +142,17 @@ static NSString *segueToProfile = @"showProfile";
     PFQuery *query = [PFQuery queryWithClassName:@"Like"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query whereKey:@"update" equalTo:self.update];
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable likes, NSError * _Nullable error) {
-        if (likes != nil) {
-            if ([likes count] != 0) self.isLikedByUser = TRUE;
-            else self.isLikedByUser = FALSE;
-            [self setLikedLabelText];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (likes != nil) {
+                if ([likes count] != 0) strongSelf.isLikedByUser = TRUE;
+                else strongSelf.isLikedByUser = FALSE;
+                [strongSelf setLikedLabelText];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
         }
     }];
 }

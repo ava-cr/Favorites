@@ -2044,8 +2044,8 @@
         <image name="dessert" width="48" height="48"/>
         <image name="drink" width="48" height="48"/>
         <image name="eat" width="48" height="48"/>
-        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart" width="48" height="48"/>
+        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <image name="network" catalog="system" width="128" height="121"/>

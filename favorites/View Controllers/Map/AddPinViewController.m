@@ -50,35 +50,43 @@ static NSString *unwindSegueToMap = @"addPin";
 
 -(void) businessMatch {
     [SVProgressHUD show];
+    typeof(self) __weak weakSelf = self;
     [self.manager getBusinessMatch:self.pin.placemark.name withAddress:self.pin.placemark.title city:self.pin.placemark.locality state:self.pin.placemark.administrativeArea country:self.pin.placemark.ISOcountryCode lat:self.pin.placemark.coordinate.latitude lng:self.pin.placemark.coordinate.longitude withCompletion:^(NSDictionary *results, NSError * _Nonnull error) {
-        if (error != nil) {
-            NSLog(@"%@", [error localizedDescription]);
-        }
-        else {
-            if (results != nil) {
-                self.yelpID = results[@"id"];
-                [self businessDetails:self.yelpID];
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
             }
             else {
-                [SVProgressHUD dismiss];
-                NSLog(@"no matching businesses found");
+                if (results != nil) {
+                    strongSelf.yelpID = results[@"id"];
+                    [strongSelf businessDetails:strongSelf.yelpID];
+                }
+                else {
+                    [SVProgressHUD dismiss];
+                    NSLog(@"no matching businesses found");
+                }
             }
         }
     }];
 }
 -(void) businessDetails: (NSString *)businessId {
+    typeof(self) __weak weakSelf = self;
     [self.manager getBusinessDetails:businessId withCompletion:^(NSDictionary * _Nonnull results, NSError * _Nonnull error) {
-        if (error != nil) {
-            NSLog(@"%@", [error localizedDescription]);
-        }
-        else {
-            NSLog(@"got business details");
-            NSLog(@"%@", results);
-            self.imageURL = results[@"image_url"];
-            self.yelpURL = results[@"url"];
-            NSURL *url = [NSURL URLWithString:self.imageURL];
-            NSData *urlData = [NSData dataWithContentsOfURL:url];
-            self.headerImageView.image = [[UIImage alloc] initWithData:urlData];
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+            }
+            else {
+                NSLog(@"got business details");
+                NSLog(@"%@", results);
+                strongSelf.imageURL = results[@"image_url"];
+                strongSelf.yelpURL = results[@"url"];
+                NSURL *url = [NSURL URLWithString:strongSelf.imageURL];
+                NSData *urlData = [NSData dataWithContentsOfURL:url];
+                strongSelf.headerImageView.image = [[UIImage alloc] initWithData:urlData];
+            }
         }
         [SVProgressHUD dismiss];
     }];
