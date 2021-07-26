@@ -27,6 +27,7 @@ static NSString *segueToLikes = @"showLikes";
 @property (strong, nonatomic) NSArray *updates;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> *isLikedByUser;
 @property (strong, nonatomic) NSMutableArray *friends;
+@property (nonatomic) BOOL loadedAllData;
 
 @end
 
@@ -50,14 +51,14 @@ static NSString *segueToLikes = @"showLikes";
     [refreshControl endRefreshing];
 }
 
-- (void) getUpdates {
+- (void) getUpdates: (int) numUpdates {
     [SVProgressHUD show]; // activity monitor
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
     NSArray *keys = @[@"update", @"author", @"objectId"];
     [query includeKeys:keys];
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"author" containedIn:self.friends];
-    query.limit = 20;
+    query.limit = numUpdates;
     typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *updates, NSError *error) {
         typeof(weakSelf) strongSelf = weakSelf;
@@ -65,6 +66,7 @@ static NSString *segueToLikes = @"showLikes";
             if (updates != nil) {
                 strongSelf.updates = updates;
                 NSLog(@"got updates");
+                if ([strongSelf.updates count] < numUpdates) strongSelf.loadedAllData = true;
                 strongSelf.isLikedByUser = [[NSMutableDictionary alloc] init];
                 for (Update *update in strongSelf.updates) { // set all updates to unliked initially
                     [strongSelf.isLikedByUser setValue:@"0" forKey:update.objectId];
@@ -120,12 +122,22 @@ static NSString *segueToLikes = @"showLikes";
                     }
                     else [strongSelf.friends addObject:friend.user1];
                 }
-                [strongSelf getUpdates];
+                [strongSelf getUpdates:20];
             } else {
                 NSLog(@"%@", error.localizedDescription);
             }
         }
     }];
+}
+
+#pragma mark - Table View Functions
+
+// infinite scrolling method
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(!self.loadedAllData && indexPath.row + 1 == [self.updates count]){
+        [self getUpdates:(int)([self.updates count]+20)];
+        NSLog(@"loading more data");
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -213,7 +225,7 @@ static NSString *segueToLikes = @"showLikes";
                 if (succeeded) {
                     NSLog(@"created new like!");
                     [strongSelf sendLikePush:update];
-                    [strongSelf getUpdates];
+                    [strongSelf getUpdates: 20];
                 } else {
                     NSLog(@"%@", error.localizedDescription);
                 }
@@ -247,7 +259,7 @@ static NSString *segueToLikes = @"showLikes";
                 [like deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if(succeeded) {
                         NSLog(@"deleted like");
-                        [strongSelf getUpdates];
+                        [strongSelf getUpdates:20];
                     }
                     else {
                         NSLog(@"%@", error.localizedDescription);
@@ -267,6 +279,8 @@ static NSString *segueToLikes = @"showLikes";
 - (void)pressedLikeLabel:(UpdateCell *)updateCell {
     [self performSegueWithIdentifier:segueToLikes sender:updateCell.update];
 }
+
+#pragma mark - Push Notifications Functions
 
 - (void)sendLikePush:(Update *)update {
     NSString *message = [[PFUser currentUser].username stringByAppendingString:@" liked your post"];
@@ -315,7 +329,7 @@ static NSString *segueToLikes = @"showLikes";
         if (strongSelf) {
             if (succeeded) {
                 NSLog(@"the update was posted!");
-                [strongSelf getUpdates];
+                [strongSelf getUpdates: 20];
             } else {
                 NSLog(@"problem saving update: %@", error.localizedDescription);
             }
