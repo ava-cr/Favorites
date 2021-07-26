@@ -37,18 +37,21 @@ static NSString *apikey = @"8finKi1Dn672HckmQcXEwns2gezMsYQTYNWNmV7P9QJIJ56-E0jD
 }
 
 - (void)getBusinessMatch:(NSString *)name withAddress:(NSString *)address city:(NSString *)city state:(NSString *)state country:(NSString *)countryCode lat:(double)latitude lng:(double)longitude withCompletion:(void(^)(NSDictionary *results, NSError *error))completion {
-    
-    NSString *nameAddressString = [[@"name=" stringByAppendingString:name] stringByAppendingString:[@"&address1=" stringByAppendingString:address]];
-    NSString *cityStateCountryString = [[[@"&city=" stringByAppendingString:city] stringByAppendingString:[@"&state=" stringByAppendingString:state]] stringByAppendingString:[@"&country=" stringByAppendingString:countryCode]];
-    NSString *params = [[nameAddressString stringByAppendingString:cityStateCountryString] stringByAppendingString:@"&match_threshold=none"];
-    NSString *fullString = [@"https://api.yelp.com/v3/businesses/matches?" stringByAppendingString:params];
-    NSString* encodedUrl =
-    [fullString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    NSURL *url = [NSURL URLWithString:encodedUrl];
+    NSURLComponents *components = [[NSURLComponents alloc] init];
+    components.scheme = @"https";
+    components.host = @"api.yelp.com";
+    components.path = @"/v3/businesses/matches";
+    NSURLQueryItem *nameItem = [NSURLQueryItem queryItemWithName:@"name" value:name];
+    NSURLQueryItem *addressItem = [NSURLQueryItem queryItemWithName:@"address1" value:address];
+    NSURLQueryItem *cityItem = [NSURLQueryItem queryItemWithName:@"city" value:city];
+    NSURLQueryItem *stateItem = [NSURLQueryItem queryItemWithName:@"state" value:state];
+    NSURLQueryItem *countryItem = [NSURLQueryItem queryItemWithName:@"country" value:countryCode];
+    NSURLQueryItem *matchThresholdItem = [NSURLQueryItem queryItemWithName:@"match_threshold" value:@"none"];
+    components.queryItems = @[nameItem, addressItem, cityItem, stateItem, countryItem, matchThresholdItem];
+    NSURL *url = components.URL;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     [request setValue:[@"Bearer " stringByAppendingString:apikey] forHTTPHeaderField:@"Authorization"];
     [request setHTTPMethod:@"GET"];
-    
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error != nil) {
             NSLog(@"%@", [error localizedDescription]);
