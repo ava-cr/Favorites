@@ -1006,6 +1006,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="x13-Jw-ZXx"/>
                     <connections>
+                        <outlet property="searchBar" destination="Zxl-FS-9xf" id="AXC-Uy-F5N"/>
                         <outlet property="tableView" destination="LQC-C0-qd1" id="BNz-hb-CVP"/>
                     </connections>
                 </viewController>
