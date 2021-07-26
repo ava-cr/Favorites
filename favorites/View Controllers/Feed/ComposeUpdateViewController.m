@@ -150,7 +150,6 @@
     return newImage;
 }
 
-
 #pragma mark - Navigation
 
 - (IBAction) pinForPostChosenUnwind:(UIStoryboardSegue*)unwindSegue {
