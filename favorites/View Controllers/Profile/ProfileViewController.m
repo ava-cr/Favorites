@@ -27,7 +27,7 @@ static NSString *segueToLikes = @"showLikes";
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, ProfileHeaderCellDelegate, ProfileUpdateCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *updates;
+@property (strong, nonatomic) NSMutableArray *updates;
 @property (strong, nonatomic) NSMutableArray *friends;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> *isLikedByUser;
 
@@ -44,6 +44,7 @@ static NSString *segueToLikes = @"showLikes";
     self.tableView.dataSource = self;
     if (!self.user) self.user = [PFUser currentUser];
     self.title = self.user.username;
+    self.updates = [[NSMutableArray alloc] init];
     [self getFriends];
     [self getUpdates];
 }
@@ -59,7 +60,7 @@ static NSString *segueToLikes = @"showLikes";
     // construct query
     [SVProgressHUD show];
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
-    NSArray *keys = @[@"update", @"author", @"objectId"];
+    NSArray *keys = @[@"author", @"objectId", @"audience", @"group"];
     [query includeKeys:keys];
     [query whereKey:@"author" equalTo:self.user];
     [query orderByDescending:@"createdAt"];
@@ -69,12 +70,25 @@ static NSString *segueToLikes = @"showLikes";
         typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf) {
             if (updates != nil) {
-                self.updates = updates;
-                NSLog(@"got updates");
                 self.isLikedByUser = [[NSMutableDictionary alloc] init];
-                for (Update *update in self.updates) {
+                for (Update *update in updates) {
+                    // set all posts to unliked at first
                     [self.isLikedByUser setValue:@"0" forKey:update.objectId];
+                    // if audience is everyone, or the current user is in the group, show the post
+                    // show no private posts unless this is the current user's prof
+                    if ([update.audience isEqual:@"everyone"] || [self.user isEqual:[PFUser currentUser]]) {
+                        [strongSelf.updates addObject:update];
+                    }
+                    else {
+                        for (NSString *objectID in update.group.members) {
+                            if ([objectID isEqual:[PFUser currentUser].objectId]) {
+                                [strongSelf.updates addObject:update];
+                                break;
+                            }
+                        }
+                    }
                 }
+                NSLog(@"got updates = %lu", [strongSelf.updates count]);
                 [self getLikes];
             } else {
                 NSLog(@"%@", error.localizedDescription);
@@ -397,7 +411,6 @@ static NSString *segueToLikes = @"showLikes";
         cell.delegate = self;
         cell.update = update;
         cell.user = self.user;
-        NSLog(@"%@", cell.user.username);
          if (self.updates) {
              cell.usernameLabel.text = update.author.username;
              cell.bottomUsernameLabel.text = update.author.username;

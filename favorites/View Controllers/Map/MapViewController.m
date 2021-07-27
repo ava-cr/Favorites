@@ -37,7 +37,7 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *listPinsButton;
 @property (weak, nonatomic) IBOutlet UIButton *friendsButton;
-@property (strong, nonatomic) NSArray *updates;
+@property (strong, nonatomic) NSMutableArray *updates;
 @property (strong, nonatomic) NSMutableArray *friends;
 @property (strong, nonatomic) NSArray<UpdateAnnotation *> *updateAnnotations;
 
@@ -50,7 +50,7 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     self.mapView.delegate = self;
     if (!self.user) self.user = [PFUser currentUser];
     self.listPinsButton.layer.cornerRadius = 8;
-    //[self getPins];
+    [self getPins];
     if ([self.user isEqual:[PFUser currentUser]]) {
         self.title = NSLocalizedString(@"Your Pins", @"the user's saved locations");
         [self.cancelButton setEnabled:FALSE];
@@ -340,7 +340,8 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     }
     else {
         NSLog(@"add update annotations");
-        self.friends = [[NSMutableArray alloc] init];
+        self.friends = [[NSMutableArray alloc] initWithObjects:[PFUser currentUser], nil];
+        self.updates = [[NSMutableArray alloc] init];
         [SVProgressHUD show];
         [self getFriends];
         [self.friendsButton setSelected:TRUE];
@@ -366,7 +367,6 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
                     }
                     else [strongSelf.friends addObject:friend.user1];
                 }
-                NSLog(@"%@", strongSelf.friends);
                 [strongSelf getUpdates];
             } else {
                 NSLog(@"%@", error.localizedDescription);
@@ -376,7 +376,7 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
 }
 - (void) getUpdates {
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
-    NSArray *keys = @[@"update", @"author", @"objectId", @"image", @"url"];
+    NSArray *keys = @[@"author", @"objectId", @"image", @"url", @"audience", @"group"];
     [query includeKeys:keys];
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"author" containedIn:self.friends];
@@ -386,7 +386,19 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
         typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf) {
             if (updates != nil) {
-                strongSelf.updates = updates;
+                for (Update *update in updates) {
+                    if ([update.audience isEqual:@"everyone"] || [update.author.objectId isEqual:[PFUser currentUser].objectId]) {
+                        [strongSelf.updates addObject:update];
+                    }
+                    else {
+                        for (NSString *objectID in update.group.members) {
+                            if ([objectID isEqual:[PFUser currentUser].objectId]) {
+                                [strongSelf.updates addObject:update];
+                                break;
+                            }
+                        }
+                    }
+                }
                 NSLog(@"got updates");
                 [strongSelf placeUpdatePins];
             } else {

@@ -25,7 +25,6 @@ static NSString *segueToLikes = @"showLikes";
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UpdateCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-// @property (strong, nonatomic) NSArray *updates;
 @property (strong, nonatomic) NSMutableArray *updates;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> *isLikedByUser;
 @property (strong, nonatomic) NSMutableArray *friends;
@@ -67,9 +66,8 @@ static NSString *segueToLikes = @"showLikes";
         typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf) {
             if (updates != nil) {
-                if ([strongSelf.updates count] < numUpdates) strongSelf.loadedAllData = true;
                 strongSelf.isLikedByUser = [[NSMutableDictionary alloc] init];
-                for (Update *update in strongSelf.updates) {
+                for (Update *update in updates) {
                     // set all updates to unliked initially
                     [strongSelf.isLikedByUser setValue:@"0" forKey:update.objectId];
                     // immediately add posts for everyone, and your own private posts
@@ -85,6 +83,7 @@ static NSString *segueToLikes = @"showLikes";
                         }
                     }
                 }
+                if ([strongSelf.updates count] < numUpdates) strongSelf.loadedAllData = true;
                 NSLog(@"got updates = %lu", [strongSelf.updates count]);
                 [strongSelf getLikes];
             } else {
