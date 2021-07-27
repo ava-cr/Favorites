@@ -19,12 +19,14 @@
 @dynamic locationTitle;
 @dynamic latitude;
 @dynamic longitude;
+@dynamic audience;
+@dynamic group;
 
 + (nonnull NSString *)parseClassName {
     return @"Update";
 }
 
-+ (void) postUserUpdate: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption locationTitle: ( NSString * _Nullable )locationTitle lat:( NSNumber * _Nullable )lat lng:( NSNumber * _Nullable )lng withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) postUserUpdate:( UIImage * _Nullable )image withCaption:( NSString * _Nullable )caption locationTitle:( NSString * _Nullable )locationTitle lat:( NSNumber * _Nullable )lat lng:( NSNumber * _Nullable )lng withAudience:( NSString * _Nullable )audience withGroup:( Group * )group withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Update *newUpdate = [Update new];
     newUpdate.image = [self getPFFileFromImage:image];
@@ -35,22 +37,16 @@
     newUpdate.latitude = lat;
     newUpdate.longitude = lng;
     newUpdate.locationTitle = locationTitle;
+    newUpdate.audience = audience;
+    newUpdate.group = group;
     
     [newUpdate saveInBackgroundWithBlock: completion];
 }
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
- 
-    // check if image is not nil
-    if (!image) {
-        return nil;
-    }
-    
+     if (!image) return nil;
     NSData *imageData = UIImagePNGRepresentation(image);
-    // get image data and check if that is not nil
-    if (!imageData) {
-        return nil;
-    }
+    if (!imageData) return nil;
     return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 

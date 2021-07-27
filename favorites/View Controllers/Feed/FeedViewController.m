@@ -15,6 +15,7 @@
 #import "LikesViewController.h"
 #import "Friend.h"
 #import "Like.h"
+#import "Group.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <DateTools/DateTools.h>
 
@@ -24,7 +25,8 @@ static NSString *segueToLikes = @"showLikes";
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UpdateCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *updates;
+// @property (strong, nonatomic) NSArray *updates;
+@property (strong, nonatomic) NSMutableArray *updates;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> *isLikedByUser;
 @property (strong, nonatomic) NSMutableArray *friends;
 @property (nonatomic, assign) BOOL loadedAllData;
@@ -43,6 +45,7 @@ static NSString *segueToLikes = @"showLikes";
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.friends = [[NSMutableArray alloc] initWithObjects:[PFUser currentUser], nil];
+    self.updates = [[NSMutableArray alloc] init];
     [self getFriends];
 }
 
@@ -54,7 +57,7 @@ static NSString *segueToLikes = @"showLikes";
 - (void) getUpdates: (int) numUpdates {
     [SVProgressHUD show]; // activity monitor
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
-    NSArray *keys = @[@"update", @"author", @"objectId"];
+    NSArray *keys = @[@"author", @"objectId", @"audience", @"group"];
     [query includeKeys:keys];
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"author" containedIn:self.friends];
@@ -64,13 +67,25 @@ static NSString *segueToLikes = @"showLikes";
         typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf) {
             if (updates != nil) {
-                strongSelf.updates = updates;
-                NSLog(@"got updates");
                 if ([strongSelf.updates count] < numUpdates) strongSelf.loadedAllData = true;
                 strongSelf.isLikedByUser = [[NSMutableDictionary alloc] init];
-                for (Update *update in strongSelf.updates) { // set all updates to unliked initially
+                for (Update *update in strongSelf.updates) {
+                    // set all updates to unliked initially
                     [strongSelf.isLikedByUser setValue:@"0" forKey:update.objectId];
+                    // immediately add posts for everyone, and your own private posts
+                    if ([update.audience isEqual:@"everyone"] || [update.author.objectId isEqual:[PFUser currentUser].objectId]) {
+                        [strongSelf.updates addObject:update];
+                    }
+                    else {
+                        for (NSString *objectID in update.group.members) {
+                            if ([objectID isEqual:[PFUser currentUser].objectId]) {
+                                [strongSelf.updates addObject:update];
+                                break;
+                            }
+                        }
+                    }
                 }
+                NSLog(@"got updates = %lu", [strongSelf.updates count]);
                 [strongSelf getLikes];
             } else {
                 NSLog(@"%@", error.localizedDescription);
@@ -328,6 +343,8 @@ static NSString *segueToLikes = @"showLikes";
 
 - (IBAction) postedUpdateUnwind:(UIStoryboardSegue*)unwindSegue {
     ComposeUpdateViewController *composeVC = [unwindSegue sourceViewController];
+    NSString *audience = composeVC.audience;
+    Group *group = composeVC.group;
     PFUser *currentUser = [PFUser currentUser];
     currentUser[@"numPosts"] = [NSNumber numberWithInt:([currentUser[@"numPosts"] intValue] + 1)];
     [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -338,7 +355,7 @@ static NSString *segueToLikes = @"showLikes";
         }
     }];
     typeof(self) __weak weakSelf = self;
-    [Update postUserUpdate:composeVC.image withCaption:composeVC.caption locationTitle:composeVC.locationTitle lat:composeVC.latitude lng:composeVC.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Update postUserUpdate:composeVC.image withCaption:composeVC.caption locationTitle:composeVC.locationTitle lat:composeVC.latitude lng:composeVC.longitude withAudience:audience withGroup:group withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf) {
             if (succeeded) {

@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Group.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *locationTitle;
 @property (strong, nonatomic) NSNumber *latitude;
 @property (strong, nonatomic) NSNumber *longitude;
+@property (strong, nonatomic) NSString *audience;
+@property (strong, nonatomic) Group *group;
 
 @end
 

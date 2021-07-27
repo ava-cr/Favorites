@@ -1010,6 +1010,7 @@
                                         <connections>
                                             <outlet property="memberStringLabel" destination="6dI-KK-TeW" id="Q0X-jq-P94"/>
                                             <outlet property="titleLabel" destination="tt5-pC-QuK" id="dEc-q5-lgp"/>
+                                            <segue destination="g5c-GV-6WQ" kind="unwind" identifier="groupChosen" unwindAction="groupForPostChosenUnwind:" id="NgN-9G-qVD"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1037,6 +1038,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BpG-oO-qdt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="g5c-GV-6WQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1882.608695652174" y="3196.2053571428569"/>
         </scene>
@@ -2149,8 +2151,8 @@
         <image name="dessert" width="48" height="48"/>
         <image name="drink" width="48" height="48"/>
         <image name="eat" width="48" height="48"/>
-        <image name="heart" width="48" height="48"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="heart" width="48" height="48"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <image name="network" catalog="system" width="128" height="121"/>

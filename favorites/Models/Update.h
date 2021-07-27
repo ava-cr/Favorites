@@ -6,6 +6,7 @@
 //
 
 #import <Parse/Parse.h>
+#import "Group.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,8 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *commentCount;
 @property (nonatomic, strong) NSNumber *latitude;
 @property (nonatomic, strong) NSNumber *longitude;
+@property (nonatomic, strong) NSString *audience;
+@property (nonatomic, strong) Group *group;
 
-+ (void) postUserUpdate: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption locationTitle: ( NSString * _Nullable )locationTitle lat:( NSNumber * _Nullable )lat lng:( NSNumber * _Nullable )lng withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) postUserUpdate:( UIImage * _Nullable )image withCaption:( NSString * _Nullable )caption locationTitle:( NSString * _Nullable )locationTitle lat:( NSNumber * _Nullable )lat lng:( NSNumber * _Nullable )lng withAudience:( NSString * _Nullable )audience withGroup:( Group * _Nullable )group withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
 

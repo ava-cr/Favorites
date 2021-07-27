@@ -34,7 +34,7 @@ static NSString *unwindAddGroup = @"unwindToGroups";
     if (!self.friends) [self getFriends];
     else self.filteredFriends = [NSMutableArray arrayWithArray:self.friends];
     if (self.addToGroup) {
-        self.title = NSLocalizedString(@"Add Friends", @"add friends to group");
+        self.title = NSLocalizedString(@"Choose Friends for your Group", @"add friends to group");
         self.tableView.allowsMultipleSelection = YES;
         [self.doneButton setEnabled:YES];
         [self.doneButton setTitle:NSLocalizedString(@"Done", @"finished selecting friends for group")];

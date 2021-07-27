@@ -109,16 +109,19 @@ static NSString *segueToGroups = @"showMyGroups";
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
         self.sharingWithLabel.text = NSLocalizedString(@"Just Me", @"post is private to the user");
+        self.audience = @"private";
     }];
     UIAlertAction *chooseGroup = [UIAlertAction actionWithTitle:NSLocalizedString(@"Share with Group", @"choose a group to share the post with")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
+        self.audience = @"group";
         [self performSegueWithIdentifier:segueToGroups sender:nil];
     }];
     UIAlertAction *allFriends = [UIAlertAction actionWithTitle:NSLocalizedString(@"All Friends", @"share post with all friends")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
         self.sharingWithLabel.text = NSLocalizedString(@"All Friends", @"share post with all friends");
+        self.audience = @"everyone";
     }];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"close alert controller")
                                                        style:UIAlertActionStyleCancel
@@ -194,6 +197,7 @@ static NSString *segueToGroups = @"showMyGroups";
 - (IBAction) groupForPostChosenUnwind:(UIStoryboardSegue*)unwindSegue {
     GroupsViewController *groupsVC = [unwindSegue sourceViewController];
     Group *group = groupsVC.chosenGroup;
+    self.group = group;
     self.sharingWithLabel.text = group.title;
 }
 

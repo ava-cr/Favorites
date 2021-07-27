@@ -13,6 +13,7 @@
 
 static NSString *cellId = @"GroupCell";
 static NSString *segueToFriends = @"showFriends";
+static NSString *unwindToCompose = @"groupChosen";
 
 @interface GroupsViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -89,6 +90,7 @@ static NSString *segueToFriends = @"showFriends";
         Group *group = self.groups[indexPath.row];
         cell.titleLabel.text = group.title;
         cell.memberStringLabel.text = group.membersString;
+        cell.group = group;
     }
     return cell;
 }
@@ -113,6 +115,10 @@ static NSString *segueToFriends = @"showFriends";
         ListFriendsViewController *friendsVC = [segue destinationViewController];
         friendsVC.addToGroup = YES;
         friendsVC.user = [PFUser currentUser];
+    }
+    else if ([segue.identifier isEqual:unwindToCompose]) {
+        GroupCell *tappedCell = sender;
+        self.chosenGroup = tappedCell.group;
     }
 }
 
