@@ -8,7 +8,11 @@
 #import "ComposeUpdateViewController.h"
 #import "MyPinsViewController.h"
 #import "Pin.h"
+#import "GroupsViewController.h"
+#import "Group.h"
 #import <CoreLocation/CoreLocation.h>
+
+static NSString *segueToGroups = @"showMyGroups";
 
 @interface ComposeUpdateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
 
@@ -17,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property CLLocationManager *locationManager;
 @property CLLocation *userLocation;
+@property (weak, nonatomic) IBOutlet UILabel *sharingWithLabel;
 
 @end
 
@@ -98,6 +103,32 @@
     [addPic addAction:cancel];
     [self presentViewController:addPic animated:YES completion:nil];
 }
+- (IBAction)shareWithTapped:(id)sender {
+    UIAlertController *sharingOptions = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
+    UIAlertAction *private = [UIAlertAction actionWithTitle:NSLocalizedString(@"Private", @"post is private to the user")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+        self.sharingWithLabel.text = NSLocalizedString(@"Just Me", @"post is private to the user");
+    }];
+    UIAlertAction *chooseGroup = [UIAlertAction actionWithTitle:NSLocalizedString(@"Share with Group", @"choose a group to share the post with")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+        [self performSegueWithIdentifier:segueToGroups sender:nil];
+    }];
+    UIAlertAction *allFriends = [UIAlertAction actionWithTitle:NSLocalizedString(@"All Friends", @"share post with all friends")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+        self.sharingWithLabel.text = NSLocalizedString(@"All Friends", @"share post with all friends");
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"close alert controller")
+                                                       style:UIAlertActionStyleCancel
+                                                     handler:^(UIAlertAction * _Nonnull action) {}];
+    [sharingOptions addAction:private];
+    [sharingOptions addAction:chooseGroup];
+    [sharingOptions addAction:allFriends];
+    [sharingOptions addAction:cancel];
+    [self presentViewController:sharingOptions animated:YES completion:nil];
+}
 
 - (IBAction)cancelTapped:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
@@ -158,6 +189,12 @@
     self.locationLabel.text = pin.title;
     self.latitude = pin.latitude;
     self.longitude = pin.longitude;
+}
+
+- (IBAction) groupForPostChosenUnwind:(UIStoryboardSegue*)unwindSegue {
+    GroupsViewController *groupsVC = [unwindSegue sourceViewController];
+    Group *group = groupsVC.chosenGroup;
+    self.sharingWithLabel.text = group.title;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

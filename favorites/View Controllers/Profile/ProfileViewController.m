@@ -467,6 +467,7 @@ static NSString *segueToLikes = @"showLikes";
     else if ([segue.identifier isEqual:@"listFriends"]) {
         ListFriendsViewController *friendsVC = [segue destinationViewController];
         friendsVC.friends = self.friends;
+        friendsVC.user = self.user;
     }
     else if ([segue.identifier isEqual:segueToComments]) {
         Update *update = sender;

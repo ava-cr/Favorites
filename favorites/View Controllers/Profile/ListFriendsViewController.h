@@ -6,12 +6,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ListFriendsViewController : UIViewController
 
 @property (strong, nonatomic) NSArray *friends;
+@property (strong, nonatomic) PFUser *user;
+@property (nonatomic, assign) BOOL addToGroup;
+@property (strong, nonatomic) NSMutableArray *members;
+@property (strong, nonatomic) NSString *membersString;
 
 @end
 

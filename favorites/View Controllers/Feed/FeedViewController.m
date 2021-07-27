@@ -27,7 +27,7 @@ static NSString *segueToLikes = @"showLikes";
 @property (strong, nonatomic) NSArray *updates;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> *isLikedByUser;
 @property (strong, nonatomic) NSMutableArray *friends;
-@property (nonatomic) BOOL loadedAllData;
+@property (nonatomic, assign) BOOL loadedAllData;
 
 @end
 

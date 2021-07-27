@@ -23,6 +23,9 @@
 		4648297E26AA10DE00482CB1 /* LikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648297D26AA10DE00482CB1 /* LikesViewController.m */; };
 		4648298126AA117500482CB1 /* LikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648298026AA117500482CB1 /* LikeCell.m */; };
 		4648298426AA2AD600482CB1 /* CommentNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4648298326AA2AD600482CB1 /* CommentNotificationCell.m */; };
+		464829C826B04D5700482CB1 /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464829C726B04D5700482CB1 /* GroupsViewController.m */; };
+		464829CB26B04EF000482CB1 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 464829CA26B04EF000482CB1 /* Group.m */; };
+		464829CE26B0528F00482CB1 /* GroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 464829CD26B0528F00482CB1 /* GroupCell.m */; };
 		464D1D92269C7EB500C32AE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D91269C7EB500C32AE2 /* AppDelegate.m */; };
 		464D1D95269C7EB500C32AE2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D1D94269C7EB500C32AE2 /* SceneDelegate.m */; };
 		464D1D9B269C7EB500C32AE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D1D99269C7EB500C32AE2 /* Main.storyboard */; };
@@ -111,6 +114,12 @@
 		4648298026AA117500482CB1 /* LikeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LikeCell.m; sourceTree = "<group>"; };
 		4648298226AA2AD600482CB1 /* CommentNotificationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentNotificationCell.h; sourceTree = "<group>"; };
 		4648298326AA2AD600482CB1 /* CommentNotificationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentNotificationCell.m; sourceTree = "<group>"; };
+		464829C626B04D5700482CB1 /* GroupsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupsViewController.h; sourceTree = "<group>"; };
+		464829C726B04D5700482CB1 /* GroupsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupsViewController.m; sourceTree = "<group>"; };
+		464829C926B04EF000482CB1 /* Group.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		464829CA26B04EF000482CB1 /* Group.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		464829CC26B0528F00482CB1 /* GroupCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupCell.h; sourceTree = "<group>"; };
+		464829CD26B0528F00482CB1 /* GroupCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupCell.m; sourceTree = "<group>"; };
 		464D1D8D269C7EB500C32AE2 /* favorites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = favorites.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464D1D90269C7EB500C32AE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		464D1D91269C7EB500C32AE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -245,6 +254,8 @@
 				46A36B4326A0839E003C3429 /* NotificationsViewController.m */,
 				4648297C26AA10DE00482CB1 /* LikesViewController.h */,
 				4648297D26AA10DE00482CB1 /* LikesViewController.m */,
+				464829C626B04D5700482CB1 /* GroupsViewController.h */,
+				464829C726B04D5700482CB1 /* GroupsViewController.m */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -370,6 +381,8 @@
 				4648298026AA117500482CB1 /* LikeCell.m */,
 				4648298226AA2AD600482CB1 /* CommentNotificationCell.h */,
 				4648298326AA2AD600482CB1 /* CommentNotificationCell.m */,
+				464829CC26B0528F00482CB1 /* GroupCell.h */,
+				464829CD26B0528F00482CB1 /* GroupCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -389,6 +402,8 @@
 				4648296126A706C400482CB1 /* Like.m */,
 				4648296C26A7458900482CB1 /* Comment.h */,
 				4648296D26A7458900482CB1 /* Comment.m */,
+				464829C926B04EF000482CB1 /* Group.h */,
+				464829CA26B04EF000482CB1 /* Group.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -695,8 +710,10 @@
 				46A36B3E269F9AE4003C3429 /* AddFriendCell.m in Sources */,
 				463278AF26A1C3BE007BCA59 /* ListFriendCell.m in Sources */,
 				46A36B5326A0ECE4003C3429 /* EditProfileViewController.m in Sources */,
+				464829C826B04D5700482CB1 /* GroupsViewController.m in Sources */,
 				464D1E17269D323300C32AE2 /* SearchLocationsViewController.m in Sources */,
 				46A36B4426A0839E003C3429 /* NotificationsViewController.m in Sources */,
+				464829CB26B04EF000482CB1 /* Group.m in Sources */,
 				4648297826A87A9700482CB1 /* UpdateDetailsViewController.m in Sources */,
 				4648297E26AA10DE00482CB1 /* LikesViewController.m in Sources */,
 				46B59A3226A5E4C000D384D4 /* APIManager.m in Sources */,
@@ -714,6 +731,7 @@
 				46A36B4726A0844A003C3429 /* FriendRequestCell.m in Sources */,
 				46B59A3B26A66D1800D384D4 /* ListPinCell.m in Sources */,
 				4648296E26A7458900482CB1 /* Comment.m in Sources */,
+				464829CE26B0528F00482CB1 /* GroupCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
