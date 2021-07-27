@@ -99,7 +99,7 @@ static NSString *segueToLikes = @"showLikes";
                 NSLog(@"%@", error.localizedDescription);
             }
         }
-        [SVProgressHUD dismiss];
+        if ([SVProgressHUD isVisible]) [SVProgressHUD dismiss];
     }];
 }
 
@@ -206,8 +206,9 @@ static NSString *segueToLikes = @"showLikes";
     [self performSegueWithIdentifier:@"showProfile" sender:user];
 }
 - (void)updateCell:(UpdateCell *)updateCell likedUpdate:(Update *)update {
-    NSLog(@"%@", self.isLikedByUser[update.objectId]);
+    UIImage *heartImage = [[UIImage alloc] init];
     if ([self.isLikedByUser[update.objectId] isEqual:@"0"]) {
+        heartImage = [UIImage imageNamed:@"fullheart"];
         // create a like object, increment like count
         update[@"likeCount"] = [NSNumber numberWithInt:([update[@"likeCount"] intValue] + 1)];
         [update saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -225,7 +226,7 @@ static NSString *segueToLikes = @"showLikes";
                 if (succeeded) {
                     NSLog(@"created new like!");
                     [strongSelf sendLikePush:update];
-                    [strongSelf getUpdates: 20];
+                    [strongSelf getLikes];
                 } else {
                     NSLog(@"%@", error.localizedDescription);
                 }
@@ -233,6 +234,7 @@ static NSString *segueToLikes = @"showLikes";
         }];
     }
     else { // delete a like object, decrememt like count
+        heartImage = [UIImage imageNamed:@"brokenheart"];
         [self.isLikedByUser setValue:@"0" forKey:update.objectId];
         update[@"likeCount"] = [NSNumber numberWithInt:([update[@"likeCount"] intValue] - 1)];
         [update saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -244,6 +246,18 @@ static NSString *segueToLikes = @"showLikes";
         }];
         [self deleteLike:update];
     }
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:heartImage];
+    int size = 150;
+    int x = updateCell.contentView.frame.origin.x + updateCell.contentView.frame.size.width/2 - size/2;
+    int y = updateCell.picImageView.frame.origin.y + updateCell.picImageView.frame.size.height/2 - size/2;
+    [imageView setFrame:CGRectMake(x, y, size, size)];
+    [updateCell.contentView addSubview:imageView];
+    [imageView setAlpha:0];
+    [UIView animateKeyframesWithDuration:0.2f delay:0.1f options:0 animations:^{imageView.alpha = 0.9;} completion:^(BOOL finished) {
+        [UIView animateKeyframesWithDuration:0.5f delay:0.2f options:0 animations:^{imageView.alpha = 0.0;} completion:^(BOOL finished) {
+            [imageView removeFromSuperview];
+        }];
+    }];
 }
 
 -(void) deleteLike:(Update *)update {
@@ -259,7 +273,7 @@ static NSString *segueToLikes = @"showLikes";
                 [like deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if(succeeded) {
                         NSLog(@"deleted like");
-                        [strongSelf getUpdates:20];
+                        [strongSelf getLikes];
                     }
                     else {
                         NSLog(@"%@", error.localizedDescription);
@@ -329,7 +343,7 @@ static NSString *segueToLikes = @"showLikes";
         if (strongSelf) {
             if (succeeded) {
                 NSLog(@"the update was posted!");
-                [strongSelf getUpdates: 20];
+                [strongSelf getUpdates:20];
             } else {
                 NSLog(@"problem saving update: %@", error.localizedDescription);
             }

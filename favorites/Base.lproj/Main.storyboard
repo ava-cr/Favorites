@@ -2029,9 +2029,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UMX-5n-MsD"/>
+        <segue reference="15X-OK-XO9"/>
         <segue reference="UQe-ax-ap8"/>
-        <segue reference="HkM-xv-pqN"/>
+        <segue reference="7if-5d-Uoj"/>
         <segue reference="0IP-IJ-Hde"/>
         <segue reference="hda-eY-N8b"/>
         <segue reference="Ldp-kw-Npj"/>
@@ -2045,8 +2045,8 @@
         <image name="dessert" width="48" height="48"/>
         <image name="drink" width="48" height="48"/>
         <image name="eat" width="48" height="48"/>
-        <image name="heart" width="48" height="48"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="heart" width="48" height="48"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <image name="network" catalog="system" width="128" height="121"/>
