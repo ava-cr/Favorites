@@ -40,12 +40,12 @@ static NSString *unwindToCompose = @"groupChosen";
     addGroup.shouldDismissOnTapOutside = YES;
     [addGroup setShowAnimationType:SCLAlertViewShowAnimationSlideInToCenter];
     [addGroup setBackgroundType:SCLAlertViewBackgroundBlur];
-    [addGroup addButton:@"Done" actionBlock:^(void) {
+    [addGroup addButton:NSLocalizedString(@"Done", @"finished typing name") actionBlock:^(void) {
         NSLog(@"Text value: %@", textField.text);
         self.addedGroupName = textField.text;
         [self performSegueWithIdentifier:segueToFriends sender:nil];
     }];
-    [addGroup showEdit:self title:@"Add a Group" subTitle:@"Give your group a name" closeButtonTitle:@"Cancel" duration:0.0f];
+    [addGroup showEdit:self title:NSLocalizedString(@"Add a Group", @"adding a group alert") subTitle:NSLocalizedString(@"Give your group a name", @"prompting user to name group") closeButtonTitle:NSLocalizedString(@"Cancel", @"close alert") duration:0.0f];
 }
 
 -(void) getGroups {

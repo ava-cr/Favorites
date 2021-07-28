@@ -9,6 +9,7 @@
 #import "WebsiteViewController.h"
 #import <MapKit/MapKit.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import <SCLAlertView_Objective_C/SCLAlertView.h>
 #import "APIManager.h"
 
 static NSString *segueIdToWebsite = @"showWebsite";
@@ -116,13 +117,11 @@ static NSString *unwindSegueToMap = @"addPin";
         [self performSegueWithIdentifier:segueIdToWebsite sender:nil];
     }
     else {
-        UIAlertController *insecureWebsiteWarning = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Website Not Secure", @"alert message that website is unsecure") message:nil preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *ok = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"accepting alert message")
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * _Nonnull action) {
-        }];
-        [insecureWebsiteWarning addAction:ok];
-        [self presentViewController:insecureWebsiteWarning animated:YES completion:nil];
+        SCLAlertView *alert = [[SCLAlertView alloc] init];
+        [alert setShowAnimationType:SCLAlertViewShowAnimationSlideInToCenter];
+        [alert setBackgroundType:SCLAlertViewBackgroundBlur];
+        alert.shouldDismissOnTapOutside = YES;
+        [alert showError:self title:NSLocalizedString(@"Error", @"error message") subTitle:NSLocalizedString(@"Website not secure.",@"alert message that website is unsecure")  closeButtonTitle:NSLocalizedString(@"OK", @"accepting alert message") duration:0.0f];
     }
 }
 // code to move the view up when the keyboard shows
