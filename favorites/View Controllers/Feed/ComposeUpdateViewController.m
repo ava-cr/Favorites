@@ -11,17 +11,18 @@
 #import "GroupsViewController.h"
 #import "Group.h"
 #import <CoreLocation/CoreLocation.h>
+#import <JVFloatLabeledTextField/JVFloatLabeledTextView.h>
 
 static NSString *segueToGroups = @"showMyGroups";
 
 @interface ComposeUpdateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *picImageView;
-@property (weak, nonatomic) IBOutlet UITextField *captionTextField;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property CLLocationManager *locationManager;
 @property CLLocation *userLocation;
 @property (weak, nonatomic) IBOutlet UILabel *sharingWithLabel;
+@property (strong, nonatomic) JVFloatLabeledTextView *captionTextView;
 
 @end
 
@@ -38,13 +39,22 @@ static NSString *segueToGroups = @"showMyGroups";
     if ([self.locationManager authorizationStatus ] == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestWhenInUseAuthorization];
     }
-    
     UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tapScreen];
+    [self setUpTextView];
 }
 
 -(void)dismissKeyboard {
-    [self.captionTextField resignFirstResponder];
+    [self.captionTextView resignFirstResponder];
+}
+
+-(void)setUpTextView {
+    int y = self.locationLabel.frame.origin.y + 30;
+    self.captionTextView = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x + self.view.frame.size.width/2 - 150, y, 300, 100)];
+    [self.captionTextView setPlaceholder:NSLocalizedString(@"Write a caption...", @"placeholder text to prompt user to type a caption")];
+    [self.captionTextView setTintColor:UIColor.systemPinkColor];
+    [self.captionTextView setScrollEnabled:YES];
+    [self.view addSubview:self.captionTextView];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
@@ -184,6 +194,34 @@ static NSString *segueToGroups = @"showMyGroups";
     return newImage;
 }
 
+// code to move the view up when the keyboard shows
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+- (void)keyboardWillShow:(NSNotification *)notification {
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    NSLog(@"keyboard will show %f", keyboardSize.height);
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect f = self.view.frame;
+        f.origin.y = -(keyboardSize.height - 80);
+        self.view.frame = f;
+    }];
+}
+-(void)keyboardWillHide:(NSNotification *)notification {
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect f = self.view.frame;
+        f.origin.y = 0.0f;
+        self.view.frame = f;
+    }];
+}
+
 #pragma mark - Navigation
 
 - (IBAction) pinForPostChosenUnwind:(UIStoryboardSegue*)unwindSegue {
@@ -204,7 +242,7 @@ static NSString *segueToGroups = @"showMyGroups";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqual:@"postedUpdate"]) {
         self.image = self.picImageView.image;
-        self.caption = self.captionTextField.text;
+        self.caption = self.captionTextView.text;
         self.locationTitle = self.locationLabel.text;
     }
 }

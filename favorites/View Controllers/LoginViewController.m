@@ -46,7 +46,7 @@ static int height = 60;
     self.usernameField.font = newFont;
     [self.view addSubview:self.usernameField];
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(x, y + height, width, 0.75)];
-    [line setBackgroundColor:UIColor.whiteColor];
+    [line setBackgroundColor:UIColor.labelColor];
     [self.view addSubview:line];
     self.passwordField = [[JVFloatLabeledTextField alloc] initWithFrame:CGRectMake(x, y + height + 10, width, height)];
     [self.passwordField setPlaceholder:NSLocalizedString(@"password", @"password string")];
@@ -58,7 +58,7 @@ static int height = 60;
     self.passwordField.font = newFont;
     [self.view addSubview:self.passwordField];
     UIView *passwordLine = [[UIView alloc] initWithFrame:CGRectMake(x, y + 2*height + 10, width, 0.75)];
-    [passwordLine setBackgroundColor:UIColor.whiteColor];
+    [passwordLine setBackgroundColor:UIColor.labelColor];
     [self.view addSubview:passwordLine];
 }
 
