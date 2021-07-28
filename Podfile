@@ -9,6 +9,7 @@ target 'favorites' do
   pod 'Parse'
   pod 'SVProgressHUD'
   pod 'DateTools'
+  pod 'SCLAlertView-Objective-C'
 
 
   target 'favoritesTests' do

@@ -5,11 +5,13 @@ PODS:
     - Parse/Core (= 1.19.2)
   - Parse/Core (1.19.2):
     - Bolts/Tasks (= 1.9.1)
+  - SCLAlertView-Objective-C (1.2.0)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - DateTools
   - Parse
+  - SCLAlertView-Objective-C
   - SVProgressHUD
 
 SPEC REPOS:
@@ -17,14 +19,16 @@ SPEC REPOS:
     - Bolts
     - DateTools
     - Parse
+    - SCLAlertView-Objective-C
     - SVProgressHUD
 
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   Parse: 081fb8755c3000fd11df817eec235def233d0af3
+  SCLAlertView-Objective-C: 84f12f66d779dadad7f293e5e8b7697ba4254ee0
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: be20090773f01b817a66e3d62da994f0fba7fd50
+PODFILE CHECKSUM: 2941bb7d595e7bc8502d056f18dcc81c6dfff168
 
 COCOAPODS: 1.10.1

@@ -50,7 +50,7 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     self.mapView.delegate = self;
     if (!self.user) self.user = [PFUser currentUser];
     self.listPinsButton.layer.cornerRadius = 8;
-    [self getPins];
+    //[self getPins];
     if ([self.user isEqual:[PFUser currentUser]]) {
         self.title = NSLocalizedString(@"Your Pins", @"the user's saved locations");
         [self.cancelButton setEnabled:FALSE];

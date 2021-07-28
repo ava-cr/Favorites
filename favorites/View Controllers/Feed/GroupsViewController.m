@@ -10,6 +10,7 @@
 #import "Group.h"
 #import "GroupCell.h"
 #import <Parse/Parse.h>
+#import <SCLAlertView_Objective_C/SCLAlertView.h>
 
 static NSString *cellId = @"GroupCell";
 static NSString *segueToFriends = @"showFriends";
@@ -32,27 +33,19 @@ static NSString *unwindToCompose = @"groupChosen";
     [self getGroups];
 }
 - (IBAction)addButtonTapped:(id)sender {
-    UIAlertController *addGroup = [UIAlertController alertControllerWithTitle:@"Add a Group"
-                                                                   message:@"Give your group a name"
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *addTitle = [UIAlertAction actionWithTitle:@"OK"
-                                                            style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {
-        NSLog(@"%@", addGroup.textFields[0].text);
-        self.addedGroupName = addGroup.textFields[0].text;
+    SCLAlertView *addGroup = [[SCLAlertView alloc] init];
+    UITextField *textField = [addGroup addTextField:@"Enter a group name"];
+    [textField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+    addGroup.customViewColor = [UIColor blueColor];
+    addGroup.shouldDismissOnTapOutside = YES;
+    [addGroup setShowAnimationType:SCLAlertViewShowAnimationSlideInToCenter];
+    [addGroup setBackgroundType:SCLAlertViewBackgroundBlur];
+    [addGroup addButton:@"Done" actionBlock:^(void) {
+        NSLog(@"Text value: %@", textField.text);
+        self.addedGroupName = textField.text;
         [self performSegueWithIdentifier:segueToFriends sender:nil];
     }];
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"close add group alert")
-                                                            style:UIAlertActionStyleCancel
-                                                          handler:^(UIAlertAction * action) {}];
-    [addGroup addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.delegate = self;
-    }];
-    [addGroup addAction:addTitle];
-    [addGroup addAction:cancel];
-    [self presentViewController:addGroup animated:YES completion:^{
-    }];
+    [addGroup showEdit:self title:@"Add a Group" subTitle:@"Give your group a name" closeButtonTitle:@"Cancel" duration:0.0f];
 }
 
 -(void) getGroups {

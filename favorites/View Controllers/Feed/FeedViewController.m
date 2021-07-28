@@ -45,7 +45,7 @@ static NSString *segueToLikes = @"showLikes";
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.friends = [[NSMutableArray alloc] initWithObjects:[PFUser currentUser], nil];
     self.updates = [[NSMutableArray alloc] init];
-    [self getFriends];
+    //[self getFriends];
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
