@@ -23,6 +23,9 @@ static NSString *segueToGroups = @"showMyGroups";
 @property CLLocation *userLocation;
 @property (weak, nonatomic) IBOutlet UILabel *sharingWithLabel;
 @property (strong, nonatomic) JVFloatLabeledTextView *captionTextView;
+@property (weak, nonatomic) IBOutlet UIButton *addPhotoButton;
+@property (weak, nonatomic) IBOutlet UIButton *addLocationButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareWithButton;
 
 @end
 
@@ -42,6 +45,12 @@ static NSString *segueToGroups = @"showMyGroups";
     UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tapScreen];
     [self setUpTextView];
+    self.addPhotoButton.layer.cornerRadius = 8;
+    self.addLocationButton.layer.cornerRadius = 8;
+    self.shareWithButton.layer.cornerRadius = 8;
+    [self.addPhotoButton setTitle:NSLocalizedString(@"Add Photo", @"title of button to add photo") forState:UIControlStateNormal];
+    [self.addLocationButton setTitle:NSLocalizedString(@"Add Location", @"title of button to add location") forState:UIControlStateNormal];
+    [self.shareWithButton setTitle:NSLocalizedString(@"Share with", @"title of button to choose who to share post with") forState:UIControlStateNormal];
 }
 
 -(void)dismissKeyboard {
@@ -63,7 +72,8 @@ static NSString *segueToGroups = @"showMyGroups";
 }
 
 - (IBAction)addLocationTapped:(id)sender {
-    UIAlertController *addLoc = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Add Location", @"prompt the user to choose a location for their post") message:@""preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertController *addLoc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
+    [addLoc.view setTintColor:UIColor.systemPinkColor];
     UIAlertAction *myLocation = [UIAlertAction actionWithTitle:NSLocalizedString(@"Use My Location", @"use the user's current location")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
@@ -95,6 +105,7 @@ static NSString *segueToGroups = @"showMyGroups";
 
 - (IBAction)addPhotoTapped:(id)sender {
     UIAlertController *addPic = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
+    [addPic.view setTintColor:UIColor.systemPinkColor];
     UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"Take Photo", @"use camera to take photo for post")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
@@ -115,6 +126,7 @@ static NSString *segueToGroups = @"showMyGroups";
 }
 - (IBAction)shareWithTapped:(id)sender {
     UIAlertController *sharingOptions = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
+    [sharingOptions.view setTintColor:UIColor.systemPinkColor];
     UIAlertAction *private = [UIAlertAction actionWithTitle:NSLocalizedString(@"Private", @"post is private to the user")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
