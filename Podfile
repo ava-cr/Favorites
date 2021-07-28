@@ -10,6 +10,7 @@ target 'favorites' do
   pod 'SVProgressHUD'
   pod 'DateTools'
   pod 'SCLAlertView-Objective-C'
+  pod 'JVFloatLabeledTextField'
 
 
   target 'favoritesTests' do

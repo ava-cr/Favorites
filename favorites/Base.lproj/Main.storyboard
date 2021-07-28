@@ -1795,49 +1795,59 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVa-kO-byK">
-                                <rect key="frame" x="136" y="435" width="42" height="30"/>
-                                <state key="normal" title="Log In"/>
+                                <rect key="frame" x="115" y="427" width="64" height="42"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleColor" systemColor="systemPinkColor"/>
+                                </state>
                                 <connections>
                                     <action selector="didTapLogIn:" destination="xNF-9z-WAk" eventType="touchUpInside" id="uq1-Fx-bLX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="157-Yg-MSg">
-                                <rect key="frame" x="230" y="435" width="54" height="30"/>
-                                <state key="normal" title="Sign Up"/>
+                                <rect key="frame" x="225" y="427" width="84" height="42"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" systemColor="systemPinkColor"/>
+                                </state>
                                 <connections>
                                     <action selector="didTapSignUp:" destination="xNF-9z-WAk" eventType="touchUpInside" id="anU-h4-P2D"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TuE-cv-HjQ">
-                                <rect key="frame" x="28" y="361" width="366" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ABI-xs-bXP">
-                                <rect key="frame" x="28" y="319" width="366" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="f  a  v  o  r  i  t  e  s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1g-gV-21A">
+                                <rect key="frame" x="64.5" y="199" width="285.5" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="1" height="0.0"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginimage" translatesAutoresizingMaskIntoConstraints="NO" id="FUZ-Cy-KCq">
+                                <rect key="frame" x="167" y="119" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="1Zx-mN-syD"/>
+                                    <constraint firstAttribute="width" constant="80" id="qrh-et-ywl"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="w10-Mj-wwg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="157-Yg-MSg" firstAttribute="centerX" secondItem="UkA-wU-MKO" secondAttribute="centerX" constant="50" id="3N6-Lg-lmf"/>
-                            <constraint firstItem="TuE-cv-HjQ" firstAttribute="trailing" secondItem="ABI-xs-bXP" secondAttribute="trailing" id="Jqz-Eg-2sJ"/>
-                            <constraint firstItem="ABI-xs-bXP" firstAttribute="leading" secondItem="w10-Mj-wwg" secondAttribute="leading" constant="28" id="L60-cc-JGy"/>
-                            <constraint firstItem="ABI-xs-bXP" firstAttribute="top" secondItem="w10-Mj-wwg" secondAttribute="top" constant="275" id="N7R-ng-gxA"/>
-                            <constraint firstItem="TuE-cv-HjQ" firstAttribute="leading" secondItem="ABI-xs-bXP" secondAttribute="leading" id="NjJ-lN-wW1"/>
-                            <constraint firstItem="w10-Mj-wwg" firstAttribute="trailing" secondItem="ABI-xs-bXP" secondAttribute="trailing" constant="20" id="fnh-iK-rXG"/>
-                            <constraint firstItem="tVa-kO-byK" firstAttribute="top" secondItem="TuE-cv-HjQ" secondAttribute="bottom" constant="40" id="k10-ND-Bds"/>
-                            <constraint firstItem="157-Yg-MSg" firstAttribute="centerY" secondItem="tVa-kO-byK" secondAttribute="centerY" id="k7T-zE-gQK"/>
-                            <constraint firstItem="tVa-kO-byK" firstAttribute="centerX" secondItem="UkA-wU-MKO" secondAttribute="centerX" constant="-50" id="kt3-tx-Qk4"/>
-                            <constraint firstItem="TuE-cv-HjQ" firstAttribute="top" secondItem="ABI-xs-bXP" secondAttribute="bottom" constant="8" id="thm-mZ-bev"/>
+                            <constraint firstItem="R1g-gV-21A" firstAttribute="top" secondItem="FUZ-Cy-KCq" secondAttribute="bottom" id="2J1-DI-9jT"/>
+                            <constraint firstItem="R1g-gV-21A" firstAttribute="centerX" secondItem="UkA-wU-MKO" secondAttribute="centerX" id="2up-nI-U7I"/>
+                            <constraint firstItem="157-Yg-MSg" firstAttribute="centerX" secondItem="UkA-wU-MKO" secondAttribute="centerX" constant="60" id="3N6-Lg-lmf"/>
+                            <constraint firstItem="157-Yg-MSg" firstAttribute="centerY" secondItem="UkA-wU-MKO" secondAttribute="centerY" id="8fz-C6-bdB"/>
+                            <constraint firstItem="R1g-gV-21A" firstAttribute="centerX" secondItem="FUZ-Cy-KCq" secondAttribute="centerX" id="H6d-rM-7P0"/>
+                            <constraint firstItem="tVa-kO-byK" firstAttribute="centerY" secondItem="UkA-wU-MKO" secondAttribute="centerY" id="IhJ-dY-zZL"/>
+                            <constraint firstItem="FUZ-Cy-KCq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="w10-Mj-wwg" secondAttribute="top" constant="5" id="PYa-6s-iIG"/>
+                            <constraint firstItem="tVa-kO-byK" firstAttribute="top" secondItem="R1g-gV-21A" secondAttribute="bottom" constant="180" id="bbi-BY-uXm"/>
+                            <constraint firstItem="R1g-gV-21A" firstAttribute="top" relation="greaterThanOrEqual" secondItem="w10-Mj-wwg" secondAttribute="top" constant="20" id="bkQ-nj-yJA"/>
+                            <constraint firstItem="tVa-kO-byK" firstAttribute="centerX" secondItem="UkA-wU-MKO" secondAttribute="centerX" constant="-60" id="kt3-tx-Qk4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zj6-Uj-BKx"/>
                     <connections>
-                        <outlet property="passwordField" destination="TuE-cv-HjQ" id="ny4-q8-Weu"/>
-                        <outlet property="usernameField" destination="ABI-xs-bXP" id="6WH-9J-hiv"/>
+                        <outlet property="logInButton" destination="tVa-kO-byK" id="WGp-mn-RS2"/>
+                        <outlet property="signUpButton" destination="157-Yg-MSg" id="aAQ-Af-p7O"/>
                         <segue destination="g5N-xD-wJ0" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" id="dWa-cX-4cI"/>
                     </connections>
                 </viewController>
@@ -2154,6 +2164,7 @@
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart" width="48" height="48"/>
         <image name="house" catalog="system" width="128" height="106"/>
+        <image name="loginimage" width="689" height="689"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <image name="network" catalog="system" width="128" height="121"/>
         <image name="paperplane.circle" catalog="system" width="128" height="121"/>
@@ -2182,6 +2193,9 @@
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
