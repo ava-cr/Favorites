@@ -44,6 +44,8 @@ static NSString *segueToGroups = @"showMyGroups";
     }
     UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tapScreen];
+    self.sharingWithLabel.text = NSLocalizedString(@"All Friends", @"default sharing label");
+    self.locationLabel.text = NSLocalizedString(@"None", @"default location label");
     [self setUpTextView];
     self.addPhotoButton.layer.cornerRadius = 8;
     self.addLocationButton.layer.cornerRadius = 8;

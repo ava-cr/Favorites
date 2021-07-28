@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <SCLAlertView_Objective_C/SCLAlertView.h>
+#import <JVFloatLabeledTextField/JVFloatLabeledTextView.h>
 #import "APIManager.h"
 
 static NSString *segueIdToWebsite = @"showWebsite";
@@ -18,7 +19,7 @@ static NSString *unwindSegueToMap = @"addPin";
 @interface AddPinViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
-@property (weak, nonatomic) IBOutlet UITextView *notesTextView;
+@property (strong, nonatomic) JVFloatLabeledTextView *notesTextView;
 @property (strong, nonatomic) APIManager *manager;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
@@ -34,15 +35,23 @@ static NSString *unwindSegueToMap = @"addPin";
     self.phone = self.pin.phoneNumber;
     self.address = self.pin.placemark.title;
     self.subtitleLabel.text = self.address;
-    self.notesTextView.layer.borderColor = [UIColor.labelColor CGColor];
-    self.notesTextView.layer.borderWidth = 1.0;
-    self.notesTextView.layer.cornerRadius = self.notesTextView.bounds.size.height / 6;
-    self.notesTextView.textContainer.lineFragmentPadding = 20;
     self.manager = [APIManager new];
     [self businessMatch];
     UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tapScreen];
-    
+    [self setUpTextView];
+}
+
+-(void)setUpTextView {
+    int height = 100;
+    int width = self.segmentedControl.frame.size.width;
+    int y = self.segmentedControl.frame.origin.y + self.segmentedControl.frame.size.height + height/2 + 55;
+    NSLog(@"y = %d", y);
+    self.notesTextView = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x + self.view.frame.size.width/2 - width/2, y, width, height)];
+    [self.notesTextView setPlaceholder:NSLocalizedString(@"Write notes on your pin...", @"prompting the user to write notes on their pin")];
+    [self.notesTextView setTintColor:UIColor.systemPinkColor];
+    [self.notesTextView setScrollEnabled:YES];
+    [self.view addSubview:self.notesTextView];
 }
 
 -(void)dismissKeyboard {
