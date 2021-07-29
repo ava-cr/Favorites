@@ -196,21 +196,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jiU-wg-4N3">
-                                <rect key="frame" x="20" y="341.5" width="374" height="100"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="xRF-y9-WxB"/>
-                                </constraints>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3od-Y8-ChN">
                                 <rect key="frame" x="10" y="756" width="394" height="32"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Delete Pin">
-                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="deletePinTapped:" destination="atg-mE-fSd" eventType="touchUpInside" id="uvH-af-ESh"/>
@@ -237,13 +228,12 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZB2-M0-p2z">
                                 <rect key="frame" x="334" y="20" width="60" height="30"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <color key="backgroundColor" systemColor="systemPinkColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="vgR-P2-8m6"/>
                                 </constraints>
-                                <state key="normal" title="Add Pin">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Add Pin"/>
                                 <connections>
                                     <action selector="addPinTapped:" destination="atg-mE-fSd" eventType="touchUpInside" id="FDM-KE-vkh"/>
                                 </connections>
@@ -256,6 +246,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8J-61-UuR">
                                 <rect key="frame" x="347.5" y="692" width="25" height="23"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal">
                                     <imageReference key="image" image="phone" catalog="system" symbolScale="large"/>
                                 </state>
@@ -271,6 +262,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VRD-TU-vMW">
                                 <rect key="frame" x="272.5" y="691" width="25" height="24"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal">
                                     <imageReference key="image" image="network" catalog="system" symbolScale="large"/>
                                 </state>
@@ -299,17 +291,14 @@
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="SjW-PS-twS" secondAttribute="trailing" constant="40" id="8gE-Dg-ahX"/>
                             <constraint firstItem="D8b-hX-SaR" firstAttribute="top" secondItem="KIs-C5-GCb" secondAttribute="top" id="9Mm-KZ-Q0g"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="hD3-5E-hrg" secondAttribute="trailing" constant="20" id="CMI-hZ-Q90"/>
-                            <constraint firstItem="VRD-TU-vMW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jiU-wg-4N3" secondAttribute="bottom" constant="10" id="DQA-Z7-Jae"/>
                             <constraint firstItem="ZB2-M0-p2z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="20" id="Dtc-k9-Xhj"/>
                             <constraint firstItem="h8J-61-UuR" firstAttribute="leading" secondItem="VRD-TU-vMW" secondAttribute="trailing" constant="50" id="E8R-ig-W5T"/>
                             <constraint firstItem="O8y-Bc-plI" firstAttribute="top" secondItem="D8b-hX-SaR" secondAttribute="bottom" constant="10" id="GZ7-Ui-bfQ"/>
-                            <constraint firstItem="jiU-wg-4N3" firstAttribute="top" secondItem="mSK-hP-WU6" secondAttribute="bottom" constant="20" id="L3Z-Bh-7jt"/>
                             <constraint firstItem="SjW-PS-twS" firstAttribute="bottom" secondItem="zlP-IY-las" secondAttribute="bottom" id="ODN-oS-Fuc"/>
                             <constraint firstItem="tyB-IT-IfF" firstAttribute="top" secondItem="KIs-C5-GCb" secondAttribute="top" constant="20" id="Q75-Nv-g9g"/>
                             <constraint firstItem="tyB-IT-IfF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="10" id="Ry1-pe-Ggu"/>
                             <constraint firstItem="SjW-PS-twS" firstAttribute="top" secondItem="h8J-61-UuR" secondAttribute="bottom" constant="5" id="Sl3-oN-Jho"/>
                             <constraint firstItem="3od-Y8-ChN" firstAttribute="top" secondItem="SjW-PS-twS" secondAttribute="bottom" constant="15" id="SuF-PI-7Ko"/>
-                            <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="jiU-wg-4N3" secondAttribute="trailing" constant="20" id="UCB-UZ-EyN"/>
                             <constraint firstItem="hD3-5E-hrg" firstAttribute="top" secondItem="O8y-Bc-plI" secondAttribute="top" id="WaQ-OZ-Duz"/>
                             <constraint firstItem="hD3-5E-hrg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O8y-Bc-plI" secondAttribute="trailing" constant="10" id="ZVg-rS-OJ8"/>
                             <constraint firstItem="O8y-Bc-plI" firstAttribute="leading" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="20" id="aeX-nz-qfF"/>
@@ -320,7 +309,7 @@
                             <constraint firstItem="h8J-61-UuR" firstAttribute="bottom" secondItem="VRD-TU-vMW" secondAttribute="bottom" id="g7J-A2-qUB"/>
                             <constraint firstItem="D8b-hX-SaR" firstAttribute="trailing" secondItem="KIs-C5-GCb" secondAttribute="trailing" id="hJv-mN-tlS"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mSK-hP-WU6" secondAttribute="trailing" constant="20" id="jQJ-g1-EWd"/>
-                            <constraint firstItem="jiU-wg-4N3" firstAttribute="leading" secondItem="O8y-Bc-plI" secondAttribute="leading" id="k33-km-mRe"/>
+                            <constraint firstItem="h8J-61-UuR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hD3-5E-hrg" secondAttribute="bottom" constant="150" id="jkP-1l-ayl"/>
                             <constraint firstItem="hD3-5E-hrg" firstAttribute="bottom" secondItem="O8y-Bc-plI" secondAttribute="bottom" id="nB9-5d-mXx"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="ZB2-M0-p2z" secondAttribute="trailing" constant="20" id="oSW-qB-amO"/>
                             <constraint firstItem="3od-Y8-ChN" firstAttribute="leading" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="10" id="uKb-lf-GP5"/>
@@ -339,7 +328,6 @@
                         <outlet property="deletePinButton" destination="3od-Y8-ChN" id="6zr-KH-jcD"/>
                         <outlet property="headerImageView" destination="D8b-hX-SaR" id="5hI-b3-KjN"/>
                         <outlet property="modalSaveButton" destination="tyB-IT-IfF" id="FYz-sy-W4R"/>
-                        <outlet property="notesTextView" destination="jiU-wg-4N3" id="Ozb-ND-Nle"/>
                         <outlet property="titleLabel" destination="O8y-Bc-plI" id="8We-0u-VMN"/>
                         <segue destination="6cd-f5-Gi2" kind="unwind" identifier="deletePin" unwindAction="deletePin:" id="5C4-i4-gKy"/>
                         <segue destination="rb9-1J-lNC" kind="presentation" identifier="showWebsite" id="0IP-IJ-Hde"/>
@@ -2141,7 +2129,7 @@
         <segue reference="15X-OK-XO9"/>
         <segue reference="ks2-i2-p0q"/>
         <segue reference="7if-5d-Uoj"/>
-        <segue reference="KGr-TS-F6e"/>
+        <segue reference="0IP-IJ-Hde"/>
         <segue reference="hda-eY-N8b"/>
         <segue reference="Ldp-kw-Npj"/>
         <segue reference="9tI-lf-D44"/>
@@ -2154,8 +2142,8 @@
         <image name="dessert" width="48" height="48"/>
         <image name="drink" width="48" height="48"/>
         <image name="eat" width="48" height="48"/>
-        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart" width="48" height="48"/>
+        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="loginimage" width="689" height="689"/>
         <image name="map" catalog="system" width="128" height="110"/>
@@ -2180,9 +2168,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

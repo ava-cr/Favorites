@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <Parse/Parse.h>
 #import <SCLAlertView_Objective_C/SCLAlertView.h>
+#import <JVFloatLabeledTextField/JVFloatLabeledTextView.h>
 #import "Pin.h"
 
 static NSString *segueIdToWebsite = @"showWebsite";
@@ -18,7 +19,8 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
 
 @interface PinDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UITextView *notesTextView;
+// @property (weak, nonatomic) IBOutlet UITextView *notesTextView;
+@property (strong, nonatomic) JVFloatLabeledTextView *notesTextView;
 @property (weak, nonatomic) IBOutlet UIButton *addPinButton;
 @property (weak, nonatomic) IBOutlet UIButton *deletePinButton;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
@@ -41,6 +43,7 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
         NSData *urlData = [NSData dataWithContentsOfURL:url];
         self.headerImageView.image = [[UIImage alloc] initWithData:urlData];
     }
+    [self setUpTextView];
     if (self.pin.notes) self.notesTextView.text = self.pin.notes;
     if (![self.user.objectId isEqual:[PFUser currentUser].objectId]) {
         [self.notesTextView setEditable:FALSE];
@@ -51,6 +54,8 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     }
     else {
         [self.modalSaveButton setTitle:NSLocalizedString(@"Save", @"save pin") forState:UIControlStateNormal];
+        self.modalSaveButton.layer.backgroundColor = [UIColor.systemPinkColor CGColor];
+        [self.modalSaveButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         self.modalSaveButton.layer.cornerRadius = 8;
         self.deletePinButton.layer.cornerRadius = 5;
         self.deletePinButton.layer.borderColor = [UIColor.systemRedColor CGColor];
@@ -63,9 +68,22 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     [self setCategoryImage];
 }
 
+-(void)setUpTextView {
+    int height = 100;
+    int width = self.view.frame.size.width - 40;
+    int y = self.addressLabel.frame.origin.y + self.addressLabel.frame.size.height + height/2 + 10;
+    NSLog(@"y = %d", y);
+    self.notesTextView = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x + self.view.frame.size.width/2 - width/2, y, width, height)];
+    [self.notesTextView setPlaceholder:NSLocalizedString(@"Pin notes", @"notes the user has written on their pin")];
+    [self.notesTextView setTintColor:UIColor.systemPinkColor];
+    [self.notesTextView setScrollEnabled:YES];
+    [self.view addSubview:self.notesTextView];
+}
+
 -(void)dismissKeyboard {
     [self.notesTextView resignFirstResponder];
 }
+
 - (void)setCategoryImage {
     int category = [self.pin.category intValue];
     self.categoryImageView.tintColor = UIColor.whiteColor;
