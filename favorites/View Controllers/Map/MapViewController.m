@@ -94,6 +94,7 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     
     [self.mapView setRegion:region animated:TRUE];
     [self.mapView setShowsUserLocation:TRUE];
+    [self.mapView setTintColor:UIColor.systemPinkColor];
     [self.locationManager stopUpdatingLocation];
 }
 

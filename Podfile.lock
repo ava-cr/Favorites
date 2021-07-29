@@ -2,6 +2,7 @@ PODS:
   - Bolts/Tasks (1.9.1)
   - DateTools (2.0.0)
   - JVFloatLabeledTextField (1.2.2)
+  - NYSegmentedControl (1.1.0)
   - Parse (1.19.2):
     - Parse/Core (= 1.19.2)
   - Parse/Core (1.19.2):
@@ -12,6 +13,7 @@ PODS:
 DEPENDENCIES:
   - DateTools
   - JVFloatLabeledTextField
+  - NYSegmentedControl
   - Parse
   - SCLAlertView-Objective-C
   - SVProgressHUD
@@ -21,6 +23,7 @@ SPEC REPOS:
     - Bolts
     - DateTools
     - JVFloatLabeledTextField
+    - NYSegmentedControl
     - Parse
     - SCLAlertView-Objective-C
     - SVProgressHUD
@@ -29,10 +32,11 @@ SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   JVFloatLabeledTextField: df48598472ee015701d509f43e59492a0d4ca208
+  NYSegmentedControl: a92726c9e459919549f94328389ffcdaecefebfe
   Parse: 081fb8755c3000fd11df817eec235def233d0af3
   SCLAlertView-Objective-C: 84f12f66d779dadad7f293e5e8b7697ba4254ee0
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 8101352a03c4ed0fb4ffdb2c6ba63d3a45310794
+PODFILE CHECKSUM: c3fe0f99a6b0871b27a3271569b63bfa1037c43d
 
 COCOAPODS: 1.10.1

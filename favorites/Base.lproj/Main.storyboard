@@ -571,7 +571,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fcm-Cq-oYq">
-                                <rect key="frame" x="327.5" y="744" width="25" height="23"/>
+                                <rect key="frame" x="347.5" y="744" width="25" height="23"/>
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal">
                                     <imageReference key="image" image="phone" catalog="system" symbolScale="large"/>
@@ -581,13 +581,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Call" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDd-bT-Wb0">
-                                <rect key="frame" x="325.5" y="772" width="28.5" height="21"/>
+                                <rect key="frame" x="345.5" y="772" width="28.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2B-RM-zlH">
-                                <rect key="frame" x="252.5" y="743.5" width="25" height="24"/>
+                                <rect key="frame" x="272.5" y="743.5" width="25" height="24"/>
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal">
                                     <imageReference key="image" image="network" catalog="system" symbolScale="large"/>
@@ -597,51 +597,31 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVf-bs-WOc">
-                                <rect key="frame" x="234" y="772" width="62" height="21"/>
+                                <rect key="frame" x="254" y="772" width="62" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DPj-vm-Q8U">
-                                <rect key="frame" x="20" y="430" width="374" height="64.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="DPj-vm-Q8U" secondAttribute="height" multiplier="100:17" id="PZu-b1-Uny"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="" image="eat"/>
-                                    <segment title="" image="cup"/>
-                                    <segment title="" image="drink"/>
-                                    <segment title="" image="dessert"/>
-                                    <segment title="" image="shop"/>
-                                    <segment title="" image="heart"/>
-                                    <segment title="" image="star"/>
-                                </segments>
-                                <color key="tintColor" systemColor="systemPinkColor"/>
-                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="A42-xC-UEh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vHg-8s-blG" firstAttribute="leading" secondItem="A42-xC-UEh" secondAttribute="leading" constant="20" id="0K5-9G-4zh"/>
                             <constraint firstItem="MOI-mk-C6I" firstAttribute="trailing" secondItem="A42-xC-UEh" secondAttribute="trailing" id="3Nh-wx-Gcb"/>
-                            <constraint firstItem="DPj-vm-Q8U" firstAttribute="top" secondItem="Eha-FY-oDj" secondAttribute="bottom" constant="20" id="4hO-Fo-91a"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bDd-bT-Wb0" secondAttribute="trailing" constant="40" id="6BG-D4-pbg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bDd-bT-Wb0" secondAttribute="trailing" constant="20" id="6BG-D4-pbg"/>
                             <constraint firstItem="Eha-FY-oDj" firstAttribute="leading" secondItem="vHg-8s-blG" secondAttribute="leading" id="7kq-N7-ryM"/>
                             <constraint firstItem="Fcm-Cq-oYq" firstAttribute="leading" secondItem="B2B-RM-zlH" secondAttribute="trailing" constant="50" id="9ru-kl-iOU"/>
                             <constraint firstItem="A42-xC-UEh" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Eha-FY-oDj" secondAttribute="trailing" constant="20" id="EQu-fu-3kx"/>
                             <constraint firstItem="Eha-FY-oDj" firstAttribute="top" secondItem="vHg-8s-blG" secondAttribute="bottom" constant="8" id="MEZ-rJ-1J9"/>
                             <constraint firstItem="bDd-bT-Wb0" firstAttribute="centerX" secondItem="Fcm-Cq-oYq" secondAttribute="centerX" id="PjJ-MY-b7v"/>
                             <constraint firstItem="A42-xC-UEh" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vHg-8s-blG" secondAttribute="trailing" constant="20" id="SSx-5f-fph"/>
-                            <constraint firstItem="B2B-RM-zlH" firstAttribute="top" relation="greaterThanOrEqual" secondItem="DPj-vm-Q8U" secondAttribute="bottom" constant="5" id="T0u-a9-02t"/>
-                            <constraint firstItem="DPj-vm-Q8U" firstAttribute="centerX" secondItem="I2p-kq-S25" secondAttribute="centerX" id="Tbd-c6-ZWe"/>
                             <constraint firstAttribute="bottomMargin" secondItem="bDd-bT-Wb0" secondAttribute="bottom" constant="20" id="VWb-xU-fcq"/>
                             <constraint firstItem="bDd-bT-Wb0" firstAttribute="centerY" secondItem="cVf-bs-WOc" secondAttribute="centerY" id="bFT-3h-tcd"/>
-                            <constraint firstItem="DPj-vm-Q8U" firstAttribute="leading" secondItem="Eha-FY-oDj" secondAttribute="leading" id="c8w-HD-pWn"/>
                             <constraint firstItem="bDd-bT-Wb0" firstAttribute="top" secondItem="Fcm-Cq-oYq" secondAttribute="bottom" constant="5" id="cLo-og-5rJ"/>
                             <constraint firstItem="Fcm-Cq-oYq" firstAttribute="centerY" secondItem="B2B-RM-zlH" secondAttribute="centerY" id="drE-Eb-k8v"/>
                             <constraint firstItem="vHg-8s-blG" firstAttribute="top" secondItem="MOI-mk-C6I" secondAttribute="bottom" constant="10" id="k8t-HI-GW4"/>
-                            <constraint firstItem="A42-xC-UEh" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DPj-vm-Q8U" secondAttribute="trailing" constant="20" id="mXa-at-F3A"/>
                             <constraint firstItem="MOI-mk-C6I" firstAttribute="leading" secondItem="A42-xC-UEh" secondAttribute="leading" id="rGx-0f-09Z"/>
+                            <constraint firstItem="B2B-RM-zlH" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MOI-mk-C6I" secondAttribute="bottom" constant="300" id="vDK-BL-6yH"/>
                             <constraint firstItem="cVf-bs-WOc" firstAttribute="centerX" secondItem="B2B-RM-zlH" secondAttribute="centerX" id="wWV-Pu-VtO"/>
                             <constraint firstItem="MOI-mk-C6I" firstAttribute="top" secondItem="A42-xC-UEh" secondAttribute="top" id="wgy-Li-SHa"/>
                         </constraints>
@@ -657,7 +637,6 @@
                     <connections>
                         <outlet property="callLabel" destination="bDd-bT-Wb0" id="9Ez-jT-jll"/>
                         <outlet property="headerImageView" destination="MOI-mk-C6I" id="hJW-V7-JG9"/>
-                        <outlet property="segmentedControl" destination="DPj-vm-Q8U" id="uDr-Yz-XCs"/>
                         <outlet property="subtitleLabel" destination="Eha-FY-oDj" id="GXG-Pz-WwL"/>
                         <outlet property="titleLabel" destination="vHg-8s-blG" id="PuP-bx-G3e"/>
                         <outlet property="websiteLabel" destination="cVf-bs-WOc" id="vvm-MB-naS"/>
@@ -2165,7 +2144,7 @@
         <segue reference="UMX-5n-MsD"/>
         <segue reference="Mus-wf-Xfa"/>
         <segue reference="HkM-xv-pqN"/>
-        <segue reference="0IP-IJ-Hde"/>
+        <segue reference="KGr-TS-F6e"/>
         <segue reference="hda-eY-N8b"/>
         <segue reference="ypO-ly-HjC"/>
         <segue reference="0iA-AN-kzc"/>
@@ -2174,12 +2153,7 @@
         <image name="arrow.triangle.2.circlepath" catalog="system" width="128" height="101"/>
         <image name="bubble.left.and.bubble.right" catalog="system" width="128" height="96"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
-        <image name="cup" width="48" height="48"/>
-        <image name="dessert" width="48" height="48"/>
-        <image name="drink" width="48" height="48"/>
-        <image name="eat" width="48" height="48"/>
         <image name="heart" catalog="system" width="128" height="109"/>
-        <image name="heart" width="48" height="48"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="loginimage" width="689" height="689"/>
         <image name="map" catalog="system" width="128" height="110"/>
@@ -2191,8 +2165,6 @@
         <image name="person.badge.plus" catalog="system" width="128" height="124"/>
         <image name="phone" catalog="system" width="128" height="115"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="shop" width="48" height="48"/>
-        <image name="star" width="48" height="48"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

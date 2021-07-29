@@ -11,6 +11,7 @@ target 'favorites' do
   pod 'DateTools'
   pod 'SCLAlertView-Objective-C'
   pod 'JVFloatLabeledTextField'
+  pod 'NYSegmentedControl'
 
 
   target 'favoritesTests' do

@@ -11,6 +11,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <SCLAlertView_Objective_C/SCLAlertView.h>
 #import <JVFloatLabeledTextField/JVFloatLabeledTextView.h>
+#import <NYSegmentedControl/NYSegmentedControl.h>
 #import "APIManager.h"
 
 static NSString *segueIdToWebsite = @"showWebsite";
@@ -22,9 +23,10 @@ static NSString *unwindSegueToMap = @"addPin";
 @property (strong, nonatomic) JVFloatLabeledTextView *notesTextView;
 @property (strong, nonatomic) APIManager *manager;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (strong, nonatomic) NYSegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UILabel *websiteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *callLabel;
+
 
 @end
 
@@ -41,18 +43,42 @@ static NSString *unwindSegueToMap = @"addPin";
     [self businessMatch];
     UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tapScreen];
+    [self setUpSegmentedControl];
     [self setUpTextView];
     self.websiteLabel.text = NSLocalizedString(@"Website", @"label for show website button");
     self.callLabel.text = NSLocalizedString(@"Call", @"label for call button");
-    
+}
+
+-(void)setUpSegmentedControl {
+    self.segmentedControl = [[NYSegmentedControl alloc] initWithItems:@[@"🍴", @"☕️", @"🍸", @"🍦", @"🛒", @"❤️", @"⭐️"]];
+    CGFloat fontSize = 27; CGFloat selectedFontSize = 40;
+    UIFont *newFont = [self.segmentedControl.titleFont fontWithSize:fontSize];
+    UIFont *newSelectedFont = [self.segmentedControl.titleFont fontWithSize:selectedFontSize];
+    self.segmentedControl.titleFont = newFont;
+    self.segmentedControl.selectedTitleFont = newSelectedFont;
+    int width = 370; int height = 60;
+    int y = self.subtitleLabel.frame.origin.y + self.subtitleLabel.frame.size.height + 10;
+    int x = self.view.frame.origin.x + self.view.frame.size.width/2 - width/2;
+    [self.segmentedControl setFrame:CGRectMake(x, y, width, height)];
+    self.segmentedControl.titleTextColor = [UIColor colorWithRed:0.38f green:0.68f blue:0.93f alpha:1.0f];
+    self.segmentedControl.selectedTitleTextColor = [UIColor whiteColor];
+    self.segmentedControl.segmentIndicatorBackgroundColor = [UIColor colorWithRed:1.0f green:45/255.0 blue:85/255.0 alpha:0.9];
+    self.segmentedControl.backgroundColor = [UIColor colorWithRed:0.3f green:0.3f blue:0.3f alpha:0.2f];
+    self.segmentedControl.borderWidth = 0.0f;
+    self.segmentedControl.segmentIndicatorBorderWidth = 0.0f;
+    self.segmentedControl.segmentIndicatorInset = 2.0f;
+    self.segmentedControl.segmentIndicatorBorderColor = self.view.backgroundColor;
+    self.segmentedControl.cornerRadius = self.segmentedControl.intrinsicContentSize.height / 2.0f;
+    self.segmentedControl.usesSpringAnimations = YES;
+    [self.view addSubview:self.segmentedControl];
 }
 
 -(void)setUpTextView {
     int height = 100;
     int width = self.segmentedControl.frame.size.width;
-    int y = self.segmentedControl.frame.origin.y + self.segmentedControl.frame.size.height + height/2 + 55;
-    NSLog(@"y = %d", y);
-    self.notesTextView = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x + self.view.frame.size.width/2 - width/2, y, width, height)];
+    int y = self.segmentedControl.frame.origin.y + self.segmentedControl.frame.size.height + 20;
+    int x = self.view.frame.origin.x + self.view.frame.size.width/2 - width/2;
+    self.notesTextView = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectMake(x, y, width, height)];
     [self.notesTextView setPlaceholder:NSLocalizedString(@"Write notes on your pin...", @"prompting the user to write notes on their pin")];
     [self.notesTextView setTintColor:UIColor.systemPinkColor];
     [self.notesTextView setScrollEnabled:YES];
