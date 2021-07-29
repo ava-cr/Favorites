@@ -28,6 +28,7 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImageView;
 @property (weak, nonatomic) IBOutlet UILabel *websiteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *callLabel;
+@property (weak, nonatomic) IBOutlet UILabel *emojiLabel;
 
 @end
 
@@ -76,7 +77,7 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
 -(void)setUpTextView {
     int height = 100;
     int width = self.view.frame.size.width - 40;
-    int y = self.addressLabel.frame.origin.y + self.addressLabel.frame.size.height + height/2 + 10;
+    int y = self.addressLabel.frame.origin.y + self.addressLabel.frame.size.height + 20;
     NSLog(@"y = %d", y);
     self.notesTextView = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x + self.view.frame.size.width/2 - width/2, y, width, height)];
     [self.notesTextView setPlaceholder:NSLocalizedString(@"Pin notes", @"notes the user has written on their pin")];
@@ -94,38 +95,40 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     self.categoryImageView.tintColor = UIColor.whiteColor;
     UIColor *color = [[UIColor alloc] init];
     UIImage *image = [[UIImage alloc] init];
+    NSString *emoji = [[NSString alloc] init];
     switch (category) {
         case 0:
             color = UIColor.systemRedColor;
-            image = [UIImage imageNamed:@"eat"];
+            emoji = @"🍽";
             break;
         case 1:
             color = UIColor.systemOrangeColor;
-            image = [UIImage imageNamed:@"cup"];
+            emoji = @"☕️";
             break;
         case 2:
             color = UIColor.systemPurpleColor;
-            image = [UIImage imageNamed:@"drink"];
+            emoji = @"🍸";
             break;
         case 3:
             color = UIColor.systemBlueColor;
+            emoji = @"🍦";
             image = [UIImage imageNamed:@"dessert"];
             break;
         case 4:
             color = UIColor.systemGreenColor;
-            image = [UIImage imageNamed:@"shop"];
+            emoji = @"🛒";
             break;
         case 5:
             color = UIColor.systemPinkColor;
-            image = [UIImage imageNamed:@"heart"];
+            emoji = @"❤️";
             break;
         case 6:
             color = UIColor.systemYellowColor;
-            image = [UIImage imageNamed:@"star"];
+            emoji = @"⭐️";
             break;
     }
-    self.categoryImageView.image = image;
     self.categoryImageView.backgroundColor = color;
+    self.emojiLabel.text = emoji;
     self.categoryImageView.layer.cornerRadius = 8;
 }
 
