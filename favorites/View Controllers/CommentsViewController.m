@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *comments;
+@property (weak, nonatomic) IBOutlet UIButton *postButton;
 
 @end
 
@@ -31,6 +32,7 @@ static NSString *commentCellID = @"CommentCell";
     self.commentTextView.layer.borderWidth = 0.75;
     self.commentTextView.layer.cornerRadius = 8;
     self.commentTextView.textContainer.lineFragmentPadding = 10;
+    [self.postButton setTitle:NSLocalizedString(@"Post", @"post comment") forState:UIControlStateNormal];
     [self getComments];
 }
 - (IBAction)didTapPost:(id)sender {

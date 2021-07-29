@@ -73,14 +73,15 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0N9-FX-0mC">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="759"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wnQ-tU-LA9">
-                                <rect key="frame" x="359" y="754" width="25" height="24"/>
+                                <rect key="frame" x="359" y="759" width="25" height="24"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal">
                                     <imageReference key="image" image="paperplane.circle" catalog="system" symbolScale="large"/>
                                 </state>
@@ -89,11 +90,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61u-mG-5to">
-                                <rect key="frame" x="20" y="20" width="55" height="30"/>
-                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <rect key="frame" x="20" y="108" width="55" height="30"/>
+                                <color key="backgroundColor" systemColor="systemPinkColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="S1h-EX-NzJ"/>
                                 </constraints>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -102,7 +104,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5U-qM-pKR">
-                                <rect key="frame" x="357" y="705" width="29.5" height="24"/>
+                                <rect key="frame" x="357" y="710" width="29.5" height="24"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal">
                                     <imageReference key="image" image="arrow.triangle.2.circlepath" catalog="system" symbolScale="large"/>
                                 </state>
@@ -111,11 +114,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kN1-fq-UxC">
-                                <rect key="frame" x="164.5" y="751" width="85" height="30"/>
-                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <rect key="frame" x="164.5" y="756" width="85" height="30"/>
+                                <color key="backgroundColor" systemColor="systemPinkColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="pYD-5L-jnU"/>
                                 </constraints>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal" title="List of Pins">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -124,7 +128,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIm-BP-7ha">
-                                <rect key="frame" x="353.5" y="658" width="36" height="22"/>
+                                <rect key="frame" x="353.5" y="663" width="36" height="22"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal">
                                     <imageReference key="image" image="person.3" catalog="system" symbolScale="medium"/>
                                 </state>
@@ -324,11 +329,13 @@
                     <connections>
                         <outlet property="addPinButton" destination="ZB2-M0-p2z" id="WlW-Gs-ejD"/>
                         <outlet property="addressLabel" destination="mSK-hP-WU6" id="XKE-0s-QVF"/>
+                        <outlet property="callLabel" destination="SjW-PS-twS" id="BN0-fV-4TB"/>
                         <outlet property="categoryImageView" destination="hD3-5E-hrg" id="41N-4Y-GJR"/>
                         <outlet property="deletePinButton" destination="3od-Y8-ChN" id="6zr-KH-jcD"/>
                         <outlet property="headerImageView" destination="D8b-hX-SaR" id="5hI-b3-KjN"/>
                         <outlet property="modalSaveButton" destination="tyB-IT-IfF" id="FYz-sy-W4R"/>
                         <outlet property="titleLabel" destination="O8y-Bc-plI" id="8We-0u-VMN"/>
+                        <outlet property="websiteLabel" destination="zlP-IY-las" id="glg-tk-pWu"/>
                         <segue destination="6cd-f5-Gi2" kind="unwind" identifier="deletePin" unwindAction="deletePin:" id="5C4-i4-gKy"/>
                         <segue destination="rb9-1J-lNC" kind="presentation" identifier="showWebsite" id="0IP-IJ-Hde"/>
                     </connections>
@@ -349,6 +356,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GR6-B6-hmi">
                                 <rect key="frame" x="10" y="99.5" width="50" height="47.5"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="abq-s4-seJ"/>
@@ -385,6 +393,7 @@
                                     <constraint firstAttribute="height" constant="18" id="dcS-VO-YnJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal" title="Location"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2d ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7LF-Nu-DNe">
@@ -406,6 +415,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BP9-Ip-vbn">
                                 <rect key="frame" x="370" y="582" width="34" height="26"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal">
                                     <imageReference key="image" image="bubble.left.and.bubble.right" catalog="system" symbolScale="large"/>
                                 </state>
@@ -469,11 +479,11 @@
             <objects>
                 <viewController id="FDp-gV-nRA" customClass="SearchLocationsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1I6-sv-9XS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tde-TR-oT9">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -539,29 +549,29 @@
             <objects>
                 <viewController id="gxX-3r-VIw" customClass="AddPinViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I2p-kq-S25">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="vHg-8s-blG">
-                                <rect key="frame" x="20" y="258.5" width="55.5" height="36"/>
+                                <rect key="frame" x="20" y="346.5" width="55.5" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eha-FY-oDj">
-                                <rect key="frame" x="20" y="302.5" width="56" height="19.5"/>
+                                <rect key="frame" x="20" y="390.5" width="56" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" systemColor="secondaryLabelColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.94999999999999996" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MOI-mk-C6I">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="248.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="248.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="MOI-mk-C6I" secondAttribute="height" multiplier="5:3" id="x83-Ja-dub"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fcm-Cq-oYq">
-                                <rect key="frame" x="327.5" y="739" width="25" height="23"/>
+                                <rect key="frame" x="327.5" y="744" width="25" height="23"/>
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal">
                                     <imageReference key="image" image="phone" catalog="system" symbolScale="large"/>
@@ -571,13 +581,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Call" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDd-bT-Wb0">
-                                <rect key="frame" x="325.5" y="767" width="28.5" height="21"/>
+                                <rect key="frame" x="325.5" y="772" width="28.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2B-RM-zlH">
-                                <rect key="frame" x="252.5" y="738.5" width="25" height="24"/>
+                                <rect key="frame" x="252.5" y="743.5" width="25" height="24"/>
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal">
                                     <imageReference key="image" image="network" catalog="system" symbolScale="large"/>
@@ -587,13 +597,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVf-bs-WOc">
-                                <rect key="frame" x="234" y="767" width="62" height="21"/>
+                                <rect key="frame" x="234" y="772" width="62" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DPj-vm-Q8U">
-                                <rect key="frame" x="20" y="342" width="374" height="64.5"/>
+                                <rect key="frame" x="20" y="430" width="374" height="64.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="DPj-vm-Q8U" secondAttribute="height" multiplier="100:17" id="PZu-b1-Uny"/>
                                 </constraints>
@@ -645,10 +655,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="callLabel" destination="bDd-bT-Wb0" id="9Ez-jT-jll"/>
                         <outlet property="headerImageView" destination="MOI-mk-C6I" id="hJW-V7-JG9"/>
                         <outlet property="segmentedControl" destination="DPj-vm-Q8U" id="uDr-Yz-XCs"/>
                         <outlet property="subtitleLabel" destination="Eha-FY-oDj" id="GXG-Pz-WwL"/>
                         <outlet property="titleLabel" destination="vHg-8s-blG" id="PuP-bx-G3e"/>
+                        <outlet property="websiteLabel" destination="cVf-bs-WOc" id="vvm-MB-naS"/>
                         <segue destination="rb9-1J-lNC" kind="presentation" identifier="showWebsite" id="KGr-TS-F6e"/>
                     </connections>
                 </viewController>
@@ -719,6 +731,7 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LQz-uC-vl0">
                                                     <rect key="frame" x="345" y="41" width="49" height="30"/>
+                                                    <color key="tintColor" systemColor="systemPinkColor"/>
                                                     <state key="normal" title="Accept"/>
                                                     <connections>
                                                         <action selector="acceptTapped:" destination="SK9-yg-2yf" eventType="touchUpInside" id="I8g-UD-3qH"/>
@@ -919,11 +932,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="New Update" id="Ud6-rn-Xkk">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="M4l-SP-iki">
+                            <color key="tintColor" systemColor="systemPinkColor"/>
                             <connections>
                                 <action selector="cancelTapped:" destination="dbK-so-hRB" id="bnB-IQ-1uo"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Post" id="g8C-H3-TEE">
+                            <color key="tintColor" systemColor="systemPinkColor"/>
                             <connections>
                                 <action selector="postTapped:" destination="dbK-so-hRB" id="xVq-nF-fXP"/>
                                 <segue destination="IAs-Lm-Ymq" kind="unwind" identifier="postedUpdate" unwindAction="postedUpdateUnwind:" id="FZN-94-ZQ5"/>
@@ -1008,6 +1023,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="AAb-9d-RM8">
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="zJK-D0-RSM">
+                            <color key="tintColor" systemColor="systemPinkColor"/>
                             <connections>
                                 <action selector="addButtonTapped:" destination="v5e-yc-7WO" id="Sch-Ys-id3"/>
                             </connections>
@@ -1119,6 +1135,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="prk-pf-NKd">
                                                     <rect key="frame" x="20" y="22.5" width="50" height="47.5"/>
                                                     <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                    <color key="tintColor" systemColor="systemPinkColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="GSI-y4-OqM"/>
                                                         <constraint firstAttribute="width" constant="50" id="Gkb-02-TeU"/>
@@ -1132,6 +1149,7 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kP7-YJ-Uo3">
                                                     <rect key="frame" x="309" y="31" width="75" height="30"/>
+                                                    <color key="tintColor" systemColor="systemPinkColor"/>
                                                     <state key="normal" title="Add Friend"/>
                                                     <connections>
                                                         <action selector="didTapAddFriend:" destination="WPI-mM-cqI" eventType="touchUpInside" id="rAc-sA-uHs"/>
@@ -1273,6 +1291,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="i7e-QM-Q7l">
                                                     <rect key="frame" x="10" y="17.5" width="50" height="47.5"/>
                                                     <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                    <color key="tintColor" systemColor="systemPinkColor"/>
                                                     <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="DYs-7k-gov"/>
@@ -1314,6 +1333,7 @@
                                                         <constraint firstAttribute="height" constant="18" id="VGH-WY-KUc"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="tintColor" systemColor="systemPinkColor"/>
                                                     <state key="normal" title="Location"/>
                                                     <connections>
                                                         <action selector="didTapLocation:" destination="O3C-jN-WyH" eventType="touchUpInside" id="OWt-wb-go4"/>
@@ -1327,6 +1347,7 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbc-YN-8jm">
                                                     <rect key="frame" x="370" y="500" width="34" height="26"/>
+                                                    <color key="tintColor" systemColor="systemPinkColor"/>
                                                     <state key="normal">
                                                         <imageReference key="image" image="bubble.left.and.bubble.right" catalog="system" symbolScale="large"/>
                                                     </state>
@@ -1399,16 +1420,19 @@
                     <navigationItem key="navigationItem" id="vgd-UH-gdG">
                         <rightBarButtonItems>
                             <barButtonItem title="New Update" image="plus" catalog="system" id="Pa2-3o-faF">
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <connections>
                                     <segue destination="9E9-G9-nem" kind="show" id="5hq-fh-URE"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Notifications" image="heart" catalog="system" id="U2I-Zb-VI4">
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <connections>
                                     <segue destination="6Ck-4t-1DI" kind="show" id="2Aw-Zr-IqA"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Add Friends" image="person.badge.plus" catalog="system" id="UM6-sO-Wkd">
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <connections>
                                     <segue destination="pe0-ts-y1C" kind="presentation" id="Ef6-i1-PEs"/>
                                 </connections>
@@ -1704,7 +1728,9 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zO-Ye-7L6">
                                 <rect key="frame" x="134.5" y="263" width="145" height="30"/>
-                                <state key="normal" title="Change Profile Photo"/>
+                                <state key="normal" title="Change Profile Photo">
+                                    <color key="titleColor" systemColor="systemPinkColor"/>
+                                </state>
                                 <connections>
                                     <action selector="tappedChangeProfilePic:" destination="Cii-b1-3QZ" eventType="touchUpInside" id="Bte-v4-l8i"/>
                                 </connections>
@@ -1712,6 +1738,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="gND-eB-BTZ">
                                 <rect key="frame" x="144.5" y="129.5" width="125" height="122.5"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="f9u-WC-7Wy"/>
                                     <constraint firstAttribute="width" constant="125" id="nop-fL-37a"/>
@@ -1729,11 +1756,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Edit Profile" id="o64-Ox-ZZW">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="Zrs-UL-5n9">
+                            <color key="tintColor" systemColor="systemPinkColor"/>
                             <connections>
                                 <action selector="tappedCancel:" destination="Cii-b1-3QZ" id="jz7-rS-sE1"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="r01-l9-lvh">
+                            <color key="tintColor" systemColor="systemPinkColor"/>
                             <connections>
                                 <segue destination="tTO-lM-8UH" kind="unwind" identifier="saveUserProfileEdits" unwindAction="unwindToProfile:" id="bxW-Tv-106"/>
                             </connections>
@@ -1757,6 +1786,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="54S-HP-GZd">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" systemColor="systemPinkColor"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1846,6 +1876,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" systemColor="systemPinkColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="Jch-wf-WEV" kind="relationship" relationship="viewControllers" id="eS4-eL-kgM"/>
@@ -1866,6 +1897,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hdn-a1-mzT">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" systemColor="systemPinkColor"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1885,6 +1917,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ped-yC-hxE">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" systemColor="systemPinkColor"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1969,6 +2002,7 @@
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUV-WT-KH3">
                                 <rect key="frame" x="373" y="773" width="31" height="30"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal" title="Post"/>
                                 <connections>
                                     <action selector="didTapPost:" destination="vSQ-1G-8Fu" eventType="touchUpInside" id="NaS-R3-7sB"/>
@@ -1992,6 +2026,7 @@
                     <navigationItem key="navigationItem" id="8qO-eL-Jkv"/>
                     <connections>
                         <outlet property="commentTextView" destination="xFP-ba-jRX" id="3iX-ny-lM6"/>
+                        <outlet property="postButton" destination="eUV-WT-KH3" id="JVE-Mi-dUx"/>
                         <outlet property="tableView" destination="My2-2v-sMk" id="RTu-H9-dRZ"/>
                     </connections>
                 </viewController>
@@ -2086,6 +2121,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="21d-6e-vY0">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="YoN-2d-S81">
+                            <color key="tintColor" systemColor="systemPinkColor"/>
                             <connections>
                                 <action selector="doneButtonTapped:" destination="7U2-2T-Zl3" id="SDV-EW-GO0"/>
                             </connections>
@@ -2126,13 +2162,13 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="o2F-QT-Vd7"/>
-        <segue reference="15X-OK-XO9"/>
-        <segue reference="ks2-i2-p0q"/>
-        <segue reference="7if-5d-Uoj"/>
+        <segue reference="UMX-5n-MsD"/>
+        <segue reference="Mus-wf-Xfa"/>
+        <segue reference="HkM-xv-pqN"/>
         <segue reference="0IP-IJ-Hde"/>
         <segue reference="hda-eY-N8b"/>
-        <segue reference="Ldp-kw-Npj"/>
-        <segue reference="9tI-lf-D44"/>
+        <segue reference="ypO-ly-HjC"/>
+        <segue reference="0iA-AN-kzc"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.triangle.2.circlepath" catalog="system" width="128" height="101"/>
@@ -2142,8 +2178,8 @@
         <image name="dessert" width="48" height="48"/>
         <image name="drink" width="48" height="48"/>
         <image name="eat" width="48" height="48"/>
-        <image name="heart" width="48" height="48"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="heart" width="48" height="48"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="loginimage" width="689" height="689"/>
         <image name="map" catalog="system" width="128" height="110"/>

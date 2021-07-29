@@ -55,11 +55,13 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
         self.title = NSLocalizedString(@"Your Pins", @"the user's saved locations");
         [self.cancelButton setEnabled:FALSE];
         [self.cancelButton setHidden:TRUE];
+        [self.listPinsButton setTitle:NSLocalizedString(@"List of Pins", @"button title for list pins feature") forState:UIControlStateNormal];
     }
     else {
         [self.friendsButton setEnabled:FALSE];
         [self.friendsButton setHidden:TRUE];
         self.cancelButton.layer.cornerRadius = 8;
+        [self.cancelButton setTitle:NSLocalizedString(@"Cancel", @"close view of user's pins") forState:UIControlStateNormal];
         [self.addPinButton setEnabled:FALSE];
         [self.addPinButton setTitle:@""];
         [self.logoutButton setEnabled:FALSE];

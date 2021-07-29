@@ -386,6 +386,7 @@ static NSString *segueToLikes = @"showLikes";
         else cell.numFriendsLabel.text = [[NSString stringWithFormat:@"%d", (int)[self.friends count]] stringByAppendingString:NSLocalizedString(@" Friends", @"user's friends plural")];
         // edit profile / see pins button
         if (![self.user isEqual:[PFUser currentUser]]) [cell.editProfileButton setTitle:NSLocalizedString(@"See Pins", @"show user's pins") forState:UIControlStateNormal];
+        else [cell.editProfileButton setTitle:NSLocalizedString(@"Edit Profile", @"edit the profile photo") forState:UIControlStateNormal];
         cell.editProfileButton.layer.cornerRadius = 5;
         cell.editProfileButton.layer.borderColor = [UIColor.systemBlueColor CGColor];
         cell.editProfileButton.layer.borderWidth = 0.5;

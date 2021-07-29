@@ -19,7 +19,6 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
 
 @interface PinDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-// @property (weak, nonatomic) IBOutlet UITextView *notesTextView;
 @property (strong, nonatomic) JVFloatLabeledTextView *notesTextView;
 @property (weak, nonatomic) IBOutlet UIButton *addPinButton;
 @property (weak, nonatomic) IBOutlet UIButton *deletePinButton;
@@ -27,6 +26,8 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UIButton *modalSaveButton;
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImageView;
+@property (weak, nonatomic) IBOutlet UILabel *websiteLabel;
+@property (weak, nonatomic) IBOutlet UILabel *callLabel;
 
 @end
 
@@ -51,12 +52,14 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
         [self.deletePinButton setEnabled:FALSE];
         [self.modalSaveButton setHidden:TRUE];
         [self.modalSaveButton setEnabled:FALSE];
+        [self.addPinButton setTitle:NSLocalizedString(@"Add Pin", @"add pin") forState:UIControlStateNormal];
     }
     else {
         [self.modalSaveButton setTitle:NSLocalizedString(@"Save", @"save pin") forState:UIControlStateNormal];
         self.modalSaveButton.layer.backgroundColor = [UIColor.systemPinkColor CGColor];
         [self.modalSaveButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
         self.modalSaveButton.layer.cornerRadius = 8;
+        [self.deletePinButton setTitle:NSLocalizedString(@"Delete", @"delete pin") forState:UIControlStateNormal];
         self.deletePinButton.layer.cornerRadius = 5;
         self.deletePinButton.layer.borderColor = [UIColor.systemRedColor CGColor];
         self.deletePinButton.layer.borderWidth = 0.5;
@@ -66,6 +69,8 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tapScreen];
     [self setCategoryImage];
+    self.websiteLabel.text = NSLocalizedString(@"Website", @"label for show website button");
+    self.callLabel.text = NSLocalizedString(@"Call", @"label for call button");
 }
 
 -(void)setUpTextView {

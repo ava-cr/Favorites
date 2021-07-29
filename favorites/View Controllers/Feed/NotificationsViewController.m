@@ -168,6 +168,7 @@ static NSString *segueToUpdate = @"showUpdate";
             cell.delegate = self;
             cell.usernameLabel.text = request.requester.username;
             cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
+            [cell.acceptButton setTitle:NSLocalizedString(@"Accept", @"accept friend request") forState:UIControlStateNormal];
         }
         return cell;
     }

@@ -49,8 +49,9 @@
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
         if ([self.requestedUsers containsObject:user]) {
             [cell.addFriendButton setHidden:TRUE];
-            [cell.addFriendButton setTitle:@"Requested" forState:UIControlStateNormal];
+            [cell.addFriendButton setTitle:NSLocalizedString(@"Requested", @"user has already been requested") forState:UIControlStateNormal];
         }
+        else [cell.addFriendButton setTitle:NSLocalizedString(@"Add Friend", @"send a friend request to this user") forState:UIControlStateNormal];
     }
     return cell;
 }

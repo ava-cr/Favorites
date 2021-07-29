@@ -23,6 +23,8 @@ static NSString *unwindSegueToMap = @"addPin";
 @property (strong, nonatomic) APIManager *manager;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (weak, nonatomic) IBOutlet UILabel *websiteLabel;
+@property (weak, nonatomic) IBOutlet UILabel *callLabel;
 
 @end
 
@@ -40,6 +42,9 @@ static NSString *unwindSegueToMap = @"addPin";
     UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tapScreen];
     [self setUpTextView];
+    self.websiteLabel.text = NSLocalizedString(@"Website", @"label for show website button");
+    self.callLabel.text = NSLocalizedString(@"Call", @"label for call button");
+    
 }
 
 -(void)setUpTextView {
