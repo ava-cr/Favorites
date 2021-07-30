@@ -40,6 +40,7 @@ static NSString *unwindAddGroup = @"unwindToGroups";
         [self.doneButton setTitle:NSLocalizedString(@"Done", @"finished selecting friends for group")];
     }
     else {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
         self.title = NSLocalizedString(@"Friends", @"the user's friends");
         [self.doneButton setEnabled:NO];
         [self.doneButton setTitle:NSLocalizedString(@"", nil)];

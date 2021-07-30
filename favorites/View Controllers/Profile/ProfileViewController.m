@@ -33,6 +33,7 @@ static NSString *segueToLikes = @"showLikes";
 @property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> *isLikedByUser;
 @property(nonatomic) MDCFlexibleHeaderViewController *headerViewController;
 @property (strong, nonatomic) UILabel *usernameLabel;
+@property (nonatomic, assign) BOOL isTabBar;
 
 @end
 
@@ -46,9 +47,14 @@ static NSString *segueToLikes = @"showLikes";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     if (!self.user) {
+        self.isTabBar = YES;
         [self.navigationController setNavigationBarHidden:YES animated:YES];
         self.user = [PFUser currentUser];
         [self setUpFlexibleHeader];
+    }
+    else {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+        self.title = self.user.username;
     }
     self.updates = [[NSMutableArray alloc] init];
     [self getFriends];
@@ -67,7 +73,7 @@ static NSString *segueToLikes = @"showLikes";
     self.headerViewController = [[MDCFlexibleHeaderViewController alloc] init];
     self.headerViewController.layoutDelegate = self;
     self.headerViewController.headerView.backgroundColor = UIColor.systemPinkColor;
-    self.headerViewController.headerView.minimumHeight = 120;
+    //self.headerViewController.headerView.minimumHeight = 120;
     self.usernameLabel = [[UILabel alloc] init];
     self.usernameLabel.text = self.user.username;
     self.headerViewController.headerView.shiftBehavior = MDCFlexibleHeaderShiftBehaviorEnabled;
@@ -99,7 +105,7 @@ static NSString *segueToLikes = @"showLikes";
     if (flexibleHeaderView.shiftedOffscreen) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     }
-    else if (flexibleHeaderView.scrollPhasePercentage < 0.2){
+    else {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     }
 }
@@ -419,6 +425,7 @@ static NSString *segueToLikes = @"showLikes";
     if (indexPath.row == 0) {
         ProfileHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell" forIndexPath:indexPath];
         cell.delegate = self;
+        cell.contentView.backgroundColor = [UIColor colorWithRed:1.0 green:45/255.0 blue:85/255.0 alpha:0.65];
         // number of posts/pins/friends labels
         if ([[self.user objectForKey:@"numPosts"] isEqual:[NSNumber numberWithInt:1]]) {
             cell.numPostsLabel.text = [[NSString stringWithFormat:@"%@",[self.user objectForKey:@"numPosts"]] stringByAppendingString:NSLocalizedString(@" Post", @"user's post singular")];

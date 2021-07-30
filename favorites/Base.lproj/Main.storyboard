@@ -1700,9 +1700,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="gAe-gX-ve5" firstAttribute="leading" secondItem="0go-7U-him" secondAttribute="leading" id="0fS-SN-LJf"/>
-                            <constraint firstItem="gAe-gX-ve5" firstAttribute="top" secondItem="0go-7U-him" secondAttribute="top" id="2fA-AB-BEE"/>
                             <constraint firstItem="gAe-gX-ve5" firstAttribute="bottom" secondItem="0go-7U-him" secondAttribute="bottom" id="V9Q-hq-S3C"/>
                             <constraint firstItem="gAe-gX-ve5" firstAttribute="trailing" secondItem="0go-7U-him" secondAttribute="trailing" id="Wio-mh-2Zn"/>
+                            <constraint firstItem="gAe-gX-ve5" firstAttribute="top" secondItem="1Ex-qW-Abp" secondAttribute="top" id="bYi-qB-cge"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Y2N-pW-qj7"/>
