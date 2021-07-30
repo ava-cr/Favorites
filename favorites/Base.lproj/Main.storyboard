@@ -1307,7 +1307,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmD-2Q-zoP">
-                                                    <rect key="frame" x="65" y="30.5" width="78" height="21"/>
+                                                    <rect key="frame" x="65" y="22.5" width="78" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="CHG-3e-nHV"/>
                                                     </constraints>
@@ -1349,13 +1349,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is at " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNb-oi-gln">
-                                                    <rect key="frame" x="148" y="32" width="32.5" height="18"/>
+                                                    <rect key="frame" x="148" y="24" width="32.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPL-SR-auZ">
-                                                    <rect key="frame" x="180.5" y="32" width="59" height="18"/>
+                                                    <rect key="frame" x="180.5" y="24" width="59" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="VGH-WY-KUc"/>
                                                     </constraints>
@@ -1366,6 +1366,12 @@
                                                         <action selector="didTapLocation:" destination="O3C-jN-WyH" eventType="touchUpInside" id="OWt-wb-go4"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sharing with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b85-H5-0E1">
+                                                    <rect key="frame" x="65" y="43" width="74" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="hmD-2Q-zoP" firstAttribute="leading" secondItem="i7e-QM-Q7l" secondAttribute="trailing" constant="5" id="0RD-WG-CQz"/>
@@ -1375,7 +1381,9 @@
                                                 <constraint firstItem="RnN-WU-hsz" firstAttribute="leading" secondItem="F36-tf-YXV" secondAttribute="leading" id="5KQ-fZ-1Wo"/>
                                                 <constraint firstItem="RnN-WU-hsz" firstAttribute="leading" secondItem="C2p-23-cIU" secondAttribute="leading" constant="10" id="8aa-Ee-riG"/>
                                                 <constraint firstItem="HQ8-Wr-b7s" firstAttribute="top" secondItem="i7e-QM-Q7l" secondAttribute="bottom" constant="10" id="8xF-yw-4kw"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="b85-H5-0E1" secondAttribute="trailing" constant="10" id="9WY-lE-ELz"/>
                                                 <constraint firstItem="SNb-oi-gln" firstAttribute="leading" secondItem="hmD-2Q-zoP" secondAttribute="trailing" constant="5" id="Dct-Wg-g7b"/>
+                                                <constraint firstItem="b85-H5-0E1" firstAttribute="centerY" secondItem="i7e-QM-Q7l" secondAttribute="centerY" constant="10" id="E0J-cZ-m7J"/>
                                                 <constraint firstItem="RnN-WU-hsz" firstAttribute="top" secondItem="F36-tf-YXV" secondAttribute="bottom" constant="8" id="GxJ-ed-j4K"/>
                                                 <constraint firstItem="hsj-uy-IMZ" firstAttribute="leading" secondItem="RnN-WU-hsz" secondAttribute="leading" id="Ica-Dc-P1Z"/>
                                                 <constraint firstItem="XPL-SR-auZ" firstAttribute="leading" secondItem="SNb-oi-gln" secondAttribute="trailing" id="Lk6-ct-h5G"/>
@@ -1385,7 +1393,8 @@
                                                 <constraint firstAttribute="trailing" secondItem="HQ8-Wr-b7s" secondAttribute="trailing" id="VeM-x1-J2n"/>
                                                 <constraint firstAttribute="trailing" secondItem="cbc-YN-8jm" secondAttribute="trailing" constant="10" id="at3-HR-q7K"/>
                                                 <constraint firstItem="cbc-YN-8jm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="F36-tf-YXV" secondAttribute="trailing" constant="10" id="c28-m2-FGr"/>
-                                                <constraint firstItem="hmD-2Q-zoP" firstAttribute="centerY" secondItem="i7e-QM-Q7l" secondAttribute="centerY" id="e3X-uB-wjR"/>
+                                                <constraint firstItem="hmD-2Q-zoP" firstAttribute="centerY" secondItem="i7e-QM-Q7l" secondAttribute="centerY" constant="-8" id="e3X-uB-wjR"/>
+                                                <constraint firstItem="b85-H5-0E1" firstAttribute="leading" secondItem="hmD-2Q-zoP" secondAttribute="leading" id="e73-eZ-jRi"/>
                                                 <constraint firstItem="i7e-QM-Q7l" firstAttribute="top" secondItem="C2p-23-cIU" secondAttribute="topMargin" constant="5" id="fSA-a3-KyQ"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hsj-uy-IMZ" secondAttribute="trailing" constant="10" id="fTq-Xw-5ME"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="9ON-Yl-3IP" secondAttribute="trailing" constant="10" id="hYk-Xr-aL0"/>
@@ -1405,6 +1414,7 @@
                                             <outlet property="locationButton" destination="XPL-SR-auZ" id="7cS-sp-QLF"/>
                                             <outlet property="picImageView" destination="HQ8-Wr-b7s" id="4DF-jT-V4y"/>
                                             <outlet property="profilePicImageView" destination="i7e-QM-Q7l" id="Kfa-zB-eyt"/>
+                                            <outlet property="sharingWithLabel" destination="b85-H5-0E1" id="ndn-3Z-nSE"/>
                                             <outlet property="timestampLabel" destination="hsj-uy-IMZ" id="ZNo-1Z-XzZ"/>
                                             <outlet property="usernameLabel" destination="hmD-2Q-zoP" id="XuZ-Dw-ViS"/>
                                         </connections>
@@ -2175,9 +2185,9 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="o2F-QT-Vd7"/>
-        <segue reference="UMX-5n-MsD"/>
-        <segue reference="UQe-ax-ap8"/>
-        <segue reference="HkM-xv-pqN"/>
+        <segue reference="zET-Cy-LY0"/>
+        <segue reference="H2C-Ip-B2u"/>
+        <segue reference="VC6-aA-08Y"/>
         <segue reference="0IP-IJ-Hde"/>
         <segue reference="hda-eY-N8b"/>
         <segue reference="ypO-ly-HjC"/>

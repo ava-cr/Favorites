@@ -212,6 +212,13 @@ static NSString *segueToLikes = @"showLikes";
         NSDate *createdAt = update.createdAt;
         NSString *createdAtString = createdAt.shortTimeAgoSinceNow;
         cell.timestampLabel.text = [createdAtString stringByAppendingString:@" ago"];
+        if ([update.audience isEqual:@"group"] && update.group) {
+            cell.sharingWithLabel.text = [NSLocalizedString(@"shared with ", @"the post is shared with this group") stringByAppendingString:update.group.title];
+        }
+        else if ([update.audience isEqual:@"private"]) {
+            cell.sharingWithLabel.text = NSLocalizedString(@"shared with just me", @"the post is private");
+        }
+        else cell.sharingWithLabel.text = NSLocalizedString(@"shared with everyone", @"the post is shared with everyone");
     }
     return cell;
 }
