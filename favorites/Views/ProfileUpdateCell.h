@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Update *update;
 @property (strong, nonatomic) PFUser *user;
 @property (nonatomic, weak) id<ProfileUpdateCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UILabel *sharingWithLabel;
 
 @end
 

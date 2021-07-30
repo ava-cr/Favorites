@@ -73,7 +73,6 @@ static NSString *segueToLikes = @"showLikes";
     self.headerViewController = [[MDCFlexibleHeaderViewController alloc] init];
     self.headerViewController.layoutDelegate = self;
     self.headerViewController.headerView.backgroundColor = UIColor.systemPinkColor;
-    //self.headerViewController.headerView.minimumHeight = 120;
     self.usernameLabel = [[UILabel alloc] init];
     self.usernameLabel.text = self.user.username;
     self.headerViewController.headerView.shiftBehavior = MDCFlexibleHeaderShiftBehaviorEnabled;
@@ -508,9 +507,23 @@ static NSString *segueToLikes = @"showLikes";
              else {
                  cell.likedLabel.text = @"";
              }
+             if ([update.audience isEqual:@"group"] && update.group) {
+                 cell.sharingWithLabel.text = [NSLocalizedString(@"shared with ", @"the post is shared with this group") stringByAppendingString:update.group.title];
+             }
+             else if ([update.audience isEqual:@"private"]) {
+                 cell.sharingWithLabel.text = NSLocalizedString(@"shared with just me", @"the post is private");
+             }
+             else cell.sharingWithLabel.text = NSLocalizedString(@"shared with everyone", @"the post is shared with everyone");
          }
         return cell;
     }
+}
+// animate cell images
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+    [UIView animateWithDuration:0.25 animations:^{
+            cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
+    }];
 }
 
 #pragma mark - UIScrollViewDelegate
