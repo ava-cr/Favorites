@@ -45,7 +45,7 @@ static NSString *segueToLikes = @"showLikes";
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.friends = [[NSMutableArray alloc] initWithObjects:[PFUser currentUser], nil];
     self.updates = [[NSMutableArray alloc] init];
-    //[self getFriends];
+    [self getFriends];
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
@@ -147,7 +147,11 @@ static NSString *segueToLikes = @"showLikes";
 #pragma mark - Table View Functions
 
 // infinite scrolling method
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+    [UIView animateWithDuration:0.25 animations:^{
+            cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
+    }];
     if(!self.loadedAllData && indexPath.row + 1 == [self.updates count]){
         [self getUpdates:(int)([self.updates count]+20)];
         NSLog(@"loading more data");
