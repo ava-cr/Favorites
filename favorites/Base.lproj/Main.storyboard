@@ -1194,11 +1194,11 @@
             <objects>
                 <viewController id="V4O-kI-mHV" customClass="LikesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6bD-Jf-Sda">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L9v-9w-z4p">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LikeCell" rowHeight="123" id="Tca-gB-NIm" customClass="LikeCell">
@@ -1481,11 +1481,11 @@
             <objects>
                 <viewController id="hDA-ZI-eSw" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Ex-qW-Abp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gAe-gX-ve5">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -1724,11 +1724,11 @@
             <objects>
                 <viewController id="Cii-b1-3QZ" customClass="EditProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aJq-5N-VmX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zO-Ye-7L6">
-                                <rect key="frame" x="134.5" y="231" width="145" height="30"/>
+                                <rect key="frame" x="134.5" y="263" width="145" height="30"/>
                                 <state key="normal" title="Change Profile Photo">
                                     <color key="titleColor" systemColor="systemPinkColor"/>
                                 </state>
@@ -1737,7 +1737,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="gND-eB-BTZ">
-                                <rect key="frame" x="144.5" y="97.5" width="125" height="122.5"/>
+                                <rect key="frame" x="144.5" y="129.5" width="125" height="122.5"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <constraints>
@@ -1934,11 +1934,11 @@
             <objects>
                 <viewController id="vSQ-1G-8Fu" customClass="CommentsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hgR-D7-FXq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="My2-2v-sMk">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="758"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="675"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -1992,7 +1992,7 @@
                                 </prototypes>
                             </tableView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xFP-ba-jRX">
-                                <rect key="frame" x="10" y="768" width="353" height="30"/>
+                                <rect key="frame" x="10" y="773" width="353" height="30"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="UJ0-he-8Ju"/>
@@ -2002,7 +2002,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUV-WT-KH3">
-                                <rect key="frame" x="373" y="768" width="31" height="30"/>
+                                <rect key="frame" x="373" y="773" width="31" height="30"/>
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal" title="Post"/>
                                 <connections>
@@ -2044,6 +2044,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="V7D-TK-mf6">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" systemColor="systemPinkColor"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -2059,11 +2060,11 @@
             <objects>
                 <viewController id="7U2-2T-Zl3" customClass="ListFriendsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PeY-KC-l6w">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="thB-ya-f5P">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="iJM-YF-fIa">
@@ -2149,7 +2150,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="1Oh-DC-pHR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mCT-oe-v5x">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -2163,10 +2164,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SBY-uA-Ilk"/>
-        <segue reference="15X-OK-XO9"/>
-        <segue reference="Mus-wf-Xfa"/>
-        <segue reference="7if-5d-Uoj"/>
+        <segue reference="o2F-QT-Vd7"/>
+        <segue reference="UMX-5n-MsD"/>
+        <segue reference="UQe-ax-ap8"/>
+        <segue reference="HkM-xv-pqN"/>
         <segue reference="0IP-IJ-Hde"/>
         <segue reference="hda-eY-N8b"/>
         <segue reference="ypO-ly-HjC"/>

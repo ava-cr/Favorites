@@ -29,6 +29,7 @@ static NSString *unwindAddGroup = @"unwindToGroups";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
+    [self.searchBar setTintColor:UIColor.systemPinkColor];
     self.groupUsernames = [[NSMutableArray alloc] init];
     self.members = [[NSMutableArray alloc] init];
     if (!self.friends) [self getFriends];
