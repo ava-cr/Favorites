@@ -381,7 +381,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFY-K8-87g">
-                                <rect key="frame" x="65" y="112.5" width="78" height="21"/>
+                                <rect key="frame" x="65" y="104.5" width="78" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -420,13 +420,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is at " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3Z-Nl-sB0">
-                                <rect key="frame" x="148" y="114" width="32.5" height="18"/>
+                                <rect key="frame" x="148" y="106" width="32.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOT-8R-mm3">
-                                <rect key="frame" x="180.5" y="114" width="59" height="18"/>
+                                <rect key="frame" x="180.5" y="106" width="59" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="dcS-VO-YnJ"/>
                                 </constraints>
@@ -434,17 +434,25 @@
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal" title="Location"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sharing with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s81-qd-hLb">
+                                <rect key="frame" x="65" y="125" width="74" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RtL-ff-k8U"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="BP9-Ip-vbn" firstAttribute="top" secondItem="sfF-nK-8rP" secondAttribute="bottom" constant="10" id="25q-Wy-ny9"/>
+                            <constraint firstItem="s81-qd-hLb" firstAttribute="leading" secondItem="aFY-K8-87g" secondAttribute="leading" id="2Gr-26-VIR"/>
                             <constraint firstItem="mae-md-LiI" firstAttribute="top" secondItem="sfF-nK-8rP" secondAttribute="bottom" constant="10" id="BGB-W1-1q5"/>
                             <constraint firstItem="7LF-Nu-DNe" firstAttribute="leading" secondItem="gwu-Lj-2f1" secondAttribute="leading" id="Co2-xl-OV3"/>
                             <constraint firstItem="RtL-ff-k8U" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7LF-Nu-DNe" secondAttribute="trailing" constant="10" id="EeI-JZ-Oey"/>
                             <constraint firstItem="OOT-8R-mm3" firstAttribute="bottom" secondItem="w3Z-Nl-sB0" secondAttribute="bottom" id="GV3-NJ-aZR"/>
                             <constraint firstItem="OOT-8R-mm3" firstAttribute="leading" secondItem="w3Z-Nl-sB0" secondAttribute="trailing" id="I3D-xa-PPI"/>
                             <constraint firstItem="gwu-Lj-2f1" firstAttribute="top" secondItem="mae-md-LiI" secondAttribute="bottom" constant="8" id="I4p-Di-v2r"/>
+                            <constraint firstItem="RtL-ff-k8U" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="s81-qd-hLb" secondAttribute="trailing" constant="10" id="JGe-LP-7WQ"/>
                             <constraint firstItem="BP9-Ip-vbn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mae-md-LiI" secondAttribute="trailing" constant="10" id="JXM-J4-1dT"/>
                             <constraint firstItem="sfF-nK-8rP" firstAttribute="top" secondItem="GR6-B6-hmi" secondAttribute="bottom" constant="10" id="LVe-nR-do1"/>
                             <constraint firstItem="fvh-HG-ifu" firstAttribute="top" secondItem="gwu-Lj-2f1" secondAttribute="top" id="Og4-hz-qMh"/>
@@ -452,11 +460,12 @@
                             <constraint firstItem="7LF-Nu-DNe" firstAttribute="top" secondItem="gwu-Lj-2f1" secondAttribute="bottom" constant="8" id="QHH-ja-s2q"/>
                             <constraint firstItem="GR6-B6-hmi" firstAttribute="top" secondItem="RtL-ff-k8U" secondAttribute="top" constant="10" id="Rjb-cW-Zev"/>
                             <constraint firstItem="aFY-K8-87g" firstAttribute="leading" secondItem="GR6-B6-hmi" secondAttribute="trailing" constant="5" id="Voe-gq-2w8"/>
-                            <constraint firstItem="aFY-K8-87g" firstAttribute="centerY" secondItem="GR6-B6-hmi" secondAttribute="centerY" id="WDD-sM-3Yg"/>
+                            <constraint firstItem="aFY-K8-87g" firstAttribute="centerY" secondItem="GR6-B6-hmi" secondAttribute="centerY" constant="-8" id="WDD-sM-3Yg"/>
                             <constraint firstItem="RtL-ff-k8U" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fvh-HG-ifu" secondAttribute="trailing" constant="10" id="YGM-Vx-EG5"/>
                             <constraint firstItem="RtL-ff-k8U" firstAttribute="trailing" secondItem="BP9-Ip-vbn" secondAttribute="trailing" constant="10" id="YuQ-2r-yXf"/>
                             <constraint firstItem="RtL-ff-k8U" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OOT-8R-mm3" secondAttribute="trailing" constant="10" id="a2h-oL-mL3"/>
                             <constraint firstItem="gwu-Lj-2f1" firstAttribute="leading" secondItem="mae-md-LiI" secondAttribute="leading" id="bYb-ZC-j3K"/>
+                            <constraint firstItem="s81-qd-hLb" firstAttribute="centerY" secondItem="GR6-B6-hmi" secondAttribute="centerY" constant="10" id="e73-J0-XZb"/>
                             <constraint firstItem="fvh-HG-ifu" firstAttribute="leading" secondItem="gwu-Lj-2f1" secondAttribute="trailing" constant="5" id="m69-m0-3Xt"/>
                             <constraint firstItem="gwu-Lj-2f1" firstAttribute="leading" secondItem="GR6-B6-hmi" secondAttribute="leading" id="nQr-4s-W4s"/>
                             <constraint firstItem="w3Z-Nl-sB0" firstAttribute="centerY" secondItem="aFY-K8-87g" secondAttribute="centerY" id="nwb-aE-wvv"/>
@@ -474,6 +483,7 @@
                         <outlet property="locationButton" destination="OOT-8R-mm3" id="C4R-eV-ubo"/>
                         <outlet property="picImageView" destination="sfF-nK-8rP" id="A59-dh-FR4"/>
                         <outlet property="profilePicImageView" destination="GR6-B6-hmi" id="4vo-1c-sRJ"/>
+                        <outlet property="sharingWithLabel" destination="s81-qd-hLb" id="jTd-Ch-efx"/>
                         <outlet property="timestampLabel" destination="7LF-Nu-DNe" id="Aoy-cG-Wjh"/>
                         <outlet property="usernameLabel" destination="aFY-K8-87g" id="wSg-ww-EiP"/>
                         <segue destination="V4O-kI-mHV" kind="show" identifier="showLikes" id="HkM-xv-pqN"/>

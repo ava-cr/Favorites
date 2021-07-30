@@ -28,6 +28,7 @@ static NSString *segueToProfile = @"showProfile";
 @property (weak, nonatomic) IBOutlet UILabel *likedLabel;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
 @property (nonatomic, assign) BOOL isLikedByUser;
+@property (weak, nonatomic) IBOutlet UILabel *sharingWithLabel;
 
 @end
 
@@ -67,6 +68,13 @@ static NSString *segueToProfile = @"showProfile";
     UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
     [self.profilePicImageView addGestureRecognizer:profileTapGestureRecognizer];
     [self.profilePicImageView setUserInteractionEnabled:YES];
+    if ([self.update.audience isEqual:@"group"] && self.update.group) {
+        self.sharingWithLabel.text = [NSLocalizedString(@"shared with ", @"the post is shared with this group") stringByAppendingString:self.update.group.title];
+    }
+    else if ([self.update.audience isEqual:@"private"]) {
+        self.sharingWithLabel.text = NSLocalizedString(@"shared with just me", @"the post is private");
+    }
+    else self.sharingWithLabel.text = NSLocalizedString(@"shared with everyone", @"the post is shared with everyone");
 }
 - (void)didTapUserProfile:(UITapGestureRecognizer *)sender {
     [self performSegueWithIdentifier:segueToProfile sender:self.update.author];
