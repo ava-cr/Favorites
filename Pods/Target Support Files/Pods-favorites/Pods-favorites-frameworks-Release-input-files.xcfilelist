@@ -2,6 +2,8 @@ ${PODS_ROOT}/Target Support Files/Pods-favorites/Pods-favorites-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework
 ${BUILT_PRODUCTS_DIR}/DateTools/DateTools.framework
 ${BUILT_PRODUCTS_DIR}/JVFloatLabeledTextField/JVFloatLabeledTextField.framework
+${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework
+${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework
 ${BUILT_PRODUCTS_DIR}/NYSegmentedControl/NYSegmentedControl.framework
 ${BUILT_PRODUCTS_DIR}/Parse/Parse.framework
 ${BUILT_PRODUCTS_DIR}/SCLAlertView-Objective-C/SCLAlertView_Objective_C.framework

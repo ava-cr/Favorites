@@ -12,6 +12,7 @@ target 'favorites' do
   pod 'SCLAlertView-Objective-C'
   pod 'JVFloatLabeledTextField'
   pod 'NYSegmentedControl'
+  pod 'MaterialComponents/FlexibleHeader'
 
 
   target 'favoritesTests' do

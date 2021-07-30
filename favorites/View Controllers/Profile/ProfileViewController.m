@@ -16,6 +16,7 @@
 #import <Parse/Parse.h>
 #import <DateTools/DateTools.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import <MaterialComponents/MaterialFlexibleHeader.h>
 #import "Update.h"
 #import "Friend.h"
 #import "Like.h"
@@ -24,12 +25,14 @@
 static NSString *segueToComments = @"showComments";
 static NSString *segueToLikes = @"showLikes";
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, ProfileHeaderCellDelegate, ProfileUpdateCellDelegate>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, ProfileHeaderCellDelegate, ProfileUpdateCellDelegate, UIScrollViewDelegate, MDCFlexibleHeaderViewLayoutDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *updates;
 @property (strong, nonatomic) NSMutableArray *friends;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> *isLikedByUser;
+@property(nonatomic) MDCFlexibleHeaderViewController *headerViewController;
+@property (strong, nonatomic) UILabel *usernameLabel;
 
 @end
 
@@ -42,8 +45,11 @@ static NSString *segueToLikes = @"showLikes";
     [self.tableView insertSubview:refreshControl atIndex:0];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    if (!self.user) self.user = [PFUser currentUser];
-    self.title = self.user.username;
+    if (!self.user) {
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+        self.user = [PFUser currentUser];
+        [self setUpFlexibleHeader];
+    }
     self.updates = [[NSMutableArray alloc] init];
     [self getFriends];
     [self getUpdates];
@@ -54,6 +60,50 @@ static NSString *segueToLikes = @"showLikes";
     [self getUpdates];
     [refreshControl endRefreshing];
 }
+
+#pragma mark - Flexible Header
+
+- (void)setUpFlexibleHeader {
+    self.headerViewController = [[MDCFlexibleHeaderViewController alloc] init];
+    self.headerViewController.layoutDelegate = self;
+    self.headerViewController.headerView.backgroundColor = UIColor.systemPinkColor;
+    self.headerViewController.headerView.minimumHeight = 120;
+    self.usernameLabel = [[UILabel alloc] init];
+    self.usernameLabel.text = self.user.username;
+    self.headerViewController.headerView.shiftBehavior = MDCFlexibleHeaderShiftBehaviorEnabled;
+    PFFileObject *pfFile = [self.user objectForKey:@"profilePic"];
+    NSURL *profURL = [NSURL URLWithString:pfFile.url];
+    NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
+    UIImage *img = [[UIImage alloc] initWithData:profURLData];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:img];
+    [imageView setAlpha:0.8];
+    imageView.frame = self.headerViewController.headerView.bounds;
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.headerViewController.headerView insertSubview:imageView atIndex:0];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.clipsToBounds = YES;
+    self.headerViewController.headerView.trackingScrollView = self.tableView;
+    [self addChildViewController:self.headerViewController];
+    [self.view addSubview:_headerViewController.view];
+    self.title = self.user.username;
+}
+
+- (void)flexibleHeaderViewController:(MDCFlexibleHeaderViewController *)flexibleHeaderViewController
+    flexibleHeaderViewFrameDidChange:(MDCFlexibleHeaderView *)flexibleHeaderView {
+    int width = self.view.bounds.size.width;
+    [self.usernameLabel setTextAlignment:NSTextAlignmentLeft];
+    [self.usernameLabel setFrame:CGRectMake(10, 20, width-10, flexibleHeaderView.scrollPhasePercentage * flexibleHeaderView.minimumHeight - 10)];
+    CGFloat fontSize = flexibleHeaderView.scrollPhasePercentage * 40;
+    [self.usernameLabel setFont:[UIFont systemFontOfSize:fontSize]];
+    [self.headerViewController.headerView addSubview:self.usernameLabel];
+    if (flexibleHeaderView.shiftedOffscreen) {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    }
+    else if (flexibleHeaderView.scrollPhasePercentage < 0.2){
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+    }
+}
+
 # pragma mark - Query Code
 
 - (void) getUpdates {
@@ -368,7 +418,6 @@ static NSString *segueToLikes = @"showLikes";
     if (!self.user) self.user = [PFUser currentUser];
     if (indexPath.row == 0) {
         ProfileHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell" forIndexPath:indexPath];
-        // ProfileHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileHeaderCell"];
         cell.delegate = self;
         // number of posts/pins/friends labels
         if ([[self.user objectForKey:@"numPosts"] isEqual:[NSNumber numberWithInt:1]]) {
@@ -388,7 +437,7 @@ static NSString *segueToLikes = @"showLikes";
         if (![self.user isEqual:[PFUser currentUser]]) [cell.editProfileButton setTitle:NSLocalizedString(@"See Pins", @"show user's pins") forState:UIControlStateNormal];
         else [cell.editProfileButton setTitle:NSLocalizedString(@"Edit Profile", @"edit the profile photo") forState:UIControlStateNormal];
         cell.editProfileButton.layer.cornerRadius = 5;
-        cell.editProfileButton.layer.borderColor = [UIColor.systemBlueColor CGColor];
+        cell.editProfileButton.layer.borderColor = [UIColor.systemPinkColor CGColor];
         cell.editProfileButton.layer.borderWidth = 0.5;
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
         // profile picture
@@ -457,6 +506,33 @@ static NSString *segueToLikes = @"showLikes";
     }
 }
 
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+  if (scrollView == self.headerViewController.headerView.trackingScrollView) {
+    [self.headerViewController.headerView trackingScrollViewDidScroll];
+  }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+  if (scrollView == self.headerViewController.headerView.trackingScrollView) {
+    [self.headerViewController.headerView trackingScrollViewDidEndDecelerating];
+  }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+  if (scrollView == self.headerViewController.headerView.trackingScrollView) {
+    [self.headerViewController.headerView trackingScrollViewDidEndDraggingWillDecelerate:decelerate];
+  }
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+  if (scrollView == self.headerViewController.headerView.trackingScrollView) {
+    [self.headerViewController.headerView trackingScrollViewWillEndDraggingWithVelocity:velocity
+                                                                           targetContentOffset:targetContentOffset];
+  }
+}
+
 # pragma mark - Navigation
 
 - (IBAction) unwindToProfile:(UIStoryboardSegue *)unwindSegue {
@@ -474,6 +550,7 @@ static NSString *segueToLikes = @"showLikes";
     }];
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     if ([segue.identifier isEqual:@"showUserPins"]) {
         MapViewController *mapVC = [segue destinationViewController];
         mapVC.user = self.user;
