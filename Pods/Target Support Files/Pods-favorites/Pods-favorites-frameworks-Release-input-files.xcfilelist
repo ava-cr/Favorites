@@ -8,3 +8,5 @@ ${BUILT_PRODUCTS_DIR}/NYSegmentedControl/NYSegmentedControl.framework
 ${BUILT_PRODUCTS_DIR}/Parse/Parse.framework
 ${BUILT_PRODUCTS_DIR}/SCLAlertView-Objective-C/SCLAlertView_Objective_C.framework
 ${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework
+${BUILT_PRODUCTS_DIR}/VBFPopFlatButton/VBFPopFlatButton.framework
+${BUILT_PRODUCTS_DIR}/pop/pop.framework

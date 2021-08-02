@@ -13,6 +13,7 @@ target 'favorites' do
   pod 'JVFloatLabeledTextField'
   pod 'NYSegmentedControl'
   pod 'MaterialComponents/FlexibleHeader'
+  pod 'VBFPopFlatButton'
 
 
   target 'favoritesTests' do

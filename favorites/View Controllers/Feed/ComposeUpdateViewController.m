@@ -12,8 +12,10 @@
 #import "Group.h"
 #import <CoreLocation/CoreLocation.h>
 #import <JVFloatLabeledTextField/JVFloatLabeledTextView.h>
+#import <VBFPopFlatButton/VBFPopFlatButton.h>
 
 static NSString *segueToGroups = @"showMyGroups";
+static NSString *postedUpdateUnwind = @"postedUpdate";
 
 @interface ComposeUpdateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
 
@@ -26,6 +28,8 @@ static NSString *segueToGroups = @"showMyGroups";
 @property (weak, nonatomic) IBOutlet UIButton *addPhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *addLocationButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareWithButton;
+@property (strong, nonatomic) VBFPopFlatButton *cancelButton;
+@property (strong, nonatomic) VBFPopFlatButton *postButton;
 
 @end
 
@@ -53,10 +57,58 @@ static NSString *segueToGroups = @"showMyGroups";
     [self.addPhotoButton setTitle:NSLocalizedString(@"Add Photo", @"title of button to add photo") forState:UIControlStateNormal];
     [self.addLocationButton setTitle:NSLocalizedString(@"Add Location", @"title of button to add location") forState:UIControlStateNormal];
     [self.shareWithButton setTitle:NSLocalizedString(@"Share with", @"title of button to choose who to share post with") forState:UIControlStateNormal];
+    [self setUpButtons];
 }
 
 -(void)dismissKeyboard {
     [self.captionTextView resignFirstResponder];
+}
+
+-(void)setUpButtons {
+    self.cancelButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(20, 20, 30, 30)
+                                                  buttonType:buttonDefaultType
+                                                 buttonStyle:buttonRoundedStyle
+                                                 animateToInitialState:YES];
+    self.cancelButton.lineThickness = 3;
+    self.cancelButton.tintColor = [UIColor systemPinkColor];
+    [self.cancelButton addTarget:self
+                               action:@selector(cancelButtonPressed)
+                     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.cancelButton];
+    self.postButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 50, 20, 30, 30)
+                                                  buttonType:buttonDefaultType
+                                                 buttonStyle:buttonRoundedStyle
+                                                 animateToInitialState:YES];
+    self.postButton.lineThickness = 3;
+    self.postButton.tintColor = [UIColor systemPinkColor];
+    [self.postButton addTarget:self
+                               action:@selector(postButtonPressed)
+                     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.postButton];
+    NSTimeInterval delayInSeconds = 0.3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.cancelButton animateToType:buttonCloseType];
+        [self.postButton animateToType:buttonOkType];
+    });
+}
+
+-(void) cancelButtonPressed {
+    [self.cancelButton animateToType:buttonMinusType];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
+}
+
+-(void) postButtonPressed {
+    [self.postButton animateToType:buttonMinusType];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self performSegueWithIdentifier:postedUpdateUnwind sender:nil];
+    });
 }
 
 -(void)setUpTextView {
@@ -157,10 +209,6 @@ static NSString *segueToGroups = @"showMyGroups";
     [self presentViewController:sharingOptions animated:YES completion:nil];
 }
 
-- (IBAction)cancelTapped:(id)sender {
-    [self dismissViewControllerAnimated:true completion:nil];
-}
-
 #pragma mark - Photo Functions
 
 // image picker delegate function
@@ -254,7 +302,7 @@ static NSString *segueToGroups = @"showMyGroups";
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqual:@"postedUpdate"]) {
+    if ([segue.identifier isEqual:postedUpdateUnwind]) {
         self.image = self.picImageView.image;
         self.caption = self.captionTextView.text;
         self.locationTitle = self.locationLabel.text;

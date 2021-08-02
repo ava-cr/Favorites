@@ -862,16 +862,16 @@
             </objects>
             <point key="canvasLocation" x="115.94202898550725" y="1747.7678571428571"/>
         </scene>
-        <!--New Update-->
+        <!--Compose Update View Controller-->
         <scene sceneID="CSy-hU-OdF">
             <objects>
                 <viewController id="dbK-so-hRB" customClass="ComposeUpdateViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x7E-2c-IjI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VJJ-Af-azW">
-                                <rect key="frame" x="87" y="108" width="240" height="240"/>
+                                <rect key="frame" x="87" y="50" width="240" height="240"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="i6Z-j5-dbx"/>
@@ -879,7 +879,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Q2-W2-iKf">
-                                <rect key="frame" x="164.5" y="356" width="105" height="36"/>
+                                <rect key="frame" x="164.5" y="305" width="105" height="36"/>
                                 <color key="backgroundColor" systemColor="systemPinkColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="105" id="tSe-ft-x4m"/>
@@ -892,7 +892,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZq-zo-7qg">
-                                <rect key="frame" x="34.5" y="356" width="125" height="36"/>
+                                <rect key="frame" x="34.5" y="305" width="125" height="36"/>
                                 <color key="backgroundColor" systemColor="systemPinkColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="Bep-Jd-g1f"/>
@@ -905,13 +905,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P3D-MC-Wds">
-                                <rect key="frame" x="97" y="411" width="0.0" height="0.0"/>
+                                <rect key="frame" x="97" y="360" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BHr-EG-FNm">
-                                <rect key="frame" x="274.5" y="356" width="105" height="36"/>
+                                <rect key="frame" x="274.5" y="305" width="105" height="36"/>
                                 <color key="backgroundColor" systemColor="systemPinkColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="105" id="U2u-ji-3t0"/>
@@ -924,7 +924,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVP-lk-7NT">
-                                <rect key="frame" x="291" y="402" width="72" height="18"/>
+                                <rect key="frame" x="291" y="351" width="72" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -940,7 +940,7 @@
                             <constraint firstItem="BHr-EG-FNm" firstAttribute="leading" secondItem="3Q2-W2-iKf" secondAttribute="trailing" constant="5" id="EmE-k9-R3e"/>
                             <constraint firstItem="P3D-MC-Wds" firstAttribute="centerX" secondItem="JZq-zo-7qg" secondAttribute="centerX" id="GiQ-UR-Ymh"/>
                             <constraint firstItem="JZq-zo-7qg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eO2-oy-CdO" secondAttribute="leading" constant="5" id="Nh4-Gz-gNT"/>
-                            <constraint firstItem="VJJ-Af-azW" firstAttribute="top" secondItem="eO2-oy-CdO" secondAttribute="top" constant="20" id="OAx-LL-5XX"/>
+                            <constraint firstItem="VJJ-Af-azW" firstAttribute="top" secondItem="eO2-oy-CdO" secondAttribute="top" constant="50" id="OAx-LL-5XX"/>
                             <constraint firstItem="BHr-EG-FNm" firstAttribute="centerX" secondItem="x7E-2c-IjI" secondAttribute="centerX" constant="120" id="Zy7-b8-YT7"/>
                             <constraint firstItem="JZq-zo-7qg" firstAttribute="centerY" secondItem="3Q2-W2-iKf" secondAttribute="centerY" id="ccP-t1-WN2"/>
                             <constraint firstItem="IVP-lk-7NT" firstAttribute="centerY" secondItem="P3D-MC-Wds" secondAttribute="centerY" id="ccy-Pt-9TY"/>
@@ -948,24 +948,9 @@
                             <constraint firstItem="IVP-lk-7NT" firstAttribute="centerX" secondItem="BHr-EG-FNm" secondAttribute="centerX" id="oKA-7G-xMl"/>
                             <constraint firstItem="3Q2-W2-iKf" firstAttribute="leading" secondItem="JZq-zo-7qg" secondAttribute="trailing" constant="5" id="qgJ-5D-Hxx"/>
                             <constraint firstItem="P3D-MC-Wds" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="x7E-2c-IjI" secondAttribute="leading" constant="5" id="rMZ-CG-7fW"/>
-                            <constraint firstItem="3Q2-W2-iKf" firstAttribute="top" secondItem="VJJ-Af-azW" secondAttribute="bottom" constant="8" id="zDE-sQ-ktb"/>
+                            <constraint firstItem="3Q2-W2-iKf" firstAttribute="top" secondItem="VJJ-Af-azW" secondAttribute="bottom" constant="15" id="zDE-sQ-ktb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="New Update" id="Ud6-rn-Xkk">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="M4l-SP-iki">
-                            <color key="tintColor" systemColor="systemPinkColor"/>
-                            <connections>
-                                <action selector="cancelTapped:" destination="dbK-so-hRB" id="bnB-IQ-1uo"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Post" id="g8C-H3-TEE">
-                            <color key="tintColor" systemColor="systemPinkColor"/>
-                            <connections>
-                                <action selector="postTapped:" destination="dbK-so-hRB" id="xVq-nF-fXP"/>
-                                <segue destination="IAs-Lm-Ymq" kind="unwind" identifier="postedUpdate" unwindAction="postedUpdateUnwind:" id="FZN-94-ZQ5"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="addLocationButton" destination="JZq-zo-7qg" id="rud-af-EQR"/>
                         <outlet property="addPhotoButton" destination="3Q2-W2-iKf" id="tcR-2S-JFf"/>
@@ -975,23 +960,24 @@
                         <outlet property="sharingWithLabel" destination="IVP-lk-7NT" id="Raa-gY-HMd"/>
                         <segue destination="ixH-Pd-UmQ" kind="presentation" identifier="showMyPins" id="bnY-sX-6gr"/>
                         <segue destination="v5e-yc-7WO" kind="show" identifier="showMyGroups" id="bBA-xN-Xoy"/>
+                        <segue destination="IAs-Lm-Ymq" kind="unwind" identifier="postedUpdate" unwindAction="postedUpdateUnwind:" id="7Qr-EO-OTl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ewN-EE-6Hl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="IAs-Lm-Ymq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1882.608695652174" y="2481.6964285714284"/>
+            <point key="canvasLocation" x="1883" y="1748"/>
         </scene>
         <!--Groups View Controller-->
         <scene sceneID="Sav-JO-JWQ">
             <objects>
                 <viewController id="v5e-yc-7WO" customClass="GroupsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="syS-Pp-gwd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="072-2E-BnE">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupCell" rowHeight="118" id="hJU-eh-Erg" customClass="GroupCell">
@@ -1058,7 +1044,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BpG-oO-qdt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="g5c-GV-6WQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1882.608695652174" y="3196.2053571428569"/>
+            <point key="canvasLocation" x="1883" y="2482"/>
         </scene>
         <!--My Pins View Controller-->
         <scene sceneID="p19-br-h4a">
@@ -1462,7 +1448,7 @@
                             <barButtonItem title="New Update" image="plus" catalog="system" id="Pa2-3o-faF">
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <connections>
-                                    <segue destination="9E9-G9-nem" kind="show" id="5hq-fh-URE"/>
+                                    <segue destination="dbK-so-hRB" kind="presentation" id="jOV-H9-pKG"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Notifications" image="heart" catalog="system" id="U2I-Zb-VI4">
@@ -2092,36 +2078,16 @@
             </objects>
             <point key="canvasLocation" x="1002.8985507246377" y="1747.7678571428571"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="u17-Fx-wxF">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9E9-G9-nem" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="oVv-sE-0lv"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V7D-TK-mf6">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" systemColor="systemPinkColor"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="dbK-so-hRB" kind="relationship" relationship="rootViewController" id="Nva-ee-xlU"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wDZ-cF-rLH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1883" y="1748"/>
-        </scene>
         <!--List Friends View Controller-->
         <scene sceneID="oty-4E-vir">
             <objects>
                 <viewController id="7U2-2T-Zl3" customClass="ListFriendsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PeY-KC-l6w">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="thB-ya-f5P">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="iJM-YF-fIa">
@@ -2221,10 +2187,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SBY-uA-Ilk"/>
-        <segue reference="15X-OK-XO9"/>
-        <segue reference="e69-fL-GIH"/>
-        <segue reference="7if-5d-Uoj"/>
+        <segue reference="o2F-QT-Vd7"/>
+        <segue reference="zET-Cy-LY0"/>
+        <segue reference="H2C-Ip-B2u"/>
+        <segue reference="VC6-aA-08Y"/>
         <segue reference="0IP-IJ-Hde"/>
         <segue reference="5Ih-DD-fVx"/>
         <segue reference="Ldp-kw-Npj"/>
