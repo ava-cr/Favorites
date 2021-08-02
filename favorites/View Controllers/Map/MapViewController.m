@@ -56,10 +56,10 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     self.friendsButton.layer.cornerRadius = self.friendsButton.frame.size.width /2;
     self.centerUserButton.layer.cornerRadius = self.centerUserButton.frame.size.width /2;
     self.refreshMapButton.layer.cornerRadius = self.refreshMapButton.frame.size.width /2;
+    self.listPinsButton.layer.cornerRadius = self.listPinsButton.frame.size.width /2;
     [self getPins];
     if ([self.user isEqual:[PFUser currentUser]]) {
         self.title = NSLocalizedString(@"Your Pins", @"the user's saved locations");
-        [self.listPinsButton setTitle:NSLocalizedString(@"List of Pins", @"button title for list pins feature") forState:UIControlStateNormal];
     }
     else {
         [self setUpCloseButton];
