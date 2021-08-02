@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import <VBFPopFlatButton/VBFPopFlatButton.h>
 #import "SceneDelegate.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
@@ -34,7 +35,6 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
 @property (strong, nonatomic) NSArray<PinAnnotation *> *annotations;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addPinButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
-@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *listPinsButton;
 @property (weak, nonatomic) IBOutlet UIButton *friendsButton;
 @property (strong, nonatomic) NSMutableArray *updates;
@@ -42,6 +42,7 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
 @property (strong, nonatomic) NSArray<UpdateAnnotation *> *updateAnnotations;
 @property (weak, nonatomic) IBOutlet UIButton *centerUserButton;
 @property (weak, nonatomic) IBOutlet UIButton *refreshMapButton;
+@property (strong, nonatomic) VBFPopFlatButton *closeButton;
 
 @end
 
@@ -55,21 +56,18 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     self.friendsButton.layer.cornerRadius = self.friendsButton.frame.size.width /2;
     self.centerUserButton.layer.cornerRadius = self.centerUserButton.frame.size.width /2;
     self.refreshMapButton.layer.cornerRadius = self.refreshMapButton.frame.size.width /2;
-    //[self getPins];
+    [self getPins];
     if ([self.user isEqual:[PFUser currentUser]]) {
         self.title = NSLocalizedString(@"Your Pins", @"the user's saved locations");
-        [self.cancelButton setEnabled:FALSE];
-        [self.cancelButton setHidden:TRUE];
         [self.listPinsButton setTitle:NSLocalizedString(@"List of Pins", @"button title for list pins feature") forState:UIControlStateNormal];
     }
     else {
-        [self.friendsButton setEnabled:FALSE];
-        [self.friendsButton setHidden:TRUE];
-        self.cancelButton.layer.cornerRadius = 8;
-        [self.cancelButton setTitle:NSLocalizedString(@"Cancel", @"close view of user's pins") forState:UIControlStateNormal];
-        [self.addPinButton setEnabled:FALSE];
+        [self setUpCloseButton];
+        [self.friendsButton setEnabled:NO];
+        [self.friendsButton setHidden:YES];
+        [self.addPinButton setEnabled:NO];
         [self.addPinButton setTitle:@""];
-        [self.logoutButton setEnabled:FALSE];
+        [self.logoutButton setEnabled:NO];
         [self.logoutButton setTitle:@""];
         self.title = [self.user.username stringByAppendingString:@"'s Pins"];
     }
@@ -83,12 +81,37 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
         [self.locationManager requestWhenInUseAuthorization];
     }
 }
+
 - (void)viewDidAppear:(BOOL)animated {
      AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
      [delegate registerForRemoteNotifications];
 }
-- (IBAction)cancelButtonTapped:(id)sender {
-[self dismissViewControllerAnimated:TRUE completion:nil];
+
+- (void)setUpCloseButton {
+    self.closeButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(20, 20, 30, 30)
+                                                  buttonType:buttonDefaultType
+                                                 buttonStyle:buttonRoundedStyle
+                                                 animateToInitialState:YES];
+    self.closeButton.lineThickness = 3;
+    self.closeButton.tintColor = [UIColor systemPinkColor];
+    [self.closeButton addTarget:self
+                               action:@selector(closeButtonPressed)
+                     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.closeButton];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.closeButton animateToType:buttonCloseType];
+    });
+}
+
+- (void)closeButtonPressed {
+    [self.closeButton animateToType:buttonMinusType];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
