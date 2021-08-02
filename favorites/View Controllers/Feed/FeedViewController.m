@@ -53,7 +53,7 @@ static NSString *segueToAddUpdate = @"newUpdate";
     self.friends = [[NSMutableArray alloc] initWithObjects:[PFUser currentUser], nil];
     self.updates = [[NSMutableArray alloc] init];
     [self setUpAddButton];
-    //[self getFriends];
+    [self getFriends];
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
@@ -62,7 +62,7 @@ static NSString *segueToAddUpdate = @"newUpdate";
 }
 
 - (void)setUpAddButton {
-    self.addButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 75, self.view.frame.size.height - 150, 40, 40)
+    self.addButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 70, self.view.frame.size.height - 155, 40, 40)
                                                   buttonType:buttonDefaultType
                                                  buttonStyle:buttonRoundedStyle
                                                  animateToInitialState:YES];

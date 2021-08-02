@@ -110,7 +110,7 @@ static NSString *segueToSearchLocations = @"searchLocations";
 }
 
 - (void)setUpAddButton {
-    self.addButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width /2 - 25, self.view.frame.size.height - 150, 40, 40)
+    self.addButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 70, self.view.frame.size.height - 155, 40, 40)
                                                   buttonType:buttonDefaultType
                                                  buttonStyle:buttonRoundedStyle
                                                  animateToInitialState:YES];
