@@ -11,6 +11,7 @@
 #import "GroupCell.h"
 #import <Parse/Parse.h>
 #import <SCLAlertView_Objective_C/SCLAlertView.h>
+#import <VBFPopFlatButton/VBFPopFlatButton.h>
 
 static NSString *cellId = @"GroupCell";
 static NSString *segueToFriends = @"showFriends";
@@ -20,6 +21,7 @@ static NSString *unwindToCompose = @"groupChosen";
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *groups;
 @property (strong, nonatomic) NSString *addedGroupName;
+@property (strong, nonatomic) VBFPopFlatButton *addButton;
 
 @end
 
@@ -31,7 +33,51 @@ static NSString *unwindToCompose = @"groupChosen";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self getGroups];
+    [self setUpButton];
 }
+
+- (void)setUpButton {
+    self.addButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 70, self.view.frame.size.height - 130, 40, 40)
+                                                  buttonType:buttonDefaultType
+                                                 buttonStyle:buttonRoundedStyle
+                                                 animateToInitialState:YES];
+    self.addButton.lineThickness = 3;
+    self.addButton.roundBackgroundColor = [UIColor whiteColor];
+    self.addButton.tintColor = [UIColor systemPinkColor];
+    [self.addButton addTarget:self
+                               action:@selector(addButtonPressed)
+                     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.addButton];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.addButton animateToType:buttonAddType];
+    });
+}
+
+- (void)addButtonPressed {
+    [self.addButton animateToType:buttonMinusType];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        SCLAlertView *addGroup = [[SCLAlertView alloc] init];
+        UITextField *textField = [addGroup addTextField:@"Enter a group name"];
+        [textField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+        addGroup.customViewColor = [UIColor systemPinkColor];
+        addGroup.cornerRadius = 15;
+        addGroup.horizontalButtons = YES;
+        addGroup.shouldDismissOnTapOutside = YES;
+        [addGroup setShowAnimationType:SCLAlertViewShowAnimationSlideInToCenter];
+        [addGroup setBackgroundType:SCLAlertViewBackgroundBlur];
+        [addGroup addButton:NSLocalizedString(@"Done", @"finished typing name") actionBlock:^(void) {
+            NSLog(@"Text value: %@", textField.text);
+            self.addedGroupName = textField.text;
+            [self performSegueWithIdentifier:segueToFriends sender:nil];
+        }];
+        [addGroup showEdit:self title:NSLocalizedString(@"Add a Group", @"adding a group alert") subTitle:NSLocalizedString(@"Give your group a name", @"prompting user to name group") closeButtonTitle:NSLocalizedString(@"Cancel", @"close alert") duration:0.0f];
+    });
+}
+
 - (IBAction)addButtonTapped:(id)sender {
     SCLAlertView *addGroup = [[SCLAlertView alloc] init];
     UITextField *textField = [addGroup addTextField:@"Enter a group name"];
@@ -48,7 +94,7 @@ static NSString *unwindToCompose = @"groupChosen";
     [addGroup showEdit:self title:NSLocalizedString(@"Add a Group", @"adding a group alert") subTitle:NSLocalizedString(@"Give your group a name", @"prompting user to name group") closeButtonTitle:NSLocalizedString(@"Cancel", @"close alert") duration:0.0f];
 }
 
--(void) getGroups {
+- (void)getGroups {
     PFQuery *query = [PFQuery queryWithClassName:@"Group"];
     NSArray *keys = @[@"title", @"membersString", @"members", @"user"];
     [query includeKeys:keys];
