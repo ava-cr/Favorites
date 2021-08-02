@@ -13,6 +13,8 @@
 #import "ProfileViewController.h"
 #import "CommentsViewController.h"
 #import "LikesViewController.h"
+#import "LoginViewController.h"
+#import "SceneDelegate.h"
 #import "Friend.h"
 #import "Like.h"
 #import "Group.h"
@@ -29,6 +31,7 @@ static NSString *segueToLikes = @"showLikes";
 @property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> *isLikedByUser;
 @property (strong, nonatomic) NSMutableArray *friends;
 @property (nonatomic, assign) BOOL loadedAllData;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 
 @end
 
@@ -36,6 +39,7 @@ static NSString *segueToLikes = @"showLikes";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.logoutButton setTitle:NSLocalizedString(@"Logout", @"log out of the app")];
     [SVProgressHUD setContainerView:self.view];
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -142,6 +146,15 @@ static NSString *segueToLikes = @"showLikes";
             }
         }
     }];
+}
+- (IBAction)didTapLogout:(id)sender {
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+    }];
+    NSLog(@"%s", "logout");
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+    myDelegate.window.rootViewController = loginViewController;
 }
 
 #pragma mark - Table View Functions

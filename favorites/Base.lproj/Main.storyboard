@@ -124,10 +124,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kN1-fq-UxC">
-                                <rect key="frame" x="164.5" y="743" width="85" height="30"/>
+                                <rect key="frame" x="164.5" y="748" width="85" height="30"/>
                                 <color key="backgroundColor" systemColor="systemPinkColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="pYD-5L-jnU"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="k19-09-y0u"/>
                                 </constraints>
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal" title="List of Pins">
@@ -146,6 +146,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal">
+                                    <color key="titleShadowColor" systemColor="systemPinkColor"/>
                                     <imageReference key="image" image="person.3" catalog="system" symbolScale="medium"/>
                                 </state>
                                 <state key="selected" image="person.3.fill" catalog="system"/>
@@ -163,13 +164,15 @@
                             <constraint firstItem="0N9-FX-0mC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="BTh-lF-Ds5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wnQ-tU-LA9" secondAttribute="bottom" constant="30" id="BnT-be-N9S"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wnQ-tU-LA9" secondAttribute="trailing" constant="30" id="DWd-gS-kiW"/>
+                            <constraint firstItem="wnQ-tU-LA9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kN1-fq-UxC" secondAttribute="trailing" constant="10" id="Edb-A3-gND"/>
                             <constraint firstItem="0N9-FX-0mC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="KKn-5V-O4P"/>
                             <constraint firstItem="61u-mG-5to" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="OP5-DL-vlr"/>
                             <constraint firstItem="f5U-qM-pKR" firstAttribute="centerX" secondItem="wIm-BP-7ha" secondAttribute="centerX" id="PVN-5S-FhR"/>
                             <constraint firstItem="wnQ-tU-LA9" firstAttribute="top" secondItem="f5U-qM-pKR" secondAttribute="bottom" constant="25" id="Sm0-ps-sZO"/>
                             <constraint firstItem="f5U-qM-pKR" firstAttribute="top" secondItem="wIm-BP-7ha" secondAttribute="bottom" constant="25" id="hu4-BB-bpu"/>
-                            <constraint firstItem="wnQ-tU-LA9" firstAttribute="centerY" secondItem="kN1-fq-UxC" secondAttribute="centerY" id="pQq-8Q-D8Z"/>
+                            <constraint firstItem="wnQ-tU-LA9" firstAttribute="bottom" secondItem="kN1-fq-UxC" secondAttribute="bottom" id="m2J-lw-WWo"/>
                             <constraint firstItem="kN1-fq-UxC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="q0O-yT-xI8"/>
+                            <constraint firstItem="kN1-fq-UxC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="qZr-hy-Xii"/>
                             <constraint firstItem="61u-mG-5to" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ufh-q4-xgk"/>
                             <constraint firstItem="wnQ-tU-LA9" firstAttribute="centerX" secondItem="f5U-qM-pKR" secondAttribute="centerX" id="yBJ-gt-qEi"/>
                         </constraints>
@@ -1449,6 +1452,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vgd-UH-gdG">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="9OB-Q3-E5d">
+                            <color key="tintColor" systemColor="systemPinkColor"/>
+                            <connections>
+                                <action selector="didTapLogout:" destination="N9n-xW-PrF" id="ytX-sQ-HhA"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="New Update" image="plus" catalog="system" id="Pa2-3o-faF">
                                 <color key="tintColor" systemColor="systemPinkColor"/>
@@ -1471,6 +1480,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="logoutButton" destination="9OB-Q3-E5d" id="WDJ-YH-6ne"/>
                         <outlet property="tableView" destination="PTV-cu-mh8" id="tks-OQ-UgK"/>
                         <segue destination="4wK-vl-P5r" kind="show" identifier="showLocationOnMap" id="Hvl-zz-9Jy"/>
                         <segue destination="hDA-ZI-eSw" kind="show" identifier="showProfile" id="H2C-Ip-B2u"/>
@@ -2213,7 +2223,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="SBY-uA-Ilk"/>
         <segue reference="15X-OK-XO9"/>
-        <segue reference="H2C-Ip-B2u"/>
+        <segue reference="e69-fL-GIH"/>
         <segue reference="7if-5d-Uoj"/>
         <segue reference="0IP-IJ-Hde"/>
         <segue reference="5Ih-DD-fVx"/>
