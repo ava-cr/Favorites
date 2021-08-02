@@ -20,9 +20,11 @@
 #import "Group.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <DateTools/DateTools.h>
+#import <VBFPopFlatButton/VBFPopFlatButton.h>
 
 static NSString *segueToComments = @"showComments";
 static NSString *segueToLikes = @"showLikes";
+static NSString *segueToAddUpdate = @"newUpdate";
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UpdateCellDelegate>
 
@@ -32,6 +34,7 @@ static NSString *segueToLikes = @"showLikes";
 @property (strong, nonatomic) NSMutableArray *friends;
 @property (nonatomic, assign) BOOL loadedAllData;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
+@property (strong, nonatomic) VBFPopFlatButton *addButton;
 
 @end
 
@@ -49,7 +52,8 @@ static NSString *segueToLikes = @"showLikes";
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.friends = [[NSMutableArray alloc] initWithObjects:[PFUser currentUser], nil];
     self.updates = [[NSMutableArray alloc] init];
-    [self getFriends];
+    [self setUpAddButton];
+    //[self getFriends];
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
@@ -57,7 +61,40 @@ static NSString *segueToLikes = @"showLikes";
     [refreshControl endRefreshing];
 }
 
-- (void) getUpdates: (int) numUpdates {
+- (void)setUpAddButton {
+    self.addButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 75, self.view.frame.size.height - 150, 40, 40)
+                                                  buttonType:buttonDefaultType
+                                                 buttonStyle:buttonRoundedStyle
+                                                 animateToInitialState:YES];
+    self.addButton.lineThickness = 3;
+    self.addButton.roundBackgroundColor = [UIColor systemPinkColor];
+    self.addButton.layer.shadowColor = [UIColor.whiteColor CGColor];
+    self.addButton.layer.shadowOffset = CGSizeMake(1.5f, 1.5f);
+    self.addButton.layer.shadowOpacity = 0.55f;
+    self.addButton.layer.masksToBounds = NO;
+    self.addButton.tintColor = [UIColor whiteColor];
+    [self.addButton addTarget:self
+                               action:@selector(addButtonPressed)
+                     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.addButton];
+    NSTimeInterval delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.addButton animateToType:buttonAddType];
+    });
+}
+
+- (void)addButtonPressed {
+    [self.addButton animateToType:buttonMinusType];
+    NSTimeInterval delayInSeconds = 0.3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self performSegueWithIdentifier:segueToAddUpdate sender:nil];
+        [self.addButton animateToType:buttonAddType];
+    });
+}
+
+- (void)getUpdates: (int) numUpdates {
     [SVProgressHUD show]; // activity monitor
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
     NSArray *keys = @[@"author", @"objectId", @"audience", @"group"];

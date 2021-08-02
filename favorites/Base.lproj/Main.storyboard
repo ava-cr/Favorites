@@ -1415,12 +1415,6 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="New Update" image="plus" catalog="system" id="Pa2-3o-faF">
-                                <color key="tintColor" systemColor="systemPinkColor"/>
-                                <connections>
-                                    <segue destination="dbK-so-hRB" kind="presentation" id="jOV-H9-pKG"/>
-                                </connections>
-                            </barButtonItem>
                             <barButtonItem title="Notifications" image="heart" catalog="system" id="U2I-Zb-VI4">
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <connections>
@@ -1442,6 +1436,7 @@
                         <segue destination="hDA-ZI-eSw" kind="show" identifier="showProfile" id="H2C-Ip-B2u"/>
                         <segue destination="vSQ-1G-8Fu" kind="show" identifier="showComments" id="zET-Cy-LY0"/>
                         <segue destination="V4O-kI-mHV" kind="show" identifier="showLikes" id="VC6-aA-08Y"/>
+                        <segue destination="dbK-so-hRB" kind="presentation" identifier="newUpdate" id="brW-7n-1yT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a00-oO-7yU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2151,7 +2146,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="o2F-QT-Vd7"/>
         <segue reference="zET-Cy-LY0"/>
-        <segue reference="Mus-wf-Xfa"/>
+        <segue reference="H2C-Ip-B2u"/>
         <segue reference="VC6-aA-08Y"/>
         <segue reference="KGr-TS-F6e"/>
         <segue reference="5Ih-DD-fVx"/>
@@ -2174,7 +2169,6 @@
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="person.badge.plus" catalog="system" width="128" height="124"/>
         <image name="phone" catalog="system" width="128" height="115"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
