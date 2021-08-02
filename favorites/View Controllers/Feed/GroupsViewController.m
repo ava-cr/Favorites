@@ -37,7 +37,7 @@ static NSString *unwindToCompose = @"groupChosen";
 }
 
 - (void)setUpButton {
-    self.addButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 70, self.view.frame.size.height - 130, 40, 40)
+    self.addButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 80, self.view.frame.size.height - 140, 40, 40)
                                                   buttonType:buttonDefaultType
                                                  buttonStyle:buttonRoundedStyle
                                                  animateToInitialState:YES];
@@ -69,6 +69,9 @@ static NSString *unwindToCompose = @"groupChosen";
         addGroup.shouldDismissOnTapOutside = YES;
         [addGroup setShowAnimationType:SCLAlertViewShowAnimationSlideInToCenter];
         [addGroup setBackgroundType:SCLAlertViewBackgroundBlur];
+        [addGroup alertIsDismissed:^{
+            [self.addButton animateToType:buttonAddType];
+        }];
         [addGroup addButton:NSLocalizedString(@"Done", @"finished typing name") actionBlock:^(void) {
             NSLog(@"Text value: %@", textField.text);
             self.addedGroupName = textField.text;
@@ -76,22 +79,6 @@ static NSString *unwindToCompose = @"groupChosen";
         }];
         [addGroup showEdit:self title:NSLocalizedString(@"Add a Group", @"adding a group alert") subTitle:NSLocalizedString(@"Give your group a name", @"prompting user to name group") closeButtonTitle:NSLocalizedString(@"Cancel", @"close alert") duration:0.0f];
     });
-}
-
-- (IBAction)addButtonTapped:(id)sender {
-    SCLAlertView *addGroup = [[SCLAlertView alloc] init];
-    UITextField *textField = [addGroup addTextField:@"Enter a group name"];
-    [textField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-    addGroup.customViewColor = [UIColor blueColor];
-    addGroup.shouldDismissOnTapOutside = YES;
-    [addGroup setShowAnimationType:SCLAlertViewShowAnimationSlideInToCenter];
-    [addGroup setBackgroundType:SCLAlertViewBackgroundBlur];
-    [addGroup addButton:NSLocalizedString(@"Done", @"finished typing name") actionBlock:^(void) {
-        NSLog(@"Text value: %@", textField.text);
-        self.addedGroupName = textField.text;
-        [self performSegueWithIdentifier:segueToFriends sender:nil];
-    }];
-    [addGroup showEdit:self title:NSLocalizedString(@"Add a Group", @"adding a group alert") subTitle:NSLocalizedString(@"Give your group a name", @"prompting user to name group") closeButtonTitle:NSLocalizedString(@"Cancel", @"close alert") duration:0.0f];
 }
 
 - (void)getGroups {
@@ -147,6 +134,7 @@ static NSString *unwindToCompose = @"groupChosen";
             NSLog(@"%@", error.localizedDescription);
         }
     }];
+    [self.addButton animateToType:buttonAddType];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

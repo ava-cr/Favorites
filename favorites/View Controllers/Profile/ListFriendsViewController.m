@@ -10,6 +10,7 @@
 #import "ListFriendCell.h"
 #import "Friend.h"
 #import <Parse/Parse.h>
+#import <VBFPopFlatButton/VBFPopFlatButton.h>
 
 static NSString *unwindAddGroup = @"unwindToGroups";
 
@@ -17,8 +18,8 @@ static NSString *unwindAddGroup = @"unwindToGroups";
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *filteredFriends;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (strong, nonatomic) NSMutableArray *groupUsernames;
+@property (strong, nonatomic) VBFPopFlatButton *saveButton;
 
 @end
 
@@ -35,21 +36,51 @@ static NSString *unwindAddGroup = @"unwindToGroups";
     if (!self.friends) [self getFriends];
     else self.filteredFriends = [NSMutableArray arrayWithArray:self.friends];
     if (self.addToGroup) {
-        self.title = NSLocalizedString(@"Choose Friends for your Group", @"add friends to group");
+        [self setUpButton];
         self.tableView.allowsMultipleSelection = YES;
-        [self.doneButton setEnabled:YES];
-        [self.doneButton setTitle:NSLocalizedString(@"Done", @"finished selecting friends for group")];
     }
     else {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
         self.title = NSLocalizedString(@"Friends", @"the user's friends");
-        [self.doneButton setEnabled:NO];
-        [self.doneButton setTitle:NSLocalizedString(@"", nil)];
         self.tableView.allowsMultipleSelection = NO;
     }
 }
 
-- (void) getFriends {
+- (void)setUpButton {
+    self.saveButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 80, self.view.frame.size.height - 140, 40, 40)
+                                                  buttonType:buttonDefaultType
+                                                 buttonStyle:buttonRoundedStyle
+                                                 animateToInitialState:YES];
+    self.saveButton.lineThickness = 3;
+    self.saveButton.roundBackgroundColor = [UIColor whiteColor];
+    self.saveButton.tintColor = [UIColor systemPinkColor];
+    [self.saveButton addTarget:self
+                               action:@selector(saveButtonPressed)
+                     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.saveButton];
+    NSTimeInterval delayInSeconds = 0.3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.saveButton animateToType:buttonOkType];
+    });
+}
+
+- (void)saveButtonPressed {
+    [self.saveButton animateToType:buttonMinusType];
+    self.membersString = [[NSString alloc] init];
+    for (NSString *username in self.groupUsernames) {
+        self.membersString = [self.membersString stringByAppendingString:username];
+        self.membersString = [self.membersString stringByAppendingString:@" "];
+    }
+    NSLog(@"%@", self.membersString);
+    NSTimeInterval delayInSeconds = 0.3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self performSegueWithIdentifier:unwindAddGroup sender:nil];
+    });
+}
+
+- (void)getFriends {
     // construct query
     PFQuery *queryUser1 = [PFQuery queryWithClassName:@"Friend"];
     [queryUser1 whereKey:@"user1" equalTo:self.user];
@@ -109,15 +140,6 @@ static NSString *unwindAddGroup = @"unwindToGroups";
         [self.groupUsernames removeObject:user.username];
         [self.members removeObject:user.objectId];
     }
-}
-- (IBAction)doneButtonTapped:(id)sender {
-    self.membersString = [[NSString alloc] init];
-    for (NSString *username in self.groupUsernames) {
-        self.membersString = [self.membersString stringByAppendingString:username];
-        self.membersString = [self.membersString stringByAppendingString:@" "];
-    }
-    NSLog(@"%@", self.membersString);
-    [self performSegueWithIdentifier:unwindAddGroup sender:nil];
 }
 
 # pragma mark - Search Bar Functions
