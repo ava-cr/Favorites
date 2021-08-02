@@ -26,6 +26,7 @@
 
 static NSString *segueToPinsList = @"showPinsList";
 static NSString *segueToUpdateDetails = @"showUpdateDetails";
+static NSString *segueToSearchLocations = @"searchLocations";
 
 @interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
@@ -33,7 +34,6 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) NSArray<MKMapItem *> *pins;
 @property (strong, nonatomic) NSArray<PinAnnotation *> *annotations;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *addPinButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 @property (weak, nonatomic) IBOutlet UIButton *listPinsButton;
 @property (weak, nonatomic) IBOutlet UIButton *friendsButton;
@@ -43,6 +43,7 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
 @property (weak, nonatomic) IBOutlet UIButton *centerUserButton;
 @property (weak, nonatomic) IBOutlet UIButton *refreshMapButton;
 @property (strong, nonatomic) VBFPopFlatButton *closeButton;
+@property (strong, nonatomic) VBFPopFlatButton *addButton;
 
 @end
 
@@ -52,25 +53,8 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     [super viewDidLoad];
     self.mapView.delegate = self;
     if (!self.user) self.user = [PFUser currentUser];
-    self.listPinsButton.layer.cornerRadius = 8;
-    self.friendsButton.layer.cornerRadius = self.friendsButton.frame.size.width /2;
-    self.centerUserButton.layer.cornerRadius = self.centerUserButton.frame.size.width /2;
-    self.refreshMapButton.layer.cornerRadius = self.refreshMapButton.frame.size.width /2;
-    self.listPinsButton.layer.cornerRadius = self.listPinsButton.frame.size.width /2;
+    [self setupByUser];
     [self getPins];
-    if ([self.user isEqual:[PFUser currentUser]]) {
-        self.title = NSLocalizedString(@"Your Pins", @"the user's saved locations");
-    }
-    else {
-        [self setUpCloseButton];
-        [self.friendsButton setEnabled:NO];
-        [self.friendsButton setHidden:YES];
-        [self.addPinButton setEnabled:NO];
-        [self.addPinButton setTitle:@""];
-        [self.logoutButton setEnabled:NO];
-        [self.logoutButton setTitle:@""];
-        self.title = [self.user.username stringByAppendingString:@"'s Pins"];
-    }
     if (self.locationManager == nil ) {
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
@@ -85,10 +69,80 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
 - (void)viewDidAppear:(BOOL)animated {
      AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
      [delegate registerForRemoteNotifications];
+    [self.addButton animateToType:buttonAddType];
+}
+
+- (void)setupByUser {
+    self.centerUserButton.layer.cornerRadius = self.centerUserButton.frame.size.width /2;
+    self.centerUserButton.layer.cornerRadius = self.listPinsButton.frame.size.width /2;
+    self.centerUserButton.layer.shadowColor = [UIColor.systemPinkColor CGColor];
+    self.centerUserButton.layer.shadowOffset = CGSizeMake(1.5f, 1.5f);
+    self.centerUserButton.layer.shadowOpacity = 0.55f;
+    self.centerUserButton.layer.masksToBounds = NO;
+    self.listPinsButton.layer.cornerRadius = 8;
+    self.listPinsButton.layer.cornerRadius = self.listPinsButton.frame.size.width /2;
+    self.listPinsButton.layer.shadowColor = [UIColor.systemPinkColor CGColor];
+    self.listPinsButton.layer.shadowOffset = CGSizeMake(1.5f, 1.5f);
+    self.listPinsButton.layer.shadowOpacity = 0.55f;
+    self.listPinsButton.layer.masksToBounds = NO;
+    self.refreshMapButton.layer.cornerRadius = self.refreshMapButton.frame.size.width /2;
+    self.refreshMapButton.layer.shadowColor = [UIColor.systemPinkColor CGColor];
+    self.refreshMapButton.layer.shadowOffset = CGSizeMake(1.5f, 1.5f);
+    self.refreshMapButton.layer.shadowOpacity = 0.55f;
+    self.refreshMapButton.layer.masksToBounds = NO;
+    if ([self.user isEqual:[PFUser currentUser]]) {
+        self.title = NSLocalizedString(@"Your Pins", @"the user's saved locations");
+        [self setUpAddButton];
+        self.friendsButton.layer.cornerRadius = self.friendsButton.frame.size.width /2;
+        self.friendsButton.layer.shadowColor = [UIColor.systemPinkColor CGColor];
+        self.friendsButton.layer.shadowOffset = CGSizeMake(1.5f, 1.5f);
+        self.friendsButton.layer.shadowOpacity = 0.55f;
+        self.friendsButton.layer.masksToBounds = NO;
+    }
+    else {
+        [self setUpCloseButton];
+        [self.friendsButton setEnabled:NO];
+        [self.friendsButton setHidden:YES];
+        [self.logoutButton setEnabled:NO];
+        [self.logoutButton setTitle:@""];
+        self.title = [self.user.username stringByAppendingString:@"'s Pins"];
+    }
+}
+
+- (void)setUpAddButton {
+    self.addButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width /2 - 25, self.view.frame.size.height - 150, 40, 40)
+                                                  buttonType:buttonDefaultType
+                                                 buttonStyle:buttonRoundedStyle
+                                                 animateToInitialState:YES];
+    self.addButton.lineThickness = 3;
+    self.addButton.roundBackgroundColor = [UIColor systemPinkColor];
+    self.addButton.layer.shadowColor = [UIColor.whiteColor CGColor];
+    self.addButton.layer.shadowOffset = CGSizeMake(1.5f, 1.5f);
+    self.addButton.layer.shadowOpacity = 0.55f;
+    self.addButton.layer.masksToBounds = NO;
+    self.addButton.tintColor = [UIColor whiteColor];
+    [self.addButton addTarget:self
+                               action:@selector(addButtonPressed)
+                     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.addButton];
+    NSTimeInterval delayInSeconds = 0.6;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.addButton animateToType:buttonAddType];
+    });
+}
+
+- (void)addButtonPressed {
+    [self.addButton animateToType:buttonMinusType];
+    NSTimeInterval delayInSeconds = 0.3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self performSegueWithIdentifier:segueToSearchLocations sender:nil];
+    });
 }
 
 - (void)setUpCloseButton {
-    self.closeButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(20, 20, 30, 30)
+    self.closeButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 60, 30, 30, 30)
                                                   buttonType:buttonDefaultType
                                                  buttonStyle:buttonRoundedStyle
                                                  animateToInitialState:YES];
