@@ -40,6 +40,8 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
 @property (strong, nonatomic) NSMutableArray *updates;
 @property (strong, nonatomic) NSMutableArray *friends;
 @property (strong, nonatomic) NSArray<UpdateAnnotation *> *updateAnnotations;
+@property (weak, nonatomic) IBOutlet UIButton *centerUserButton;
+@property (weak, nonatomic) IBOutlet UIButton *refreshMapButton;
 
 @end
 
@@ -50,6 +52,9 @@ static NSString *segueToUpdateDetails = @"showUpdateDetails";
     self.mapView.delegate = self;
     if (!self.user) self.user = [PFUser currentUser];
     self.listPinsButton.layer.cornerRadius = 8;
+    self.friendsButton.layer.cornerRadius = self.friendsButton.frame.size.width /2;
+    self.centerUserButton.layer.cornerRadius = self.centerUserButton.frame.size.width /2;
+    self.refreshMapButton.layer.cornerRadius = self.refreshMapButton.frame.size.width /2;
     //[self getPins];
     if ([self.user isEqual:[PFUser currentUser]]) {
         self.title = NSLocalizedString(@"Your Pins", @"the user's saved locations");

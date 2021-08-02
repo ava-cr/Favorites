@@ -443,8 +443,9 @@ static NSString *segueToLikes = @"showLikes";
         if (![self.user isEqual:[PFUser currentUser]]) [cell.editProfileButton setTitle:NSLocalizedString(@"See Pins", @"show user's pins") forState:UIControlStateNormal];
         else [cell.editProfileButton setTitle:NSLocalizedString(@"Edit Profile", @"edit the profile photo") forState:UIControlStateNormal];
         cell.editProfileButton.layer.cornerRadius = 5;
-        cell.editProfileButton.layer.borderColor = [UIColor.systemPinkColor CGColor];
+        cell.editProfileButton.layer.borderColor = [UIColor.whiteColor CGColor];
         cell.editProfileButton.layer.borderWidth = 0.5;
+        cell.editProfileButton.layer.backgroundColor = [UIColor.systemPinkColor CGColor];
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
         // profile picture
         PFFileObject *pfFile = [self.user objectForKey:@"profilePic"];
