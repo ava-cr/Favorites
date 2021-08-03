@@ -215,31 +215,6 @@
                                     <constraint firstAttribute="width" secondItem="D8b-hX-SaR" secondAttribute="height" multiplier="207:124" id="45a-mM-Srw"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyB-IT-IfF">
-                                <rect key="frame" x="354" y="20" width="40" height="30"/>
-                                <color key="backgroundColor" systemColor="linkColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="62v-HB-M9j"/>
-                                </constraints>
-                                <state key="normal">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="6cd-f5-Gi2" kind="unwind" identifier="savePin" unwindAction="updatedPinUnwind:" id="RgY-Cx-cXS"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZB2-M0-p2z">
-                                <rect key="frame" x="334" y="20" width="60" height="30"/>
-                                <color key="backgroundColor" systemColor="systemPinkColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="vgR-P2-8m6"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Add Pin"/>
-                                <connections>
-                                    <action selector="addPinTapped:" destination="atg-mE-fSd" eventType="touchUpInside" id="FDM-KE-vkh"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSK-hP-WU6">
                                 <rect key="frame" x="20" y="302" width="59.5" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -300,29 +275,23 @@
                             <constraint firstItem="D8b-hX-SaR" firstAttribute="top" secondItem="KIs-C5-GCb" secondAttribute="top" id="9Mm-KZ-Q0g"/>
                             <constraint firstItem="E1y-Hf-mXj" firstAttribute="trailing" secondItem="hD3-5E-hrg" secondAttribute="trailing" id="Ajt-gN-vZT"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="hD3-5E-hrg" secondAttribute="trailing" constant="20" id="CMI-hZ-Q90"/>
-                            <constraint firstItem="ZB2-M0-p2z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="20" id="Dtc-k9-Xhj"/>
                             <constraint firstItem="h8J-61-UuR" firstAttribute="leading" secondItem="VRD-TU-vMW" secondAttribute="trailing" constant="50" id="E8R-ig-W5T"/>
                             <constraint firstItem="O8y-Bc-plI" firstAttribute="top" secondItem="D8b-hX-SaR" secondAttribute="bottom" constant="10" id="GZ7-Ui-bfQ"/>
                             <constraint firstItem="E1y-Hf-mXj" firstAttribute="bottom" secondItem="hD3-5E-hrg" secondAttribute="bottom" id="MGZ-W3-UB9"/>
                             <constraint firstItem="SjW-PS-twS" firstAttribute="bottom" secondItem="zlP-IY-las" secondAttribute="bottom" id="ODN-oS-Fuc"/>
-                            <constraint firstItem="tyB-IT-IfF" firstAttribute="top" secondItem="KIs-C5-GCb" secondAttribute="top" constant="20" id="Q75-Nv-g9g"/>
-                            <constraint firstItem="tyB-IT-IfF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="10" id="Ry1-pe-Ggu"/>
                             <constraint firstItem="SjW-PS-twS" firstAttribute="top" secondItem="h8J-61-UuR" secondAttribute="bottom" constant="5" id="Sl3-oN-Jho"/>
                             <constraint firstItem="3od-Y8-ChN" firstAttribute="top" secondItem="SjW-PS-twS" secondAttribute="bottom" constant="15" id="SuF-PI-7Ko"/>
                             <constraint firstItem="hD3-5E-hrg" firstAttribute="top" secondItem="O8y-Bc-plI" secondAttribute="top" id="WaQ-OZ-Duz"/>
                             <constraint firstItem="hD3-5E-hrg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O8y-Bc-plI" secondAttribute="trailing" constant="10" id="ZVg-rS-OJ8"/>
                             <constraint firstItem="O8y-Bc-plI" firstAttribute="leading" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="20" id="aeX-nz-qfF"/>
-                            <constraint firstItem="ZB2-M0-p2z" firstAttribute="top" secondItem="KIs-C5-GCb" secondAttribute="top" constant="20" id="c1L-An-LxC"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="bottom" secondItem="3od-Y8-ChN" secondAttribute="bottom" constant="20" id="c8X-xA-1vl"/>
                             <constraint firstItem="E1y-Hf-mXj" firstAttribute="leading" secondItem="hD3-5E-hrg" secondAttribute="leading" id="d9D-0f-afg"/>
                             <constraint firstItem="SjW-PS-twS" firstAttribute="centerX" secondItem="h8J-61-UuR" secondAttribute="centerX" id="eod-tb-TvK"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="tyB-IT-IfF" secondAttribute="trailing" id="fTn-lf-3Bu"/>
                             <constraint firstItem="h8J-61-UuR" firstAttribute="bottom" secondItem="VRD-TU-vMW" secondAttribute="bottom" id="g7J-A2-qUB"/>
                             <constraint firstItem="D8b-hX-SaR" firstAttribute="trailing" secondItem="KIs-C5-GCb" secondAttribute="trailing" id="hJv-mN-tlS"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mSK-hP-WU6" secondAttribute="trailing" constant="20" id="jQJ-g1-EWd"/>
                             <constraint firstItem="h8J-61-UuR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hD3-5E-hrg" secondAttribute="bottom" constant="150" id="jkP-1l-ayl"/>
                             <constraint firstItem="hD3-5E-hrg" firstAttribute="bottom" secondItem="O8y-Bc-plI" secondAttribute="bottom" id="nB9-5d-mXx"/>
-                            <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="ZB2-M0-p2z" secondAttribute="trailing" constant="20" id="oSW-qB-amO"/>
                             <constraint firstItem="3od-Y8-ChN" firstAttribute="leading" secondItem="KIs-C5-GCb" secondAttribute="leading" constant="10" id="uKb-lf-GP5"/>
                             <constraint firstItem="E1y-Hf-mXj" firstAttribute="top" secondItem="hD3-5E-hrg" secondAttribute="top" id="vL3-uJ-tme"/>
                             <constraint firstItem="KIs-C5-GCb" firstAttribute="trailing" secondItem="3od-Y8-ChN" secondAttribute="trailing" constant="10" id="x2j-Eu-lre"/>
@@ -334,18 +303,17 @@
                         <barButtonItem key="rightBarButtonItem" title="Save" id="ZOR-bV-ucv"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="addPinButton" destination="ZB2-M0-p2z" id="WlW-Gs-ejD"/>
                         <outlet property="addressLabel" destination="mSK-hP-WU6" id="XKE-0s-QVF"/>
                         <outlet property="callLabel" destination="SjW-PS-twS" id="BN0-fV-4TB"/>
                         <outlet property="categoryImageView" destination="hD3-5E-hrg" id="41N-4Y-GJR"/>
                         <outlet property="deletePinButton" destination="3od-Y8-ChN" id="6zr-KH-jcD"/>
                         <outlet property="emojiLabel" destination="E1y-Hf-mXj" id="ux6-3d-IEN"/>
                         <outlet property="headerImageView" destination="D8b-hX-SaR" id="5hI-b3-KjN"/>
-                        <outlet property="modalSaveButton" destination="tyB-IT-IfF" id="FYz-sy-W4R"/>
                         <outlet property="titleLabel" destination="O8y-Bc-plI" id="8We-0u-VMN"/>
                         <outlet property="websiteLabel" destination="zlP-IY-las" id="glg-tk-pWu"/>
                         <segue destination="6cd-f5-Gi2" kind="unwind" identifier="deletePin" unwindAction="deletePin:" id="5C4-i4-gKy"/>
                         <segue destination="rb9-1J-lNC" kind="presentation" identifier="showWebsite" id="0IP-IJ-Hde"/>
+                        <segue destination="6cd-f5-Gi2" kind="unwind" identifier="savePin" unwindAction="updatedPinUnwind:" id="5ej-iV-7rp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K4N-Dw-c1Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2119,7 +2087,7 @@
         <segue reference="15X-OK-XO9"/>
         <segue reference="Mus-wf-Xfa"/>
         <segue reference="7if-5d-Uoj"/>
-        <segue reference="KGr-TS-F6e"/>
+        <segue reference="0IP-IJ-Hde"/>
         <segue reference="hda-eY-N8b"/>
         <segue reference="Ldp-kw-Npj"/>
         <segue reference="9tI-lf-D44"/>
@@ -2142,9 +2110,6 @@
         <image name="phone" catalog="system" width="128" height="115"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

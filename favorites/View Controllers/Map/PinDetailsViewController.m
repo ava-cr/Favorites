@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import <SCLAlertView_Objective_C/SCLAlertView.h>
 #import <JVFloatLabeledTextField/JVFloatLabeledTextView.h>
+#import <VBFPopFlatButton/VBFPopFlatButton.h>
 #import "Pin.h"
 
 static NSString *segueIdToWebsite = @"showWebsite";
@@ -20,15 +21,16 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
 @interface PinDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) JVFloatLabeledTextView *notesTextView;
-@property (weak, nonatomic) IBOutlet UIButton *addPinButton;
 @property (weak, nonatomic) IBOutlet UIButton *deletePinButton;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-@property (weak, nonatomic) IBOutlet UIButton *modalSaveButton;
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImageView;
 @property (weak, nonatomic) IBOutlet UILabel *websiteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *callLabel;
 @property (weak, nonatomic) IBOutlet UILabel *emojiLabel;
+@property (strong, nonatomic) VBFPopFlatButton *saveButton;
+@property (strong, nonatomic) VBFPopFlatButton *cancelButton;
+@property (strong, nonatomic) VBFPopFlatButton *addButton;
 
 @end
 
@@ -39,34 +41,14 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     if (!self.pin) self.pin = self.annotation.pin;
     self.titleLabel.text = self.pin.title;
     self.addressLabel.text = self.pin.address;
-    self.addPinButton.layer.cornerRadius = 8;
     if (self.pin.imageURL) {
         NSURL *url = [NSURL URLWithString:self.pin.imageURL];
         NSData *urlData = [NSData dataWithContentsOfURL:url];
         self.headerImageView.image = [[UIImage alloc] initWithData:urlData];
     }
     [self setUpTextView];
+    [self setUpByUser];
     if (self.pin.notes) self.notesTextView.text = self.pin.notes;
-    if (![self.user.objectId isEqual:[PFUser currentUser].objectId]) {
-        [self.notesTextView setEditable:FALSE];
-        [self.deletePinButton setHidden:TRUE];
-        [self.deletePinButton setEnabled:FALSE];
-        [self.modalSaveButton setHidden:TRUE];
-        [self.modalSaveButton setEnabled:FALSE];
-        [self.addPinButton setTitle:NSLocalizedString(@"Add Pin", @"add pin") forState:UIControlStateNormal];
-    }
-    else {
-        [self.modalSaveButton setTitle:NSLocalizedString(@"Save", @"save pin") forState:UIControlStateNormal];
-        self.modalSaveButton.layer.backgroundColor = [UIColor.systemPinkColor CGColor];
-        [self.modalSaveButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        self.modalSaveButton.layer.cornerRadius = 8;
-        [self.deletePinButton setTitle:NSLocalizedString(@"Delete", @"delete pin") forState:UIControlStateNormal];
-        self.deletePinButton.layer.cornerRadius = 5;
-        self.deletePinButton.layer.borderColor = [UIColor.systemRedColor CGColor];
-        self.deletePinButton.layer.borderWidth = 0.5;
-        [self.addPinButton setHidden:TRUE];
-        [self.addPinButton setEnabled:FALSE];
-    }
     UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tapScreen];
     [self setCategoryImage];
@@ -74,7 +56,118 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     self.callLabel.text = NSLocalizedString(@"Call", @"label for call button");
 }
 
--(void)setUpTextView {
+- (void)setUpByUser {
+    self.cancelButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(20, 20, 30, 30)
+                                                  buttonType:buttonDefaultType
+                                                 buttonStyle:buttonRoundedStyle
+                                                 animateToInitialState:YES];
+    self.cancelButton.lineThickness = 3;
+    self.cancelButton.tintColor = [UIColor systemPinkColor];
+    [self.cancelButton addTarget:self
+                               action:@selector(cancelButtonPressed)
+                     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.cancelButton];
+    if (![self.user.objectId isEqual:[PFUser currentUser].objectId]) {
+        [self.notesTextView setEditable:FALSE];
+        [self.deletePinButton setHidden:TRUE];
+        [self.deletePinButton setEnabled:FALSE];
+        self.addButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 50, 20, 30, 30)
+                                                      buttonType:buttonDefaultType
+                                                     buttonStyle:buttonRoundedStyle
+                                                     animateToInitialState:YES];
+        self.addButton.lineThickness = 3;
+        self.addButton.tintColor = [UIColor systemPinkColor];
+        self.addButton.roundBackgroundColor = [UIColor whiteColor];
+        [self.addButton addTarget:self
+                                   action:@selector(addButtonPressed)
+                         forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.addButton];
+        NSTimeInterval delayInSeconds = 0.3;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self.cancelButton animateToType:buttonCloseType];
+            [self.addButton animateToType:buttonAddType];
+        });
+    }
+    else {
+        self.saveButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 50, 20, 30, 30)
+                                                      buttonType:buttonDefaultType
+                                                     buttonStyle:buttonRoundedStyle
+                                                     animateToInitialState:YES];
+        self.saveButton.lineThickness = 3;
+        self.saveButton.tintColor = [UIColor systemPinkColor];
+        [self.saveButton addTarget:self
+                                   action:@selector(saveButtonPressed)
+                         forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.saveButton];
+        NSTimeInterval delayInSeconds = 0.3;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self.cancelButton animateToType:buttonCloseType];
+            [self.saveButton animateToType:buttonOkType];
+        });
+        [self.deletePinButton setTitle:NSLocalizedString(@"Delete", @"delete pin") forState:UIControlStateNormal];
+        self.deletePinButton.layer.cornerRadius = 5;
+        self.deletePinButton.layer.borderColor = [UIColor.systemRedColor CGColor];
+        self.deletePinButton.layer.borderWidth = 0.5;
+    }
+}
+
+- (void)addButtonPressed {
+    // update pin count & post pin to user's map
+    PFUser *currentUser = [PFUser currentUser];
+    currentUser[@"numPins"] = [NSNumber numberWithInt:([currentUser[@"numPins"] intValue] + 1)];
+    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"updated user pin count!");
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    NSNumber *lat = self.pin.latitude;;
+    NSNumber *lng = self.pin.longitude;
+    typeof(self) __weak weakSelf = self;
+    [Pin postUserPin:self.pin.title withNotes:self.pin.notes latitude:lat longitude:lng urlString:self.pin.urlString phone:self.pin.phone imageURL:self.pin.imageURL yelpID:self.pin.yelpID yelpURL:self.pin.yelpURL address:self.pin.address category:self.pin.category withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (succeeded) {
+                NSLog(@"the pin was added!");
+                UIAlertController *pinAdded = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Pin added to your map!", @"message that pin was successfully added to user's map") message:@""preferredStyle:(UIAlertControllerStyleAlert)];
+                [pinAdded.view setTintColor:UIColor.systemPinkColor];
+                UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+                                                                   style:UIAlertActionStyleDefault
+                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                    [strongSelf dismissViewControllerAnimated:TRUE completion:nil];
+                                                                 }];
+                [pinAdded addAction:ok];
+                [strongSelf presentViewController:pinAdded animated:YES completion:nil];
+            }
+            else {
+                NSLog(@"problem saving pin: %@", error.localizedDescription);
+            }
+        }
+    }];
+}
+
+-(void) cancelButtonPressed {
+    [self.cancelButton animateToType:buttonMinusType];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
+}
+
+- (void)saveButtonPressed {
+    [self.cancelButton animateToType:buttonMinusType];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self performSegueWithIdentifier:unwindSegueToMapSavePin sender:nil];
+    });
+}
+
+- (void)setUpTextView {
     int height = 100;
     int width = self.view.frame.size.width - 40;
     int y = self.addressLabel.frame.origin.y + self.addressLabel.frame.size.height + 20;
