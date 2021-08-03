@@ -26,6 +26,8 @@ static NSString *unwindSegueToMap = @"addPin";
 @property (strong, nonatomic) NYSegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UILabel *websiteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *callLabel;
+@property (weak, nonatomic) IBOutlet UIButton *websiteButton;
+@property (weak, nonatomic) IBOutlet UIButton *callButton;
 
 
 @end
@@ -71,6 +73,12 @@ static NSString *unwindSegueToMap = @"addPin";
     self.segmentedControl.cornerRadius = self.segmentedControl.intrinsicContentSize.height / 2.0f;
     self.segmentedControl.usesSpringAnimations = YES;
     [self.view addSubview:self.segmentedControl];
+    [self.headerImageView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
+    [self.titleLabel.topAnchor constraintEqualToAnchor:self.headerImageView.bottomAnchor constant:10].active = YES;
+    [self.subtitleLabel.topAnchor constraintEqualToAnchor:self.titleLabel.bottomAnchor constant:8].active = YES;
+    self.subtitleLabel.numberOfLines = 0;
+    [self.segmentedControl.topAnchor constraintEqualToAnchor:self.subtitleLabel.bottomAnchor constant:20].active = YES;
+    [self.segmentedControl.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
 }
 
 -(void)setUpTextView {
@@ -83,6 +91,9 @@ static NSString *unwindSegueToMap = @"addPin";
     [self.notesTextView setTintColor:UIColor.systemPinkColor];
     [self.notesTextView setScrollEnabled:YES];
     [self.view addSubview:self.notesTextView];
+    [self.notesTextView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.notesTextView.topAnchor constraintEqualToAnchor:self.segmentedControl.bottomAnchor constant:20].active = YES;
+    [self.websiteLabel.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-10].active = YES;
 }
 
 -(void)dismissKeyboard {

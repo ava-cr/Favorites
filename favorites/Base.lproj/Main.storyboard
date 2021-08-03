@@ -652,10 +652,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="callButton" destination="Fcm-Cq-oYq" id="5T3-Bz-PTY"/>
                         <outlet property="callLabel" destination="bDd-bT-Wb0" id="9Ez-jT-jll"/>
                         <outlet property="headerImageView" destination="MOI-mk-C6I" id="hJW-V7-JG9"/>
                         <outlet property="subtitleLabel" destination="Eha-FY-oDj" id="GXG-Pz-WwL"/>
                         <outlet property="titleLabel" destination="vHg-8s-blG" id="PuP-bx-G3e"/>
+                        <outlet property="websiteButton" destination="B2B-RM-zlH" id="TZK-Zu-cXT"/>
                         <outlet property="websiteLabel" destination="cVf-bs-WOc" id="vvm-MB-naS"/>
                         <segue destination="rb9-1J-lNC" kind="presentation" identifier="showWebsite" id="KGr-TS-F6e"/>
                     </connections>
