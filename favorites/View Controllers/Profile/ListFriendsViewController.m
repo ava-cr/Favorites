@@ -120,6 +120,13 @@ static NSString *unwindAddGroup = @"unwindToGroups";
     ListFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListFriendCell" forIndexPath:indexPath];
     PFUser *friend = self.filteredFriends[indexPath.row];
     cell.usernameLabel.text = friend.username;
+    if ([friend objectForKey:@"profilePic"]) {
+        PFFileObject *pfFile = [friend objectForKey:@"profilePic"];
+        NSURL *profURL = [NSURL URLWithString:pfFile.url];
+        NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
+        cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+    }
+    cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
     return cell;
 }
 

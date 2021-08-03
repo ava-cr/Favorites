@@ -40,10 +40,12 @@ static NSString *segueToProfile = @"showProfile";
     self.usernameLabel.text = self.update.author.username;
     self.bottomUsernameLabel.text = self.update.author.username;
     self.profilePicImageView.layer.cornerRadius = self.profilePicImageView.layer.bounds.size.height / 2;
-    PFFileObject *pfFile = [self.update.author objectForKey:@"profilePic"];
-    NSURL *profURL = [NSURL URLWithString:pfFile.url];
-    NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
-    self.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+    if ([self.update.author objectForKey:@"profilePic"]) {
+        PFFileObject *pfFile = [self.update.author objectForKey:@"profilePic"];
+        NSURL *profURL = [NSURL URLWithString:pfFile.url];
+        NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
+        self.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+    }
     self.captionTextField.text = self.update.caption;
     if ([self.update.locationTitle isEqual:[self.update.author.username stringByAppendingString:NSLocalizedString(@"'s location", nil)]] || [self.update.locationTitle isEqual:@""]) {
          self.isAtLabel.text = @"";

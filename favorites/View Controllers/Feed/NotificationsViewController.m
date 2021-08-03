@@ -168,6 +168,13 @@ static NSString *segueToUpdate = @"showUpdate";
             cell.delegate = self;
             cell.usernameLabel.text = request.requester.username;
             cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
+            if ([request.requester objectForKey:@"profilePic"]) {
+                PFFileObject *pfFile = [request.requester objectForKey:@"profilePic"];
+                NSURL *profURL = [NSURL URLWithString:pfFile.url];
+                NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
+                cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+            }
+            
             [cell.acceptButton setTitle:NSLocalizedString(@"Accept", @"accept friend request") forState:UIControlStateNormal];
         }
         return cell;
@@ -178,10 +185,12 @@ static NSString *segueToUpdate = @"showUpdate";
             Comment *comment = self.commentsAndLikes[indexPath.row - [self.friendRequests count]];
             cell.usernameLabel.text = comment.author.username;
             cell.commentLabel.text = [NSLocalizedString(@"commented: ", @"commented on updated notification string") stringByAppendingString:comment.text];
-            PFFileObject *pfFile = [comment.author objectForKey:@"profilePic"];
-            NSURL *profURL = [NSURL URLWithString:pfFile.url];
-            NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
-            cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+            if ([comment.author objectForKey:@"profilePic"]) {
+                PFFileObject *pfFile = [comment.author objectForKey:@"profilePic"];
+                NSURL *profURL = [NSURL URLWithString:pfFile.url];
+                NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
+                cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+            }
             cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
             NSURL *url = [NSURL URLWithString:comment.update.image.url];
             NSData *urlData = [NSData dataWithContentsOfURL:url];
@@ -196,10 +205,12 @@ static NSString *segueToUpdate = @"showUpdate";
             else if (likeCount == 2) notifText = NSLocalizedString(@"and 1 other liked your post.", @"liked post notification string");
             else notifText = [[NSLocalizedString(@"and ", nil) stringByAppendingString:[NSString stringWithFormat:@"%d", likeCount - 1]] stringByAppendingString:NSLocalizedString(@"others liked your post.", @"liked post notification string")];
             cell.commentLabel.text = notifText;
-            PFFileObject *pfFile = [like.user objectForKey:@"profilePic"];
-            NSURL *profURL = [NSURL URLWithString:pfFile.url];
-            NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
-            cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+            if ([like.user objectForKey:@"profilePic"]) {
+                PFFileObject *pfFile = [like.user objectForKey:@"profilePic"];
+                NSURL *profURL = [NSURL URLWithString:pfFile.url];
+                NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
+                cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+            }
             cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
             NSURL *url = [NSURL URLWithString:like.update.image.url];
             NSData *urlData = [NSData dataWithContentsOfURL:url];

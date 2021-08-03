@@ -53,7 +53,7 @@ static NSString *segueToAddUpdate = @"newUpdate";
     self.friends = [[NSMutableArray alloc] initWithObjects:[PFUser currentUser], nil];
     self.updates = [[NSMutableArray alloc] init];
     [self setUpAddButton];
-    [self getFriends];
+    //[self getFriends];
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
@@ -225,10 +225,12 @@ static NSString *segueToAddUpdate = @"newUpdate";
         cell.usernameLabel.text = update.author.username;
         cell.bottomUsernameLabel.text = update.author.username;
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
-        PFFileObject *pfFile = [update.author objectForKey:@"profilePic"];
-        NSURL *profURL = [NSURL URLWithString:pfFile.url];
-        NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
-        cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+        if ([update.author objectForKey:@"profilePic"]) {
+            PFFileObject *pfFile = [update.author objectForKey:@"profilePic"];
+            NSURL *profURL = [NSURL URLWithString:pfFile.url];
+            NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
+            cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+        }
         cell.captionTextField.text = update.caption;
         int likeCount = [cell.update[@"likeCount"] intValue];
         NSString *singularLikedLabel = NSLocalizedString(@" other", @"post liked by 1 other");

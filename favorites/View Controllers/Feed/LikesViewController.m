@@ -57,10 +57,12 @@ static NSString *segueToUserProfile = @"showProfile";
     if (self.likes) {
         Like *like = self.likes[indexPath.row];
         cell.usernameLabel.text = like.user.username;
-        PFFileObject *pfFile = [like.user objectForKey:@"profilePic"];
-        NSURL *profURL = [NSURL URLWithString:pfFile.url];
-        NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
-        cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+        if ([like.user objectForKey:@"profilePic"]) {
+            PFFileObject *pfFile = [like.user objectForKey:@"profilePic"];
+            NSURL *profURL = [NSURL URLWithString:pfFile.url];
+            NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
+            cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+        }
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
     }
     return cell;

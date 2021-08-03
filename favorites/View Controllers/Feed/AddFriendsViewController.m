@@ -47,6 +47,12 @@
         cell.delegate = self;
         cell.usernameLabel.text = user.username;
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
+        if ([user objectForKey:@"profilePic"]) {
+            PFFileObject *pfFile = [user objectForKey:@"profilePic"];
+            NSURL *profURL = [NSURL URLWithString:pfFile.url];
+            NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
+            cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+        }
         if ([self.requestedUsers containsObject:user]) {
             [cell.addFriendButton setHidden:TRUE];
             [cell.addFriendButton setTitle:NSLocalizedString(@"Requested", @"user has already been requested") forState:UIControlStateNormal];
