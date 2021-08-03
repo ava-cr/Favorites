@@ -12,6 +12,7 @@
 #import <SCLAlertView_Objective_C/SCLAlertView.h>
 #import <JVFloatLabeledTextField/JVFloatLabeledTextView.h>
 #import <VBFPopFlatButton/VBFPopFlatButton.h>
+#import <SCLAlertView_Objective_C/SCLAlertView.h>
 #import "Pin.h"
 
 static NSString *segueIdToWebsite = @"showWebsite";
@@ -132,15 +133,16 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
         if (strongSelf) {
             if (succeeded) {
                 NSLog(@"the pin was added!");
-                UIAlertController *pinAdded = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Pin added to your map!", @"message that pin was successfully added to user's map") message:@""preferredStyle:(UIAlertControllerStyleAlert)];
-                [pinAdded.view setTintColor:UIColor.systemPinkColor];
-                UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
-                                                                   style:UIAlertActionStyleDefault
-                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                SCLAlertView *success = [[SCLAlertView alloc] init];
+                success.customViewColor = [UIColor systemPinkColor];
+                success.cornerRadius = 15;
+                success.shouldDismissOnTapOutside = YES;
+                [success setShowAnimationType:SCLAlertViewShowAnimationSlideInToCenter];
+                [success setBackgroundType:SCLAlertViewBackgroundBlur];
+                [success alertIsDismissed:^{
                     [strongSelf dismissViewControllerAnimated:TRUE completion:nil];
-                                                                 }];
-                [pinAdded addAction:ok];
-                [strongSelf presentViewController:pinAdded animated:YES completion:nil];
+                }];
+                [success showSuccess:self title:NSLocalizedString(@"Success!", @"success message") subTitle:NSLocalizedString(@"Pin added to your map.", @"pin successfully added to user's map message") closeButtonTitle:NSLocalizedString(@"OK", @"close alert") duration:0.0f];
             }
             else {
                 NSLog(@"problem saving pin: %@", error.localizedDescription);
@@ -225,40 +227,6 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     self.categoryImageView.layer.cornerRadius = 8;
 }
 
-- (IBAction)addPinTapped:(id)sender {
-    // update pin count & post pin to user's map
-    PFUser *currentUser = [PFUser currentUser];
-    currentUser[@"numPins"] = [NSNumber numberWithInt:([currentUser[@"numPins"] intValue] + 1)];
-    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"updated user pin count!");
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
-    }];
-    NSNumber *lat = self.pin.latitude;;
-    NSNumber *lng = self.pin.longitude;
-    typeof(self) __weak weakSelf = self;
-    [Pin postUserPin:self.pin.title withNotes:self.pin.notes latitude:lat longitude:lng urlString:self.pin.urlString phone:self.pin.phone imageURL:self.pin.imageURL yelpID:self.pin.yelpID yelpURL:self.pin.yelpURL address:self.pin.address category:self.pin.category withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf) {
-            if (succeeded) {
-                NSLog(@"the pin was added!");
-                UIAlertController *pinAdded = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Pin added to your map!", @"message that pin was successfully added to user's map") message:@""preferredStyle:(UIAlertControllerStyleAlert)];
-                UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
-                                                                   style:UIAlertActionStyleDefault
-                                                                 handler:^(UIAlertAction * _Nonnull action) {
-                    [strongSelf dismissViewControllerAnimated:TRUE completion:nil];
-                                                                 }];
-                [pinAdded addAction:ok];
-                [strongSelf presentViewController:pinAdded animated:YES completion:nil];
-            }
-            else {
-                NSLog(@"problem saving pin: %@", error.localizedDescription);
-            }
-        }
-    }];
-}
 - (IBAction)deletePinTapped:(id)sender {
     UIAlertController *editUpdate = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
     UIAlertAction *delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"delete pin")
@@ -296,7 +264,7 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
     }];
 }
 
--(NSString *) formatPhoneNumber:(NSString *)number {
+- (NSString *)formatPhoneNumber:(NSString *)number {
     NSString *formattedNumber = [number stringByReplacingOccurrencesOfString:@"(" withString:@""];
     formattedNumber = [formattedNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
     formattedNumber = [formattedNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -336,7 +304,7 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
         self.view.frame = f;
     }];
 }
--(void)keyboardWillHide:(NSNotification *)notification {
+- (void)keyboardWillHide:(NSNotification *)notification {
     [UIView animateWithDuration:0.5 animations:^{
         CGRect f = self.view.frame;
         f.origin.y = 0.0f;
