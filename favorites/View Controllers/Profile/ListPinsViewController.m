@@ -9,6 +9,7 @@
 #import "ListPinCell.h"
 #import "Pin.h"
 #import "PinDetailsViewController.h"
+#import <pop/POP.h>
 
 static NSString *segueToPinDetails = @"pinDetails";
 
@@ -26,6 +27,11 @@ static NSString *segueToPinDetails = @"pinDetails";
     self.tableView.dataSource = self;
     if (!self.user) self.user = [PFUser currentUser];
     [self getPins];
+    POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerBounds];
+    anim.toValue = [NSValue valueWithCGRect:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 60)];
+    anim.springBounciness = 30;
+    anim.springSpeed = 0.7;
+    [self.view pop_addAnimation:anim forKey:@"size"];
 }
 
 -(void) getPins {
@@ -59,6 +65,7 @@ static NSString *segueToPinDetails = @"pinDetails";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ListPinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPinCell" forIndexPath:indexPath];
+    cell.contentView.backgroundColor = [UIColor systemPinkColor];
     Pin *pin = self.pins[indexPath.row];
     if (self.pins) {
         cell.pinTitleLabel.text = pin.title;
