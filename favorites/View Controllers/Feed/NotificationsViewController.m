@@ -41,7 +41,7 @@ static NSString *segueToUpdate = @"showUpdate";
     [self getUpdates];
 }
 
-- (void) getFriendRequests {
+- (void)getFriendRequests {
     PFQuery *query = [PFQuery queryWithClassName:@"FriendRequest"];
     [query includeKey:@"requester"];
     [query whereKey:@"requestee" equalTo:[PFUser currentUser]];
@@ -50,7 +50,6 @@ static NSString *segueToUpdate = @"showUpdate";
         typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf) {
             if (requests != nil) {
-                NSLog(@"%lu", (unsigned long)[requests count]);
                 strongSelf.friendRequests = requests;
             } else {
                 NSLog(@"%@", error.localizedDescription);
@@ -77,7 +76,7 @@ static NSString *segueToUpdate = @"showUpdate";
     }];
 }
 
-- (void) getUpdates { // only have notifications from last 3 posts
+- (void)getUpdates { // only have notifications from last 3 posts
     [SVProgressHUD show];
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
     query.limit = 3;
@@ -98,7 +97,7 @@ static NSString *segueToUpdate = @"showUpdate";
     }];
 }
 
-- (void) getComments {
+- (void)getComments {
     PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
     [query whereKey:@"update" containedIn:self.updates];
     [query orderByDescending:@"createdAt"];
@@ -148,6 +147,13 @@ static NSString *segueToUpdate = @"showUpdate";
     }];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return NSLocalizedString(@" Friend Requests", @"friend request notification section");
+    }
+    else return NSLocalizedString(@" Activity", @"comments & likes notification section");
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         if (self.friendRequests) return [self.friendRequests count];
@@ -181,8 +187,8 @@ static NSString *segueToUpdate = @"showUpdate";
     }
     else {
         CommentNotificationCell *cell = [tableView dequeueReusableCellWithIdentifier:commentCellID forIndexPath:indexPath];
-        if ([self.commentsAndLikes[indexPath.row - [self.friendRequests count]] isKindOfClass:[Comment class]]) {
-            Comment *comment = self.commentsAndLikes[indexPath.row - [self.friendRequests count]];
+        if ([self.commentsAndLikes[indexPath.row] isKindOfClass:[Comment class]]) {
+            Comment *comment = self.commentsAndLikes[indexPath.row];
             cell.usernameLabel.text = comment.author.username;
             cell.commentLabel.text = [NSLocalizedString(@"commented: ", @"commented on updated notification string") stringByAppendingString:comment.text];
             if ([comment.author objectForKey:@"profilePic"]) {
@@ -197,7 +203,7 @@ static NSString *segueToUpdate = @"showUpdate";
             cell.picImageView.image = [[UIImage alloc] initWithData:urlData];
         }
         else {
-            Like *like = self.commentsAndLikes[indexPath.row - [self.friendRequests count]];
+            Like *like = self.commentsAndLikes[indexPath.row];
             cell.usernameLabel.text = like.user.username;
             NSString *notifText;
             int likeCount = [like.update.likeCount intValue];
