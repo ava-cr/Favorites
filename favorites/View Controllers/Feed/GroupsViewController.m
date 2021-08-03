@@ -12,6 +12,7 @@
 #import <Parse/Parse.h>
 #import <SCLAlertView_Objective_C/SCLAlertView.h>
 #import <VBFPopFlatButton/VBFPopFlatButton.h>
+#import <pop/POP.h>
 
 static NSString *cellId = @"GroupCell";
 static NSString *segueToFriends = @"showFriends";
@@ -34,6 +35,15 @@ static NSString *unwindToCompose = @"groupChosen";
     self.tableView.dataSource = self;
     [self getGroups];
     [self setUpButton];
+    [self animate];
+}
+
+- (void)animate {
+    POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerBounds];
+    anim.toValue = [NSValue valueWithCGRect:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 60)];
+    anim.springBounciness = 30;
+    anim.springSpeed = 0.7;
+    [self.view pop_addAnimation:anim forKey:@"size"];
 }
 
 - (void)setUpButton {
@@ -94,7 +104,6 @@ static NSString *unwindToCompose = @"groupChosen";
             if (groups != nil) {
                 strongSelf.groups = groups;
                 NSLog(@"got groups");
-                // strongSelf.filteredPins = [NSMutableArray arrayWithArray:strongSelf.pins];
                 [strongSelf.tableView reloadData];
             } else {
                 NSLog(@"%@", error.localizedDescription);
@@ -112,6 +121,7 @@ static NSString *unwindToCompose = @"groupChosen";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GroupCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
+    cell.contentView.backgroundColor = [UIColor systemPinkColor];
     if (self.groups) {
         Group *group = self.groups[indexPath.row];
         cell.titleLabel.text = group.title;
