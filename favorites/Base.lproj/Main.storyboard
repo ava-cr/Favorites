@@ -995,7 +995,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LQC-C0-qd1">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LQC-C0-qd1">
                                 <rect key="frame" x="0.0" y="51" width="414" height="791"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1007,20 +1007,21 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNl-SY-8dL">
-                                                    <rect key="frame" x="20" y="41" width="41.5" height="43"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNl-SY-8dL">
+                                                    <rect key="frame" x="20" y="26" width="44" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="nNl-SY-8dL" secondAttribute="trailing" id="2hX-z8-YOJ"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="nNl-SY-8dL" secondAttribute="bottom" constant="30" id="LCV-mE-ukt"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="nNl-SY-8dL" secondAttribute="bottom" constant="15" id="LCV-mE-ukt"/>
                                                 <constraint firstItem="nNl-SY-8dL" firstAttribute="leading" secondItem="GFz-TG-pUR" secondAttribute="leadingMargin" id="Pci-AE-aEt"/>
-                                                <constraint firstItem="nNl-SY-8dL" firstAttribute="top" secondItem="GFz-TG-pUR" secondAttribute="topMargin" constant="30" id="QYQ-6t-v2q"/>
+                                                <constraint firstItem="nNl-SY-8dL" firstAttribute="top" secondItem="GFz-TG-pUR" secondAttribute="topMargin" constant="15" id="QYQ-6t-v2q"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" systemColor="systemPinkColor"/>
                                         <connections>
                                             <outlet property="titleLabel" destination="nNl-SY-8dL" id="bfe-tJ-B2g"/>
                                             <segue destination="GdQ-VI-pne" kind="unwind" identifier="locationChosen" unwindAction="pinForPostChosenUnwind:" id="vka-U7-eQ2"/>
@@ -1030,6 +1031,7 @@
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Zxl-FS-9xf">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>

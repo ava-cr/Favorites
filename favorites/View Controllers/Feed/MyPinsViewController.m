@@ -9,6 +9,7 @@
 #import "MyPinCell.h"
 #import <Parse/Parse.h>
 #import "Pin.h"
+#import <pop/POP.h>
 
 @interface MyPinsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -25,7 +26,17 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
+    [self.searchBar setSearchBarStyle:UISearchBarStyleProminent];
     [self getPins];
+    [self animate];
+}
+
+- (void)animate {
+    POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerBounds];
+    anim.toValue = [NSValue valueWithCGRect:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 60)];
+    anim.springBounciness = 30;
+    anim.springSpeed = 0.7;
+    [self.view pop_addAnimation:anim forKey:@"size"];
 }
 
 -(void) getPins {
