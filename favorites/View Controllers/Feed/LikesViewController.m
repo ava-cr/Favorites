@@ -27,6 +27,7 @@ static NSString *segueToUserProfile = @"showProfile";
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.title = NSLocalizedString(@"Likes", @"users who have liked the post");
     [self getLikes];
 }
 - (void) getLikes {
