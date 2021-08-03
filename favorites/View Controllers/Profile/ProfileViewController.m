@@ -24,6 +24,7 @@
 
 static NSString *segueToComments = @"showComments";
 static NSString *segueToLikes = @"showLikes";
+static NSString *segueToEditProfile = @"editProfile";
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, ProfileHeaderCellDelegate, ProfileUpdateCellDelegate, UIScrollViewDelegate, MDCFlexibleHeaderViewLayoutDelegate>
 
@@ -34,6 +35,7 @@ static NSString *segueToLikes = @"showLikes";
 @property(nonatomic) MDCFlexibleHeaderViewController *headerViewController;
 @property (strong, nonatomic) UILabel *usernameLabel;
 @property (nonatomic, assign) BOOL isTabBar;
+@property (strong, nonatomic) UIImage *profileImage;
 
 @end
 
@@ -448,10 +450,13 @@ static NSString *segueToLikes = @"showLikes";
         cell.editProfileButton.layer.backgroundColor = [UIColor.systemPinkColor CGColor];
         cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
         // profile picture
-        PFFileObject *pfFile = [self.user objectForKey:@"profilePic"];
-        NSURL *url = [NSURL URLWithString:pfFile.url];
-        NSData *urlData = [NSData dataWithContentsOfURL:url];
-        cell.profilePicImageView.image = [[UIImage alloc] initWithData:urlData];
+        if ([self.user objectForKey:@"profilePic"]) {
+            PFFileObject *pfFile = [self.user objectForKey:@"profilePic"];
+            NSURL *url = [NSURL URLWithString:pfFile.url];
+            NSData *urlData = [NSData dataWithContentsOfURL:url];
+            self.profileImage = [[UIImage alloc] initWithData:urlData];
+            cell.profilePicImageView.image = self.profileImage;
+        }
         return cell;
     }
     else {
@@ -481,10 +486,12 @@ static NSString *segueToLikes = @"showLikes";
              NSData *urlData = [NSData dataWithContentsOfURL:url];
              cell.picImageView.image = [[UIImage alloc] initWithData:urlData];
              cell.profilePicImageView.layer.cornerRadius = cell.profilePicImageView.layer.bounds.size.height / 2;
-             PFFileObject *pfFile = [self.user objectForKey:@"profilePic"];
-             NSURL *profURL = [NSURL URLWithString:pfFile.url];
-             NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
-             cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+             if ([self.user objectForKey:@"profilePic"]) {
+                 PFFileObject *pfFile = [self.user objectForKey:@"profilePic"];
+                 NSURL *profURL = [NSURL URLWithString:pfFile.url];
+                 NSData *profURLData = [NSData dataWithContentsOfURL:profURL];
+                 cell.profilePicImageView.image = [[UIImage alloc] initWithData:profURLData];
+             }
              NSDate *createdAt = update.createdAt;
              NSString *createdAtString = createdAt.shortTimeAgoSinceNow;
              cell.timestampLabel.text = [createdAtString stringByAppendingString:@" ago"];
@@ -590,6 +597,10 @@ static NSString *segueToLikes = @"showLikes";
         Update *update = sender;
         LikesViewController *likesVC = [segue destinationViewController];
         likesVC.update = update;
+    }
+    else if ([segue.identifier isEqual:segueToEditProfile]) {
+        EditProfileViewController *editProfVC = [segue destinationViewController];
+        editProfVC.profilePicture = self.profileImage;
     }
 }
 

@@ -7,10 +7,15 @@
 
 #import "EditProfileViewController.h"
 #import <Parse/Parse.h>
+#import <VBFPopFlatButton/VBFPopFlatButton.h>
 #import "Update.h"
+
+static NSString *unwindToProfile = @"saveProfileEdits";
 
 @interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicImageView;
+@property (strong, nonatomic) VBFPopFlatButton *cancelButton;
+@property (strong, nonatomic) VBFPopFlatButton *saveButton;
 
 @end
 
@@ -18,13 +23,64 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.profilePicImageView.image = self.profilePicture;
     self.profilePicImageView.layer.cornerRadius = self.profilePicImageView.layer.bounds.size.height /2;
+    [self setUpButtons];
 }
+
+-(void)setUpButtons {
+    self.cancelButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(20, 20, 30, 30)
+                                                  buttonType:buttonDefaultType
+                                                 buttonStyle:buttonRoundedStyle
+                                                 animateToInitialState:YES];
+    self.cancelButton.lineThickness = 3;
+    self.cancelButton.tintColor = [UIColor systemPinkColor];
+    [self.cancelButton addTarget:self
+                               action:@selector(cancelButtonPressed)
+                     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.cancelButton];
+    self.saveButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 50, 20, 30, 30)
+                                                  buttonType:buttonDefaultType
+                                                 buttonStyle:buttonRoundedStyle
+                                                 animateToInitialState:YES];
+    self.saveButton.lineThickness = 3;
+    self.saveButton.tintColor = [UIColor systemPinkColor];
+    [self.saveButton addTarget:self
+                               action:@selector(saveButtonPressed)
+                     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.saveButton];
+    NSTimeInterval delayInSeconds = 0.3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.cancelButton animateToType:buttonCloseType];
+        [self.saveButton animateToType:buttonOkType];
+    });
+}
+
+-(void) cancelButtonPressed {
+    [self.cancelButton animateToType:buttonMinusType];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
+}
+
+-(void) saveButtonPressed {
+    [self.saveButton animateToType:buttonMinusType];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self performSegueWithIdentifier:unwindToProfile sender:nil];
+    });
+}
+
 - (IBAction)tappedCancel:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
 - (IBAction)tappedChangeProfilePic:(id)sender {
     UIAlertController *changeProf = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
+    [changeProf.view setTintColor:UIColor.systemPinkColor];
     UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"Take Photo", @"use camera to take photo for post")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
@@ -89,9 +145,8 @@
     return newImage;
 }
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqual:@"saveUserProfileEdits"]) {
+    if ([segue.identifier isEqual:unwindToProfile]) {
         self.profilePicture = self.profilePicImageView.image;
     }
 }
