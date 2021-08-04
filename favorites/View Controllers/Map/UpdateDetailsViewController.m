@@ -48,10 +48,16 @@ static NSString *segueToProfile = @"showProfile";
     }
     self.captionTextField.text = self.update.caption;
     if ([self.update.locationTitle isEqual:[self.update.author.username stringByAppendingString:NSLocalizedString(@"'s location", nil)]] || [self.update.locationTitle isEqual:@""]) {
-         self.isAtLabel.text = @"";
+        self.isAtLabel.text = NSLocalizedString(@"is ", @"formulating location string");
+        [self.locationButton setTitle:NSLocalizedString(@"Here", @"formulating location string") forState:UIControlStateNormal];
      }
+    else if ([self.update.locationTitle isEqual:@"None"]) {
+        [self.locationButton setTitle:@"" forState:UIControlStateNormal];
+        self.isAtLabel.text = @"";
+    }
      else {
          self.isAtLabel.text = NSLocalizedString(@"is at ", @"formulating location string");
+         [self.locationButton setTitle:self.update.locationTitle forState:UIControlStateNormal];
      }
      [self.locationButton setTitle:self.update.locationTitle forState:UIControlStateNormal];
      NSURL *url = [NSURL URLWithString:self.update.image.url];

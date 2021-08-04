@@ -251,13 +251,18 @@ static NSString *segueToAddUpdate = @"newUpdate";
         else {
             cell.likedLabel.text = @"";
         }
-        if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:NSLocalizedString(@"'s location", nil)]] || [update.locationTitle isEqual:@""]) {
+        if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:NSLocalizedString(@"'s location", nil)]]) {
+            cell.isAtLabel.text = NSLocalizedString(@"is ", @"formulating location string");
+            [cell.locationButton setTitle:NSLocalizedString(@"Here", @"formulating location string") forState:UIControlStateNormal];
+        }
+        else if ([update.locationTitle isEqual:@"None"]) {
             cell.isAtLabel.text = @"";
+            [cell.locationButton setTitle:@"" forState:UIControlStateNormal];
         }
         else {
             cell.isAtLabel.text = NSLocalizedString(@"is at ", @"formulating location string");
+            [cell.locationButton setTitle:update.locationTitle forState:UIControlStateNormal];
         }
-        [cell.locationButton setTitle:update.locationTitle forState:UIControlStateNormal];
         NSURL *url = [NSURL URLWithString:update.image.url];
         NSData *urlData = [NSData dataWithContentsOfURL:url];
         cell.picImageView.image = [[UIImage alloc] initWithData:urlData];
