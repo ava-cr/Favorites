@@ -38,5 +38,8 @@
 - (void)didTapLikeLabel:(UITapGestureRecognizer *)sender {
     [self.delegate pressedLikeLabel:self];
 }
+- (IBAction)didTapLocation:(id)sender {
+    [self.delegate pressedLocation:self];
+}
 
 @end

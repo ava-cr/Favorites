@@ -11,6 +11,7 @@
 #import "MapViewController.h"
 #import "CommentsViewController.h"
 #import "LikesViewController.h"
+#import "ShowLocationOnMapViewController.h"
 #import "ProfileHeaderCell.h"
 #import "ProfileUpdateCell.h"
 #import <Parse/Parse.h>
@@ -25,6 +26,7 @@
 static NSString *segueToComments = @"showComments";
 static NSString *segueToLikes = @"showLikes";
 static NSString *segueToEditProfile = @"editProfile";
+static NSString *segueToLocation = @"showLocation";
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, ProfileHeaderCellDelegate, ProfileUpdateCellDelegate, UIScrollViewDelegate, MDCFlexibleHeaderViewLayoutDelegate>
 
@@ -207,6 +209,10 @@ static NSString *segueToEditProfile = @"editProfile";
     }];
 }
 #pragma mark - Cell Delegate Functions
+
+- (void)pressedLocation:(ProfileUpdateCell *)updateCell {
+    [self performSegueWithIdentifier:segueToLocation sender:updateCell.update];
+}
 
 - (void)tappedProfileButton:(ProfileHeaderCell *)cell {
     if ([self.user isEqual:[PFUser currentUser]]) {
@@ -609,6 +615,16 @@ static NSString *segueToEditProfile = @"editProfile";
     else if ([segue.identifier isEqual:segueToEditProfile]) {
         EditProfileViewController *editProfVC = [segue destinationViewController];
         editProfVC.profilePicture = self.profileImage;
+    }
+    else if ([segue.identifier isEqual:segueToLocation]) {
+        ShowLocationOnMapViewController *showLocationVC = [segue destinationViewController];
+        Update *update = sender;
+        showLocationVC.update = update;
+        showLocationVC.title = update.locationTitle;
+        if ([update.locationTitle isEqual:[update.author.username stringByAppendingString:NSLocalizedString(@"'s location", nil)]]) {
+            showLocationVC.isPin = FALSE;
+        }
+        else showLocationVC.isPin = TRUE;
     }
 }
 

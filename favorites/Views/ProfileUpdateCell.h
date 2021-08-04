@@ -39,6 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateCell:(ProfileUpdateCell *)updateCell likedUpdate:(Update *)update;
 - (void)pressedComments:(ProfileUpdateCell *)updateCell;
 - (void)pressedLikeLabel:(ProfileUpdateCell *)updateCell;
+- (void)pressedLocation:(ProfileUpdateCell *)updateCell;
 
 @end
 

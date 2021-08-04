@@ -1619,6 +1619,9 @@
                                                     <state key="normal" title="Location">
                                                         <color key="titleColor" systemColor="systemPinkColor"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="didTapLocation:" destination="qyn-NU-N6Q" eventType="touchUpInside" id="fKD-Cp-lOr"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sharing with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcG-FX-GDc">
                                                     <rect key="frame" x="65" y="43" width="74" height="16"/>
@@ -1702,6 +1705,7 @@
                         <segue destination="vSQ-1G-8Fu" kind="show" identifier="showComments" id="15X-OK-XO9"/>
                         <segue destination="V4O-kI-mHV" kind="show" identifier="showLikes" id="7if-5d-Uoj"/>
                         <segue destination="Cii-b1-3QZ" kind="presentation" identifier="editProfile" id="gUC-wo-Tq1"/>
+                        <segue destination="4wK-vl-P5r" kind="presentation" identifier="showLocation" id="bYT-8n-duT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C1y-tB-2q1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2094,10 +2098,10 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="SBY-uA-Ilk"/>
-        <segue reference="UMX-5n-MsD"/>
+        <segue reference="15X-OK-XO9"/>
         <segue reference="UQe-ax-ap8"/>
-        <segue reference="Hvl-zz-9Jy"/>
-        <segue reference="HkM-xv-pqN"/>
+        <segue reference="bYT-8n-duT"/>
+        <segue reference="7if-5d-Uoj"/>
         <segue reference="0IP-IJ-Hde"/>
         <segue reference="hda-eY-N8b"/>
         <segue reference="ypO-ly-HjC"/>
