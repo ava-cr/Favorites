@@ -9,6 +9,7 @@
 #import "CommentsViewController.h"
 #import "LikesViewController.h"
 #import "ProfileViewController.h"
+#import "ShowLocationOnMapViewController.h"
 #import <Parse/Parse.h>
 #import <DateTools/DateTools.h>
 #import "Like.h"
@@ -16,6 +17,7 @@
 static NSString *segueToComments = @"showComments";
 static NSString *segueToLikes = @"showLikes";
 static NSString *segueToProfile = @"showProfile";
+static NSString *segueToLocation = @"showLocation";
 
 @interface UpdateDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *picImageView;
@@ -221,6 +223,9 @@ static NSString *segueToProfile = @"showProfile";
     alert.modalPresentationStyle = UIModalPresentationPopover;
     [self presentViewController:alert animated:YES completion:nil];
 }
+- (IBAction)locationButtonTapped:(id)sender {
+    [self performSegueWithIdentifier:segueToLocation sender:nil];
+}
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -236,6 +241,15 @@ static NSString *segueToProfile = @"showProfile";
         ProfileViewController *profVC = [segue destinationViewController];
         PFUser *user = sender;
         profVC.user = user;
+    }
+    else if ([segue.identifier isEqual:segueToLocation]) {
+        ShowLocationOnMapViewController *showLocationVC = [segue destinationViewController];
+        showLocationVC.update = self.update;
+        showLocationVC.title = self.update.locationTitle;
+        if ([self.update.locationTitle isEqual:[self.update.author.username stringByAppendingString:NSLocalizedString(@"'s location", nil)]]) {
+            showLocationVC.isPin = FALSE;
+        }
+        else showLocationVC.isPin = TRUE;
     }
 }
 

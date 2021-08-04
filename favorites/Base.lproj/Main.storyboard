@@ -399,6 +399,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal" title="Location"/>
+                                <connections>
+                                    <action selector="locationButtonTapped:" destination="a7g-qC-BCm" eventType="touchUpInside" id="YmE-X3-8Wl"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sharing with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s81-qd-hLb">
                                 <rect key="frame" x="65" y="125" width="74" height="16"/>
@@ -456,6 +459,7 @@
                         <outlet property="usernameLabel" destination="aFY-K8-87g" id="wSg-ww-EiP"/>
                         <segue destination="V4O-kI-mHV" kind="show" identifier="showLikes" id="HkM-xv-pqN"/>
                         <segue destination="hDA-ZI-eSw" kind="show" identifier="showProfile" id="UQe-ax-ap8"/>
+                        <segue destination="4wK-vl-P5r" kind="show" identifier="showLocation" id="a0m-4Q-IeW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7vE-Qn-h8V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2090,12 +2094,13 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="SBY-uA-Ilk"/>
-        <segue reference="15X-OK-XO9"/>
+        <segue reference="UMX-5n-MsD"/>
         <segue reference="UQe-ax-ap8"/>
-        <segue reference="7if-5d-Uoj"/>
+        <segue reference="a0m-4Q-IeW"/>
+        <segue reference="HkM-xv-pqN"/>
         <segue reference="0IP-IJ-Hde"/>
         <segue reference="hda-eY-N8b"/>
-        <segue reference="nAY-vd-LhH"/>
+        <segue reference="ypO-ly-HjC"/>
         <segue reference="9tI-lf-D44"/>
     </inferredMetricsTieBreakers>
     <resources>
