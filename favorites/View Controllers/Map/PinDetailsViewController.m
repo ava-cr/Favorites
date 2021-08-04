@@ -64,6 +64,7 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
                                                  animateToInitialState:YES];
     self.cancelButton.lineThickness = 3;
     self.cancelButton.tintColor = [UIColor systemPinkColor];
+    self.cancelButton.roundBackgroundColor = [UIColor whiteColor];
     [self.cancelButton addTarget:self
                                action:@selector(cancelButtonPressed)
                      forControlEvents:UIControlEventTouchUpInside];
@@ -97,6 +98,7 @@ static NSString *unwindSegueToMapDeletePin = @"deletePin";
                                                      animateToInitialState:YES];
         self.saveButton.lineThickness = 3;
         self.saveButton.tintColor = [UIColor systemPinkColor];
+        self.saveButton.roundBackgroundColor = [UIColor whiteColor];
         [self.saveButton addTarget:self
                                    action:@selector(saveButtonPressed)
                          forControlEvents:UIControlEventTouchUpInside];
