@@ -28,7 +28,7 @@ static NSString *segueToPinsList = @"showPinsList";
 static NSString *segueToUpdateDetails = @"showUpdateDetails";
 static NSString *segueToSearchLocations = @"searchLocations";
 
-@interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
 @property CLLocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -148,6 +148,7 @@ static NSString *segueToSearchLocations = @"searchLocations";
                                                  animateToInitialState:YES];
     self.closeButton.lineThickness = 3;
     self.closeButton.tintColor = [UIColor systemPinkColor];
+    self.closeButton.roundBackgroundColor = [UIColor whiteColor];
     [self.closeButton addTarget:self
                                action:@selector(closeButtonPressed)
                      forControlEvents:UIControlEventTouchUpInside];
@@ -414,8 +415,69 @@ static NSString *segueToSearchLocations = @"searchLocations";
     [self reloadMapView];
 }
 - (IBAction)listPinsButtonTapped:(id)sender {
+//    ListPinsViewController *listPinsVC = [[ListPinsViewController alloc] init];
+//    [listPinsVC setModalPresentationStyle:UIModalPresentationCustom];
+//    [listPinsVC setTransitioningDelegate:self];
+//    listPinsVC.user = self.user;
+//    [self presentViewController:listPinsVC animated:YES completion:nil];
     [self performSegueWithIdentifier:segueToPinsList sender:nil];
 }
+#pragma mark - Functions for Animation/Transition to List Pins VC
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    return self;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    return self;
+}
+
+- (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
+    return 1;
+}
+
+- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+    UIView *fromView = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey].view;
+    UIView *toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
+    NSLog(@"%@", fromView);
+    BOOL isPresentingDrawer = YES;
+    if ([fromView isEqual:self.view]) isPresentingDrawer = YES;
+    UIView *drawerView = [[UIView alloc] init];
+    if (isPresentingDrawer) drawerView = toView;
+    else drawerView = fromView;
+    if (isPresentingDrawer) {
+        [transitionContext.containerView addSubview:drawerView];
+    }
+    //CGSize drawerSize = CGSizeMake([[UIScreen mainScreen] bounds].size.width * 0.85, [[UIScreen mainScreen] bounds].size.height - 100);
+    int y = self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height;
+    CGSize drawerSize = CGSizeMake([[UIScreen mainScreen] bounds].size.width * 0.8, [[UIScreen mainScreen] bounds].size.height - y);
+    CGRect offScreenDrawerFrame = CGRectMake(drawerSize.width * -1, y, drawerSize.width, drawerSize.height);
+    CGRect onScreenDrawerFrame = CGRectMake(0, y, drawerSize.width, drawerSize.height);
+    if (isPresentingDrawer) {
+        [drawerView setFrame:offScreenDrawerFrame];
+    }
+    else [drawerView setFrame:onScreenDrawerFrame];
+    
+    //added
+    drawerView.layer.cornerRadius = 10;
+    drawerView.layer.masksToBounds = YES;
+    
+    NSTimeInterval animationDuration = [self transitionDuration:transitionContext];
+    [UIView animateWithDuration:animationDuration animations:^{
+            if (isPresentingDrawer) {
+                [drawerView setFrame:onScreenDrawerFrame];
+            }
+            else [drawerView setFrame:offScreenDrawerFrame];
+        } completion:^(BOOL finished) {
+            if (finished) {
+                if (!isPresentingDrawer) {
+                    [drawerView removeFromSuperview];
+                }
+            }
+            [transitionContext completeTransition:YES];
+    }];
+}
+
 #pragma mark - Functions for Seeing Friends' Updates on Map Feature
 - (IBAction)friendsButtonTapped:(id)sender {
     if ([self.friendsButton isSelected]) {
@@ -530,6 +592,10 @@ static NSString *segueToSearchLocations = @"searchLocations";
     }
     else if ([segue.identifier isEqual:segueToPinsList]) {
         ListPinsViewController *listVC = [segue destinationViewController];
+        if ([self.user isEqual:[PFUser currentUser]]) {
+            [listVC setModalPresentationStyle:UIModalPresentationCustom];
+            [listVC setTransitioningDelegate:self];
+        }
         listVC.user = self.user;
     }
     else if ([segue.identifier isEqual:segueToUpdateDetails]) {

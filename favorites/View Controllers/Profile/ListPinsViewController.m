@@ -10,12 +10,14 @@
 #import "Pin.h"
 #import "PinDetailsViewController.h"
 #import <pop/POP.h>
+#import <VBFPopFlatButton/VBFPopFlatButton.h>
 
 static NSString *segueToPinDetails = @"pinDetails";
 
 @interface ListPinsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *pins;
+@property (strong, nonatomic) VBFPopFlatButton *closeButton;
 
 @end
 
@@ -27,11 +29,47 @@ static NSString *segueToPinDetails = @"pinDetails";
     self.tableView.dataSource = self;
     if (!self.user) self.user = [PFUser currentUser];
     [self getPins];
-    POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerBounds];
-    anim.toValue = [NSValue valueWithCGRect:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 60)];
-    anim.springBounciness = 30;
-    anim.springSpeed = 0.7;
-    [self.view pop_addAnimation:anim forKey:@"size"];
+    if ([self.user isEqual:[PFUser currentUser]]) {
+        [self setUpCloseButton];
+    }
+    else {
+        POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerBounds];
+        anim.toValue = [NSValue valueWithCGRect:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 60)];
+        anim.springBounciness = 30;
+        anim.springSpeed = 0.7;
+        [self.view pop_addAnimation:anim forKey:@"size"];
+    }
+}
+
+- (void) setUpCloseButton {
+    NSLog(@"here");
+    NSLog(@"%f", self.view.frame.size.width);
+    self.closeButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width * 0.8 - 60, 30, 30, 30)
+                                                  buttonType:buttonDefaultType
+                                                 buttonStyle:buttonRoundedStyle
+                                                 animateToInitialState:YES];
+    self.closeButton.lineThickness = 3;
+    self.closeButton.tintColor = [UIColor systemPinkColor];
+    self.closeButton.roundBackgroundColor = [UIColor whiteColor];
+    [self.closeButton addTarget:self
+                               action:@selector(closeButtonPressed)
+                     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.closeButton];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.closeButton animateToType:buttonCloseType];
+    });
+}
+
+- (void)closeButtonPressed {
+    [self.closeButton animateToType:buttonMinusType];
+    [self setTransitioningDelegate:NULL];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 -(void) getPins {
