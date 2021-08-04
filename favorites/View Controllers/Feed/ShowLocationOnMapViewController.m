@@ -10,13 +10,16 @@
 #import <MapKit/MapKit.h>
 #import <Parse/Parse.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import <VBFPopFlatButton/VBFPopFlatButton.h>
 #import "PinAnnotation.h"
 #import "Pin.h"
 
 @interface ShowLocationOnMapViewController () <MKMapViewDelegate>
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) PinAnnotation *annotation;
 @property (strong, nonatomic) Pin *pin;
+@property (strong, nonatomic) VBFPopFlatButton *closeButton;
 
 @end
 
@@ -25,11 +28,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.mapView.delegate = self;
+    [self.mapView setTintColor:UIColor.systemPinkColor];
     CLLocationCoordinate2D center =  CLLocationCoordinate2DMake([self.update.latitude doubleValue], [self.update.longitude doubleValue]);
     MKCoordinateRegion region = MKCoordinateRegionMake(center, MKCoordinateSpanMake(0.01, 0.01));
     [self.mapView setRegion:region animated:TRUE];
     if (!self.isPin) [self placeUserLocation];
     else [self getPin];
+    [self setUpCloseButton];
+}
+
+- (void) setUpCloseButton {
+    self.closeButton = [[VBFPopFlatButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 60, 30, 30, 30)
+                                                  buttonType:buttonDefaultType
+                                                 buttonStyle:buttonRoundedStyle
+                                                 animateToInitialState:YES];
+    self.closeButton.lineThickness = 3;
+    self.closeButton.tintColor = [UIColor systemPinkColor];
+    self.closeButton.roundBackgroundColor = [UIColor whiteColor];
+    [self.closeButton addTarget:self
+                               action:@selector(closeButtonPressed)
+                     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.closeButton];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.closeButton animateToType:buttonCloseType];
+    });
+}
+
+- (void)closeButtonPressed {
+    [self.closeButton animateToType:buttonMinusType];
+    NSTimeInterval delayInSeconds = 0.4;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 - (void)getPin {
@@ -139,7 +172,5 @@
         pdVC.pin = self.pin;
     }
 }
-
-
 
 @end

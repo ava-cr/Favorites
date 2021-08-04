@@ -1411,7 +1411,7 @@
                     <connections>
                         <outlet property="logoutButton" destination="9OB-Q3-E5d" id="WDJ-YH-6ne"/>
                         <outlet property="tableView" destination="PTV-cu-mh8" id="tks-OQ-UgK"/>
-                        <segue destination="4wK-vl-P5r" kind="show" identifier="showLocationOnMap" id="Hvl-zz-9Jy"/>
+                        <segue destination="4wK-vl-P5r" kind="presentation" identifier="showLocationOnMap" id="Hvl-zz-9Jy"/>
                         <segue destination="hDA-ZI-eSw" kind="show" identifier="showProfile" id="H2C-Ip-B2u"/>
                         <segue destination="vSQ-1G-8Fu" kind="show" identifier="showComments" id="zET-Cy-LY0"/>
                         <segue destination="V4O-kI-mHV" kind="show" identifier="showLikes" id="VC6-aA-08Y"/>
@@ -1427,11 +1427,11 @@
             <objects>
                 <viewController id="4wK-vl-P5r" customClass="ShowLocationOnMapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Flj-uA-vV3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fKa-Az-Bvv">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="I7V-uS-J8C"/>
@@ -2096,7 +2096,7 @@
         <segue reference="SBY-uA-Ilk"/>
         <segue reference="UMX-5n-MsD"/>
         <segue reference="UQe-ax-ap8"/>
-        <segue reference="a0m-4Q-IeW"/>
+        <segue reference="Hvl-zz-9Jy"/>
         <segue reference="HkM-xv-pqN"/>
         <segue reference="0IP-IJ-Hde"/>
         <segue reference="hda-eY-N8b"/>
