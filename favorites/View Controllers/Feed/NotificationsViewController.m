@@ -76,10 +76,10 @@ static NSString *segueToUpdate = @"showUpdate";
     }];
 }
 
-- (void)getUpdates { // only have notifications from last 3 posts
+- (void)getUpdates { // only have notifications from last 5 posts
     [SVProgressHUD show];
     PFQuery *query = [PFQuery queryWithClassName:@"Update"];
-    query.limit = 3;
+    query.limit = 5;
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"author"];
     [query whereKey:@"author" equalTo:[PFUser currentUser]];
@@ -139,7 +139,8 @@ static NSString *segueToUpdate = @"showUpdate";
                     }
                 }
                 [SVProgressHUD dismiss];
-                [strongSelf.tableView reloadData];
+                //[strongSelf.tableView reloadData];
+                [self.tableView reloadData];
             } else {
                 NSLog(@"%@", error.localizedDescription);
             }
@@ -209,7 +210,7 @@ static NSString *segueToUpdate = @"showUpdate";
             int likeCount = [like.update.likeCount intValue];
             if (likeCount == 1) notifText = NSLocalizedString(@"liked your post.", @"liked post notification string");
             else if (likeCount == 2) notifText = NSLocalizedString(@"and 1 other liked your post.", @"liked post notification string");
-            else notifText = [[NSLocalizedString(@"and ", nil) stringByAppendingString:[NSString stringWithFormat:@"%d", likeCount - 1]] stringByAppendingString:NSLocalizedString(@"others liked your post.", @"liked post notification string")];
+            else notifText = [[NSLocalizedString(@"and ", nil) stringByAppendingString:[NSString stringWithFormat:@"%d", likeCount - 1]] stringByAppendingString:NSLocalizedString(@" others liked your post.", @"liked post notification string")];
             cell.commentLabel.text = notifText;
             if ([like.user objectForKey:@"profilePic"]) {
                 PFFileObject *pfFile = [like.user objectForKey:@"profilePic"];
@@ -227,8 +228,8 @@ static NSString *segueToUpdate = @"showUpdate";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.commentsAndLikes[indexPath.row - [self.friendRequests count]] isKindOfClass:[Comment class]]) {
-        Comment *comment = self.commentsAndLikes[indexPath.row - [self.friendRequests count]];
+    if ([self.commentsAndLikes[indexPath.row] isKindOfClass:[Comment class]]) {
+        Comment *comment = self.commentsAndLikes[indexPath.row];
         for (Update *update in self.updates) {
             if ([comment.update.objectId isEqual:update.objectId]) {
                 [self performSegueWithIdentifier:segueToUpdate sender:update];
@@ -236,7 +237,7 @@ static NSString *segueToUpdate = @"showUpdate";
         }
     }
     else {
-        Like *like = self.commentsAndLikes[indexPath.row - [self.friendRequests count]];
+        Like *like = self.commentsAndLikes[indexPath.row];
         for (Update *update in self.updates) {
             if ([like.update.objectId isEqual:update.objectId]) {
                 [self performSegueWithIdentifier:segueToUpdate sender:update];

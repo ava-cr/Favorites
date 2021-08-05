@@ -213,7 +213,7 @@ static NSString *locationChosenSegueId = @"locationChosen";
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *header = NSLocalizedString(@"Search Results", @"Standard result text");
+    NSString *header = NSLocalizedString(@" Search Results", @"Standard result text");
     NSString *city = self.currentPlacemark.locality;
     if (city) {
         NSString *templateString = NSLocalizedString(@"Search Results near %@", city);

@@ -49,7 +49,7 @@ static NSString *commentCellID = @"CommentCell";
     }];
 }
 - (void)sendPush:(NSString *)comment {
-    NSString *message = [[PFUser currentUser].username stringByAppendingString:@" commented:"];
+    NSString *message = [[PFUser currentUser].username stringByAppendingString:@" commented: "];
     message = [message stringByAppendingString:comment];
     [PFCloud callFunctionInBackground:@"sendPushToUser"
                        withParameters:@{@"message": message, @"userid": self.update.author.objectId}

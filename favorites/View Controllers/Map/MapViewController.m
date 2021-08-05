@@ -54,7 +54,7 @@ static NSString *segueToSearchLocations = @"searchLocations";
     self.mapView.delegate = self;
     if (!self.user) self.user = [PFUser currentUser];
     [self setupByUser];
-    //[self getPins];
+    [self getPins];
     if (self.locationManager == nil ) {
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;

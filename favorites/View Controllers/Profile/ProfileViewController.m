@@ -66,6 +66,7 @@ static NSString *segueToLocation = @"showLocation";
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    self.updates = [[NSMutableArray alloc] init];
     [self getFriends];
     [self getUpdates];
     [refreshControl endRefreshing];
@@ -311,6 +312,7 @@ static NSString *segueToLocation = @"showLocation";
                 [Comment deleteAllInBackground:comments block:^(BOOL succeeded, NSError * _Nullable error) {
                     if (succeeded) {
                         NSLog(@"deleted comments");
+                        strongSelf.updates = [[NSMutableArray alloc] init];
                         [strongSelf getUpdates];
                     } else {
                         NSLog(@"%@", error.localizedDescription);

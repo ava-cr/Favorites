@@ -74,6 +74,7 @@ static NSString *unwindSegueToMap = @"addPin";
     self.segmentedControl.usesSpringAnimations = YES;
     [self.view addSubview:self.segmentedControl];
     [self.headerImageView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
+    self.titleLabel.numberOfLines = 0;
     [self.titleLabel.topAnchor constraintEqualToAnchor:self.headerImageView.bottomAnchor constant:10].active = YES;
     [self.subtitleLabel.topAnchor constraintEqualToAnchor:self.titleLabel.bottomAnchor constant:8].active = YES;
     self.subtitleLabel.numberOfLines = 0;

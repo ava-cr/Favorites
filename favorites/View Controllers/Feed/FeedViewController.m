@@ -53,10 +53,11 @@ static NSString *segueToAddUpdate = @"newUpdate";
     self.friends = [[NSMutableArray alloc] initWithObjects:[PFUser currentUser], nil];
     self.updates = [[NSMutableArray alloc] init];
     [self setUpAddButton];
-    //[self getFriends];
+    [self getFriends];
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    self.updates = [[NSMutableArray alloc] init];
     [self getFriends];
     [refreshControl endRefreshing];
 }
@@ -427,6 +428,7 @@ static NSString *segueToAddUpdate = @"newUpdate";
         if (strongSelf) {
             if (succeeded) {
                 NSLog(@"the update was posted!");
+                strongSelf.updates = [[NSMutableArray alloc] init];
                 [strongSelf getUpdates:20];
             } else {
                 NSLog(@"problem saving update: %@", error.localizedDescription);
