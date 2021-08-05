@@ -226,6 +226,16 @@ static NSString *segueToLocation = @"showLocation";
 - (IBAction)locationButtonTapped:(id)sender {
     [self performSegueWithIdentifier:segueToLocation sender:nil];
 }
+- (IBAction)scaleImage:(UIPinchGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan || sender.state == UIGestureRecognizerStateChanged) {
+        self.picImageView.transform = CGAffineTransformMakeScale(sender.scale, sender.scale);
+    }
+    else {
+        [UIView animateWithDuration:0.4 animations:^{
+            self.picImageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }];
+    }
+}
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

@@ -342,9 +342,13 @@
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sfF-nK-8rP">
                                 <rect key="frame" x="0.0" y="70" width="414" height="414"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="sfF-nK-8rP" secondAttribute="height" multiplier="1:1" id="a9j-lL-yAY"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Pgn-Qg-gmY" appends="YES" id="uMJ-0F-ZvJ"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFY-K8-87g">
                                 <rect key="frame" x="65" y="18" width="74" height="18"/>
@@ -463,6 +467,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7vE-Qn-h8V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="Pgn-Qg-gmY">
+                    <connections>
+                        <action selector="scaleImage:" destination="a7g-qC-BCm" id="sC1-WZ-u6d"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1588.4057971014495" y="1747.7678571428571"/>
         </scene>
