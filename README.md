@@ -17,21 +17,16 @@ Favorites is an iOS application inspired by the fact that friends visiting NYC a
 
 ## Demo
 
-Gif 1: Push Notifications, Map Tab  - adding a pin, pin details
-Gif 2: Map Tab - center user button, refresh map button, list of pins button, friends button (tap a friend's update - go to the location, add it to your map, go to friend's profile)
-Gif 3: Map Tab - from friend's profile, see their map of pins/list of pins, Feed Tab - post a new update (choose a photo, choose a location)
-Gif 4: Feed Tab - choose who to share your update with (add a new group, choose a group), like/unlike
-Gif 5: Feed Tab - like/unlike, comment, add friends/search for friends button, notifications page
-Gif 6: Profile Tab - delete updates, delete comments, look at list of friends and get to their profiles that way, edit profile photo, log out
+1. Push Notifications, Map Tab  - adding a pin, pin details
+2. Map Tab - center user button, refresh map button, list of pins button, friends button (tap a friend's update - go to the location, add it to your map, go to friend's profile)
+3. Map Tab - from friend's profile, see their map of pins/list of pins, Feed Tab - post a new update (choose a photo, choose a location)
+4. Feed Tab - choose who to share your update with (add a new group, choose a group), like/unlike
+5. Feed Tab - like/unlike, comment, add friends/search for friends button, notifications page
+6. Profile Tab - delete updates, delete comments, look at list of friends and get to their profiles that way, edit profile photo, log out
 
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/first30secs.gif' title='First' width='200px' alt='First' />
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/second30secs.gif' title='Second' width='200px' alt='Second' />
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/third30secs.gif' title='Third' width='200px' alt='Third' />
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fourth30secs.gif' title='Fourth' width='200px' alt='Fourth' />
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fifth30secs.gif' title='Fifth' width='200px' alt='Fifth' />
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/last50sec.gif' title='Sixth' width='200px' alt='Sixth' />
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/first30secs.gif' title='First' width='200px' alt='First' /> <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/second30secs.gif' title='Second' width='200px' alt='Second' /> <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/third30secs.gif' title='Third' width='200px' alt='Third' /> <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fourth30secs.gif' title='Fourth' width='200px' alt='Fourth' /> <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fifth30secs.gif' title='Fifth' width='200px' alt='Fifth' /> <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/last50sec.gif' title='Sixth' width='200px' alt='Sixth' />
 
-Full Demo:
+Look at full demo here:
 <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/appfull.mp4' title='Demo' width='' alt='Demo' />
 
 
