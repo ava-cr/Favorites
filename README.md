@@ -10,7 +10,6 @@
     a. [Overview](#Overview)
     b. [Product Spec](#Product-Spec)
     c. [Wireframes](#Wireframes)
-    d. [Schema](#Schema)
     
 ## Final Product
 Favorites is an iOS application inspired by the fact that friends visiting NYC are always asking me for recommendations of where to eat, drink, shop, etc. in the city. With Favorites, you can save all of your favorite locations to your personal map, add your friends, and see their maps and the updates they post from their locations (and add these locations to your own map to visit later). These are the basics, watch the demo for more details!
@@ -78,7 +77,7 @@ Look at full demo here:
 This app will be a cross between a social media and a self-organization app. The first major tab will be a map in which you can drop pins with your favorite places (under the categories - to shop, to eat, to drink) and when you click on the pin you can see details of the place including pictures (from its instagram or google maps), your own notes, and your categorization of the place using emojis - sneaker emojis for sneaker store etc. You will also be able to add and follow your friends on this app so the second tab will be a timeline where you can post where you are currently shopping/eating/drinking either to just you, a specific group of your friends, or all followers. You will be able to interact with other users' posts through commenting and liking as usual. You can click on your friends' profiles to see their own maps of locations or you can add the locations they are at (to your own map) directly from their posts.
 
 ### App Evaluation
-[Evaluation of your app across the following attributes]
+
 - **Category:** Social Media/Lifestyle
 - **Mobile:** Uses camera and location, mobile-only experience.
 - **Story:** Allows users to save and organize all their favorite places to shop/eat/drink so that when they are in a specific neighborhood or area, they can open the app and see if they have any saved places (or if any of their friends do!) Also allows users to share what they're doing with their friends and see what everyone else is doing. Creates the potential to see who's out/who could meet up.
@@ -159,16 +158,11 @@ This app will be a cross between a social media and a self-organization app. The
     * Add Friends
     * Edit Profile
 
-## Wireframes
+### Wireframes
 
 ![Wireframe](https://i.imgur.com/pJ0E8aL.jpg)
 
-### [BONUS] Digital Wireframes & Mockups
 
-### [BONUS] Interactive Prototype
-
-## Schema 
-[This section will be completed in Unit 9]
 ### Models
 
 1. User (will be a PFUser)
