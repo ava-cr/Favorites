@@ -2,14 +2,14 @@
 
 ## Table of Contents
 1. Final Product
-    a. [Description](#Description)
-    b. [Demo](#Demo)
-    c. [Credits](#Credits)
-    d. [License](#License)
+    1. [Description](#Description)
+    2. [Demo](#Demo)
+    3. [Credits](#Credits)
+    4. [License](#License)
 2. Planning Stages
-    a. [Overview](#Overview)
-    b. [Product Spec](#Product-Spec)
-    c. [Wireframes](#Wireframes)
+    1. [Overview](#Overview)
+    2. [Product Spec](#Product-Spec)
+    3. [Wireframes](#Wireframes)
     
 ## Final Product
 Favorites is an iOS application inspired by the fact that friends visiting NYC are always asking me for recommendations of where to eat, drink, shop, etc. in the city. With Favorites, you can save all of your favorite locations to your personal map, add your friends, and see their maps and the updates they post from their locations (and add these locations to your own map to visit later). These are the basics, watch the demo for more details!
