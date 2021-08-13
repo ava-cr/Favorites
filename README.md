@@ -2,20 +2,25 @@
 
 ## Table of Contents
 1. Final Product
-    1. Description
-    2. Gifs
-    3. Credits
-    4. License
+    a. [Description](#Description)
+    b. [Demo](#Demo)
+    c. [Credits](#Credits)
+    d. [License](#License)
 2. Planning Stages
-    1. [Overview](#Overview)
-    2. [Product Spec](#Product-Spec)
-    3. [Wireframes](#Wireframes)
-    4. [Schema](#Schema)
+    a. [Overview](#Overview)
+    b. [Product Spec](#Product-Spec)
+    c. [Wireframes](#Wireframes)
+    d. [Schema](#Schema)
     
 ## Final Product
 Favorites is an iOS application inspired by the fact that friends visiting NYC are always asking me for recommendations of where to eat, drink, shop, etc. in the city. With Favorites, you can save all of your favorite locations to your personal map, add your friends, and see their maps and the updates they post from their locations (and add these locations to your own map to visit later). These are the basics, watch the demo for more details!
 
 ## Demo
+
+Gif 1: Push Notifications, Map Tab
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/first30secs.gif' title='First' width='' alt='First' />
+
+Full Demo:
 <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/appfull.mp4' title='Demo' width='' alt='Demo' />
 
 
