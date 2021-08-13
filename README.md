@@ -1,16 +1,51 @@
-Original App Design Project - README Template
-===
-
 # Favorites
 
 ## Table of Contents
-1. [Overview](#Overview)
-1. [Product Spec](#Product-Spec)
-1. [Wireframes](#Wireframes)
-2. [Schema](#Schema)
+1. Final Product
+    1. Description
+    2. Gifs
+    3. Credits
+    4. License
+2. Planning Stages
+    1. [Overview](#Overview)
+    2. [Product Spec](#Product-Spec)
+    3. [Wireframes](#Wireframes)
+    4. [Schema](#Schema)
+    
+## Final Product
+Favorites is an iOS application inspired by the fact that friends visiting NYC are always asking me for recommendations of where to eat, drink, shop, etc. in the city. With Favorites, you can save all of your favorite locations to your personal map, add your friends, and see their maps and the updates they post from their locations (and add these locations to your own map to visit later). These are the basics, watch the demo for more details!
 
-## Overview
-### Description
+## Demo
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/appfull.mp4' title='Demo' width='' alt='Demo' />
+
+
+## Credits
+
+- 
+    [DateTools](https://github.com/MatthewYork/DateTools#time-ago) - library to streamline date and time handling in iOS.
+    
+- 
+    [SVProgressHUD](https://github.com/SVProgressHUD/SVProgressHUD) - activity monitor library
+  
+  ## License
+
+      Copyright [2021] [Ava Crnkovic-Rubsamen]
+
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+      You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+      Unless required by applicable law or agreed to in writing, software
+      distributed under the License is distributed on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      See the License for the specific language governing permissions and
+      limitations under the License.
+  
+
+## Planning Stages
+### Overview
 This app will be a cross between a social media and a self-organization app. The first major tab will be a map in which you can drop pins with your favorite places (under the categories - to shop, to eat, to drink) and when you click on the pin you can see details of the place including pictures (from its instagram or google maps), your own notes, and your categorization of the place using emojis - sneaker emojis for sneaker store etc. You will also be able to add and follow your friends on this app so the second tab will be a timeline where you can post where you are currently shopping/eating/drinking either to just you, a specific group of your friends, or all followers. You will be able to interact with other users' posts through commenting and liking as usual. You can click on your friends' profiles to see their own maps of locations or you can add the locations they are at (to your own map) directly from their posts.
 
 ### App Evaluation
