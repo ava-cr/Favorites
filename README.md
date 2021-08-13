@@ -17,8 +17,18 @@ Favorites is an iOS application inspired by the fact that friends visiting NYC a
 
 ## Demo
 
-Gif 1: Push Notifications, Map Tab
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/first30secs.gif' title='First' width='' alt='First' />
+Gif 1: Push Notifications, Map Tab (adding a pin)
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/first30secs.gif' title='First' width='120px' alt='First' />
+Gif 2: 
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/second30secs.gif' title='Second' width='120px' alt='Second' />
+Gif 3:
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/third30secs.gif' title='Third' width='120px' alt='Third' />
+Gif 4:
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fourth30secs.gif' title='Fourth' width='120px' alt='Fourth' />
+Gif 5:
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fifth30secs.gif' title='Fifth' width='120px' alt='Fifth' />
+Gif 6:
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/last50secs.gif' title='Sixth' width='120px' alt='Sixth' />
 
 Full Demo:
 <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/appfull.mp4' title='Demo' width='' alt='Demo' />
