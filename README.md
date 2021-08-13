@@ -24,12 +24,12 @@ Gif 4: Feed Tab - choose who to share your update with (add a new group, choose 
 Gif 5: Feed Tab - like/unlike, comment, add friends/search for friends button, notifications page
 Gif 6: Profile Tab - delete updates, delete comments, look at list of friends and get to their profiles that way, edit profile photo, log out
 
-1. <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/first30secs.gif' title='First' width='200px' alt='First' />
-2. <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/second30secs.gif' title='Second' width='200px' alt='Second' />
-3. <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/third30secs.gif' title='Third' width='200px' alt='Third' />
-4. <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fourth30secs.gif' title='Fourth' width='200px' alt='Fourth' />
-5. <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fifth30secs.gif' title='Fifth' width='200px' alt='Fifth' />
-6. <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/last50secs.gif' title='Sixth' width='200px' alt='Sixth' />
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/first30secs.gif' title='First' width='200px' alt='First' />
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/second30secs.gif' title='Second' width='200px' alt='Second' />
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/third30secs.gif' title='Third' width='200px' alt='Third' />
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fourth30secs.gif' title='Fourth' width='200px' alt='Fourth' />
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fifth30secs.gif' title='Fifth' width='200px' alt='Fifth' />
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/last50sec.gif' title='Sixth' width='200px' alt='Sixth' />
 
 Full Demo:
 <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/appfull.mp4' title='Demo' width='' alt='Demo' />
