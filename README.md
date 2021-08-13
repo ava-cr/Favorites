@@ -18,13 +18,15 @@ Favorites is an iOS application inspired by the fact that friends visiting NYC a
 ## Demo
 
 Gif 1: Push Notifications, Map Tab (adding a pin)
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/first30secs.gif' title='First' width='120px' alt='First' />
+
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/first30secs.gif' title='First' width='200px' alt='First' />
+
 Gif 2: 
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/second30secs.gif' title='Second' width='120px' alt='Second' />
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/second30secs.gif' title='Second' width='200px' alt='Second' />
 Gif 3:
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/third30secs.gif' title='Third' width='120px' alt='Third' />
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/third30secs.gif' title='Third' width='150px' alt='Third' />
 Gif 4:
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fourth30secs.gif' title='Fourth' width='120px' alt='Fourth' />
+<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fourth30secs.gif' title='Fourth' width='150px' alt='Fourth' />
 Gif 5:
 <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fifth30secs.gif' title='Fifth' width='120px' alt='Fifth' />
 Gif 6:
