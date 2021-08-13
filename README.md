@@ -17,20 +17,19 @@ Favorites is an iOS application inspired by the fact that friends visiting NYC a
 
 ## Demo
 
-Gif 1: Push Notifications, Map Tab (adding a pin)
+Gif 1: Push Notifications, Map Tab  - adding a pin, pin details
+Gif 2: Map Tab - center user button, refresh map button, list of pins button, friends button (tap a friend's update - go to the location, add it to your map, go to friend's profile)
+Gif 3: Map Tab - from friend's profile, see their map of pins/list of pins, Feed Tab - post a new update (choose a photo, choose a location)
+Gif 4: Feed Tab - choose who to share your update with (add a new group, choose a group), like/unlike
+Gif 5: Feed Tab - like/unlike, comment, add friends/search for friends button, notifications page
+Gif 6: Profile Tab - delete updates, delete comments, look at list of friends and get to their profiles that way, edit profile photo, log out
 
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/first30secs.gif' title='First' width='200px' alt='First' />
-
-Gif 2: 
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/second30secs.gif' title='Second' width='200px' alt='Second' />
-Gif 3:
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/third30secs.gif' title='Third' width='150px' alt='Third' />
-Gif 4:
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fourth30secs.gif' title='Fourth' width='150px' alt='Fourth' />
-Gif 5:
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fifth30secs.gif' title='Fifth' width='120px' alt='Fifth' />
-Gif 6:
-<img src='https://github.com/ava-cr/Favorites/blob/main/gifs/last50secs.gif' title='Sixth' width='120px' alt='Sixth' />
+1. <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/first30secs.gif' title='First' width='200px' alt='First' />
+2. <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/second30secs.gif' title='Second' width='200px' alt='Second' />
+3. <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/third30secs.gif' title='Third' width='200px' alt='Third' />
+4. <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fourth30secs.gif' title='Fourth' width='200px' alt='Fourth' />
+5. <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/fifth30secs.gif' title='Fifth' width='200px' alt='Fifth' />
+6. <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/last50secs.gif' title='Sixth' width='200px' alt='Sixth' />
 
 Full Demo:
 <img src='https://github.com/ava-cr/Favorites/blob/main/gifs/appfull.mp4' title='Demo' width='' alt='Demo' />
@@ -43,6 +42,24 @@ Full Demo:
     
 - 
     [SVProgressHUD](https://github.com/SVProgressHUD/SVProgressHUD) - activity monitor library
+    
+-
+    [SCLAlertView](https://github.com/dogo/SCLAlertView) - customizable, animated alert view
+    
+- 
+    [JVFloatLabeledTextField](https://github.com/jverdi/JVFloatLabeledTextField) - customized text field that aims to improve the user experience by having placeholders transition into floating labels that hover above the fields after they are populated with text.
+    
+-
+    [NYSegmentedControl](https://github.com/nealyoung/NYSegmentedControl) - customizable, animated replacement for UISegmentedControl
+    
+-
+    [Material Design Flexible Header](https://material.io/develop/ios/supporting/flexible-header) - flexible header container view whose height and vertical offset react to UIScrollViewDelegate events
+    
+-
+    [VBFPopFlatButton](https://github.com/victorBaro/VBFPopFlatButton) - customized, animated buttons (using pop)
+    
+-
+    [POP](https://github.com/facebookarchive/pop) - animation library
   
   ## License
 
